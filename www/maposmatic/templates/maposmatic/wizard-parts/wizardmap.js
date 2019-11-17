@@ -2,7 +2,7 @@
 {% load l10n %}
 {% load extratags %}
 
-function wizardmap(elt) {
+function wizardmap(elt, bounds=false) {
   /**
    * Update the 4 text fields with the area coordinates.
    *
@@ -131,6 +131,10 @@ function wizardmap(elt) {
       update_fields();
   });
   locationFilter.addTo(map);
+  if (bounds) {
+    locationFilter.setBounds(bounds);
+    locationFilter.enable();
+  }
 
   // locate client position
   L.control.locate().addTo(map);

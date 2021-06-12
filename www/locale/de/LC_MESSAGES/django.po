@@ -13,22 +13,23 @@
 # Wasilis Mandratzis <inactive+Wasilis@transifex.com>, 2013
 # Wasilis Mandratzis <inactive+Wasilis@transifex.com>, 2013
 # Hartmut Holzgraefe <hartmut@php.net>, 2019.
+# Weblate Admin <admin@example.com>, 2021.
 #: www/maposmatic/feeds.py:46 www/maposmatic/feeds.py:103
 msgid ""
 msgstr ""
 "Project-Id-Version: MapOSMatic\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-04-10 22:23+0200\n"
-"PO-Revision-Date: 2019-04-10 20:39+0000\n"
-"Last-Translator: Hartmut Holzgraefe <hartmut@php.net>\n"
-"Language-Team: German <http://translate.get-map.org/projects/maposmatic/"
+"PO-Revision-Date: 2021-06-12 20:24+0000\n"
+"Last-Translator: Weblate Admin <admin@example.com>\n"
+"Language-Team: German <https://translate.get-map.org/projects/maposmatic/"
 "maposmatic/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.5.1\n"
+"X-Generator: Weblate 4.6.2\n"
 
 #: www/maposmatic/feeds.py:45
 msgid "maps"
@@ -52,7 +53,7 @@ msgstr "Die aktuellsten Render-Fehler auf MapOSMatic."
 
 #: www/maposmatic/forms.py:45
 msgid "Search for a map"
-msgstr "Nach einem Plan suchen"
+msgstr "Nach einer Karte suchen"
 
 #: www/maposmatic/forms.py:61
 msgid "Portrait"
@@ -252,10 +253,12 @@ msgid ""
 msgstr ""
 "MapOSMatic entstand dank einer Idee von Gilles Lamiral, einem Entwickler "
 "von\n"
-" <a href=\"http://www.openstreetmap.org\">OpenStreetMap</a> und Freier "
-"Software bei Rennes in Frankreich.\n"
-" Zu seiner Idee fand sich eine Gruppe von <a href=\"http://de.wikipedia.org/"
-"wiki/Hacker%%23Free-Software-_und_Open-Source-Hackerkultur\">Hackern</a>\n"
+" <a\n"
+"href=\"http://www.openstreetmap.org\">OpenStreetMap</a> und Freier Software "
+"bei Rennes in Frankreich.\n"
+" Zu seiner Idee fand sich eine Gruppe von <a\n"
+" href=\"http://de.wikipedia.org/wiki/Hacker%%23Free-Software-_und_Open-"
+"Source-Hackerkultur\">Hackern</a>\n"
 " während eines einwöchigen <em>Hackfests</em> im August 2009. Sie hauchten "
 "Gilles' Idee Leben ein,\n"
 " indem sie den Code schrieben und das Projekt <strong>MapOSMatic</strong> "

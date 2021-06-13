@@ -43,7 +43,7 @@ class MapsFeed(Feed):
     """
 
     title = "%s %s %s" % (www.settings.BRAND_NAME, _("maps"), 
-                          www.settings.DEBUG and _('') or _('[DEV]'))
+                          www.settings.DEBUG and '' or _('[DEV]'))
     link = '/maps/' # We can't use reverse here as the urlpatterns aren't
                     # defined yet at this point.
     description = _('The latest rendered maps on MapOSMatic.')
@@ -100,7 +100,7 @@ class ErrorFeed(Feed):
     """
 
     title = "%s %s %s" % (www.settings.BRAND_NAME, _("errors"),
-                          www.settings.DEBUG and _('') or _('[DEV]'))
+                          www.settings.DEBUG and '' or _('[DEV]'))
     link = '/maps/' # We can't use reverse here as the urlpatterns aren't
                     # defined yet at this point.
     description = _('The latest render failures on MapOSMatic.')

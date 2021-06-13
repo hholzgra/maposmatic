@@ -14,12 +14,11 @@
 # Wasilis Mandratzis <inactive+Wasilis@transifex.com>, 2013
 # Hartmut Holzgraefe <hartmut@php.net>, 2019.
 # Weblate Admin <admin@example.com>, 2021.
-#: www/maposmatic/feeds.py:46 www/maposmatic/feeds.py:103
 msgid ""
 msgstr ""
 "Project-Id-Version: MapOSMatic\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-04-10 22:23+0200\n"
+"POT-Creation-Date: 2021-06-13 14:34+0200\n"
 "PO-Revision-Date: 2021-06-12 20:24+0000\n"
 "Last-Translator: Weblate Admin <admin@example.com>\n"
 "Language-Team: German <https://translate.get-map.org/projects/maposmatic/"

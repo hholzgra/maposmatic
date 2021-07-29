@@ -131,8 +131,6 @@ class MapRenderingJob(models.Model):
     class Meta:
         indexes = [models.Index(fields=['submission_time',]),]
 
-    _files_prefix = None
-
     objects = MapRenderingJobManager()
 
     def __str__(self):
@@ -147,17 +145,19 @@ class MapRenderingJob(models.Model):
             t = slugify(t)
         return t
 
+    _files_prefix = None
     def files_prefix(self):
-        try:
-            return "%06d_%s_%s" % \
-                (self.id,
-                 self.startofrendering_time.strftime("%Y-%m-%d_%H-%M"),
-                 self.maptitle_computized())
-        except Exception:
-            return "%06d_%s" % \
-                (self.id,
-                 self.maptitle_computized())
-
+        if self._files_prefix is None:
+            try:
+                self._files_prefix = "%06d_%s_%s" % \
+                    (self.id,
+                     self.startofrendering_time.strftime("%Y-%m-%d_%H-%M"),
+                     self.maptitle_computized())
+            except Exception:
+                self._files_prefix = "%06d_%s" % \
+                    (self.id,
+                     self.maptitle_computized())
+        return self._files_prefix
 
     def start_rendering(self):
         self.status = 1
@@ -200,11 +200,17 @@ class MapRenderingJob(models.Model):
                 self.stylesheet and self.layout and
                 self.paper_width_mm != -1 and self.paper_height_mm != -1)
 
+    _map_fileurl = None
     def get_map_fileurl(self, format):
-        return www.settings.RENDERING_RESULT_URL + "/" + self.files_prefix() + "." + format
+        if self._map_fileurl is None:
+            self._map_fileurl = os.path.join(www.settings.RENDERING_RESULT_URL, self.files_prefix() + "." + format)
+        return self._map_fileurl 
 
+    _map_filepath_base = None
     def get_map_filepath(self, format):
-        return os.path.join(www.settings.RENDERING_RESULT_PATH, self.files_prefix() + "." + format)
+        if self._map_filepath_base is None:
+            self._map_filepath_base = os.path.join(www.settings.RENDERING_RESULT_PATH, self.files_prefix() )
+        return self._map_filepath_base + format
 
     def output_files(self):
         """Returns a structured dictionary of the output files for this job.
@@ -212,13 +218,15 @@ class MapRenderingJob(models.Model):
         files, and two single files for thumbnail and error output. 
         Each file is reported by a tuple (format, path, title, size)."""
 
+        files_prefix = self.files_prefix()
+
         allfiles = {'maps': {}, 'indeces': {}, 'thumbnail': [], 'errorlog': []}
 
         formats = www.settings.RENDERING_RESULT_FORMATS
         formats.append('8bit.png')
         formats.append('jpg')
         for format in formats:
-            map_path = self.get_map_filepath(format)
+            map_path = self.get_map_filepath("." + format)
             if format != 'csv' and os.path.exists(map_path):
                 # Map files (all formats but CSV)
                 allfiles['maps'][format] = (
@@ -236,11 +244,11 @@ class MapRenderingJob(models.Model):
                     os.stat(map_path).st_size,
                     map_path)
 
-        thumbnail = os.path.join(www.settings.RENDERING_RESULT_PATH, self.files_prefix() + "_small.png")
+        thumbnail = self.get_map_filepath("_small.png")
         if os.path.exists(thumbnail):
             allfiles['thumbnail'].append(('thumbnail', None, os.stat(thumbnail).st_size, thumbnail))
 
-        errorlog = os.path.join(www.settings.RENDERING_RESULT_PATH, self.files_prefix() + "-errors.txt")
+        errorlog = self.get_map_filepath("-errors.txt")
         if os.path.exists(errorlog):
             allfiles['errorlog'].append(('errorlog', None, os.stat(errorlog).st_size, errorlog))
 

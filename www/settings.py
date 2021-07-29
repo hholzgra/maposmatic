@@ -333,6 +333,6 @@ LOG = logging.getLogger('maposmatic')
 # are still readable 
 FILE_UPLOAD_PERMISSIONS = 0o644
 
-MAINTENANCE_MODE = False # True or False, *NOT* None
-# MAINTENANCE_MODE_IGNORE_IP_ADDRESSES = ('xxx.xxx.xxx.xxx',)
+MAINTENANCE_MODE = False  # True or False, *NOT* None
+MAINTENANCE_MODE_IGNORE_IP_ADDRESSES = ('217.146.146.90',)
 MAINTENANCE_MODE_TEMPLATE = '503.html'

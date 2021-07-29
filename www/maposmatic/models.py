@@ -128,6 +128,10 @@ class MapRenderingJob(models.Model):
 
     nonce = models.CharField(max_length=NONCE_SIZE, blank=True)
 
+    class Meta:
+        indexes = [models.Index(fields=['submission_time',]),]
+
+    _files_prefix = None
 
     objects = MapRenderingJobManager()
 

@@ -70,9 +70,9 @@ class MapRenderingJobManager(models.Manager):
         entire files_prefix is used to match a job."""
 
         try:
-            jobid = int(name.split('_', 1)[0])
+            jobid = int(os.path.basename(name).split('_', 1)[0])
             job = MapRenderingJob.objects.get(id=jobid)
-            if name.startswith(job.files_prefix()):
+            if name.startswith(os.path.join(www.settings.RENDERING_RESULT_PATH, job.files_prefix())):
                 return job
         except (ValueError, IndexError, MapRenderingJob.DoesNotExist):
             pass
@@ -149,8 +149,9 @@ class MapRenderingJob(models.Model):
     def files_prefix(self):
         if self._files_prefix is None:
             try:
-                self._files_prefix = "%06d_%s_%s" % \
-                    (self.id,
+                self._files_prefix = "%s/%06d_%s_%s" % \
+                    (self.startofrendering_time.strftime("%Y/%m/%d"),
+                     self.id,
                      self.startofrendering_time.strftime("%Y-%m-%d_%H-%M"),
                      self.maptitle_computized())
             except Exception:

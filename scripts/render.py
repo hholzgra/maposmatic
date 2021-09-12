@@ -432,6 +432,8 @@ class JobRenderer(threading.Thread):
         try:
             renderer = ocitysmap.OCitySMap(OCITYSMAP_CFG_PATH)
             config = ocitysmap.RenderingConfiguration()
+            result_file_prefix = os.path.join(RENDERING_RESULT_PATH, self.job.files_prefix())
+            os.makedirs(os.path.dirname(result_file_prefix), exist_ok=True)
 
             # TODO have the create form provide this
             config.origin_url = 'https://print.get-map.org' + self.job.get_absolute_url()
@@ -485,14 +487,12 @@ class JobRenderer(threading.Thread):
             self.result = RESULT_PREPARATION_EXCEPTION
             LOG.exception("Rendering of job #%d failed (exception occurred during"
                           " data preparation)!" % self.job.id)
-            errfile = os.path.join(RENDERING_RESULT_PATH, self.job.files_prefix() + "-errors.txt")
+            errfile = result_file_prefix + "-errors.txt"
             fp = open(errfile, "w")
             traceback.print_exc(file=fp)
             fp.close()
             self._email_exception(e)
             return self.result
-
-        prefix = os.path.join(RENDERING_RESULT_PATH, self.job.files_prefix())
 
         try:
             # Get the list of output formats (PNG, PDF, SVGZ, CSV)
@@ -506,11 +506,11 @@ class JobRenderer(threading.Thread):
                 list(set(compatible_output_formats) & set(RENDERING_RESULT_FORMATS))
 
             renderer.render(config, self.job.layout,
-                            output_formats, prefix)
+                            output_formats, result_file_prefix)
 
             # Create thumbnail
             try:
-                self._gen_thumbnail(prefix, config.paper_width_mm,
+                self._gen_thumbnail(result_file_prefix, config.paper_width_mm,
                                     config.paper_height_mm)
             except:
                 pass
@@ -525,7 +525,7 @@ class JobRenderer(threading.Thread):
             self.result = RESULT_RENDERING_EXCEPTION
             LOG.exception("Rendering of job #%d failed (exception occurred during"
                           " rendering)!" % self.job.id)
-            errfile = os.path.join(RENDERING_RESULT_PATH, self.job.files_prefix() + "-errors.txt")
+            errfile = result_file_prefix + "-errors.txt"
             fp = open(errfile, "w")
             traceback.print_exc(file=fp)
             fp.close()

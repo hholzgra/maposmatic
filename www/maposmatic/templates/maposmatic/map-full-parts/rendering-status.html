@@ -6,32 +6,36 @@
 <div class="container">
   <div class="row">
     <div class="col-md-9">
-      {% with date=map.submission_time|date:"DATETIME_FORMAT" %}
-      {% blocktrans %}Request submitted: {{ date }}{% endblocktrans %}
-      {% endwith %}
-      <br />
-      {% if map.is_rendering or map.is_done%}
-      {% with date=map.startofrendering_time|date:"DATETIME_FORMAT" duration=map.submission_time|timesince:map.startofrendering_time %}
-      {% blocktrans %}Rendering started at {{ date }} {% endblocktrans %}
-      {% blocktrans %}after {{duration}} in the queue{% endblocktrans %}
-      {% endwith %}
-      <br />
-      {% endif %}
-      {% if map.is_done or map.is_obsolete %}
-      {% with date=map.endofrendering_time|date:"DATETIME_FORMAT" duration=map.startofrendering_time|timesince:map.endofrendering_time %}
-      {% blocktrans %}Rendering completed at {{ date }} {% endblocktrans %}
-      {% blocktrans %}after {{duration}} {% endblocktrans %}
-      {% endwith %}
-      <br />
-      {% endif %}
-      {% if map.is_cancelled %}
-      {% with map.endofrendering_time|date:"DATETIME_FORMAT" as date %}
-      {% blocktrans %}Rendering cancelled: {{ date }}{% endblocktrans %}
-      {% endwith %}
-      <br />
-      {% endif %}
+      <table class="table table-striped">
+        {% with date=map.submission_time|date:"DATETIME_FORMAT" %}
+        <tr><td><strong>{% trans "Request submitted" %}</strong></td><td title="{{ date }}">{{ map.submission_time|timesince }} ago</td></tr>
+        {% endwith %}
+	
+        {% if map.is_rendering %}
+        {% with date=map.startofrendering_time|date:"DATETIME_FORMAT" duration=map.submission_time|timesince:map.startofrendering_time %}
+	<tr><td><strong>{% trans "Rendering started" %}</strong></td><td title="{{ date }}">{{ map.startofrendering_time|timesince }} ago, {% blocktrans %}after {{ duration}} in the queue{% endblocktrans %}</td></tr>
+        {% endwith %}
+        {% endif %}
+	
+        {% if map.is_done or map.is_obsolete %}
+        {% with date=map.startofrendering_time|date:"DATETIME_FORMAT" duration=map.submission_time|timesince:map.startofrendering_time %}
+	<tr><td><strong>{% trans "Rendering started" %}</strong></td><td title="{{ date }}">{{ map.startofrendering_time|timesince }} ago, {% blocktrans %}after {{ duration}} in the queue{% endblocktrans %}</td></tr>
+        {% endwith %}
+        {% with date=map.endofrendering_time|date:"DATETIME_FORMAT" duration=map.startofrendering_time|timesince:map.endofrendering_time %}
+	<tr><td><strong>{% trans "Rendering completed" %}</strong></td><td title="{{ date }}">{{ map.endofrendering_time|timesince }} ago, {% blocktrans %}after {{ duration }} {% endblocktrans %}</td></tr>
+        {% endwith %}
+        {% endif %}
+	
+        {% if map.is_cancelled %}
+        {% with map.endofrendering_time|date:"DATETIME_FORMAT" as date %}
+        <tr><td><strong>{% trans "Rendering cancelled" %}</strong></td><td>{{ date }}</td></tr>
+        {% endwith %}
+        {% endif %}
+      </table>
+      
+      <div>
       {{ map.status|job_status_to_str:map.resultmsg }}
-      <br />
+      </div>
 
       <div style="height: 2em"></div>
 

@@ -341,7 +341,7 @@ def recreate(request):
 
             newjob.save()
 
-            for each in job.uploadfile_set.all():
+            for each in job.uploads.all():
                 each.job.add(newjob)
 
             return HttpResponseRedirect(reverse('map-by-id-and-nonce',

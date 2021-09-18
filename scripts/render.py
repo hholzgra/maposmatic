@@ -466,7 +466,7 @@ class JobRenderer(threading.Thread):
             config.umap_file    = False
             config.poi_file     = False
 
-            for file in self.job.uploadfile_set.all():
+            for file in self.job.uploads.all():
                 config.import_files.append((file.file_type, os.path.join(MEDIA_ROOT, file.uploaded_file.name)))
 
                 # legacy files, eventually remove these

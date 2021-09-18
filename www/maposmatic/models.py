@@ -384,4 +384,4 @@ class UploadFile(models.Model):
     uploaded_file = models.FileField(upload_to='upload/general/%Y/%m/%d/', null=True, blank=True)
     file_type = models.CharField(max_length = 4, choices = FILE_TYPES)
 
-    job = models.ManyToManyField(MapRenderingJob)
+    job = models.ManyToManyField(MapRenderingJob, related_name = 'uploads')

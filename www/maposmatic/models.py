@@ -201,11 +201,11 @@ class MapRenderingJob(models.Model):
                 self.stylesheet and self.layout and
                 self.paper_width_mm != -1 and self.paper_height_mm != -1)
 
-    _map_fileurl = None
+    _map_fileurl_base = None
     def get_map_fileurl(self, format):
-        if self._map_fileurl is None:
-            self._map_fileurl = os.path.join(www.settings.RENDERING_RESULT_URL, self.files_prefix() + "." + format)
-        return self._map_fileurl 
+        if self._map_fileurl_base is None:
+            self._map_fileurl_base = os.path.join(www.settings.RENDERING_RESULT_URL, self.files_prefix())
+        return self._map_fileurl_base + format
 
     _map_filepath_base = None
     def get_map_filepath(self, format):
@@ -231,7 +231,7 @@ class MapRenderingJob(models.Model):
             if format != 'csv' and os.path.exists(map_path):
                 # Map files (all formats but CSV)
                 allfiles['maps'][format] = (
-                    self.get_map_fileurl(format),
+                    self.get_map_fileurl("." + format),
                     _("%(title)s %(format)s Map") % {'title': self.maptitle,
                                                      'format': format.upper()},
                     os.stat(map_path).st_size,

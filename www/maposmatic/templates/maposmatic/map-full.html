@@ -101,7 +101,7 @@
 	    </td></tr>
  	    {% endif %}
            <tr><td><strong>{% trans "Paper format" %}</strong></td>
-              <td>{{ map.paper_width_mm }}&times;{{ map.paper_height_mm }} mm²</td></tr>
+              <td>{{ map|paper_size }}</td></tr> 
 	    <tr><td><strong>{% trans "Map locale" %}</strong></td>
 	      <td>{{ MAP_LANGUAGES|getitem:map.map_language }}</td></tr>
 	  </tbody>

@@ -34,7 +34,7 @@ import django
 django.setup()
 
 from www.maposmatic.models import MapRenderingJob
-from www.settings import RENDERING_RESULT_PATH, RENDERING_RESULT_MAX_SIZE_GB
+from www.settings import RENDERING_RESULT_PATH, RENDERING_RESULT_MAX_SIZE_GB, RENDERING_RESULT_MAX_PURGE_ITERATIONS
 
 import render
 
@@ -183,10 +183,12 @@ class RenderingsGarbageCollector:
         """Returns the given saved space, size and threshold details, formatted
         for display by get_formatted_value()."""
 
-        return 'saved %s, now %s/%s' % \
+        return 'saved %s, now %s/%s (%d%%)' % \
                 (self.get_formatted_value(saved),
                  self.get_formatted_value(size),
-                 self.get_formatted_value(threshold))
+                 self.get_formatted_value(threshold),
+                 size*100/threshold
+                 )
 
     def cleanup(self):
         """Run one iteration of the cleanup loop. A sorted list of files from
@@ -225,8 +227,8 @@ class RenderingsGarbageCollector:
         iterations = 0
         previous_job_id = 0
         while size > threshold:
-            if iterations > 10:
-                LOG.info("10 delete iterations done, pausing until next invocation")
+            if iterations > RENDERING_RESULT_MAX_PURGE_ITERATIONS:
+                LOG.info("%d delete iterations done, pausing until next invocation" % RENDERING_RESULT_MAX_PURGE_ITERATIONS)
                 break
             if not len(files):
                 LOG.error("No files to remove and still above threshold! "
@@ -238,10 +240,10 @@ class RenderingsGarbageCollector:
             if job:
                 if job.id != previous_job_id:
                     previous_job_id = job.id
-                    iterations += 1
                     removed, saved = job.remove_all_files()
                     size -= saved
                     if removed:
+                        iterations += 1
                         LOG.info("Cleanup removed %d files for job #%d (%s)." %
                                  (removed, job.id,
                                   self.get_formatted_details(saved, size,

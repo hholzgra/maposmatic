@@ -76,6 +76,7 @@ RENDERING_RESULT_PATH = '/path/to/rendering/results/'
 RENDERING_RESULT_URL = '/results/' # Either a relative URL or an absolute URL
 RENDERING_RESULT_FORMATS = ['pdf', 'svgz', 'png', 'csv']
 RENDERING_RESULT_MAX_SIZE_GB = 10
+RENDERING_RESULT_MAX_PURGE_ITERATIONS = 10
 
 # Default output log file when the env variable MAPOSMATIC_LOG_FILE is not set
 DEFAULT_MAPOSMATIC_LOG_FILE = '/path/to/maposmatic/logs/maposmatic.log'

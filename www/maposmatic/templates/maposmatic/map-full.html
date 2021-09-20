@@ -62,7 +62,6 @@
     <div class="card card-default mb-3">
       <div class="card-header">{% trans "Map details" %}</div>
       <div class="card-body">
-	
 	<table class="table table-striped">
 	  <tbody>
             {% if map.administrative_osmid %}
@@ -94,8 +93,15 @@
             <tr><td><strong>{% trans "UMAP File" %}</strong></td>
               <td>{{ map.umap|file_basename }}</td></tr>
 	    {% endif %}
-            <tr><td><strong>{% trans "Paper format" %}</strong></td>
-              <td>{{ map.paper_width_mm }}&times;{{ map.paper_height_mm }} mm²</td></tr>
+	    {% if map.uploads.all %}
+	    <tr><td><strong>{% trans "Uploaded files" %}</strong></td><td>
+	    {% for upload in map.uploads.all %}
+ 	      <tt>{{ upload.uploaded_file|file_basename }}</tt> <em>({{ upload.file_type }}, {{ upload.uploaded_file.size|filesizeformat }})</em><br/>
+	    {% endfor %}
+	    </td></tr>
+ 	    {% endif %}
+           <tr><td><strong>{% trans "Paper format" %}</strong></td>
+              <td>{{ map|paper_size }}</td></tr> 
 	    <tr><td><strong>{% trans "Map locale" %}</strong></td>
 	      <td>{{ MAP_LANGUAGES|getitem:map.map_language }}</td></tr>
 	  </tbody>

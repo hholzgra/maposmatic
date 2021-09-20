@@ -113,7 +113,19 @@ def language_flag(value):
 
 def locale_base(value):
     return re.sub('\..*', '', value)
-    
+
+def paper_size(value):
+    w = value.paper_width_mm
+    h = value.paper_height_mm
+
+    oc = ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH)
+    size_name = oc.get_paper_size_name_by_size(w, h)
+
+    if size_name is None:
+        return "%d×%d mm²" % (w,h)
+    else:
+        return "%s (%d×%d mm²)" % (size_name, w, h)
+
 register.filter('job_status_to_str', job_status_to_str)
 register.filter('feedparsed', feedparsed)
 register.filter('abs', lambda x: abs(x))
@@ -125,3 +137,4 @@ register.filter('longitude', longitude)
 register.filter('bbox_km', bbox_km)
 register.filter('language_flag', language_flag)
 register.filter('locale_base', locale_base)
+register.filter('paper_size', paper_size)

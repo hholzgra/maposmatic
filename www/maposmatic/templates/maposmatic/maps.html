@@ -82,25 +82,32 @@
 	      {% if map.umap %}
               <tr><td><strong>{% trans "UMAP file" %}</strong></td><td>{{ map.umap|file_basename }}</td></tr>
 	      {% endif %}
-              <tr><td><strong>{% trans "Paper format" %}</strong></td><td>{{ map.paper_width_mm }}&times;{{ map.paper_height_mm }} mm²</td></tr>
+	      {% if map.uploads.all %}
+	      <tr><td><strong>{% trans "Uploaded files" %}</strong></td><td>
+		{% for upload in map.uploads.all %}
+ 	        <tt>{{ upload.uploaded_file|file_basename }}</tt> <em>({{ upload.file_type }}, {{ upload.uploaded_file.size|filesizeformat }})</em><br/>
+	        {% endfor %}
+	      </td></tr>
+ 	      {% endif %}
+              <tr><td><strong>{% trans "Paper format" %}</strong></td><td>{{ map|paper_size }}</td></tr>
               <tr><td><strong>{% trans "Map locale" %}</strong></td><td>{{ MAP_LANGUAGES|getitem:map.map_language }}</td></tr>
 	      
               {% with date=map.submission_time|date:"DATETIME_FORMAT" %}
-              <tr><td><strong>{% trans "Request submitted" %}</strong></td><td>{{ date }}</td></tr>
+              <tr><td><strong>{% trans "Request submitted" %}</strong></td><td title="{{ date }}">{{ map.submission_time|timesince }} ago</td></tr>
               {% endwith %}
 	      
               {% if map.is_rendering %}
               {% with date=map.startofrendering_time|date:"DATETIME_FORMAT" duration=map.submission_time|timesince:map.startofrendering_time %}
-	      <tr><td><strong>{% trans "Rendering started" %}</strong></td><td>{{ date }}, {% blocktrans %}after {{ duration}} in the queue{% endblocktrans %}</td></tr>
+	      <tr><td><strong>{% trans "Rendering started" %}</strong></td><td title="{{ date }}">{{ map.startofrendering_time|timesince }} ago, {% blocktrans %}after {{ duration}} in the queue{% endblocktrans %}</td></tr>
               {% endwith %}
               {% endif %}
 	      
               {% if map.is_done or map.is_obsolete %}
               {% with date=map.startofrendering_time|date:"DATETIME_FORMAT" duration=map.submission_time|timesince:map.startofrendering_time %}
-	      <tr><td><strong>{% trans "Rendering started" %}</strong></td><td>{{ date }}, {% blocktrans %}after {{ duration}} in the queue{% endblocktrans %}</td></tr>
+	      <tr><td><strong>{% trans "Rendering started" %}</strong></td><td title="{{ date }}">{{ map.startofrendering_time|timesince }} ago, {% blocktrans %}after {{ duration}} in the queue{% endblocktrans %}</td></tr>
               {% endwith %}
               {% with date=map.endofrendering_time|date:"DATETIME_FORMAT" duration=map.startofrendering_time|timesince:map.endofrendering_time %}
-	      <tr><td><strong>{% trans "Rendering completed" %}</strong></td><td>{{ date }}, {% blocktrans %}after {{ duration }} {% endblocktrans %}</td></tr>
+	      <tr><td><strong>{% trans "Rendering completed" %}</strong></td><td title="{{ date }}">{{ map.endofrendering_time|timesince }} ago, {% blocktrans %}after {{ duration }} {% endblocktrans %}</td></tr>
               {% endwith %}
               {% endif %}
 	      

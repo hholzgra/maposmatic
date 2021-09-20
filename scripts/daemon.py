@@ -28,6 +28,7 @@ import sys
 import threading
 import time
 from functools import reduce
+import glob
 
 import django
 django.setup()
@@ -194,9 +195,10 @@ class RenderingsGarbageCollector:
         we're back below the size threshold."""
 
         files = list(map(lambda f: self.get_file_info(f),
-                    [os.path.join(RENDERING_RESULT_PATH, f)
-                        for f in os.listdir(RENDERING_RESULT_PATH)
-                        if not (f.startswith('.') or
+                    [os.path.join(f)
+                        for f in glob.iglob(os.path.join(RENDERING_RESULT_PATH, '**'), recursive=True)
+                        if not (os.path.isdir(f) or
+                                f.startswith('.') or
                                 f.endswith(render.THUMBNAIL_SUFFIX))]))
 
         # Compute the total size occupied by the renderings, and the actual
@@ -232,7 +234,7 @@ class RenderingsGarbageCollector:
                 return
 
             f = files.pop()
-            job = MapRenderingJob.objects.get_by_filename(f['name'])
+            job = MapRenderingJob.objects.get_by_filename(f['path'])
             if job:
                 if job.id != previous_job_id:
                     previous_job_id = job.id
@@ -248,12 +250,15 @@ class RenderingsGarbageCollector:
             else:
                 # If we didn't find a parent job, it means this is an orphaned
                 # file, we can safely remove it to get back some disk space.
-                os.remove(f['path'])
-                size -= f['size']
-                LOG.info("Cleanup: Removed orphan file %s (%s)." %
-                         (f['name'], self.get_formatted_details(f['size'],
-                                                                size,
-                                                                threshold)))
+                try:
+                    os.remove(f['path'])
+                    size -= f['size']
+                    LOG.info("Cleanup: Removed orphan file %s (%s)." %
+                             (f['name'], self.get_formatted_details(f['size'],
+                                                                    size,
+                                                                    threshold)))
+                except:
+                    pass
 
 
 if __name__ == '__main__':

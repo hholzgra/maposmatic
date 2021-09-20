@@ -70,9 +70,9 @@ class MapRenderingJobManager(models.Manager):
         entire files_prefix is used to match a job."""
 
         try:
-            jobid = int(name.split('_', 1)[0])
+            jobid = int(os.path.basename(name).split('_', 1)[0])
             job = MapRenderingJob.objects.get(id=jobid)
-            if name.startswith(job.files_prefix()):
+            if name.startswith(os.path.join(www.settings.RENDERING_RESULT_PATH, job.files_prefix())):
                 return job
         except (ValueError, IndexError, MapRenderingJob.DoesNotExist):
             pass
@@ -149,8 +149,9 @@ class MapRenderingJob(models.Model):
     def files_prefix(self):
         if self._files_prefix is None:
             try:
-                self._files_prefix = "%06d_%s_%s" % \
-                    (self.id,
+                self._files_prefix = "%s/%06d_%s_%s" % \
+                    (self.startofrendering_time.strftime("%Y/%m/%d"),
+                     self.id,
                      self.startofrendering_time.strftime("%Y-%m-%d_%H-%M"),
                      self.maptitle_computized())
             except Exception:
@@ -200,11 +201,11 @@ class MapRenderingJob(models.Model):
                 self.stylesheet and self.layout and
                 self.paper_width_mm != -1 and self.paper_height_mm != -1)
 
-    _map_fileurl = None
+    _map_fileurl_base = None
     def get_map_fileurl(self, format):
-        if self._map_fileurl is None:
-            self._map_fileurl = os.path.join(www.settings.RENDERING_RESULT_URL, self.files_prefix() + "." + format)
-        return self._map_fileurl 
+        if self._map_fileurl_base is None:
+            self._map_fileurl_base = os.path.join(www.settings.RENDERING_RESULT_URL, self.files_prefix())
+        return self._map_fileurl_base + format
 
     _map_filepath_base = None
     def get_map_filepath(self, format):
@@ -230,7 +231,7 @@ class MapRenderingJob(models.Model):
             if format != 'csv' and os.path.exists(map_path):
                 # Map files (all formats but CSV)
                 allfiles['maps'][format] = (
-                    self.get_map_fileurl(format),
+                    self.get_map_fileurl("." + format),
                     _("%(title)s %(format)s Map") % {'title': self.maptitle,
                                                      'format': format.upper()},
                     os.stat(map_path).st_size,
@@ -383,4 +384,4 @@ class UploadFile(models.Model):
     uploaded_file = models.FileField(upload_to='upload/general/%Y/%m/%d/', null=True, blank=True)
     file_type = models.CharField(max_length = 4, choices = FILE_TYPES)
 
-    job = models.ManyToManyField(MapRenderingJob)
+    job = models.ManyToManyField(MapRenderingJob, related_name = 'uploads')

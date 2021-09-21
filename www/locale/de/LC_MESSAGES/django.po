@@ -19,7 +19,7 @@ msgstr ""
 "Project-Id-Version: MapOSMatic\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-13 14:34+0200\n"
-"PO-Revision-Date: 2021-06-13 13:55+0000\n"
+"PO-Revision-Date: 2021-09-21 21:18+0000\n"
 "Last-Translator: Hartmut Holzgraefe <hartmut@php.net>\n"
 "Language-Team: German <https://translate.get-map.org/projects/maposmatic/"
 "maposmatic/de/>\n"
@@ -71,10 +71,8 @@ msgid "Full-page layout with the street index at the bottom"
 msgstr "Ganzseitig mit Straßenverzeichnis unten"
 
 #: www/maposmatic/forms.py:112
-#, fuzzy
-#| msgid "Full-page layout with the street index on the side"
 msgid "Full-page layout with the street index on extra page (PDF only)"
-msgstr "Ganzseitig mit Straßenverzeichnis seitlich"
+msgstr "Ganzseitig mit Straßenverzeichnis auf einer eigenen Seite (nur PDF)"
 
 #: www/maposmatic/forms.py:114
 msgid "Multi-page layout"
@@ -231,8 +229,8 @@ msgstr ""
 "Gilles' Idee Leben ein,\n"
 " indem sie den Code schrieben und das Projekt <strong>MapOSMatic</strong> "
 "nannten.\n"
-" Die Gruppe der <em>Hacker</em> möchte Gilles dafür danken, dass er seine "
-"geniale Idee mit ihnen teilte!"
+" Die Gruppe der Hacker möchte Gilles dafür danken, dass er seine geniale "
+"Idee mit ihnen teilte!"
 
 #: www/maposmatic/templates/maposmatic/about.html:84
 msgid ""
@@ -481,18 +479,16 @@ msgid "Contributors"
 msgstr "Mitwirkende"
 
 #: www/maposmatic/templates/maposmatic/about.html:200
-#, fuzzy
-#| msgid "Core team"
 msgid "Current team"
-msgstr "Kernteam"
+msgstr "Aktuelles Team"
 
 #: www/maposmatic/templates/maposmatic/about.html:203
 msgid "Developer, running instance on https://print.get-map-org/"
-msgstr ""
+msgstr "Entwickler, Betreiber der Instanz auf https://print.get-map.org/"
 
 #: www/maposmatic/templates/maposmatic/about.html:208
 msgid "Original team"
-msgstr ""
+msgstr "Original-Team"
 
 #: www/maposmatic/templates/maposmatic/about.html:211
 #: www/maposmatic/templates/maposmatic/about.html:212
@@ -1202,10 +1198,8 @@ msgid "File upload"
 msgstr "Datei(en) hochladen"
 
 #: www/maposmatic/templates/maposmatic/new.html:195
-#, fuzzy
-#| msgid "Umap data file"
 msgid "Upload files"
-msgstr "Umap Datei"
+msgstr "Dateien hochlanden"
 
 #: www/maposmatic/templates/maposmatic/new.html:204
 msgid ""
@@ -1213,6 +1207,10 @@ msgid ""
 "multiple files at once. If you re-open the file selection dialog to select "
 "files, your selection will replace the previous one."
 msgstr ""
+"Laden Sie hier GPX-, Umap- oder allgemeine GeoJSON-Dateien hoch. <br/> Sie "
+"können mehrere Dateien gleichzeitig auswählen. Wenn Sie den "
+"Dateiauswahldialog erneut öffnen, um Dateien auszuwählen, ersetzt Ihre "
+"Auswahl die vorherige."
 
 #: www/maposmatic/templates/maposmatic/new.html:216
 msgid ""
@@ -1312,6 +1310,9 @@ msgid ""
 "You can choose from the suggested standard sizes, the \"best fit\" size for "
 "the map area you selected, or specify a width and height of your own choice."
 msgstr ""
+"Sie können aus den vorgeschlagenen Standardgrößen die am \"besten geeignete\""
+" Größe für den ausgewählten Kartenbereich auswählen oder eine Breite und "
+"Höhe Ihrer Wahl angeben."
 
 #: www/maposmatic/templates/maposmatic/new.html:408
 msgid "Map title"
@@ -1327,7 +1328,7 @@ msgstr "Ihre Email-Adresse (für Benachrichtigungen, optional)"
 
 #: www/maposmatic/templates/maposmatic/new.html:436
 msgid "will be deleted after"
-msgstr ""
+msgstr "wird gelöscht nach"
 
 #: www/maposmatic/templates/maposmatic/new.html:436
 msgid "hours"
@@ -1490,9 +1491,9 @@ msgid ""
 "  "
 msgstr ""
 "\n"
-"  Wenn Sie eine Email-Adresse angeben unter der sie benachrichtigt werden "
-"wollen wenn der Kartenauftrag ausgeführt worde ist so wird diese Adresse "
-"gespeichert\n"
+"  Wenn Sie eine Email-Adresse angeben unter der Sie benachrichtigt werden "
+"wollen sobald ein Kartenauftrag vollständig ausgeführt wurde wird diese "
+"Adresse gespeichert\n"
 "  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:96
@@ -1524,8 +1525,8 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"    Diese Seite benutzt <a href=\"https://matomo.org/\">Matomo</a> ("
-"ursprünglich bekannt als Piwik) für statistische Analysen.\n"
+"    Diese Seite benutzt <a href=\"https://matomo.org/\">Matomo</a>\n"
+" (ursprünglich bekannt als Piwik) für statistische Analysen.\n"
 "    "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:116
@@ -1536,8 +1537,8 @@ msgid ""
 "  "
 msgstr ""
 "\n"
-"  Diese Seite führt weder selbst Benutzer-Tracking durch, noch nutzt sie "
-"dafür externe Tracking-Dienste.\n"
+"  Diese Seite führt weder selbst Benutzer-Tracking durch, \n"
+"noch nutzt sie dafür externe Tracking-Dienste.\n"
 "  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:126
@@ -1593,7 +1594,7 @@ msgid ""
 "      "
 msgstr ""
 "\n"
-"      Wenn Sie dieses Cookie nicht akzeptieren wird die Cookie-Warning bei "
+"      Wenn Sie dieses Cookie nicht akzeptieren wird die Cookie-Warnung bei "
 "jedem weiteren Zugriff auf diesen Webauftritt angezeigt, bis auf den dafür "
 "nötigen Bildschirm-Platz wird das aber keine funktionalen Einschränkungen "
 "mit sich bringen.\n"
@@ -1609,7 +1610,7 @@ msgid ""
 msgstr ""
 "\n"
 "      Dieses Cookie stellt eine Verbindung zwischen Ihrer aktuellen Browser-"
-"Sitzung und einigen Sitzungsspezifischen Inormationen auf dem Server her.\n"
+"Sitzung und einigen sitzungsspezifischen Informationen auf dem Server her.\n"
 "      "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:169
@@ -1720,10 +1721,10 @@ msgid ""
 "      "
 msgstr ""
 "\n"
-"      Wenn Sie sich entscheiden dieses Cookie nicht anzunehen kann es "
+"      Wenn Sie sich entscheiden dieses Cookie nicht anzunehmen kann es "
 "vorkommen, dass die Kartenkacheln in der interaktiven Karte deutlich "
 "langsamer geladen werden, aber davon abgesehen wird die Funktionalität "
-"dieser Website dadurch nicht weiter beeinrächtigt.\n"
+"dieser Website dadurch nicht weiter beeinträchtigt.\n"
 "      "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:235
@@ -1825,9 +1826,9 @@ msgid ""
 msgstr ""
 "\n"
 "  Sollten Sie solche Dateien irrtümlich hochgeladen haben, so "
-"benachrichtigen Sie bitte %(CONTACT_EMAIL) via Email und bitten Sie um die "
+"benachrichtigen Sie bitte %(CONTACT_EMAIL)s via Email und bitten Sie um die "
 "Entfernung der hochgeladenen Dateien und der daraus generierten Karten. "
-"Bitte geben Sie entweder die URL oder Kennummer der generierten Karte an, "
+"Bitte geben Sie entweder die URL oder Kennnummer der generierten Karte an, "
 "oder die Dateinamen der hochgeladenen Dateien und den ungefähren Zeitpunkt "
 "des Hochladens auf diese Seite.\n"
 "  "
@@ -1868,7 +1869,7 @@ msgstr ""
 
 #: www/maposmatic/templates/maposmatic/suggest.js:41
 msgid "Start typing for suggestions..."
-msgstr "Tippen Sie, um Vorschläge zu erhalten... "
+msgstr "Tippen Sie, um Vorschläge zu erhalten..."
 
 #: www/maposmatic/templatetags/extratags.py:41
 msgid "Waiting for rendering to begin..."
@@ -2038,16 +2039,14 @@ msgstr "Akzeptieren"
 #: www/templates/render_email_failure.txt:1
 #: www/templates/render_email_success.txt:1
 #: www/templates/render_email_timeout.txt:1
-#, fuzzy
-#| msgid "Rendering daemon: "
 msgid "MapOSMatic rendering daemon"
-msgstr "Render-Daemon: "
+msgstr "MapOSMatic Render-Daemon"
 
 #: www/templates/render_email_exception.txt:7
 #: www/templates/render_email_failure.txt:7
 #, python-format
 msgid "Rendering of job #%(jobid)s failed"
-msgstr "Rendervorgang  für Auftrag #%(jobid)s fehlgeschlagen!"
+msgstr "Rendervorgang für Auftrag #%(jobid)s fehlgeschlagen"
 
 #: www/templates/render_email_exception.txt:10
 #, python-format

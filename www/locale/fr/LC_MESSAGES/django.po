@@ -6,21 +6,22 @@
 # Jeroen van Rijn <jvrnix@gmail.com>, 2013
 # Maxime Petazzoni <maxime.petazzoni@bulix.org>, 2013
 # nom complet <weblate.sanspourriel@spamgourmet.com>, 2019.
+# Loïc LE METAYER <loic.lemetayer@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: MapOSMatic\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-13 14:34+0200\n"
-"PO-Revision-Date: 2019-04-20 21:05+0000\n"
-"Last-Translator: nom complet <weblate.sanspourriel@spamgourmet.com>\n"
-"Language-Team: French <http://translate.get-map.org/projects/maposmatic/"
+"PO-Revision-Date: 2021-10-08 08:38+0000\n"
+"Last-Translator: Loïc LE METAYER <loic.lemetayer@gmail.com>\n"
+"Language-Team: French <https://translate.get-map.org/projects/maposmatic/"
 "maposmatic/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.5.1\n"
+"X-Generator: Weblate 4.6.2\n"
 
 #: www/maposmatic/feeds.py:45
 msgid "maps"
@@ -63,10 +64,10 @@ msgid "Full-page layout with the street index at the bottom"
 msgstr "Disposition pleine page avec index des rues en dessous"
 
 #: www/maposmatic/forms.py:112
-#, fuzzy
-#| msgid "Full-page layout with the street index on the side"
 msgid "Full-page layout with the street index on extra page (PDF only)"
-msgstr "Disposition pleine page avec l'index des rues sur le coté"
+msgstr ""
+"Disposition pleine page avec l'index des rues sur une page dédiée ("
+"uniquement en PDF)"
 
 #: www/maposmatic/forms.py:114
 msgid "Multi-page layout"
@@ -455,18 +456,17 @@ msgid "Contributors"
 msgstr "Contributeurs"
 
 #: www/maposmatic/templates/maposmatic/about.html:200
-#, fuzzy
-#| msgid "Core team"
 msgid "Current team"
-msgstr "Équipe principale"
+msgstr "Équipe actuelle"
 
 #: www/maposmatic/templates/maposmatic/about.html:203
 msgid "Developer, running instance on https://print.get-map-org/"
 msgstr ""
+"Développeur, possède une instance accessible sur https://print.get-map-org/"
 
 #: www/maposmatic/templates/maposmatic/about.html:208
 msgid "Original team"
-msgstr ""
+msgstr "Équipe originelle"
 
 #: www/maposmatic/templates/maposmatic/about.html:211
 #: www/maposmatic/templates/maposmatic/about.html:212
@@ -640,7 +640,7 @@ msgstr ""
 
 #: www/maposmatic/templates/maposmatic/base.html:126
 msgid "Privacy statement"
-msgstr ""
+msgstr "Déclaration de confidentialité"
 
 #: www/maposmatic/templates/maposmatic/donate-thanks.html:36
 msgid "Thanks!"
@@ -651,16 +651,12 @@ msgid "Thanks for your donation!"
 msgstr "Merci pour votre don !"
 
 #: www/maposmatic/templates/maposmatic/donate-thanks.html:42
-#, fuzzy
-#| msgid ""
-#| "<i class=\"fa fa-check\"></i> We have received your donation.\n"
-#| "Thank you for your support to the MapOSMatic project!"
 msgid ""
 "<i class=\"fas fa-check\"></i> We have received your donation.\n"
 "Thank you for your support to the MapOSMatic project!"
 msgstr ""
-"<i class=\"fa-fa-check\"></i> Nous avons bien reçu votre don, merci pour "
-"votre soutien au projet MapOSMatic !"
+"<i class=\"fas fa-check\"></i> Nous avons bien reçu votre don.\n"
+"Merci pour votre soutien au projet MapOSMatic !"
 
 #: www/maposmatic/templates/maposmatic/donate-thanks.html:47
 msgid ""
@@ -1002,10 +998,8 @@ msgid "Cancel this queued request (position %(pos)s in the queue)"
 msgstr "Annuler cette requête (position %(pos)s dans la file d'attente)"
 
 #: www/maposmatic/templates/maposmatic/map-full-parts/rendering-status.html:65
-#, fuzzy
-#| msgid "<i class=\"fa fa-times\"></i> Cancel"
 msgid "<i class=\"fas fa-times\"></i> Cancel"
-msgstr "<i class=\"fa fa-times\"></i> Annuler"
+msgstr "<i class=\"fas fa-times\"></i> Annuler"
 
 #: www/maposmatic/templates/maposmatic/map-full-parts/rendering-status.html:77
 #: www/maposmatic/templates/maposmatic/maps.html:142
@@ -1063,7 +1057,7 @@ msgstr "Mise à jour en cours ..."
 
 #: www/maposmatic/templates/maposmatic/map-full.html:56
 msgid "Rendering status"
-msgstr "Status du rendu"
+msgstr "Statut du rendu"
 
 #: www/maposmatic/templates/maposmatic/map-full.html:63
 msgid "Map details"
@@ -1176,13 +1170,11 @@ msgstr "Recherche par ville"
 
 #: www/maposmatic/templates/maposmatic/new.html:168
 msgid "File upload"
-msgstr ""
+msgstr "Importer un fichier"
 
 #: www/maposmatic/templates/maposmatic/new.html:195
-#, fuzzy
-#| msgid "Umap data file"
 msgid "Upload files"
-msgstr "fichier de données Umap"
+msgstr "Import de fichiers"
 
 #: www/maposmatic/templates/maposmatic/new.html:204
 msgid ""
@@ -1190,21 +1182,19 @@ msgid ""
 "multiple files at once. If you re-open the file selection dialog to select "
 "files, your selection will replace the previous one."
 msgstr ""
+"Importer ici un fichier au format GPX, Umap, ou GeoJSON. <br/>Vous pouvez "
+"sélectionner plusieurs fichiers simultanément. La réouverture de la fenêtre "
+"de sélection remplacera la liste précédemment sélectionnée."
 
 #: www/maposmatic/templates/maposmatic/new.html:216
-#, fuzzy
-#| msgid ""
-#| "<b>Note:</b> The uploaded file will not be made available to anyone, the "
-#| "map created using this file <b>will be publicly visible</b> though.<br/"
-#| ">Do <b>NOT</b> upload any data you don't want to be publicly visible."
 msgid ""
 "<b>Note:</b> The uploaded files will not be made available to anyone, the "
 "map created using this file <b>will be publicly visible</b> though.<br/>Do "
 "<b>NOT</b> upload any data you don't want to be publicly visible."
 msgstr ""
-"<b>Note :</b> Le fichier téléversé ne sera pas visible de tous. <b>Mais</b> "
-"la carte utilisant ce fichier le sera .<br/><b>NE</b> téléversez <b>PAS</b> "
-"de données si vous ne voulez pas qu'elles soient visibles de tous."
+"<b>Note :</b> Les fichiers téléversés ne seront pas visible de tous. "
+"<b>Mais</b> la carte utilisant ce fichier le sera.<br/><b>NE</b> téléversez "
+"<b>PAS</b> de données si vous ne voulez pas qu'elles soient visibles de tous."
 
 #: www/maposmatic/templates/maposmatic/new.html:228
 msgid "Geographic area selection"
@@ -1272,7 +1262,7 @@ msgstr "Taille du papier"
 
 #: www/maposmatic/templates/maposmatic/new.html:337
 msgid "(width x height)"
-msgstr ""
+msgstr "(largeur × hauteur)"
 
 #: www/maposmatic/templates/maposmatic/new.html:370
 msgid "An error occured while retrieving compatible paper sizes."
@@ -1291,7 +1281,7 @@ msgstr "Format et taille du papier"
 #: www/maposmatic/templates/maposmatic/new.html:389
 msgid "Select the desired format, size and orientation for your map."
 msgstr ""
-"Selectionnez le format, la taille et l'orientation de papier désirée pour "
+"Sélectionnez le format, la taille et l'orientation de papier désirée pour "
 "votre carte."
 
 #: www/maposmatic/templates/maposmatic/new.html:392
@@ -1313,14 +1303,12 @@ msgid "Your Email address (for notifications, optional)"
 msgstr "Votre adresse mail (pour les notifications, facultatif)"
 
 #: www/maposmatic/templates/maposmatic/new.html:436
-#, fuzzy
-#| msgid "Clear selected area"
 msgid "will be deleted after"
-msgstr "Enlever la zone sélectionée"
+msgstr "sera supprimée après"
 
 #: www/maposmatic/templates/maposmatic/new.html:436
 msgid "hours"
-msgstr ""
+msgstr "heure(s)"
 
 #: www/maposmatic/templates/maposmatic/new.html:445
 msgid "Summary"
@@ -1362,11 +1350,11 @@ msgstr ""
 #: www/maposmatic/templates/maposmatic/privacy.html:33
 #: www/maposmatic/templates/maposmatic/privacy.html:36
 msgid "Privacy Statement"
-msgstr ""
+msgstr "Déclaration de confidentialité"
 
 #: www/maposmatic/templates/maposmatic/privacy.html:38
 msgid "Encryption"
-msgstr ""
+msgstr "Chiffrement"
 
 #: www/maposmatic/templates/maposmatic/privacy.html:41
 msgid ""
@@ -1783,7 +1771,7 @@ msgstr "Service indisponible"
 
 #: www/templates/cookielaw/banner.html:7
 msgid "Cookie information"
-msgstr ""
+msgstr "Informations sur les cookies"
 
 #: www/templates/cookielaw/banner.html:10
 msgid ""
@@ -1822,23 +1810,20 @@ msgstr ""
 
 #: www/templates/cookielaw/banner.html:37
 msgid "Accept"
-msgstr ""
+msgstr "Accepter"
 
 #: www/templates/render_email_exception.txt:1
 #: www/templates/render_email_failure.txt:1
 #: www/templates/render_email_success.txt:1
 #: www/templates/render_email_timeout.txt:1
-#, fuzzy
-#| msgid "Rendering daemon: "
 msgid "MapOSMatic rendering daemon"
-msgstr "Démon de rendu : "
+msgstr "Démon de rendu MapOSMatic"
 
 #: www/templates/render_email_exception.txt:7
 #: www/templates/render_email_failure.txt:7
-#, fuzzy, python-format
-#| msgid "Rendering failed!"
+#, python-format
 msgid "Rendering of job #%(jobid)s failed"
-msgstr "Échec du rendu !"
+msgstr "Le rendu de la tâche #%(jobid)s a échoué"
 
 #: www/templates/render_email_exception.txt:10
 #, python-format
@@ -1880,7 +1865,7 @@ msgstr ""
 #: www/templates/render_email_success.txt:7
 #, python-format
 msgid "Rendering of job #%(jobid)s succeeded"
-msgstr ""
+msgstr "Le rendu de la tâche #%(jobid)s s'est terminé avec succès"
 
 #: www/templates/render_email_success.txt:10
 #, python-format
@@ -1904,7 +1889,7 @@ msgstr ""
 #: www/templates/render_email_timeout.txt:7
 #, python-format
 msgid "Rendering of job #%(jobid)s timed out"
-msgstr ""
+msgstr "Délai maximum dépassé pour le rendu de la tâche #%(jobid)s"
 
 #: www/templates/render_email_timeout.txt:10
 #, python-format

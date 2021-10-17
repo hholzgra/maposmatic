@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-13 14:34+0200\n"
-"PO-Revision-Date: 2021-10-09 23:49+0000\n"
+"PO-Revision-Date: 2021-10-18 03:59+0000\n"
 "Last-Translator: Mikel Larreategi <larreategi@gmail.com>\n"
 "Language-Team: Basque <https://translate.get-map.org/projects/maposmatic/"
 "maposmatic/eu/>\n"
@@ -1080,43 +1080,43 @@ msgstr "Atzera"
 
 #: www/maposmatic/templates/maposmatic/new.html:116
 msgid "Map area"
-msgstr ""
+msgstr "Maparen ingurunea"
 
 #: www/maposmatic/templates/maposmatic/new.html:126
 msgid "Style"
-msgstr ""
+msgstr "Estiloa"
 
 #: www/maposmatic/templates/maposmatic/new.html:136
 msgid "Paper"
-msgstr ""
+msgstr "Papera"
 
 #: www/maposmatic/templates/maposmatic/new.html:141
 msgid "Submit"
-msgstr ""
+msgstr "Bidali"
 
 #: www/maposmatic/templates/maposmatic/new.html:146
 msgid "Next"
-msgstr ""
+msgstr "Hurrengoa"
 
 #: www/maposmatic/templates/maposmatic/new.html:148
 msgid "Generate"
-msgstr ""
+msgstr "Sortu"
 
 #: www/maposmatic/templates/maposmatic/new.html:162
 msgid "Geographic area"
-msgstr ""
+msgstr "Ingurune geografikoa"
 
 #: www/maposmatic/templates/maposmatic/new.html:165
 msgid "City search"
-msgstr ""
+msgstr "Hiria bilatu"
 
 #: www/maposmatic/templates/maposmatic/new.html:168
 msgid "File upload"
-msgstr ""
+msgstr "Fitxategia kargatu"
 
 #: www/maposmatic/templates/maposmatic/new.html:195
 msgid "Upload files"
-msgstr ""
+msgstr "Fitxategiak kargatu"
 
 #: www/maposmatic/templates/maposmatic/new.html:204
 msgid ""
@@ -1124,6 +1124,9 @@ msgid ""
 "multiple files at once. If you re-open the file selection dialog to select "
 "files, your selection will replace the previous one."
 msgstr ""
+"Kargatu GPX, Umap edo GeoJSON fitxtegiak.<br/>Fitxategi bat baino gehiago "
+"ere aukeratu dezakezu. Fitxategiak aukeratzeko leihoa berriz irekitzen "
+"baduzu, aurrez aukeratutakoak galdu egingo dituzu."
 
 #: www/maposmatic/templates/maposmatic/new.html:216
 msgid ""
@@ -1131,10 +1134,13 @@ msgid ""
 "map created using this file <b>will be publicly visible</b> though.<br/>Do "
 "<b>NOT</b> upload any data you don't want to be publicly visible."
 msgstr ""
+"<b>Oharra:</b> Kargatutako fitxategiak edonorentzat deskargatzeko moduan "
+"egongo dira, fitxategi hau erabiliz sortutako mapa <b>publikoa izango "
+"da</b>.<br/><b>Ez</b> kargatu publikoa izan nahi ez duzun fitxategirik."
 
 #: www/maposmatic/templates/maposmatic/new.html:228
 msgid "Geographic area selection"
-msgstr ""
+msgstr "Aukeratu ingurune geografikoa"
 
 #: www/maposmatic/templates/maposmatic/new.html:230
 msgid ""
@@ -1147,7 +1153,7 @@ msgstr ""
 
 #: www/maposmatic/templates/maposmatic/new.html:259
 msgid "Map layout"
-msgstr ""
+msgstr "Maparen formatua"
 
 #: www/maposmatic/templates/maposmatic/new.html:261
 msgid ""
@@ -1155,20 +1161,25 @@ msgid ""
 "<em>Multi-page layout</em> produces a booklet very suitable for printing and "
 "binding."
 msgstr ""
+"Maparen formatuak, mapa eta indizea nola agertzen diren ezartzen du. "
+"<em>Orrialde anitzeko formatuak</em> inprimatu eta grapatzeko egokia den "
+"formatua sortzen du."
 
 #: www/maposmatic/templates/maposmatic/new.html:290
 msgid "Map stylesheet"
-msgstr ""
+msgstr "Maparen estilo-orria"
 
 #: www/maposmatic/templates/maposmatic/new.html:292
 msgid ""
 "The map stylesheet determines the style and appearance of the map itself. "
 "Note that the stylesheet also drives what details will be visible on the map."
 msgstr ""
+"Maparen estilo-orriak maparen itxura zehazten du. Estilo-orriak mapan "
+"ikusiko diren xehetasunak zehazten ditu."
 
 #: www/maposmatic/templates/maposmatic/new.html:319
 msgid "Map overlays"
-msgstr ""
+msgstr "Maparen geruzak"
 
 #: www/maposmatic/templates/maposmatic/new.html:321
 msgid ""
@@ -1176,99 +1187,105 @@ msgid ""
 "overlays can be selected to add different kinds of additional information on "
 "top of the map."
 msgstr ""
+"Geruzetan aukeratutako maparen gainean informazio gehigarria zehazten da. "
+"Hainbat geruza aukeratu ditzakezu horrela informazio gehiago edukitzeko."
 
 #: www/maposmatic/templates/maposmatic/new.html:337
 msgid "Paper size"
-msgstr ""
+msgstr "Paperaren tamaina"
 
 #: www/maposmatic/templates/maposmatic/new.html:337
 msgid "(width x height)"
-msgstr ""
+msgstr "(zabalera x altuera)"
 
 #: www/maposmatic/templates/maposmatic/new.html:370
 msgid "An error occured while retrieving compatible paper sizes."
-msgstr ""
+msgstr "Errore bat gertatu da paper tamainak lortzean."
 
 #: www/maposmatic/templates/maposmatic/new.html:379
 msgid "Calculating available paper formats for your map..."
-msgstr ""
+msgstr "Zure maparentzat eskuragarri dauden paper formatuak kalkulatzen..."
 
 #: www/maposmatic/templates/maposmatic/new.html:387
 msgid "Paper format and size"
-msgstr ""
+msgstr "Paperaren formatu eta tamaina"
 
 #: www/maposmatic/templates/maposmatic/new.html:389
 msgid "Select the desired format, size and orientation for your map."
-msgstr ""
+msgstr "Aukeratu maparen formatu, tamaina eta paperaren orientazioa."
 
 #: www/maposmatic/templates/maposmatic/new.html:392
 msgid ""
 "You can choose from the suggested standard sizes, the \"best fit\" size for "
 "the map area you selected, or specify a width and height of your own choice."
 msgstr ""
+"Aukeratutako tamaina estandarrak aukeratu ditzakezu, mapako inguru onenaren "
+"zatia, edo zuk nahi duzun tamaina ere aukeratu dezakezu."
 
 #: www/maposmatic/templates/maposmatic/new.html:408
 msgid "Map title"
-msgstr ""
+msgstr "Maparen izenburua"
 
 #: www/maposmatic/templates/maposmatic/new.html:414
 msgid "Locale"
-msgstr ""
+msgstr "Hizkuntza"
 
 #: www/maposmatic/templates/maposmatic/new.html:433
 msgid "Your Email address (for notifications, optional)"
-msgstr ""
+msgstr "Zure posta elektronikoa (jakinarazpenak bidaltzeko, hautazkoa)"
 
 #: www/maposmatic/templates/maposmatic/new.html:436
 msgid "will be deleted after"
-msgstr ""
+msgstr "denbora honen ostean ezabatuko da"
 
 #: www/maposmatic/templates/maposmatic/new.html:436
 msgid "hours"
-msgstr ""
+msgstr "ordu"
 
 #: www/maposmatic/templates/maposmatic/new.html:445
 msgid "Summary"
-msgstr ""
+msgstr "Laburpena"
 
 #: www/maposmatic/templates/maposmatic/new.html:448
 msgid "Location:"
-msgstr ""
+msgstr "Kokalekua:"
 
 #: www/maposmatic/templates/maposmatic/new.html:449
 msgid "Layout:"
-msgstr ""
+msgstr "Itxura:"
 
 #: www/maposmatic/templates/maposmatic/new.html:450
 msgid "Stylesheet:"
-msgstr ""
+msgstr "Estilo-orriak:"
 
 #: www/maposmatic/templates/maposmatic/new.html:451
 msgid "Overlay:"
-msgstr ""
+msgstr "Geruza:"
 
 #: www/maposmatic/templates/maposmatic/new.html:452
 msgid "Paper format:"
-msgstr ""
+msgstr "Paperaren formatua:"
 
 #: www/maposmatic/templates/maposmatic/new.html:461
 msgid "Almost there!"
-msgstr ""
+msgstr "Ia prest!"
 
 #: www/maposmatic/templates/maposmatic/new.html:463
 msgid ""
 "You're almost ready to request to map rendering! Select the map language, "
 "eventually adjust the title of your map, and you're good to go!"
 msgstr ""
+"Maparen sorkuntza eskatzeko prest zaude! Aukeratu maparen hizkuntza, ezarri "
+"izenburua eta hasi!"
 
 #: www/maposmatic/templates/maposmatic/privacy.html:33
 #: www/maposmatic/templates/maposmatic/privacy.html:36
 msgid "Privacy Statement"
-msgstr ""
+msgstr "Pribatutasun adierazpena"
 
 #: www/maposmatic/templates/maposmatic/privacy.html:38
 msgid "Encryption"
-msgstr ""
+msgstr "Zifratzea"
 
 #: www/maposmatic/templates/maposmatic/privacy.html:41
 msgid ""

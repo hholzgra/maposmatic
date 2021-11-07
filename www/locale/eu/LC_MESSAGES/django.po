@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-13 14:34+0200\n"
-"PO-Revision-Date: 2021-10-18 03:59+0000\n"
+"PO-Revision-Date: 2021-11-08 04:38+0000\n"
 "Last-Translator: Mikel Larreategi <larreategi@gmail.com>\n"
 "Language-Team: Basque <https://translate.get-map.org/projects/maposmatic/"
 "maposmatic/eu/>\n"
@@ -341,6 +341,7 @@ msgid ""
 "  MapOSMatic;"
 msgstr ""
 "<a href=\"http://wiki.maposmatic.org\">MapOsMatic Wikia</a>,\n"
+"\n"
 "MapOSMatic zerbitzuaren inguruko informazio teknikoa,\n"
 "eta dokumentuak ematen dituena;"
 
@@ -352,7 +353,7 @@ msgid ""
 msgstr ""
 "<a\n"
 "  href=\"https://savannah.nongnu.org/projects/maposmatic/\">Proiektua \n"
-"Savannah-n</a>"
+"Savannah-n</a>;"
 
 #: www/maposmatic/templates/maposmatic/about.html:178
 msgid ""
@@ -910,7 +911,7 @@ msgstr "kolan %(duration)s egon ostean"
 #: www/maposmatic/templates/maposmatic/map-full-parts/rendering-status.html:22
 #, python-format
 msgid "Rendering completed at %(date)s "
-msgstr "Mapa sorrera amaitu da  %(date)s "
+msgstr "Mapa sorrera amaitu da %(date)s "
 
 #: www/maposmatic/templates/maposmatic/map-full-parts/rendering-status.html:23
 #: www/maposmatic/templates/maposmatic/maps.html:103
@@ -1150,6 +1151,10 @@ msgid ""
 "select the <em>Geographic area</em> tab and use the mini-map to set the "
 "limits of the rendered area."
 msgstr ""
+"Aukeratu sortu nahi duzun ingurua. Idazten hasten zarenean aholkuak agertuko "
+"zaizkizu. Bila ari zaren tokia ez baduzu aurkitzen edo ingurua eskuz "
+"aukeratu nahi baduzu aukeratu <em>Inguru geografikoa</em> fitxa eta erabili "
+"mapa txikia ingurua aukeratzeko."
 
 #: www/maposmatic/templates/maposmatic/new.html:259
 msgid "Map layout"
@@ -1362,6 +1367,11 @@ msgid ""
 "  be stored\n"
 "  "
 msgstr ""
+"\n"
+"  Jakinarazpenerako posta elektronikoko helbidea ematen baduzu\n"
+"zure eskaera osatzen denean mezua bidaliko dizugu, helbide hau\n"
+"gorde egingo da\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:96
 #, python-format
@@ -1370,6 +1380,9 @@ msgid ""
 "    for %(SUBMITTER_MAIL_LIFETIME)s hours.\n"
 "    "
 msgstr ""
+"\n"
+"    %(SUBMITTER_MAIL_LIFETIME)s orduan\n"
+"    "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:100
 msgid ""
@@ -1377,6 +1390,9 @@ msgid ""
 "    until removed manually.\n"
 "    "
 msgstr ""
+"\n"
+"    eskuz ezabatu arte.\n"
+"    "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:109
 msgid ""

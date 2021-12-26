@@ -1630,7 +1630,7 @@ msgstr "Renderointi onnistui."
 msgid "Rendering failed! Please contact %(email)s for more information."
 msgstr ""
 "Renderointi epäonnistui! Lisätietoja varten ota yhteys osoitteeseen "
-"hartmut@php.net ."
+"%(email)s."
 
 #: www/maposmatic/templatetags/extratags.py:51
 #, fuzzy

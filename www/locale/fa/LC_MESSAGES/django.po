@@ -1847,7 +1847,7 @@ msgstr "ساخت نقشه موفقیت‌آمیز بود."
 #| "Rendering failed! Please contact hartmut@php.net for more information."
 msgid "Rendering failed! Please contact %(email)s for more information."
 msgstr ""
-"ساخت نقشه ناموفق بود! لطفاً برای اطلاعات بیشتر با hartmut@php.net تماس بگیرید."
+"ساخت نقشه ناموفق بود! لطفاً برای اطلاعات بیشتر با %(email)s تماس بگیرید."
 
 #: www/maposmatic/templatetags/extratags.py:51
 #, fuzzy

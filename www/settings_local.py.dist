@@ -35,7 +35,7 @@ import sys
 DEBUG = True
 
 ADMINS = (
-    ('MapOSMatic admin', 'contact@your.domain'),
+    ('MapOSMatic admin', 'your-name@example.org'),
 )
 
 DATABASES = {
@@ -125,9 +125,9 @@ DAEMON_ERRORS_SMTP_PORT = 25
 DAEMON_ERRORS_SMTP_ENCRYPT = None
 DAEMON_ERRORS_SMTP_USER = None
 DAEMON_ERRORS_SMTP_PASSWORD = None
-DAEMON_ERRORS_EMAIL_FROM = 'daemon@example.com'
-DAEMON_ERRORS_EMAIL_REPLY_TO = 'noreply@example.com'
-DAEMON_ERRORS_JOB_URL = 'http://example.com/jobs/%d'
+DAEMON_ERRORS_EMAIL_FROM = 'daemon@example.org'
+DAEMON_ERRORS_EMAIL_REPLY_TO = 'noreply@example.org'
+DAEMON_ERRORS_JOB_URL = 'http://example.org/jobs/%d'
 
 # example email settings for using a Google Mail account
 # DAEMON_ERRORS_SMTP_HOST = 'smtp.googlemail.com'
@@ -175,7 +175,7 @@ SUBMITTER_MAIL_LIFETIME=24
 WEBLATE_BASE_URL = 'https://translate.get-map.org/'
 
 # contact information, to be displayed in page footer if set
-CONTACT_EMAIL = 'hartmut@php.net'
+CONTACT_EMAIL = 'your-name@example.org'
 CONTACT_CHAT  = 'irc://irc.freenode.net/#maposmatic'
 
 # custom footer text

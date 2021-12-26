@@ -1604,7 +1604,7 @@ msgstr "İşlenme başarılı"
 #| "Rendering failed! Please contact hartmut@php.net for more information."
 msgid "Rendering failed! Please contact %(email)s for more information."
 msgstr ""
-"İşlenme başarısız oldu! Daha fazla bilgi için hartmut@php.net ile irtibata "
+"İşlenme başarısız oldu! Daha fazla bilgi için %(email)s ile irtibata "
 "geçiniz."
 
 #: www/maposmatic/templatetags/extratags.py:51

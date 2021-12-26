@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: MapOSMatic\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-13 14:34+0200\n"
-"PO-Revision-Date: 2021-12-08 19:49+0000\n"
+"PO-Revision-Date: 2021-12-27 00:34+0000\n"
 "Last-Translator: André Marcelo Alvarenga <andrealvarenga@gmx.net>\n"
 "Language-Team: Portuguese (Brazil) <https://translate.get-map.org/projects/"
 "maposmatic/maposmatic/pt_BR/>\n"
@@ -790,7 +790,7 @@ msgstr ""
 
 #: www/maposmatic/templates/maposmatic/index-parts/status.html:25
 msgid "The rendering daemon is running."
-msgstr "O serviço de renderização está em andamento."
+msgstr "O serviço de renderização está funcionando."
 
 #: www/maposmatic/templates/maposmatic/index-parts/status.html:29
 msgid ""

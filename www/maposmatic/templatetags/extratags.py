@@ -103,7 +103,10 @@ def bbox_km(value):
 
     (height, width) = boundingbox.spheric_sizes()
 
-    return "ca. %d x %d km²" % (width/1000, height/1000)
+    if width >= 1000 and height >= 1000:
+        return "ca. %d x %d km²" % (width/1000, height/1000)
+
+    return "ca. %d x %d m²" % (width, height)
 
 def language_flag(value):
     if value in www.settings.LANGUAGE_FLAGS:

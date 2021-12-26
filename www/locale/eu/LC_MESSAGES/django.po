@@ -2,21 +2,22 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Gari Araolaza <garaolaza@codesyntax.com>, 2019.
+# Mikel Larreategi <larreategi@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-13 14:34+0200\n"
-"PO-Revision-Date: 2019-04-16 19:13+0000\n"
-"Last-Translator: Gari Araolaza <garaolaza@codesyntax.com>\n"
-"Language-Team: Basque <http://translate.get-map.org/projects/maposmatic/"
+"PO-Revision-Date: 2021-10-07 20:31+0000\n"
+"Last-Translator: Mikel Larreategi <larreategi@gmail.com>\n"
+"Language-Team: Basque <https://translate.get-map.org/projects/maposmatic/"
 "maposmatic/eu/>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.5.1\n"
+"X-Generator: Weblate 4.6.2\n"
 
 #: www/maposmatic/feeds.py:45
 msgid "maps"
@@ -28,7 +29,7 @@ msgstr "[DEV]"
 
 #: www/maposmatic/feeds.py:49
 msgid "The latest rendered maps on MapOSMatic."
-msgstr ""
+msgstr "MapOSMaticen sortutako azken mapak."
 
 #: www/maposmatic/feeds.py:102
 msgid "errors"

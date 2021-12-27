@@ -6,21 +6,22 @@
 # Jeroen van Rijn <jvrnix@gmail.com>, 2013
 # Maxime Petazzoni <maxime.petazzoni@bulix.org>, 2013
 # nom complet <weblate.sanspourriel@spamgourmet.com>, 2019.
+# Loïc LE METAYER <loic.lemetayer@gmail.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: MapOSMatic\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-13 14:34+0200\n"
-"PO-Revision-Date: 2019-04-20 21:05+0000\n"
-"Last-Translator: nom complet <weblate.sanspourriel@spamgourmet.com>\n"
-"Language-Team: French <http://translate.get-map.org/projects/maposmatic/"
+"PO-Revision-Date: 2021-11-06 02:59+0000\n"
+"Last-Translator: Loïc LE METAYER <loic.lemetayer@gmail.com>\n"
+"Language-Team: French <https://translate.get-map.org/projects/maposmatic/"
 "maposmatic/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.5.1\n"
+"X-Generator: Weblate 4.6.2\n"
 
 #: www/maposmatic/feeds.py:45
 msgid "maps"
@@ -63,10 +64,10 @@ msgid "Full-page layout with the street index at the bottom"
 msgstr "Disposition pleine page avec index des rues en dessous"
 
 #: www/maposmatic/forms.py:112
-#, fuzzy
-#| msgid "Full-page layout with the street index on the side"
 msgid "Full-page layout with the street index on extra page (PDF only)"
-msgstr "Disposition pleine page avec l'index des rues sur le coté"
+msgstr ""
+"Disposition pleine page avec l'index des rues sur une page dédiée ("
+"uniquement en PDF)"
 
 #: www/maposmatic/forms.py:114
 msgid "Multi-page layout"
@@ -455,18 +456,17 @@ msgid "Contributors"
 msgstr "Contributeurs"
 
 #: www/maposmatic/templates/maposmatic/about.html:200
-#, fuzzy
-#| msgid "Core team"
 msgid "Current team"
-msgstr "Équipe principale"
+msgstr "Équipe actuelle"
 
 #: www/maposmatic/templates/maposmatic/about.html:203
 msgid "Developer, running instance on https://print.get-map-org/"
 msgstr ""
+"Développeur, possède une instance accessible sur https://print.get-map-org/"
 
 #: www/maposmatic/templates/maposmatic/about.html:208
 msgid "Original team"
-msgstr ""
+msgstr "Équipe originelle"
 
 #: www/maposmatic/templates/maposmatic/about.html:211
 #: www/maposmatic/templates/maposmatic/about.html:212
@@ -640,7 +640,7 @@ msgstr ""
 
 #: www/maposmatic/templates/maposmatic/base.html:126
 msgid "Privacy statement"
-msgstr ""
+msgstr "Déclaration de confidentialité"
 
 #: www/maposmatic/templates/maposmatic/donate-thanks.html:36
 msgid "Thanks!"
@@ -651,16 +651,12 @@ msgid "Thanks for your donation!"
 msgstr "Merci pour votre don !"
 
 #: www/maposmatic/templates/maposmatic/donate-thanks.html:42
-#, fuzzy
-#| msgid ""
-#| "<i class=\"fa fa-check\"></i> We have received your donation.\n"
-#| "Thank you for your support to the MapOSMatic project!"
 msgid ""
 "<i class=\"fas fa-check\"></i> We have received your donation.\n"
 "Thank you for your support to the MapOSMatic project!"
 msgstr ""
-"<i class=\"fa-fa-check\"></i> Nous avons bien reçu votre don, merci pour "
-"votre soutien au projet MapOSMatic !"
+"<i class=\"fas fa-check\"></i> Nous avons bien reçu votre don.\n"
+"Merci pour votre soutien au projet MapOSMatic !"
 
 #: www/maposmatic/templates/maposmatic/donate-thanks.html:47
 msgid ""
@@ -1002,10 +998,8 @@ msgid "Cancel this queued request (position %(pos)s in the queue)"
 msgstr "Annuler cette requête (position %(pos)s dans la file d'attente)"
 
 #: www/maposmatic/templates/maposmatic/map-full-parts/rendering-status.html:65
-#, fuzzy
-#| msgid "<i class=\"fa fa-times\"></i> Cancel"
 msgid "<i class=\"fas fa-times\"></i> Cancel"
-msgstr "<i class=\"fa fa-times\"></i> Annuler"
+msgstr "<i class=\"fas fa-times\"></i> Annuler"
 
 #: www/maposmatic/templates/maposmatic/map-full-parts/rendering-status.html:77
 #: www/maposmatic/templates/maposmatic/maps.html:142
@@ -1063,7 +1057,7 @@ msgstr "Mise à jour en cours ..."
 
 #: www/maposmatic/templates/maposmatic/map-full.html:56
 msgid "Rendering status"
-msgstr "Status du rendu"
+msgstr "Statut du rendu"
 
 #: www/maposmatic/templates/maposmatic/map-full.html:63
 msgid "Map details"
@@ -1176,13 +1170,11 @@ msgstr "Recherche par ville"
 
 #: www/maposmatic/templates/maposmatic/new.html:168
 msgid "File upload"
-msgstr ""
+msgstr "Importer un fichier"
 
 #: www/maposmatic/templates/maposmatic/new.html:195
-#, fuzzy
-#| msgid "Umap data file"
 msgid "Upload files"
-msgstr "fichier de données Umap"
+msgstr "Import de fichiers"
 
 #: www/maposmatic/templates/maposmatic/new.html:204
 msgid ""
@@ -1190,21 +1182,19 @@ msgid ""
 "multiple files at once. If you re-open the file selection dialog to select "
 "files, your selection will replace the previous one."
 msgstr ""
+"Importer ici un fichier au format GPX, Umap, ou GeoJSON. <br/>Vous pouvez "
+"sélectionner plusieurs fichiers simultanément. La réouverture de la fenêtre "
+"de sélection remplacera la liste précédemment sélectionnée."
 
 #: www/maposmatic/templates/maposmatic/new.html:216
-#, fuzzy
-#| msgid ""
-#| "<b>Note:</b> The uploaded file will not be made available to anyone, the "
-#| "map created using this file <b>will be publicly visible</b> though.<br/"
-#| ">Do <b>NOT</b> upload any data you don't want to be publicly visible."
 msgid ""
 "<b>Note:</b> The uploaded files will not be made available to anyone, the "
 "map created using this file <b>will be publicly visible</b> though.<br/>Do "
 "<b>NOT</b> upload any data you don't want to be publicly visible."
 msgstr ""
-"<b>Note :</b> Le fichier téléversé ne sera pas visible de tous. <b>Mais</b> "
-"la carte utilisant ce fichier le sera .<br/><b>NE</b> téléversez <b>PAS</b> "
-"de données si vous ne voulez pas qu'elles soient visibles de tous."
+"<b>Note :</b> Les fichiers téléversés ne seront pas visible de tous. "
+"<b>Mais</b> la carte utilisant ce fichier le sera.<br/><b>NE</b> téléversez "
+"<b>PAS</b> de données si vous ne voulez pas qu'elles soient visibles de tous."
 
 #: www/maposmatic/templates/maposmatic/new.html:228
 msgid "Geographic area selection"
@@ -1272,7 +1262,7 @@ msgstr "Taille du papier"
 
 #: www/maposmatic/templates/maposmatic/new.html:337
 msgid "(width x height)"
-msgstr ""
+msgstr "(largeur × hauteur)"
 
 #: www/maposmatic/templates/maposmatic/new.html:370
 msgid "An error occured while retrieving compatible paper sizes."
@@ -1291,7 +1281,7 @@ msgstr "Format et taille du papier"
 #: www/maposmatic/templates/maposmatic/new.html:389
 msgid "Select the desired format, size and orientation for your map."
 msgstr ""
-"Selectionnez le format, la taille et l'orientation de papier désirée pour "
+"Sélectionnez le format, la taille et l'orientation de papier désirée pour "
 "votre carte."
 
 #: www/maposmatic/templates/maposmatic/new.html:392
@@ -1299,6 +1289,9 @@ msgid ""
 "You can choose from the suggested standard sizes, the \"best fit\" size for "
 "the map area you selected, or specify a width and height of your own choice."
 msgstr ""
+"Vous pouvez choisir parmi les tailles standards suggérées, la taille \"la "
+"plus adaptée\" à la zone de carte sélectionnée, ou spécifier la hauteur et "
+"la largeur de votre choix."
 
 #: www/maposmatic/templates/maposmatic/new.html:408
 msgid "Map title"
@@ -1313,14 +1306,12 @@ msgid "Your Email address (for notifications, optional)"
 msgstr "Votre adresse mail (pour les notifications, facultatif)"
 
 #: www/maposmatic/templates/maposmatic/new.html:436
-#, fuzzy
-#| msgid "Clear selected area"
 msgid "will be deleted after"
-msgstr "Enlever la zone sélectionée"
+msgstr "sera supprimée après"
 
 #: www/maposmatic/templates/maposmatic/new.html:436
 msgid "hours"
-msgstr ""
+msgstr "heure(s)"
 
 #: www/maposmatic/templates/maposmatic/new.html:445
 msgid "Summary"
@@ -1362,11 +1353,11 @@ msgstr ""
 #: www/maposmatic/templates/maposmatic/privacy.html:33
 #: www/maposmatic/templates/maposmatic/privacy.html:36
 msgid "Privacy Statement"
-msgstr ""
+msgstr "Déclaration de confidentialité"
 
 #: www/maposmatic/templates/maposmatic/privacy.html:38
 msgid "Encryption"
-msgstr ""
+msgstr "Chiffrement"
 
 #: www/maposmatic/templates/maposmatic/privacy.html:41
 msgid ""
@@ -1375,6 +1366,10 @@ msgid ""
 "  provided by <a href=\"https://letsencrypt.org/\">LetsEncrypt</a>.\n"
 "  "
 msgstr ""
+"\n"
+"  L'intégralité du trafic web est chiffré par des certificates TLS/SSL\n"
+"  fournis de <a href=\"https://letsencrypt.org/\">LetsEncrypt</a>.\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:48
 msgid ""
@@ -1384,6 +1379,12 @@ msgid ""
 "  URL counterparts.\n"
 "  "
 msgstr ""
+"\n"
+"  Les tentatives d'accès au site par des URLs en <tt>http:</tt> non-"
+"chiffrées \n"
+"   seront redirigées automatiquement vers les URLs en <tt>https:</tt> \n"
+"chiffrées correspondantes.\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:58
 msgid ""
@@ -1398,6 +1399,18 @@ msgid ""
 "  additional access logs will be removed again within 24 hours.\n"
 "  "
 msgstr ""
+"\n"
+"  Le serveur web ne consigne dans son journal que la date et l'heure, l'URL "
+"demandée et le statut HTTP, \n"
+"  il n'enregistre ni l'adresse IP, la valeur de l'<em>user agent</em> ou "
+"l'URL de provenance (<em>referer</em>).\n"
+"  C'est champs additionnels peuvent toutefois être enregistrés dans les "
+"journaux quand \n"
+"  l'analyse des problèmes le requiert to analyze problems (bien que cela "
+"n'ait jamais été nécessaire jusqu'à présent),\n"
+"  mais alors ces journaux d'accès supplémentaires seraient supprimés dans "
+"les 24 heures.\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:68
 msgid ""
@@ -1405,6 +1418,9 @@ msgid ""
 "  When submitting an actual map rendering job, your IP address will\n"
 "  "
 msgstr ""
+"\n"
+"  Lorsque vous soumettez une tâche de rendu de carte, votre adresse IP\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:72
 msgid ""
@@ -1412,6 +1428,9 @@ msgid ""
 "    be stored until removed manually\n"
 "    "
 msgstr ""
+"\n"
+"    sera stocker jusqu'à sa suppression manuelle\n"
+"    "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:76
 msgid ""
@@ -1419,6 +1438,9 @@ msgid ""
 "    not be stored\n"
 "    "
 msgstr ""
+"\n"
+"    ne sera pas stockée\n"
+"    "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:80
 #, python-format
@@ -1427,6 +1449,9 @@ msgid ""
 "    stored for %(SUBMITTER_IP_LIFETIME)s hours\n"
 "    "
 msgstr ""
+"\n"
+"    sera stockée pour une durée de %(SUBMITTER_IP_LIFETIME)s heures\n"
+"    "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:84
 msgid ""
@@ -1434,6 +1459,9 @@ msgid ""
 "  along with the actual map request.\n"
 "  "
 msgstr ""
+"\n"
+"  en même temps que la requête de génération de carte.\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:90
 msgid ""
@@ -1443,6 +1471,12 @@ msgid ""
 "  be stored\n"
 "  "
 msgstr ""
+"\n"
+"  Si vous choisissez de fournir une adresse email pour être notifié quand\n"
+"  le traitement de votre requête sera terminé, alors cette adresse email "
+"sera\n"
+"  enregistrée\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:96
 #, python-format
@@ -1451,6 +1485,9 @@ msgid ""
 "    for %(SUBMITTER_MAIL_LIFETIME)s hours.\n"
 "    "
 msgstr ""
+"\n"
+"    pour une durée de %(SUBMITTER_MAIL_LIFETIME)s heures.\n"
+"    "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:100
 msgid ""
@@ -1458,6 +1495,9 @@ msgid ""
 "    until removed manually.\n"
 "    "
 msgstr ""
+"\n"
+"    jusqu'à sa suppression manuelle.\n"
+"    "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:109
 msgid ""
@@ -1466,6 +1506,11 @@ msgid ""
 "    (formerly known as Piwik) for analytics.\n"
 "    "
 msgstr ""
+"\n"
+"    Ce site utilise <a href=\"https://matomo.org/\">Matomo</a>\n"
+"    (auparavant nommé Piwik) pour l'analyse des données (<em>analytics</em>)."
+"\n"
+"    "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:116
 msgid ""
@@ -1474,6 +1519,11 @@ msgid ""
 "  nor by use of any external tracking services.\n"
 "  "
 msgstr ""
+"\n"
+"  Ce site ne procède d'aucune manière au suivi des utilisateurs, ni de lui-"
+"même,\n"
+"  ni en recourant à un service de suivi externe.\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:126
 msgid ""
@@ -1481,6 +1531,10 @@ msgid ""
 "  This site may use up to three cookies to store information about you:\n"
 "  "
 msgstr ""
+"\n"
+"  Ce site peut utiliser jusqu'à trois cookies pour stocker les informations "
+"vous concernant :\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:135
 msgid ""
@@ -1493,6 +1547,15 @@ msgid ""
 "      ten years.\n"
 "      "
 msgstr ""
+"\n"
+"      Ces cookies sont créés dès que vous cliquez sur \n"
+"      <span class=\"badge badge-success\">Accepter</span>\n"
+"      dans le message d'avertissement sur l'utilisation des cookies. Après "
+"cela, vous ne verrez plus\n"
+"      cette avertissement dans ce navigateur web jusqu'à\n"
+"      ce que les cookies soient supprimés par vous, ou expirent après\n"
+"      dix ans.\n"
+"      "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:145
 msgid ""
@@ -1501,6 +1564,10 @@ msgid ""
 "      remember your acceptance.\n"
 "      "
 msgstr ""
+"\n"
+"      Le cookie ne contient qu'une donnée statique de valeur \"1\" pour\n"
+"      se souvenir de votre consentement.\n"
+"      "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:151
 msgid ""
@@ -1512,6 +1579,13 @@ msgid ""
 "      screen space taken.\n"
 "      "
 msgstr ""
+"\n"
+"      Si vous n'acceptez pas l'utilisation de ce cookie\n"
+"      le message d'avertissement apparaîtra à chaque chargement\n"
+"      d'une page sur le site, mais ne devrait cependant pas\n"
+"      affecter les fonctionnalités du site, en dehors de\n"
+"      l'espace utilisé à l'écran pour afficher l'avertissement.\n"
+"      "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:162
 msgid ""
@@ -1521,6 +1595,11 @@ msgid ""
 "      side.\n"
 "      "
 msgstr ""
+"\n"
+"      Ce cookie est utilisé pour lier la session de votre navigateur web à\n"
+"      certaines informations propres à la session et stockées côté\n"
+"      serveur.\n"
+"      "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:169
 msgid ""
@@ -1533,6 +1612,17 @@ msgid ""
 "      a map.\n"
 "      "
 msgstr ""
+"\n"
+"      Jusqu'à présent nous n'utilisons les sessions que pour stocker et "
+"mémoriser\n"
+"      certains choix que vous avez fait dans le formulaire \n"
+"      <span class=\"badge badge-success\">Créer une carte</span>\n"
+"      , pour que nous puissions pré-sélectionner ou pré-remplir les "
+"éléments\n"
+"      du formulaire en accord avec vos choix lors de votre prochaine "
+"utilisation du formulaire pour créer\n"
+"      une carte.\n"
+"      "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:179
 msgid ""
@@ -1546,6 +1636,15 @@ msgid ""
 "      form.      \n"
 "      "
 msgstr ""
+"\n"
+"      Les informations stockées en session ne sont donc là que\n"
+"      pour votre confort d'utilisation, elles ne sont pas tracées\n"
+"      d'aucune manière, et elles n'incluent pas de données personnelles\n"
+"      vous concernant, et ces informations seront supprimées\n"
+"      complètement deux semaines après votre dernier avez au formulaire\n"
+"      <span class=\"badge badge-success\">Créer une carte</span>\n"
+"      .      \n"
+"      "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:190
 msgid ""
@@ -1555,6 +1654,11 @@ msgid ""
 "      the form prefill convenice.\n"
 "      "
 msgstr ""
+"\n"
+"      Si vous décidez de ne pas accepter ce cookie, les fonctionnalités\n"
+"      de ce site ne sont pas affectées, vous perdrez juste la commodité\n"
+"      de pré-remplissage du formulaire.\n"
+"      "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:200
 msgid ""
@@ -1564,6 +1668,12 @@ msgid ""
 "      <span class=\"badge badge-success\">Create Map</span> form.\n"
 "      "
 msgstr ""
+"\n"
+"      Ce cookie peut être défini par le serveur de tuiles OpenStreetMap\n"
+"      qui fourni les tuiles utilisées dans la carte interactive du "
+"formulaire\n"
+"      <span class=\"badge badge-success\">Créer une carte</span>.\n"
+"      "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:207
 msgid ""
@@ -1576,6 +1686,15 @@ msgid ""
 "      and so can improve tile access performance. \n"
 "      "
 msgstr ""
+"\n"
+"      Ce cookie stocke\n"
+"      <a href=\"https://operations.osmfoundation.org/2017/01/31/january."
+"html\"\n"
+"\t >un jeton de mot de passe unique basé sur le temps\n"
+"      qui peut être vérifier par les serveurs de cache de tuiles "
+"OpenStreetMap</a>\n"
+"      et qui peut améliorer les performances d'accès aux tuiles. \n"
+"      "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:216
 msgid ""
@@ -1584,6 +1703,10 @@ msgid ""
 "      OpenStreetMap to perform tracking of any kind.\n"
 "      "
 msgstr ""
+"\n"
+"      À notre connaissance, ce cookie n'est pas utilisé par\n"
+"      OpenStreetMap pour effectuer un suivi de quelque manière que ce soit.\n"
+"      "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:222
 msgid ""
@@ -1594,6 +1717,13 @@ msgid ""
 "      any way.\n"
 "      "
 msgstr ""
+"\n"
+"      Si vous refusez ce cookie les tuiles\n"
+"      de la carte interactive peuvent charger plus lentement, mais "
+"autrement\n"
+"      les fonctionnalités de notre site ne sont pas limitées\n"
+"      d'aucune manière.\n"
+"      "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:235
 msgid ""
@@ -1604,6 +1734,13 @@ msgid ""
 "  service, with one exception:\n"
 "  "
 msgstr ""
+"\n"
+"  Toutes les images, les feuilles de style, les polices et l'ensemble du "
+"code JavaScript\n"
+"  sont stockés localement sur ce serveur. Il n'y a pas de\n"
+"   requêtes vers d'autres sites web lors de l'accès à ce \n"
+"  service, avec une unique exception :\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:244
 msgid ""
@@ -1616,6 +1753,15 @@ msgid ""
 "  subdomain by your browser directly.\n"
 "  "
 msgstr ""
+"\n"
+"  Le site utilise les tuiles de carte fournies par OpenStreetMap visible "
+"dans la \n"
+"  carte interactive du formulaire\n"
+"  <span class=\"badge badge-success\">Créer une carte</span>\n"
+"  . Elles sont chargées depuis les serveurs de tuiles d'OpenStreetMap\n"
+"  du sous-domaine <tt>tiles.openstreetmap.org</tt>\n"
+"  par votre navigateur directement.\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:255
 msgid ""
@@ -1628,6 +1774,15 @@ msgid ""
 "  map tile images.\n"
 "  "
 msgstr ""
+"\n"
+"  Merci de consulter\n"
+"  <a href=\"https://wiki.osmfoundation.org/wiki/Privacy_Policy#"
+"Where_do_we_store_the_data\"\n"
+"  >la Politique de Confidentialité de la Fondation OpenStreetMap (en "
+"anglais)</a>\n"
+"  pour connaître les détails relatifs à l'accès de ces \n"
+"images de tuiles de carte.\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:267
 msgid ""
@@ -1637,6 +1792,13 @@ msgid ""
 "  incorporate information stored in them into generated maps.\n"
 "  "
 msgstr ""
+"\n"
+"  Le site vous permet de téléverser des pistes GPX, ou des fichiers Geo JSON "
+"et des exports de carte\n"
+"  <a href=\"umap.openstreetmap.fr\">Umap</a> pour\n"
+"  incorporer des informations stockées dans ces fichiers au sein des cartes "
+"générées.\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:275
 msgid ""
@@ -1648,6 +1810,17 @@ msgid ""
 "  for privacy, security, copyright, or other legal reasons.\n"
 "  "
 msgstr ""
+"\n"
+"  Veuillez noter que toutes les cartes générées par ce service sont "
+"visibles\n"
+"  publiquement, <strong>NE</strong> téléversez donc <strong>PAS</strong> de "
+"fichiers\n"
+"  qui contiendraient des informations qui ne devraient pas être vues par "
+"tous, \n"
+"  que ce soit pour des raisons\n"
+"  d'atteinte de la vie privée, de sécurité, de droits d'auteurs ou d'autres "
+"raisons juridiques.\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:285
 #, python-format
@@ -1660,6 +1833,14 @@ msgid ""
 "  uploaded file and the date it was uploaded to this site.\n"
 "  "
 msgstr ""
+"\n"
+"  Si vous avez téléversez par accident un tel fichier, veuillez contacter "
+"par email \n"
+"  %(CONTACT_EMAIL)s et demander la suppression du fichier\n"
+"  téléversé ainsi que la carte générée associée. Fournissez soit\n"
+"  l'URL de la page de la carte générée, ou le nom du fichier\n"
+"  téléversé ainsi que la date d'envoi sur le site.\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:297
 msgid ""
@@ -1671,6 +1852,13 @@ msgid ""
 "  at any time. \n"
 "  "
 msgstr ""
+"\n"
+"  Les cartes générées sont stockées sur le serveur un certain temps\n"
+"  avant d'être supprimées afin de libérer de l'espace de stockage.\n"
+"  Les données et options de la tâche de rendu de la carte sont\n"
+"  cependant conservées, permettant ainsi de regénérer les cartes\n"
+"  à tout moment. \n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:307
 #, python-format
@@ -1682,6 +1870,12 @@ msgid ""
 "  of the rendering job you want to have removed.\n"
 "  "
 msgstr ""
+"\n"
+"  Si vous estimez qu'une tâche de rendu doit être supprimé\n"
+"  complètement pour quelques raisons qu'il soit, veuillez informer\n"
+"  %(CONTACT_EMAIL)s par email et fournir l'URL\n"
+"  de la tâche de rendu que vous souhaiteriez supprimer.\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/suggest.js:41
 msgid "Start typing for suggestions..."
@@ -1783,7 +1977,7 @@ msgstr "Service indisponible"
 
 #: www/templates/cookielaw/banner.html:7
 msgid "Cookie information"
-msgstr ""
+msgstr "Informations sur les cookies"
 
 #: www/templates/cookielaw/banner.html:10
 msgid ""
@@ -1819,26 +2013,57 @@ msgid ""
 "\t</p>\n"
 "        "
 msgstr ""
+"\n"
+"\t<p>\n"
+"\tCe site n'utilise aucun cookie de suivi d'aucune sorte.\n"
+"\tIl utilise cependant jusqu'à trois cookies pour d'autres usages, à savoir :"
+"\n"
+"\t</p>\n"
+"\t<ul>\n"
+"\t  <li>Un cookie pour retenir que vous avez vu et accepté l'avertissement "
+"sur l'usage des cookies (valable pour 10 ans)</li>\n"
+"\t  <li>Un cookie de session pour faire le lien avec les informations de "
+"session stocké côté serveur</li>\n"
+"\t  <li>Le serveur de tuiles de carte sur openstreetmap.org peut également "
+"définir un cookie de son côté</li>\n"
+"\t</ul>\n"
+"\t<p>\n"
+"\tLe informations de session stockées côté serveur et liée au cookie de "
+"session est uniquement utilisé pour mémoriser\n"
+"\tles options précédemment saisies dans le formulaire <em>Créer une carte</"
+"em>. La session\n"
+"\tne stocke aucune sorte d'information personnelle.\n"
+"\t</p>\n"
+"\tLe site continue de fonctionner même si vous refusez l'usage\n"
+"\tdes cookies, mais vous verrez malheureusement cet avertissement sur "
+"l'usage des cookies encore et\n"
+"\tencore jusqu'à ce que vous acceptiez le stockage du cookie nommé "
+"<tt>cookielaw_accepted</tt> \n"
+"\ten cliquant sur le bouton \"OK\" ci-dessous\n"
+"\t<p>\n"
+"\t</p>\n"
+"\t<p>\n"
+"\tPour plus d'informations, consultez la <a href=\"/privacy/#cookies\""
+">Politique de Confidentialité</a> du site\n"
+"\t</p>\n"
+"        "
 
 #: www/templates/cookielaw/banner.html:37
 msgid "Accept"
-msgstr ""
+msgstr "Accepter"
 
 #: www/templates/render_email_exception.txt:1
 #: www/templates/render_email_failure.txt:1
 #: www/templates/render_email_success.txt:1
 #: www/templates/render_email_timeout.txt:1
-#, fuzzy
-#| msgid "Rendering daemon: "
 msgid "MapOSMatic rendering daemon"
-msgstr "Démon de rendu : "
+msgstr "Démon de rendu MapOSMatic"
 
 #: www/templates/render_email_exception.txt:7
 #: www/templates/render_email_failure.txt:7
-#, fuzzy, python-format
-#| msgid "Rendering failed!"
+#, python-format
 msgid "Rendering of job #%(jobid)s failed"
-msgstr "Échec du rendu !"
+msgstr "Le rendu de la tâche #%(jobid)s a échoué"
 
 #: www/templates/render_email_exception.txt:10
 #, python-format
@@ -1856,6 +2081,18 @@ msgid ""
 "-- \n"
 "MapOSMatic\n"
 msgstr ""
+"\n"
+"Une erreur s'est produite pendant le rendu de la tâche %(jobid)s !\n"
+"\n"
+"%(tb)s\n"
+"\n"
+"Informations sur la tâche :\n"
+"\n"
+"%%(jobinfo)s\n"
+"\n"
+"Vous pouvez voir la page de cette tâche à l'adresse <%%(url)s>.\n"
+"-- \n"
+"MapOSMatic\n"
 
 #: www/templates/render_email_failure.txt:10
 #, python-format
@@ -1876,11 +2113,27 @@ msgid ""
 "-- \n"
 "MapOSMatic\n"
 msgstr ""
+"\n"
+"Bonjour %(to)s,\n"
+"\n"
+"malheureusement votre demande de rendu pour la carte\n"
+"\n"
+"  %(title)s\n"
+"\n"
+"a échoué.\n"
+"\n"
+"Vous pouvez consulter la raison de l'erreur sur la page de détail de la "
+"demande :\n"
+"\n"
+"  %(url)s\n"
+"\n"
+"-- \n"
+"MapOSMatic\n"
 
 #: www/templates/render_email_success.txt:7
 #, python-format
 msgid "Rendering of job #%(jobid)s succeeded"
-msgstr ""
+msgstr "Le rendu de la tâche #%(jobid)s s'est terminé avec succès"
 
 #: www/templates/render_email_success.txt:10
 #, python-format
@@ -1900,11 +2153,25 @@ msgid ""
 "-- \n"
 "MapOSMatic\n"
 msgstr ""
+"\n"
+"Bonjour %(to)s,\n"
+"\n"
+"votre demande de rendu pour la carte\n"
+"\n"
+"  %(title)s\n"
+"\n"
+"a été traité avec succès et le résultat peut maintenant être téléchargé\n"
+"depuis la page de détail de la tâche de rendu :\n"
+"\n"
+"  %(url)s\n"
+"\n"
+"-- \n"
+"MapOSMatic\n"
 
 #: www/templates/render_email_timeout.txt:7
 #, python-format
 msgid "Rendering of job #%(jobid)s timed out"
-msgstr ""
+msgstr "Délai maximum dépassé pour le rendu de la tâche #%(jobid)s"
 
 #: www/templates/render_email_timeout.txt:10
 #, python-format
@@ -1925,6 +2192,22 @@ msgid ""
 "-- \n"
 "MapOSMatic\n"
 msgstr ""
+"\n"
+"Bonjour %(to)s,\n"
+"\n"
+"malheureusement votre demande de rendu de la carte\n"
+"\n"
+"  %(title)s\n"
+"\n"
+"a dû être annulé, car sa génération s'est exécuté durant plus de %(timeout)s "
+"minutes sans aboutir.\n"
+"\n"
+"Vous devriez réessayer avec une carte s'étendant sur une plus petite zone, "
+"en utilisant un style de carte moins complexe\n"
+"ou en utilisant moins de surcouches.\n"
+"\n"
+"-- \n"
+"MapOSMatic\n"
 
 #~ msgid "Portrait"
 #~ msgstr "Portrait"

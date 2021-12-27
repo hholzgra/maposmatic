@@ -1798,7 +1798,7 @@ msgstr "成功繪製"
 #| msgid ""
 #| "Rendering failed! Please contact hartmut@php.net for more information."
 msgid "Rendering failed! Please contact %(email)s for more information."
-msgstr "繪製失敗，欲得知進一步資訊請聯絡 hartmut@php.net"
+msgstr "繪製失敗，欲得知進一步資訊請聯絡 %(email)s"
 
 #: www/maposmatic/templatetags/extratags.py:51
 #, fuzzy

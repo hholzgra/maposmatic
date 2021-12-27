@@ -46,9 +46,9 @@ def job_status_to_str(value, arg, autoescape=None):
             return _("Rendering was successful.")
         else:
             if www.settings.CONTACT_EMAIL:
-                return _("Rendering failed! Please contact %(email)s for more information.") % {'email': www.settings.CONTACT_EMAIL}
+                return _("Rendering failed! Please check the error log and contact %(email)s for more information.") % {'email': www.settings.CONTACT_EMAIL}
             else:
-                return _("Rendering failed!")
+                return _("Rendering failed! Please check the error log for more information.")
     elif value == 3:
         if arg == 'ok':
             return _("Rendering is obsolete: the rendering was successful, but the files are no longer available.")
@@ -103,7 +103,10 @@ def bbox_km(value):
 
     (height, width) = boundingbox.spheric_sizes()
 
-    return "ca. %d x %d km²" % (width/1000, height/1000)
+    if width >= 1000 and height >= 1000:
+        return "ca. %d x %d km²" % (width/1000, height/1000)
+
+    return "ca. %d x %d m²" % (width, height)
 
 def language_flag(value):
     if value in www.settings.LANGUAGE_FLAGS:

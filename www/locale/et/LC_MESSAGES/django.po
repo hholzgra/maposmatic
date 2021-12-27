@@ -1614,7 +1614,7 @@ msgstr "Renderdus oli edukas."
 #| "Rendering failed! Please contact hartmut@php.net for more information."
 msgid "Rendering failed! Please contact %(email)s for more information."
 msgstr ""
-"Renderdus ebaõnnestus! Palun kontakteeru hartmut@php.net et saada enam infot."
+"Renderdus ebaõnnestus! Palun kontakteeru %(email)s et saada enam infot."
 
 #: www/maposmatic/templatetags/extratags.py:51
 #, fuzzy

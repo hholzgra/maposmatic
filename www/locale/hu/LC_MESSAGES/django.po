@@ -2,22 +2,22 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Translators:
-# Gábor Babos <gabor.babos@gmail.com>, 2017, 2019.
+# Gábor Babos <gabor.babos@gmail.com>, 2017, 2019, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: MapOSMatic\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-13 14:34+0200\n"
-"PO-Revision-Date: 2019-04-12 09:38+0000\n"
+"PO-Revision-Date: 2021-12-08 12:47+0000\n"
 "Last-Translator: Gábor Babos <gabor.babos@gmail.com>\n"
-"Language-Team: Hungarian <http://translate.get-map.org/projects/maposmatic/"
+"Language-Team: Hungarian <https://translate.get-map.org/projects/maposmatic/"
 "maposmatic/hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 3.5.1\n"
+"X-Generator: Weblate 4.6.2\n"
 
 #: www/maposmatic/feeds.py:45
 msgid "maps"
@@ -60,10 +60,8 @@ msgid "Full-page layout with the street index at the bottom"
 msgstr "Teljes oldalas elrendezés utcanévmutatóval alul"
 
 #: www/maposmatic/forms.py:112
-#, fuzzy
-#| msgid "Full-page layout with the street index on the side"
 msgid "Full-page layout with the street index on extra page (PDF only)"
-msgstr "Teljes oldalas elrendezés utcanévmutatóval oldalt"
+msgstr "Teljes oldalas elrendezés, az utcanévmutató külön oldalon (csak PDF)"
 
 #: www/maposmatic/forms.py:114
 msgid "Multi-page layout"
@@ -446,18 +444,16 @@ msgid "Contributors"
 msgstr "Közreműködők"
 
 #: www/maposmatic/templates/maposmatic/about.html:200
-#, fuzzy
-#| msgid "Core team"
 msgid "Current team"
-msgstr "Belső csoport"
+msgstr "Jelenlegi csoport"
 
 #: www/maposmatic/templates/maposmatic/about.html:203
 msgid "Developer, running instance on https://print.get-map-org/"
-msgstr ""
+msgstr "Fejlesztő, a példány futtatója itt: https://print.get-map.org/"
 
 #: www/maposmatic/templates/maposmatic/about.html:208
 msgid "Original team"
-msgstr ""
+msgstr "Eredeti team"
 
 #: www/maposmatic/templates/maposmatic/about.html:211
 #: www/maposmatic/templates/maposmatic/about.html:212
@@ -632,7 +628,7 @@ msgstr ""
 
 #: www/maposmatic/templates/maposmatic/base.html:126
 msgid "Privacy statement"
-msgstr ""
+msgstr "Adatvédelmi nyilatkozat"
 
 #: www/maposmatic/templates/maposmatic/donate-thanks.html:36
 msgid "Thanks!"
@@ -643,15 +639,11 @@ msgid "Thanks for your donation!"
 msgstr "Köszönjük a támogatást!"
 
 #: www/maposmatic/templates/maposmatic/donate-thanks.html:42
-#, fuzzy
-#| msgid ""
-#| "<i class=\"fa fa-check\"></i> We have received your donation.\n"
-#| "Thank you for your support to the MapOSMatic project!"
 msgid ""
 "<i class=\"fas fa-check\"></i> We have received your donation.\n"
 "Thank you for your support to the MapOSMatic project!"
 msgstr ""
-"<i class=\"fa fa-check\"></i> Megkaptuk az adományt.\n"
+"<i class=\"fas fa-check\"></i> Megkaptuk az adományt.\n"
 "Köszönjük, hogy támogatja a MapOSMatic projektet!"
 
 #: www/maposmatic/templates/maposmatic/donate-thanks.html:47
@@ -994,10 +986,8 @@ msgid "Cancel this queued request (position %(pos)s in the queue)"
 msgstr "Ennek a kérésnek a megszakítása (jelenleg %(pos)s. a sorban)"
 
 #: www/maposmatic/templates/maposmatic/map-full-parts/rendering-status.html:65
-#, fuzzy
-#| msgid "<i class=\"fa fa-times\"></i> Cancel"
 msgid "<i class=\"fas fa-times\"></i> Cancel"
-msgstr "<i class=\"fa fa-times\"></i> Megszakítás"
+msgstr "<i class=\"fas fa-times\"></i> Megszakítás"
 
 #: www/maposmatic/templates/maposmatic/map-full-parts/rendering-status.html:77
 #: www/maposmatic/templates/maposmatic/maps.html:142
@@ -1168,13 +1158,11 @@ msgstr "Település keresése"
 
 #: www/maposmatic/templates/maposmatic/new.html:168
 msgid "File upload"
-msgstr ""
+msgstr "Fájl feltöltése"
 
 #: www/maposmatic/templates/maposmatic/new.html:195
-#, fuzzy
-#| msgid "Umap data file"
 msgid "Upload files"
-msgstr "uMap adatfájl"
+msgstr "Fájlok feltöltése"
 
 #: www/maposmatic/templates/maposmatic/new.html:204
 msgid ""
@@ -1182,20 +1170,18 @@ msgid ""
 "multiple files at once. If you re-open the file selection dialog to select "
 "files, your selection will replace the previous one."
 msgstr ""
+"Töltsön fel GPX, Umap vagy általános GeoJSON fájlokat itt. <br/> Egyszerre "
+"több fájlt is kijelölhet. Ha újra megnyitja a fájlkijelölő párbeszédpanelt, "
+"az új kijelölés felváltja az előzőt."
 
 #: www/maposmatic/templates/maposmatic/new.html:216
-#, fuzzy
-#| msgid ""
-#| "<b>Note:</b> The uploaded file will not be made available to anyone, the "
-#| "map created using this file <b>will be publicly visible</b> though.<br/"
-#| ">Do <b>NOT</b> upload any data you don't want to be publicly visible."
 msgid ""
 "<b>Note:</b> The uploaded files will not be made available to anyone, the "
 "map created using this file <b>will be publicly visible</b> though.<br/>Do "
 "<b>NOT</b> upload any data you don't want to be publicly visible."
 msgstr ""
-"<b>Megjegyzés:</b> A feltöltött fájl senkinek sem lesz elérhető, azonban a "
-"fájl segítségével létrehozott térkép <b>nyilvános</b> lesz.<br/><b>Ne "
+"<b>Megjegyzés:</b> A feltöltött fájlok senkinek sem lesz elérhetők, azonban "
+"a fájl segítségével létrehozott térkép <b>nyilvános</b> lesz.<br/><b>Ne "
 "töltsön fel</b> olyan adatot, amelyről nem szeretné, hogy bárki láthassa."
 
 #: www/maposmatic/templates/maposmatic/new.html:228
@@ -1263,7 +1249,7 @@ msgstr "Lap mérete"
 
 #: www/maposmatic/templates/maposmatic/new.html:337
 msgid "(width x height)"
-msgstr ""
+msgstr "(szélesség × magasság)"
 
 #: www/maposmatic/templates/maposmatic/new.html:370
 msgid "An error occured while retrieving compatible paper sizes."
@@ -1286,6 +1272,9 @@ msgid ""
 "You can choose from the suggested standard sizes, the \"best fit\" size for "
 "the map area you selected, or specify a width and height of your own choice."
 msgstr ""
+"Választhat a javasolt szabványos méretek közül, a kiválasztott "
+"térképterülethez legjobban illeszkedő méretből, vagy megadhatja az Ön által "
+"kiválasztott szélességet és magasságot."
 
 #: www/maposmatic/templates/maposmatic/new.html:408
 msgid "Map title"
@@ -1300,14 +1289,12 @@ msgid "Your Email address (for notifications, optional)"
 msgstr "E-mail cím (értesítésekhez, nem kötelező)"
 
 #: www/maposmatic/templates/maposmatic/new.html:436
-#, fuzzy
-#| msgid "Clear selected area"
 msgid "will be deleted after"
-msgstr "Kijelölt terület törlése"
+msgstr "törlődik ennyi idő után:"
 
 #: www/maposmatic/templates/maposmatic/new.html:436
 msgid "hours"
-msgstr ""
+msgstr "óra"
 
 #: www/maposmatic/templates/maposmatic/new.html:445
 msgid "Summary"
@@ -1348,11 +1335,11 @@ msgstr ""
 #: www/maposmatic/templates/maposmatic/privacy.html:33
 #: www/maposmatic/templates/maposmatic/privacy.html:36
 msgid "Privacy Statement"
-msgstr ""
+msgstr "Adatvédelmi nyilatkozat"
 
 #: www/maposmatic/templates/maposmatic/privacy.html:38
 msgid "Encryption"
-msgstr ""
+msgstr "Titkosítás"
 
 #: www/maposmatic/templates/maposmatic/privacy.html:41
 msgid ""
@@ -1361,6 +1348,12 @@ msgid ""
 "  provided by <a href=\"https://letsencrypt.org/\">LetsEncrypt</a>.\n"
 "  "
 msgstr ""
+"\n"
+"  Minden webes adatforgalom TLS/SSL titkosítással, tanúsítványok "
+"használatával történik,\n"
+"  a <a href=\"https://letsencrypt.org/\">LetsEncrypt</a> által biztosított "
+"tanúsítványokkal.\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:48
 msgid ""
@@ -1370,6 +1363,11 @@ msgid ""
 "  URL counterparts.\n"
 "  "
 msgstr ""
+"\n"
+"  Ha a webhelyet titkosítatlan <tt>http://</tt> URL-lel próbálja elérni,\n"
+" automatikusan átirányítjuk a megfelelő titkosított <tt>https://</tt>  URL-"
+"re.\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:58
 msgid ""
@@ -1384,6 +1382,16 @@ msgid ""
 "  additional access logs will be removed again within 24 hours.\n"
 "  "
 msgstr ""
+"\n"
+"  A webkiszolgáló csak a dátumot és az időt, a kért URL-címet és a HTTP-"
+"státuszt naplózza,\n"
+" általában nem naplózza az IP-címeket, a felhasználóiügynök-karakterláncokat "
+"vagy a hivatkozó URL-címeket.\n"
+" Problémák elemézése végett szükség esetén a naplóbejegyzésekhez\n"
+" ideiglenesen ezek a további mezők is hozzáadhatók (bár erre eddig még soha "
+"nem volt szükség),\n"
+" de az ilyen a további hozzáférési naplók 24 órán belül ismét törlődnek.\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:68
 msgid ""
@@ -1391,6 +1399,9 @@ msgid ""
 "  When submitting an actual map rendering job, your IP address will\n"
 "  "
 msgstr ""
+"\n"
+"  Egy tényleges térképmegjelenítési feladat beküldésekor az Ön IP-címe\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:72
 msgid ""
@@ -1398,6 +1409,9 @@ msgid ""
 "    be stored until removed manually\n"
 "    "
 msgstr ""
+"\n"
+"    addig tárolódik, amíg kézzel nem törlik\n"
+"    "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:76
 msgid ""
@@ -1405,6 +1419,9 @@ msgid ""
 "    not be stored\n"
 "    "
 msgstr ""
+"\n"
+"    nem tárolódik\n"
+"    "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:80
 #, python-format
@@ -1413,6 +1430,9 @@ msgid ""
 "    stored for %(SUBMITTER_IP_LIFETIME)s hours\n"
 "    "
 msgstr ""
+"\n"
+"    %(SUBMITTER_IP_LIFETIME)s óra időtartamra tárolódik\n"
+"    "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:84
 msgid ""
@@ -1420,6 +1440,9 @@ msgid ""
 "  along with the actual map request.\n"
 "  "
 msgstr ""
+"\n"
+"  a tényleges térképkérelemmel együtt.\n"
+"  "
 
 #: www/maposmatic/templates/maposmatic/privacy.html:90
 msgid ""
@@ -1814,17 +1837,14 @@ msgstr ""
 #: www/templates/render_email_failure.txt:1
 #: www/templates/render_email_success.txt:1
 #: www/templates/render_email_timeout.txt:1
-#, fuzzy
-#| msgid "Rendering daemon: "
 msgid "MapOSMatic rendering daemon"
-msgstr "Megjelenítő háttérfolyamat (daemon): "
+msgstr "MapOSMatic megjelenítő háttérfolyamat (daemon)"
 
 #: www/templates/render_email_exception.txt:7
 #: www/templates/render_email_failure.txt:7
-#, fuzzy, python-format
-#| msgid "Rendering failed!"
+#, python-format
 msgid "Rendering of job #%(jobid)s failed"
-msgstr "Nem sikerült a megjelenítés."
+msgstr "#%(jobid)s megjelenítése nem sikerült"
 
 #: www/templates/render_email_exception.txt:10
 #, python-format

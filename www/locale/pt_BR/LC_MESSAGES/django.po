@@ -6,23 +6,23 @@
 # Rodrigo de Avila <rodrigo@avila.net.br>, 2013
 # Rodrigo de Avila <rodrigo@avila.net.br>, 2013,2015
 # Thiago Vieira <thipvieira@gmail.com>, 2014
-# André Marcelo Alvarenga <andrealvarenga@gmx.net>, 2019.
+# André Marcelo Alvarenga <andrealvarenga@gmx.net>, 2019, 2021.
 # Andre Luis Lourenço Raposo <andreluiz09444@gmail.com>, 2019.
 msgid ""
 msgstr ""
 "Project-Id-Version: MapOSMatic\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-13 14:34+0200\n"
-"PO-Revision-Date: 2019-08-16 17:41+0000\n"
-"Last-Translator: Andre Luis Lourenço Raposo <andreluiz09444@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) <http://translate.get-map.org/projects/"
+"PO-Revision-Date: 2021-12-27 00:34+0000\n"
+"Last-Translator: André Marcelo Alvarenga <andrealvarenga@gmx.net>\n"
+"Language-Team: Portuguese (Brazil) <https://translate.get-map.org/projects/"
 "maposmatic/maposmatic/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.5.1\n"
+"X-Generator: Weblate 4.6.2\n"
 
 #: www/maposmatic/feeds.py:45
 msgid "maps"
@@ -65,10 +65,9 @@ msgid "Full-page layout with the street index at the bottom"
 msgstr "Layout de página inteira com índice de ruas embaixo"
 
 #: www/maposmatic/forms.py:112
-#, fuzzy
-#| msgid "Full-page layout with the street index on the side"
 msgid "Full-page layout with the street index on extra page (PDF only)"
-msgstr "Layout de página inteira com índice de ruas na lateral"
+msgstr ""
+"Layout de página inteira com índice de ruas em página extra (apenas PDF)"
 
 #: www/maposmatic/forms.py:114
 msgid "Multi-page layout"
@@ -477,14 +476,12 @@ msgid "Contributors"
 msgstr "Colaboradores"
 
 #: www/maposmatic/templates/maposmatic/about.html:200
-#, fuzzy
-#| msgid "Core team"
 msgid "Current team"
-msgstr "Time principal"
+msgstr "Time atual"
 
 #: www/maposmatic/templates/maposmatic/about.html:203
 msgid "Developer, running instance on https://print.get-map-org/"
-msgstr ""
+msgstr "Desenvolvedor, executando a instância em https://print.get-map-org/"
 
 #: www/maposmatic/templates/maposmatic/about.html:208
 msgid "Original team"
@@ -793,7 +790,7 @@ msgstr ""
 
 #: www/maposmatic/templates/maposmatic/index-parts/status.html:25
 msgid "The rendering daemon is running."
-msgstr "O serviço de renderização está em andamento."
+msgstr "O serviço de renderização está funcionando."
 
 #: www/maposmatic/templates/maposmatic/index-parts/status.html:29
 msgid ""
@@ -1828,7 +1825,7 @@ msgstr "Renderização concluída com sucesso."
 #| "Rendering failed! Please contact hartmut@php.net for more information."
 msgid "Rendering failed! Please contact %(email)s for more information."
 msgstr ""
-"A renderização falhou! Por favor, contate hartmut@php.net para mais "
+"A renderização falhou! Por favor, contate %(email)s para mais "
 "informações."
 
 #: www/maposmatic/templatetags/extratags.py:51

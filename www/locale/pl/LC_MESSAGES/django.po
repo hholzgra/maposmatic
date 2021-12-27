@@ -1602,7 +1602,7 @@ msgstr "Wyrenderowano pomyślnie."
 #| "Rendering failed! Please contact hartmut@php.net for more information."
 msgid "Rendering failed! Please contact %(email)s for more information."
 msgstr ""
-"Renderowanie nieudane! Proszę skontaktuj się z hartmut@php.net po więcej "
+"Renderowanie nieudane! Proszę skontaktuj się z %(email)s po więcej "
 "informacji."
 
 #: www/maposmatic/templatetags/extratags.py:51

@@ -1889,7 +1889,7 @@ msgstr "Η επεξεργασία ολοκληρώθηκε."
 #| "Rendering failed! Please contact hartmut@php.net for more information."
 msgid "Rendering failed! Please contact %(email)s for more information."
 msgstr ""
-"Η επεξεργασια απετυχε! Επικοινωνηστε στην διευθυνση hartmut@php.net για "
+"Η επεξεργασια απετυχε! Επικοινωνηστε στην διευθυνση %(email)s για "
 "περισσοτερες πληροφοριες."
 
 #: www/maposmatic/templatetags/extratags.py:51

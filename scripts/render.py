@@ -505,7 +505,7 @@ class JobRenderer(threading.Thread):
             output_formats = \
                 list(set(compatible_output_formats) & set(RENDERING_RESULT_FORMATS))
 
-            renderer.render(config, self.job.layout,
+            output_count = renderer.render(config, self.job.layout,
                             output_formats, result_file_prefix)
 
             # Create thumbnail
@@ -515,8 +515,14 @@ class JobRenderer(threading.Thread):
             except:
                 pass
 
-            self.result = RESULT_SUCCESS
-            LOG.info("Finished rendering of job #%d." % self.job.id)
+            if output_count > 0:
+                self.result = RESULT_SUCCESS
+                LOG.info("Finished rendering of job #%d." % self.job.id)
+                # TODO log if some formats failed
+            else:
+                self.result = RESULT_RENDERING_EXCEPTION
+                LOG.exception("Rendering of job #%d faild, no output files generated" % self.job.id)
+                return self.result
         except KeyboardInterrupt:
             self.result = RESULT_KEYBOARD_INTERRUPT
             LOG.info("Rendering of job #%d interrupted!" % self.job.id)

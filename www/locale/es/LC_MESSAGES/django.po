@@ -1677,7 +1677,7 @@ msgstr "Renderización exitosa."
 #| "Rendering failed! Please contact hartmut@php.net for more information."
 msgid "Rendering failed! Please contact %(email)s for more information."
 msgstr ""
-"¡Renderización fallida! Contacte con hartmut@php.net for para más "
+"¡Renderización fallida! Contacte con %(email)s for para más "
 "información."
 
 #: www/maposmatic/templatetags/extratags.py:51

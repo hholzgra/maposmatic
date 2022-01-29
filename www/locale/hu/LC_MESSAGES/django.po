@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: MapOSMatic\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-06-13 14:34+0200\n"
-"PO-Revision-Date: 2022-01-29 13:29+0000\n"
+"PO-Revision-Date: 2022-01-29 15:14+0000\n"
 "Last-Translator: Gábor Babos <gabor.babos@gmail.com>\n"
 "Language-Team: Hungarian <https://translate.get-map.org/projects/maposmatic/"
 "maposmatic/hu/>\n"
@@ -79,7 +79,7 @@ msgstr "további információ"
 #: www/maposmatic/forms.py:155
 #, python-format
 msgid "The <i>%(stylesheet_name)s</i> overlay"
-msgstr "<i>%(stylesheet_name)s</i> rátétréteg"
+msgstr "<i>%(stylesheet_name)s</i> fedőréteg"
 
 #: www/maposmatic/forms.py:196
 msgid "Layout required"
@@ -812,8 +812,8 @@ msgid ""
 "The Waymarked route database is not available. Route overlays cannot be "
 "processed at this time."
 msgstr ""
-"A turistaútjelzés-adatbázis elérhetetlen. Megjelenítési kéréseket jelenleg "
-"nem lehet feldolgozni."
+"A turistaútjelzés-adatbázis elérhetetlen. Útvonaltervezési fedőrétegeket "
+"jelenleg nem lehet feldolgozni."
 
 #: www/maposmatic/templates/maposmatic/index.html:38
 msgid "Welcome to"
@@ -901,7 +901,7 @@ msgstr "Stíluslap"
 #: www/maposmatic/templates/maposmatic/new.html:131
 #: www/maposmatic/templates/maposmatic/new.html:307
 msgid "Overlays"
-msgstr "Rátétrétegek"
+msgstr "Fedőrétegek"
 
 #: www/maposmatic/templates/maposmatic/map-feed.html:31
 #: www/maposmatic/templates/maposmatic/map-full.html:90
@@ -1065,7 +1065,7 @@ msgstr "Határolókeret"
 
 #: www/maposmatic/templates/maposmatic/maps.html:77
 msgid "Overlay(s)"
-msgstr "Rátétréteg(ek)"
+msgstr "Fedőréteg(ek)"
 
 #: www/maposmatic/templates/maposmatic/maps.html:80
 msgid "GPX track"
@@ -1231,7 +1231,7 @@ msgstr ""
 
 #: www/maposmatic/templates/maposmatic/new.html:319
 msgid "Map overlays"
-msgstr "Térkép rátétrétegei"
+msgstr "Térképfedőrétegek"
 
 #: www/maposmatic/templates/maposmatic/new.html:321
 msgid ""
@@ -1239,9 +1239,9 @@ msgid ""
 "overlays can be selected to add different kinds of additional information on "
 "top of the map."
 msgstr ""
-"A rátétrétegek további objektumokat jelenítenek meg a kiválasztott "
+"A fedőrétegek további objektumokat jelenítenek meg a kiválasztott "
 "alapstíluson. Ha a térképen többfajta további információt is szeretne "
-"megjeleníteni, akkor több rátétréteget is kijelölhet."
+"megjeleníteni, akkor több fedőréteget is kijelölhet."
 
 #: www/maposmatic/templates/maposmatic/new.html:337
 msgid "Paper size"
@@ -1314,7 +1314,7 @@ msgstr "Stíluslap:"
 
 #: www/maposmatic/templates/maposmatic/new.html:451
 msgid "Overlay:"
-msgstr "Rátétréteg:"
+msgstr "Fedőréteg:"
 
 #: www/maposmatic/templates/maposmatic/new.html:452
 msgid "Paper format:"

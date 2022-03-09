@@ -25,6 +25,7 @@
           Order allow,deny
           Allow from all
         </Directory>
+        AddEncoding gzip svgz
 
         LogLevel warn
         ServerSignature On

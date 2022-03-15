@@ -94,7 +94,7 @@ class MapRenderingJob(models.Model):
 
     NONCE_SIZE = 16
 
-    maptitle = models.CharField(max_length=256, blank=True)
+    maptitle = models.CharField(max_length=256, blank=True, default='')
     stylesheet = models.CharField(max_length=256)
     overlay = models.CharField(max_length=256, null=True, blank=True)
     layout = models.CharField(max_length=256)
@@ -239,7 +239,7 @@ class MapRenderingJob(models.Model):
             elif format == 'csv' and os.path.exists(map_path):
                 # Index CSV file
                 allfiles['indeces'][format] = (
-                    self.get_map_fileurl(format),
+                    self.get_map_fileurl("." + format),
                      _("%(title)s %(format)s Index") % {'title': self.maptitle,
                                                        'format': format.upper()},
                     os.stat(map_path).st_size,

@@ -315,7 +315,7 @@ class JobRenderer(threading.Thread):
             LOG.exception("Could not send notification email to the submitter!")
 
 
-    def _email_exception(self, e):
+    def _email_exception(self, exc_info):
         """This method can be used to send the given exception by email to the
         configured admins in the project's settings."""
 
@@ -353,7 +353,7 @@ class JobRenderer(threading.Thread):
                       'jobinfo': '\n'.join(jobinfo),
                       'date': datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S +0200 (CEST)'),
                       'url': DAEMON_ERRORS_JOB_URL % self.job.id,
-                      'tb': traceback.format_exc(e)
+                      'tb': traceback.format_exception(*exc_info)
                     }
             msg = template.render(context)
             
@@ -491,7 +491,7 @@ class JobRenderer(threading.Thread):
             fp = open(errfile, "w")
             traceback.print_exc(file=fp)
             fp.close()
-            self._email_exception(e)
+            self._email_exception(sys.exc_info())
             return self.result
 
         try:
@@ -535,7 +535,7 @@ class JobRenderer(threading.Thread):
             fp = open(errfile, "w")
             traceback.print_exc(file=fp)
             fp.close()
-            self._email_exception(e)
+            self._email_exception(sys.exc_info())
             return self.result
 
         self._email_submitter("render_email_success.txt")

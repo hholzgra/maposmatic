@@ -331,7 +331,7 @@ class JobRenderer(threading.Thread):
             if DAEMON_ERRORS_SMTP_ENCRYPT == "SSL":
               mailer = smtplib.SMTP_SSL()
             else:
-              mailer = smtplib.SMTP()
+              mailer = smtplib.SMTP(DAEMON_ERRORS_SMTP_HOST)
             mailer.connect(DAEMON_ERRORS_SMTP_HOST, DAEMON_ERRORS_SMTP_PORT)
             if DAEMON_ERRORS_SMTP_ENCRYPT == "TLS":
                 mailer.starttls()

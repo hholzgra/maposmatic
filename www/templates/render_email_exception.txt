@@ -14,9 +14,10 @@ An error occured while rendering job {{jobid}}!
 
 Job information:
 
-%(jobinfo)s
+{{jobinfo}}
 
-You can view the job page at <%(url)s>.
+You can view the job page at <{{url}}>.
+
 -- 
 MapOSMatic
 {% endblocktrans %}

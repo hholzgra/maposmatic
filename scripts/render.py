@@ -353,7 +353,7 @@ class JobRenderer(threading.Thread):
                       'jobinfo': '\n'.join(jobinfo),
                       'date': datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S +0200 (CEST)'),
                       'url': DAEMON_ERRORS_JOB_URL % self.job.id,
-                      'tb': traceback.format_exception(*exc_info)
+                      'tb': ''.join(traceback.format_exception(*exc_info))
                     }
             msg = template.render(context)
             

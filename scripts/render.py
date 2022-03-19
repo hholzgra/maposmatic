@@ -55,6 +55,7 @@ RESULT_KEYBOARD_INTERRUPT = 1
 RESULT_PREPARATION_EXCEPTION = 2
 RESULT_RENDERING_EXCEPTION = 3
 RESULT_TIMEOUT_REACHED = 4
+RESULT_MEMORY_EXCEEDED = 5
 
 THUMBNAIL_SUFFIX = '_small.png'
 
@@ -483,6 +484,11 @@ class JobRenderer(threading.Thread):
             self.result = RESULT_KEYBOARD_INTERRUPT
             LOG.info("Rendering of job #%d interrupted!" % self.job.id)
             return self.result
+        except MemoryError:
+            self.result = RESULT_MEMORY_EXCEEDED
+            LOG.exception("Not enough memory to render job #%d" % self.job.id)
+            self._email_exception(sys.exc_info())
+            return self.result
         except Exception as e:
             self.result = RESULT_PREPARATION_EXCEPTION
             LOG.exception("Rendering of job #%d failed (exception occurred during"
@@ -526,6 +532,11 @@ class JobRenderer(threading.Thread):
         except KeyboardInterrupt:
             self.result = RESULT_KEYBOARD_INTERRUPT
             LOG.info("Rendering of job #%d interrupted!" % self.job.id)
+            return self.result
+        except MemoryError:
+            self.result = RESULT_MEMORY_EXCEEDED
+            LOG.exception("Not enough memory to render job #%d" % self.job.id)
+            self._email_exception(sys.exc_info())
             return self.result
         except Exception as e:
             self.result = RESULT_RENDERING_EXCEPTION

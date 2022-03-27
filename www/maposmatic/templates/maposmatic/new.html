@@ -144,7 +144,7 @@ $('#error-modal').modal('show')
   </div>
   <div class="col-lg-2" style="align: right">
     <button type="button" class="btn btn-success" id="nextlink" onclick="nextPrev(1)"><i class="fas fa-arrow-right"></i> {% trans "Next" %}</button>
-    <button id="formsubmit" type="button" class="btn btn-success" value="submit" onclick="$('#mainfrm').submit()">
+    <button id="formsubmit" type="submit" class="btn btn-success" value="submit" onclick="$('#submitme').click()">
       {% trans "Generate" %}&nbsp;<i class="fas fa-check-circle"></i>
     </button>
   </div>
@@ -468,6 +468,7 @@ $('#error-modal').modal('show')
       </div>
     </div>
   </div>
+  <input id="submitme" type="submit" style="display: none"/>
 </form>
 
 {% endblock %}

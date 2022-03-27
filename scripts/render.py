@@ -310,7 +310,7 @@ class JobRenderer(threading.Thread):
                       }
             msg = template.render(context)
             
-            mailer.sendmail(DAEMON_ERRORS_EMAIL_FROM, self.job.submittermail, msg)
+            mailer.sendmail(DAEMON_ERRORS_EMAIL_FROM, self.job.submittermail, msg.encode("utf8"))
             LOG.info("Email notification sent.")
         except Exception as e:
             LOG.exception("Could not send notification email to the submitter!")

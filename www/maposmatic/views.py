@@ -179,7 +179,7 @@ def new(request):
             return HttpResponseRedirect(reverse('map-by-id-and-nonce',
                                                 args=[job.id, job.nonce]))
         else:
-            LOG.debug("FORM NOT VALID")
+            LOG.warning("FORM NOT VALID")
     else:
         init_vals = request.GET.dict()
         oc = ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH)

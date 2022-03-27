@@ -47,7 +47,7 @@ def job_status_to_str(value, arg="Rendering failed", autoescape=True):
     if value == 0:
         return mark_safe(_alert_info + str(_("Waiting for rendering to begin...")) + _alert_end)
     elif value == 1:
-        return mark_safe(_alert_info + str(_("The rendering is in progress...")) + alert_end)
+        return mark_safe(_alert_info + str(_("The rendering is in progress...")) + _alert_end)
     elif value == 2:
         if arg == 'ok':
             return mark_safe(_alert_ok + str(_("Rendering was successful.")) + _alert_end)

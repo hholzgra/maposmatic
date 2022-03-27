@@ -36,26 +36,33 @@ import ocitysmap
 
 register = template.Library()
 
-def job_status_to_str(value, arg, autoescape=None):
+_alert_ok   = "<div class='alert alert-success' role='alert'>"
+_alert_info = "<div class='alert alert-info'    role='alert'>"
+_alert_warn = "<div class='alert alert-warning' role='alert'>"
+_alert_err  = "<div class='alert alert-danger'  role='alert'>"
+_alert_end  = "</div>"
+
+@register.filter()
+def job_status_to_str(value, arg="Rendering failed", autoescape=True):
     if value == 0:
-        return _("Waiting for rendering to begin...")
+        return mark_safe(_alert_info + str(_("Waiting for rendering to begin...")) + _alert_end)
     elif value == 1:
-        return _("The rendering is in progress...")
+        return mark_safe(_alert_info + str(_("The rendering is in progress...")) + _alert_end)
     elif value == 2:
         if arg == 'ok':
-            return _("Rendering was successful.")
+            return mark_safe(_alert_ok + str(_("Rendering was successful.")) + _alert_end)
         else:
             if www.settings.CONTACT_EMAIL:
-                return _("Rendering failed! Please check the error log and contact %(email)s for more information.") % {'email': www.settings.CONTACT_EMAIL}
+                return mark_safe(_alert_err + str(_("%(arg)s!<br/>Please check the error log or contact %(email)s for more information." % {'arg': arg, 'email': www.settings.CONTACT_EMAIL})) + _alert_end)
             else:
-                return _("Rendering failed! Please check the error log for more information.")
+                return mark_safe( _alert_err + _str(_("%(arg)s! Please check the error log for more information.") % {'arg': arg}) + _alert_end)
     elif value == 3:
         if arg == 'ok':
-            return _("Rendering is obsolete: the rendering was successful, but the files are no longer available.")
+            return mark_safe(_alert_info + str(_("Rendering is obsolete: the rendering was successful, but the files are no longer available.")) + _alert_end)
         else:
-            return _("Obsolete failed rendering: the rendering failed, and the incomplete files have been removed.")
+            return mark_safe(_alert_warn + str(_("Obsolete failed rendering: the rendering failed, and the incomplete files have been removed.")) + _alert_end)
     elif value == 4:
-        return _("The rendering was cancelled by the user.")
+        return mark_safe(_alert_warn + str(_("The rendering was cancelled by the user.")) + _alert_end)
 
     return ''
 
@@ -129,7 +136,6 @@ def paper_size(value):
     else:
         return "%s (%d×%d mm²)" % (size_name, w, h)
 
-register.filter('job_status_to_str', job_status_to_str)
 register.filter('feedparsed', feedparsed)
 register.filter('abs', lambda x: abs(x))
 register.filter('getitem', lambda d,i: d.get(i,''))

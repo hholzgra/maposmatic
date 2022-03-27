@@ -44,10 +44,11 @@ _DEFAULT_POLL_FREQUENCY = 10        # Daemon job polling frequency, in seconds
 
 _RESULT_MSGS = {
     render.RESULT_SUCCESS: 'ok',
-    render.RESULT_KEYBOARD_INTERRUPT: 'rendering interrupted',
-    render.RESULT_PREPARATION_EXCEPTION: 'data preparation failed',
-    render.RESULT_RENDERING_EXCEPTION: 'rendering failed',
-    render.RESULT_TIMEOUT_REACHED: 'rendering took too long, canceled'
+    render.RESULT_KEYBOARD_INTERRUPT: 'Rendering interrupted',
+    render.RESULT_PREPARATION_EXCEPTION: 'Data preparation failed',
+    render.RESULT_RENDERING_EXCEPTION: 'Rendering failed',
+    render.RESULT_TIMEOUT_REACHED: 'Rendering took too long, canceled',
+    render.RESULT_MEMORY_EXCEEDED: 'Not enough memory to render, try a smaller region or a simpler stylesheet'
 }
 
 LOG = logging.getLogger('maposmatic')
@@ -226,7 +227,7 @@ class RenderingsGarbageCollector:
         LOG.info("Cleanup processing file list")
         iterations = 0
         previous_job_id = 0
-        while size > threshold:
+        while size > ( 0.9 * threshold):
             if iterations > RENDERING_RESULT_MAX_PURGE_ITERATIONS:
                 LOG.info("%d delete iterations done, pausing until next invocation" % RENDERING_RESULT_MAX_PURGE_ITERATIONS)
                 break

@@ -4,3 +4,4 @@ Disallow: /accounts/
 Disallow: /apis/
 Disallow: /media/
 Disallow: /results/
+Disallow: /maps/

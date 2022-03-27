@@ -1,4 +1,4 @@
-{% load i18n %}{% load l10n %}{% load extratags %}From: {% blocktrans %}MapOSMatic rendering daemon{% endblocktrans %} <{{from}}s>
+{% load i18n %}{% load l10n %}{% load extratags %}{% autoescape on %}From: {% blocktrans %}MapOSMatic rendering daemon{% endblocktrans %} <{{from}}s>
 Sender: <{{from}}>
 Reply-To: {{replyto}}
 To: {{to}}
@@ -14,9 +14,11 @@ An error occured while rendering job {{jobid}}!
 
 Job information:
 
-%(jobinfo)s
+{{jobinfo}}
 
-You can view the job page at <%(url)s>.
+You can view the job page at <{{url}}>.
+
 -- 
 MapOSMatic
 {% endblocktrans %}
+{% endautoescape %}

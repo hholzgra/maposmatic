@@ -55,6 +55,7 @@ RESULT_KEYBOARD_INTERRUPT = 1
 RESULT_PREPARATION_EXCEPTION = 2
 RESULT_RENDERING_EXCEPTION = 3
 RESULT_TIMEOUT_REACHED = 4
+RESULT_MEMORY_EXCEEDED = 5
 
 THUMBNAIL_SUFFIX = '_small.png'
 
@@ -309,13 +310,13 @@ class JobRenderer(threading.Thread):
                       }
             msg = template.render(context)
             
-            mailer.sendmail(DAEMON_ERRORS_EMAIL_FROM, self.job.submittermail, msg)
+            mailer.sendmail(DAEMON_ERRORS_EMAIL_FROM, self.job.submittermail, msg.encode("utf8"))
             LOG.info("Email notification sent.")
         except Exception as e:
             LOG.exception("Could not send notification email to the submitter!")
 
 
-    def _email_exception(self, e):
+    def _email_exception(self, exc_info):
         """This method can be used to send the given exception by email to the
         configured admins in the project's settings."""
 
@@ -331,7 +332,7 @@ class JobRenderer(threading.Thread):
             if DAEMON_ERRORS_SMTP_ENCRYPT == "SSL":
               mailer = smtplib.SMTP_SSL()
             else:
-              mailer = smtplib.SMTP()
+              mailer = smtplib.SMTP(DAEMON_ERRORS_SMTP_HOST)
             mailer.connect(DAEMON_ERRORS_SMTP_HOST, DAEMON_ERRORS_SMTP_PORT)
             if DAEMON_ERRORS_SMTP_ENCRYPT == "TLS":
                 mailer.starttls()
@@ -353,7 +354,7 @@ class JobRenderer(threading.Thread):
                       'jobinfo': '\n'.join(jobinfo),
                       'date': datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S +0200 (CEST)'),
                       'url': DAEMON_ERRORS_JOB_URL % self.job.id,
-                      'tb': traceback.format_exc(e)
+                      'tb': ''.join(traceback.format_exception(*exc_info))
                     }
             msg = template.render(context)
             
@@ -483,6 +484,11 @@ class JobRenderer(threading.Thread):
             self.result = RESULT_KEYBOARD_INTERRUPT
             LOG.info("Rendering of job #%d interrupted!" % self.job.id)
             return self.result
+        except MemoryError:
+            self.result = RESULT_MEMORY_EXCEEDED
+            LOG.exception("Not enough memory to render job #%d" % self.job.id)
+            self._email_exception(sys.exc_info())
+            return self.result
         except Exception as e:
             self.result = RESULT_PREPARATION_EXCEPTION
             LOG.exception("Rendering of job #%d failed (exception occurred during"
@@ -491,7 +497,7 @@ class JobRenderer(threading.Thread):
             fp = open(errfile, "w")
             traceback.print_exc(file=fp)
             fp.close()
-            self._email_exception(e)
+            self._email_exception(sys.exc_info())
             return self.result
 
         try:
@@ -527,6 +533,11 @@ class JobRenderer(threading.Thread):
             self.result = RESULT_KEYBOARD_INTERRUPT
             LOG.info("Rendering of job #%d interrupted!" % self.job.id)
             return self.result
+        except MemoryError:
+            self.result = RESULT_MEMORY_EXCEEDED
+            LOG.exception("Not enough memory to render job #%d" % self.job.id)
+            self._email_exception(sys.exc_info())
+            return self.result
         except Exception as e:
             self.result = RESULT_RENDERING_EXCEPTION
             LOG.exception("Rendering of job #%d failed (exception occurred during"
@@ -535,7 +546,7 @@ class JobRenderer(threading.Thread):
             fp = open(errfile, "w")
             traceback.print_exc(file=fp)
             fp.close()
-            self._email_exception(e)
+            self._email_exception(sys.exc_info())
             return self.result
 
         self._email_submitter("render_email_success.txt")

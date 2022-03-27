@@ -1,4 +1,4 @@
-{% load i18n %}{% load l10n %}{% load extratags %}From: {% blocktrans %}MapOSMatic rendering daemon{% endblocktrans %} <{{from}}>
+{% load i18n %}{% load l10n %}{% load extratags %}{% autoescape on %}From: {% blocktrans %}MapOSMatic rendering daemon{% endblocktrans %} <{{from}}>
 Sender: <{{from}}>
 Reply-To: {{replyto}}
 To: $(to}}
@@ -22,3 +22,4 @@ style or less map overlays.
 -- 
 MapOSMatic
 {% endblocktrans %}
+{% endautoencode %}

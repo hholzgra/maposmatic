@@ -227,7 +227,7 @@ class RenderingsGarbageCollector:
         LOG.info("Cleanup processing file list")
         iterations = 0
         previous_job_id = 0
-        while size > threshold:
+        while size > ( 0.9 * threshold):
             if iterations > RENDERING_RESULT_MAX_PURGE_ITERATIONS:
                 LOG.info("%d delete iterations done, pausing until next invocation" % RENDERING_RESULT_MAX_PURGE_ITERATIONS)
                 break

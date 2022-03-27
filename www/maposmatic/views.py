@@ -179,6 +179,10 @@ def new(request):
             return HttpResponseRedirect(reverse('map-by-id-and-nonce',
                                                 args=[job.id, job.nonce]))
         else:
+            data = {'form': form }
+            return render_to_response('generic_error.html',
+                                      data)
+
             LOG.warning("FORM NOT VALID")
     else:
         init_vals = request.GET.dict()

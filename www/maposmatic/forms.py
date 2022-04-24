@@ -110,6 +110,8 @@ class MapRenderingJobForm(forms.ModelForm):
                 description = _(u"Full-page layout with the street index at the bottom")
             elif r.name == 'single_page_index_extra_page':
                 description = _(u"Full-page layout with the street index on extra page (PDF only)")
+            elif r.name == 'tk25':
+                description = _(u"TK25 full page layout")
             elif r.name == 'multi_page':
                 description = _(u"Multi-page layout")
             else:

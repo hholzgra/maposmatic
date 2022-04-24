@@ -30,7 +30,7 @@
     "leaflet.locatecontrol": "^0.66.2",
     "leaflet.locationfilter": "git+https://github.com/marcoqu/leaflet-locationfilter.git",
     "leaflet.restoreview": "git+https://github.com/makinacorpus/Leaflet.RestoreView.git",
-    "minimist": "^1.2.5",
+    "minimist": "^1.2.6",
     "popper.js": "^1.15.0"
   }
 }

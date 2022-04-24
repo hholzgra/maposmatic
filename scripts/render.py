@@ -343,8 +343,10 @@ class JobRenderer(threading.Thread):
             for k in sorted(self.job.__dict__.keys()):
                 # We don't care about state that much, especially since it
                 # doesn't display well
-                if k != '_state':
+                # for privacy reasons we remove submitter email and ip
+                if k != '_state' and k != 'submitterip' and k != 'submittermail':
                     jobinfo.append('  %s: %s' % (k, str(self.job.__dict__[k])))
+
 
             template = get_template("render_email_exception.txt")
             context = { 'from': DAEMON_ERRORS_EMAIL_FROM,

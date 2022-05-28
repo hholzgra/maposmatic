@@ -28,6 +28,7 @@ from django.core.files.base import ContentFile
 from django.http import HttpResponseRedirect, HttpResponseBadRequest, HttpResponseNotFound, HttpResponse, HttpResponseNotAllowed, Http404
 from django.forms.models import model_to_dict
 from django.shortcuts import get_object_or_404
+from django.db import connections
 
 import ocitysmap
 from www.maposmatic import helpers, forms, nominatim, models
@@ -103,8 +104,38 @@ def job_stati(request):
 
     return HttpResponse( content=json.dumps(result, indent=4, sort_keys=True, default=str), content_type='text/json')
 
+def heatdata(request):
+    query = """
+select (lat_upper_left + lat_bottom_right)/2 as lat
+     , (lon_upper_left + lon_bottom_right)/2 as lng
+     , 1 as count
+  from maposmatic_maprenderingjob
+ where lat_upper_left is not null
+"""
 
+    data = { "max": 8, "data": [] }
+    
+    try:
+        cursor = connections['default'].cursor()
+        if cursor is None:
+            raise Http404("postgis: no cursor")
 
+        cursor.execute(query)
+
+        columns = [col[0] for col in cursor.description]
+
+        for row in cursor.fetchall():
+            data["data"].append(dict(zip(columns, row)))
+
+        cursor.close()
+
+        return HttpResponse(content="var data = " + json.dumps(data),
+                            content_type='application/javascript')
+
+    except Exception as e:
+        raise RuntimeError(e)
+
+    
 def jobs(request, job_id=False):
     """API handler for external rendering requests"""
 

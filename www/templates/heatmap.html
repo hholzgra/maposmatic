@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <title>Heatmap</title>
+    <script src="/media/node_modules/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="/media/node_modules/leaflet/dist/leaflet.css" />
+    
+    <script src="/media/node_modules/heatmap.js/build/heatmap.min.js"></script>
+    <script src="/media/node_modules/leaflet-heatmap/leaflet-heatmap.js"></script>
+
+    <script src="/apis/heatdata.js"></script>
+  </head>
+  <body>
+    <h1>Heatmap test</h1>
+    <div class="demo-wrapper">
+      <div class="heatmap" id="map-canvas" style="height: 500px;">
+
+      </div>
+    </div>
+    <script>
+      window.onload = function() {
+        var baseLayer = L.tileLayer(
+          'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+            maxZoom: 18
+          }
+        );
+
+        var cfg = {
+          // radius should be small ONLY if scaleRadius is true (or small radius is intended)
+          "radius": 2,
+          "maxOpacity": .8,
+          // scales the radius based on map zoom
+          "scaleRadius": true,
+          // if set to false the heatmap uses the global maximum for colorization
+          // if activated: uses the data maximum within the current map boundaries
+          //   (there will always be a red spot with useLocalExtremas true)
+          "useLocalExtrema": true,
+          // which field name in your data represents the latitude - default "lat"
+          latField: 'lat',
+          // which field name in your data represents the longitude - default "lng"
+          lngField: 'lng',
+          // which field name in your data represents the data value - default "value"
+          valueField: 'count'
+        };
+
+
+        var heatmapLayer = new HeatmapOverlay(cfg);
+
+        var map = new L.Map('map-canvas', {
+          center: new L.LatLng(25.6586, -80.3568),
+          zoom: 4,
+          layers: [baseLayer, heatmapLayer]
+        });
+
+        heatmapLayer.setData(data);
+
+    };
+  </script>    
+  </body>
+</html>

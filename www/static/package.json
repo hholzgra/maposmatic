@@ -25,6 +25,7 @@
     "leaflet": "^1.4.0",
     "leaflet-easybutton": "^2.4.0",
     "leaflet-gpx": "^1.0.0",
+    "leaflet-heatmap": "^1.0.0",
     "leaflet-providers": "^1.6.0",
     "leaflet-search": "^2.9.8",
     "leaflet.locatecontrol": "^0.66.2",

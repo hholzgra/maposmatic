@@ -104,14 +104,31 @@ def job_stati(request):
 
     return HttpResponse( content=json.dumps(result, indent=4, sort_keys=True, default=str), content_type='text/json')
 
-def heatdata(request):
+def heatdata(request, days=1):
     query = """
+select round(lat::numeric, 4)::float as lat
+     , round(lng::numeric, 4)::float as lng
+     , count(*) as count
+  from (   
 select (lat_upper_left + lat_bottom_right)/2 as lat
      , (lon_upper_left + lon_bottom_right)/2 as lng
-     , 1 as count
   from maposmatic_maprenderingjob
  where lat_upper_left is not null
-"""
+   and submission_time BETWEEN LOCALTIMESTAMP - INTERVAL '%s days' AND LOCALTIMESTAMP
+
+union
+
+select (north + south)/2 as lat
+     , (west + east)/2 as lng
+  from maposmatic_maprenderingjob m
+  left outer join dblink('dbname=gis', 'SELECT osm_id, west, east, north, south FROM place') AS p(osm_id bigint, west float, east float, north float, south float)
+  on -m.administrative_osmid = p.osm_id
+  where m.administrative_osmid is not null
+   and submission_time BETWEEN LOCALTIMESTAMP - INTERVAL '%s days' AND LOCALTIMESTAMP
+
+) x group by lat, lng;
+;
+""" % (days, days)
 
     data = { "max": 8, "data": [] }
     
@@ -129,7 +146,7 @@ select (lat_upper_left + lat_bottom_right)/2 as lat
 
         cursor.close()
 
-        return HttpResponse(content="var data = " + json.dumps(data),
+        return HttpResponse(content="var data = " + json.dumps(data, indent=2),
                             content_type='application/javascript')
 
     except Exception as e:

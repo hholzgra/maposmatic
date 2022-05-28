@@ -134,8 +134,10 @@ urlpatterns = [
     url(r'^apple-touch-icon.*\.png$', RedirectView.as_view(url=staticfiles_storage.url('img/apple-touch-icon.png'))),
 
     # test
-    url(r'heatmap/', TemplateView.as_view(template_name='heatmap.html', content_type='text/html')),
-    url(r'^apis/heatdata.js$',     apis.heatdata),
+    url(r'heatmap/(\d*)$',
+        views.heatmap,
+        name='heatmap'),
+    url(r'^apis/heatdata/(\d*)$',     apis.heatdata),
 ]
 
 if settings.DEBUG:

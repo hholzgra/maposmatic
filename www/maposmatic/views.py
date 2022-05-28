@@ -392,6 +392,12 @@ def api_nominatim(request):
     return HttpResponse(content=json.dumps(contents),
                         content_type='text/json')
 
+def heatmap(request, days=7):
+    return render(request, 'maposmatic/heatmap.html',
+                  { 'days' : days ,
+                  })
+
+
 def api_nominatim_reverse(request, lat, lon):
     """Nominatim reverse geocoding query gateway."""
     lat = float(lat)

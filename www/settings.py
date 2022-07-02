@@ -104,6 +104,7 @@ MIDDLEWARE = (
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'maintenance_mode.middleware.MaintenanceModeMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
 )
 
 ROOT_URLCONF = 'www.urls'
@@ -118,6 +119,8 @@ INSTALLED_APPS = (
     'cookielaw',
     'maintenance_mode',
     'www.maposmatic',
+    'django.contrib.admin',
+    'django.contrib.messages',
 )
 
 STATIC_URL = "/media/"

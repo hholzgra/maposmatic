@@ -1,0 +1,12 @@
+{% extends 'maposmatic/base.html' %}
+
+{% load i18n %}
+{% load l10n %}
+{% load extratags %}
+
+{% block title %}Login{% endblock %}
+{% block page %}
+<h2>Logout</h2>
+
+<a href="{% url 'dashboard' %}">Back to dashboard</a>
+{% endblock %}

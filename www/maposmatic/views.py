@@ -654,3 +654,7 @@ def api_rendering_status(request, id, nonce=None):
                                 'queue_size': queue_size,
                                 'status':     'working'
                               })
+
+
+def dashboard(request):
+    return render(request, "users/dashboard.html")

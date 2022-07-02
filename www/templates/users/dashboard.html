@@ -1,0 +1,21 @@
+{% extends 'maposmatic/base.html' %}
+
+{% load i18n %}
+{% load l10n %}
+{% load extratags %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block page %}
+
+Hello, {{ user.username|default:'Guest' }}!
+
+<div>
+    {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">Logout</a>
+    {% else %}
+        <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+</div>
+
+{% endblock %}

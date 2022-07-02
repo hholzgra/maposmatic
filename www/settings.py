@@ -339,6 +339,11 @@ LOG = logging.getLogger('maposmatic')
 # are still readable 
 FILE_UPLOAD_PERMISSIONS = 0o644
 
+# user account management settings
+LOGIN_REDIRECT_URL = "dashboard"
+LOGOUT_REDIRECT_URL = "dashboard"
+
+# maintenance mode settings
 MAINTENANCE_MODE = False  # True or False, *NOT* None
 MAINTENANCE_MODE_IGNORE_IP_ADDRESSES = ('217.146.146.90',)
 MAINTENANCE_MODE_TEMPLATE = '503.html'

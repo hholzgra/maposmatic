@@ -1,0 +1,18 @@
+{% extends "maposmatic/base.html" %}
+
+{% load i18n %}
+{% load l10n %}
+{% load extratags %}
+
+{% block title %}Registration{% endblock %}
+{% block page %}
+<h2>Register</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{form}}
+    <input type="submit" value="{%trans "Register" %}"/>
+</form>
+
+<a href="{% url 'login' %}">Back to login</a>
+{% endblock %}

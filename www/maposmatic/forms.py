@@ -30,6 +30,8 @@ from django.utils.safestring import mark_safe
 from django.utils.html import escape
 from django.utils.translation import ugettext_lazy as _
 from django.forms.utils import ErrorList
+from django.contrib.auth.forms import UserCreationForm
+
 import time
 
 import ocitysmap
@@ -334,3 +336,8 @@ class MapCancelForm(forms.Form):
             cleaned_data["id"] = 0
 
         return cleaned_data
+
+class CustomUserCreationForm(UserCreationForm):
+    class Meta(UserCreationForm.Meta):
+#        fields = UserCreationForm.Meta.fields + ("email",)
+        pass

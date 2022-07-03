@@ -136,6 +136,7 @@ urlpatterns = [
     # user management
     url(r"^accounts/", include("django.contrib.auth.urls")),
     url(r"^dashboard/", views.dashboard, name="dashboard"),
+    url(r"^register/", views.register, name="register"),
     
     # test
     url(r'heatmap/', TemplateView.as_view(template_name='heatmap.html', content_type='text/html')),

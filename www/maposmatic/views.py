@@ -34,7 +34,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponseBadRequest, HttpResponseNotFound, HttpResponse, Http404
 from django.db.transaction import TransactionManagementError
-from django.shortcuts import get_object_or_404, render_to_response, render
+from django.shortcuts import get_object_or_404, render_to_response, render, redirect
 from django.template import RequestContext
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.core import serializers
@@ -43,6 +43,9 @@ from django.core.exceptions import ValidationError
 from django.urls import get_script_prefix
 from django.db import connections
 from django.utils.safestring import mark_safe
+from django.urls import reverse
+
+from www.maposmatic.forms import CustomUserCreationForm
 
 import ocitysmap
 from www.maposmatic import helpers, forms, nominatim, models
@@ -658,3 +661,17 @@ def api_rendering_status(request, id, nonce=None):
 
 def dashboard(request):
     return render(request, "users/dashboard.html")
+
+def register(request):
+    if request.method == "GET":
+        return render(
+            request, "users/register.html",
+            {"form": CustomUserCreationForm}
+        )
+    elif request.method == "POST":
+        form = CustomUserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect(reverse("dashboard"))
+

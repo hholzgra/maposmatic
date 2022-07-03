@@ -325,3 +325,12 @@ a.carousel-control { display: none; }
   letter-spacing: -2px; vertical-align: top; z-index: 999;
 }
 
+
+
+* > .fa-hover-show,
+*:hover > .fa-hover-hidden {
+  display: none;
+}
+*:hover > .fa-hover-show {
+  display: inline-block;
+}

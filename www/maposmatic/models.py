@@ -24,7 +24,7 @@
 
 from django.urls import reverse
 from django.db import models
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 
 from datetime import datetime, timedelta
 import www.settings
@@ -94,6 +94,7 @@ class MapRenderingJob(models.Model):
 
     NONCE_SIZE = 16
 
+    id = models.AutoField(primary_key=True)
     maptitle = models.CharField(max_length=256, blank=True, default='')
     stylesheet = models.CharField(max_length=256)
     overlay = models.CharField(max_length=256, null=True, blank=True)
@@ -380,7 +381,7 @@ class UploadFile(models.Model):
         ('umap', 'UMAP Export File'),
         ('poi',  'POI File'),
         );
-
+    id = models.AutoField(primary_key=True)
     uploaded_file = models.FileField(upload_to='upload/general/%Y/%m/%d/', null=True, blank=True)
     file_type = models.CharField(max_length = 4, choices = FILE_TYPES)
 

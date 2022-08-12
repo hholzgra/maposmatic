@@ -34,7 +34,7 @@ Simple API to query http://nominatim.openstreetmap.org
 Most of the credits should go to gthe Nominatim team.
 """
 
-from django.utils.translation import ugettext
+from django.utils.translation import gettext
 from django.db import connections
 import logging
 import psycopg2
@@ -242,7 +242,7 @@ def _get_admin_boundary_info_from_GIS(cursor, osm_id):
             or metric_size_lon > www.settings.BBOX_MAXIMUM_LENGTH_IN_METERS):
             valid = False
             reason = "area-too-big"
-            reason_text = ugettext("Administrative area too big for rendering")
+            reason_text = gettext("Administrative area too big for rendering")
         else:
             valid = True
             reason = ""
@@ -298,7 +298,7 @@ def _prepare_entry(cursor, entry):
             entry["ocitysmap_params"] \
                 = dict(valid=False,
                        reason="no-admin",
-                       reason_text=ugettext("No administrative boundary details from GIS"))
+                       reason_text=gettext("No administrative boundary details from GIS"))
         else:
             (osm_id, admin_level, table_name,
              valid, reason, reason_text) = details
@@ -312,7 +312,7 @@ def _prepare_entry(cursor, entry):
         entry["ocitysmap_params"] \
             = dict(valid=False,
                    reason="no-admin",
-                   reason_text=ugettext("No administrative boundary"))
+                   reason_text=gettext("No administrative boundary"))
 
 def _prepare_and_filter_entries(entries):
     """Try to retrieve additional OSM information for the given nominatim

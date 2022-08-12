@@ -57,7 +57,7 @@
         <i class="fas fa-hourglas"></i> {% trans "Pending..." %}
       </a>
 
-      {% ifequal nonce map.nonce %}
+      {% if nonce == map.nonce %}
       <div style="height: 2em"></div>
       <form method="post" action="{% url "cancel" %}">
         <input type="hidden" name="id" value="{{ map.id }}" />
@@ -70,7 +70,7 @@
         </button>
       </form>
 
-      {% endifequal %}
+      {% endif %}
     {% endif %}
 
     {% if map.is_rendering %}

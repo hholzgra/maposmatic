@@ -210,11 +210,11 @@
 </div>
 {% empty %}
 <p>
-{% ifequal form.cleaned_data.query "" %}
+{% if form.cleaned_data.query == "" %}
   {% blocktrans %}Our database does not contain any rendered maps for the moment.{% endblocktrans %}
 {% else %}
   {% blocktrans %}No map matches your query.{% endblocktrans %} <a href="{% url "new" %}">{% trans "Create a new map!" %}</a>
-{% endifequal %}
+{% endif %}
 </p>
 {% endfor %}
 

@@ -34,7 +34,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponseBadRequest, HttpResponseNotFound, HttpResponse, Http404
 from django.db.transaction import TransactionManagementError
-from django.shortcuts import get_object_or_404, render_to_response, render
+from django.shortcuts import get_object_or_404, render
 from django.template import RequestContext
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.core import serializers
@@ -124,7 +124,7 @@ def donate(request):
 
 def donate_thanks(request):
     """The thanks for donation page."""
-    return render_to_response('maposmatic/donate-thanks.html')
+    return render(request, 'maposmatic/donate-thanks.html')
 
 def create_upload_file(job, file):
     first_line = file.readline().decode("utf-8-sig")
@@ -180,8 +180,9 @@ def new(request):
                                                 args=[job.id, job.nonce]))
         else:
             data = {'form': form }
-            return render_to_response('generic_error.html',
-                                      data)
+            return render(request,
+                          'generic_error.html',
+                          data)
 
             LOG.warning("FORM NOT VALID")
     else:

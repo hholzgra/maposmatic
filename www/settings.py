@@ -148,13 +148,14 @@ LANGUAGES = {
     "nb":    "Norwegian Bokmål",
     "nl":    "Nederlands",
     "pl":    "Polski",
-    "pt-br": "Português do Brasil",
-    "pt-pt": "Português",
+    "pt": "Português",
+#    "pt-br": "Português do Brasil", # 
     "ru":    "Русский",
     "sk":    "Slovenčina",
     "tr":    "Türkçe",
     "uk":    "українська",
-    "zh-tw": "繁體中文",
+    "zh": "繁體中文",
+#    "zh-tw": "繁體中文",
 }
 LANGUAGES_LIST = sorted(LANGUAGES.items(), key=lambda p: p[1])
 

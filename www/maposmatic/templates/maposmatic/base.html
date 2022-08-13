@@ -27,7 +27,7 @@
 {% load i18n %}
 {% load l10n %}
 {% load extratags %}
-{% load cookielaw_tags%}
+{% load cookielaw_tags %}
 
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
@@ -94,7 +94,7 @@
     {% include "./base-parts/navbar.html" %}
 
     <div class="container" style="margin-top: 5em;">
-      {% cookielaw_banner %}
+      {% CookielawBanner %}
 
       {% if MAINTENANCE_NOTICE %}
       <div class="alert alert-danger">

@@ -45,11 +45,11 @@ def get_poi_file_path(instance, filename):
     return ""
 
 class MapRenderingJobManager(models.Manager):
-    def to_render(self):
-        return MapRenderingJob.objects.filter(status=0).order_by('submission_time')
+    def to_render(self, queue_name = 'default'):
+        return MapRenderingJob.objects.filter(status=0).filter(queue=queue_name).order_by('submission_time')
 
-    def queue_size(self):
-        return MapRenderingJob.objects.filter(status=0).count()
+    def queue_size(self, queue_name = 'default'):
+        return MapRenderingJob.objects.filter(status=0).filter(queue=queue_name).count()
 
     def get_by_filename(self, name):
         """Tries to find the parent MapRenderingJob of a given file from its
@@ -314,17 +314,7 @@ class MapRenderingJob(models.Model):
         return None
 
     def current_position_in_queue(self):
-        return MapRenderingJob.objects.filter(status=0).filter(id__lte=self.id).count()
-
-    # Estimate the date at which the rendering will be started
-    def rendering_estimated_start_time(self):
-        waiting_time = datetime.now() - self.submission_time
-        progression = self.index_queue_at_submission - self.current_position_in_queue()
-        if progression == 0:
-            return datetime.now()
-        mean_job_rendering_time = waiting_time // progression
-        estimated_time_left = mean_job_rendering_time * self.current_position_in_queue()
-        return datetime.now() + estimated_time_left
+        return MapRenderingJob.objects.filter(status=0).filter(queue=self.queue).filter(id__lte=self.id).count()
 
     def get_absolute_url(self):
         return reverse('map-by-id', args=[self.id])

@@ -167,7 +167,7 @@ def new(request):
             job.submitteremail = form.cleaned_data.get('submitteremail')
             job.map_language = form.cleaned_data.get('map_language')
             job.index_queue_at_submission = (models.MapRenderingJob.objects
-                                             .queue_size())
+                                             .queue_size() + 1)
             job.nonce = helpers.generate_nonce(models.MapRenderingJob.NONCE_SIZE)
 
             job.save()
@@ -252,11 +252,11 @@ def map_full(request, id, nonce=None):
     isredirected = request.session.get('redirected', False)
     request.session.pop('redirected', None)
 
-    queue_size = models.MapRenderingJob.objects.queue_size()
+    queue_size = job.index_queue_at_submission
     progress = 100
     if queue_size:
-        progress = 20 + int(80 * (queue_size -
-            job.current_position_in_queue()) / float(queue_size))
+       progress = int(100 * (queue_size -
+           job.current_position_in_queue()) / float(queue_size))
 
     refresh = job.is_rendering() and \
         www.settings.REFRESH_JOB_RENDERING or \
@@ -340,7 +340,7 @@ def recreate(request):
             newjob.submittermail = None # TODO
             newjob.map_language = job.map_language
             newjob.index_queue_at_submission = (models.MapRenderingJob.objects
-                                               .queue_size())
+                                                .queue_size() + 1)
             newjob.nonce = helpers.generate_nonce(models.MapRenderingJob.NONCE_SIZE)
 
             newjob.save()
@@ -635,11 +635,11 @@ def api_rendering_status(request, id, nonce=None):
     isredirected = request.session.get('redirected', False)
     request.session.pop('redirected', None)
 
-    queue_size = models.MapRenderingJob.objects.queue_size()
+    queue_size = job.index_queue_at_submission
     progress = 100
     if queue_size:
-        progress = 20 + int(80 * (queue_size -
-            job.current_position_in_queue()) / float(queue_size))
+       progress = int(100 * (queue_size -
+           job.current_position_in_queue()) / float(queue_size))
 
     refresh = job.is_rendering() and \
         www.settings.REFRESH_JOB_RENDERING or \

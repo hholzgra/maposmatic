@@ -1,0 +1,14 @@
+[Unit]
+Description=Maposmatic render daemon processing queue: %I
+After=multi-user.target
+Wants=postgresql.service
+
+[Service]
+Type=idle
+User=maposmatic
+ExecStart=/usr/bin/python /path/to/maposmatic/scripts/wrapper.py scripts/daemon.py %i
+
+[Install]
+WantedBy=multi-user.target
+
+

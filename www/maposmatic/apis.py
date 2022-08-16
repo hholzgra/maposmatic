@@ -90,9 +90,7 @@ def layouts(request):
 
     return HttpResponse( content=json.dumps(result, indent=4, sort_keys=True, default=str), content_type='text/json')
 
-
-
-def job_stati(request):
+def job_stati_dict(id = None):
     # TODO do not hard-code these, get them from OCitysMap cleanly
     result = {
         "0": "Submitted",
@@ -102,7 +100,14 @@ def job_stati(request):
         "4": "Cancelled"
     }
 
-    return HttpResponse( content=json.dumps(result, indent=4, sort_keys=True, default=str), content_type='text/json')
+    if id is not None:
+        return result[str(id)]
+
+    return result
+
+
+def job_stati(request):
+    return HttpResponse( content=json.dumps(job_stati_dict(), indent=4, sort_keys=True, default=str), content_type='text/json')
 
 def heatdata(request):
     query = """
@@ -155,8 +160,9 @@ def _jobs_get(request, job_id):
     reply = model_to_dict(job)
 
     result = {}
-    result['id']              = job_id
+    result['id']              = int(job_id)
     result['status']          = reply['status']
+    result['status_msg']      = job_stati_dict(reply['status'])
 
     if reply['administrative_osmid']:
         result['osm_id']      = reply['administrative_osmid']
@@ -188,6 +194,8 @@ def _jobs_get(request, job_id):
         for key, val in files['maps'].items():
             result['files'][key] = request.build_absolute_uri(val[0])
 
+    result['interactive']     = request.build_absolute_uri('../../../maps/%d' % reply['id'])
+
     if job.status <= 1:
         status = 202
     else:
@@ -209,10 +217,15 @@ def _jobs_post(request):
         input = json.loads(request.POST['job'])
 
     valid_keys = ['osmid',
+                  'bbox',
                   'bbox_bottom',
                   'bbox_left',
                   'bbox_right',
                   'bbox_top',
+                  'min_lat',
+                  'max_lat',
+                  'min_lon',
+                  'max_lon',
                   'import_urls',
                   'language',
                   'layout',
@@ -233,6 +246,16 @@ def _jobs_post(request):
 
     if 'osmid' in input:
         job.administrative_osmid= input['osmid']
+    elif 'bbox' in input:
+        job.lat_upper_left   = input['bbox'][0]
+        job.lon_upper_left   = input['bbox'][3]
+        job.lat_bottom_right = input['bbox'][2]
+        job.lon_bottom_right = input['bbox'][1]
+    elif 'lat_min' in input and 'lat_max' in input and 'lon_min' in input and 'lon_max' in input: 
+        job.lat_upper_left   = input['max_lat']
+        job.lon_upper_left   = input['min_lon']
+        job.lat_bottom_right = input['min_lat']
+        job.lon_bottom_right = input['max_lon']
     elif 'bbox_top' in input and 'bbox_bottom' in input and 'bbox_left' in input and 'bbox_right' in input:
         job.lat_upper_left   = input['bbox_top']
         job.lon_upper_left   = input['bbox_left']
@@ -394,6 +417,13 @@ def _jobs_post(request):
 
             result['id']              = reply['id']
             result['status']          = reply['status']
+            result['status_msg']      = job_stati_dict(reply['status'])
+            if reply['status'] == 0:
+                result['queue_size'] = models.MapRenderingJob.objects.queue_size()
+            else:
+                result['queue_size'] = 0
+
+            result['files'] = {}
 
             result['interactive']     = request.build_absolute_uri('../../maps/%d' % reply['id'])
 

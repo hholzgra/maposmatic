@@ -51,19 +51,6 @@ class MapRenderingJobManager(models.Manager):
     def queue_size(self):
         return MapRenderingJob.objects.filter(status=0).count()
 
-    # We try to find a rendered map from the last 15 days, which still
-    # has its thumbnail present.
-    def get_random_with_thumbnail(self):
-        fifteen_days_before = datetime.now() - timedelta(15)
-        maps = (MapRenderingJob.objects.filter(status=2)
-            .filter(submission_time__gte=fifteen_days_before)
-            .filter(resultmsg='ok')
-            .order_by('?')[0:10])
-        for m in maps:
-            if m.get_thumbnail():
-                return m
-        return None
-
     def get_by_filename(self, name):
         """Tries to find the parent MapRenderingJob of a given file from its
         filename. Both the job ID found in the first part of the prefix and the

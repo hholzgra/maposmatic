@@ -113,6 +113,8 @@ class MapRenderingJob(models.Model):
 
     renderstep = models.CharField(max_length=80,null=True,blank=True)
 
+    queue = models.CharField(max_length=40,null=False,blank=False, default='default')
+    
     nonce = models.CharField(max_length=NONCE_SIZE, blank=True)
 
     class Meta:

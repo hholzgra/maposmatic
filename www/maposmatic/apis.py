@@ -418,6 +418,7 @@ def _jobs_post(request):
             reply = model_to_dict(job)
 
             result['id']              = reply['id']
+            result['nonce']           = reply['nonce']
             result['status']          = reply['status']
             result['status_msg']      = job_stati_dict(reply['status'])
             if reply['status'] == 0:

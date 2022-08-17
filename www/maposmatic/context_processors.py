@@ -32,7 +32,7 @@ import datetime
 from .models import MapRenderingJob
 import www.settings
 
-from www.maposmatic import forms
+from www.maposmatic import forms, models
 
 import logging
 
@@ -98,6 +98,51 @@ def get_waymarked_database_last_update():
 
     return None
 
+def queue_states():
+    queues = {}
+
+    for queue_name in www.settings.QUEUE_NAMES:
+        status = {}
+        status['running'] = www.settings.is_daemon_running(queue_name)
+        status['size']    = models.MapRenderingJob.objects.queue_size(queue_name)
+        queues[queue_name] = status
+
+    return queues
+
+def all_queues_running():
+    for queue_name in www.settings.QUEUE_NAMES:
+        if not www.settings.is_daemon_running(queue_name):
+            return False
+    return True
+
+def queues_overall_state():
+    queues_total = 0
+    queues_running = 0
+    for queue_name in www.settings.QUEUE_NAMES:
+        queues_total = queues_total + 1
+        if www.settings.is_daemon_running(queue_name):
+            queues_running = queues_running + 1
+
+    if queues_running == 0:
+        return "danger"
+    if queues_running < queues_total:
+        return "warning"
+    return "success"
+
+def queues_overall_symbol():
+    queues_total = 0
+    queues_running = 0
+    for queue_name in www.settings.QUEUE_NAMES:
+        queues_total = queues_total + 1
+        if www.settings.is_daemon_running(queue_name):
+            queues_running = queues_running + 1
+
+    if queues_running == 0:
+        return "times"
+    if queues_running < queues_total:
+        return "exclamation"
+    return "check"
+
 def all(request):
     # Do not add the useless overhead of parsing blog entries when generating
     # the rss feed
@@ -112,7 +157,7 @@ def all(request):
         paypal_lang_code = "en_US"
         paypal_country_code = "US"
 
-    daemon_running = www.settings.is_daemon_running()
+    daemon_running = all_queues_running()
 
     gis_lastupdate = get_osm_database_last_update()
     gis_lag_ok = (gis_lastupdate
@@ -168,4 +213,8 @@ def all(request):
 
         'SUBMITTER_MAIL_LIFETIME': www.settings.SUBMITTER_MAIL_LIFETIME,
         'SUBMITTER_IP_LIFETIME': www.settings.SUBMITTER_IP_LIFETIME,
+
+        'queue_states': queue_states(),
+        'queues_overall_state': queues_overall_state(),
+        'queues_overall_symbol': queues_overall_symbol(),
     }

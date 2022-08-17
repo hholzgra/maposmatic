@@ -5,44 +5,43 @@
 <div class="alert alert-info">
     <h2>{% trans "Platform status" %}</h2>
 
-    {% if queued %}
-    <p class="queue">
-    {% blocktrans with queued|pluralize as qp %}{{ queued }} job{{ qp }} in the rendering queue.{% endblocktrans %}
-    </p>
-    {% endif %}
-
     <p>
-      {% if daemon_running and gis_lag_ok  and waymarked_lag_ok%}
-        {% blocktrans with gis_lastupdate|timesince:utc_now as date %}All systems are operational.{% endblocktrans %}
-      {% else %}
-        {% if daemon_running and gis_lastupdate %}
-          {% blocktrans %}Systems are operational but renderings may not reflect the latest available OpenStreetMap data.{% endblocktrans %}
-        {% endif %}
-      {% endif %}
-
-      {% if daemon_running %}
-      <div class="alert alert-success">
-	<i class="fas fa-check"></i> {% blocktrans %}The rendering daemon is running.{% endblocktrans %}
+      <div class="alert alert-{{queues_overall_state}}">
+        <h5>Render queue states:</h5>
+        <ul class="list-group">
+          {% for key, value in queue_states.items %}
+          <li class="list-group-item 
+                     list-group-item-{{value.running|yesno:"success,danger,warning"}} 
+                     d-flex justify-content-between align-items-center"
+              >{{key}}
+         <span
+              class="badge badge-pill 
+                     badge-{{value.running|yesno:"success,danger,warning"}}"
+                     title="{% blocktrans with size=value.size qp=value.size|pluralize %} {{size}} job{{ qp }} in the rendering queue.{% endblocktrans %}">
+          {% if value.size > 0 %}
+          {{value.size}}
+          {% else %}
+          -
+          {% endif %}
+          </span>
+          </li>
+          {% endfor %}
+        </ul>
       </div>
-      {% else %}
-      <div class="alert alert-danger">
-	<i class="fas fa-times"></i> {% blocktrans %}The rendering daemon is not running: jobs will be queued until the rendering daemon is back up.{% endblocktrans %}
-      </div>
-      {% endif %}
 
       {% if gis_lag_ok %}
       <div class="alert alert-success">
-	<i class="fas fa-check"></i> {% blocktrans with gis_lastupdate|timesince:utc_now as date %}The GIS database is online and up to date, <span class="tooltipped" data-original-title="{{ gis_lastupdate }}">updated {{ date }} ago</span>.{% endblocktrans %}
+        <i class="fas fa-check"></i> {% blocktrans with gis_lastupdate|timesince:utc_now as date %}The GIS database is online and up to date, <span class="tooltipped" data-original-title="{{ gis_lastupdate }}">updated {{ date }} ago</span>.{% endblocktrans %}
       </div>
       {% else %}
       {% if gis_lastupdate %}
       <div class="alert alert-warning">
-	<i class="fas fa-warning"></i>
-	{% blocktrans with gis_lastupdate|timesince:utc_now as date %}The GIS database is not up to date and was only <span class="tooltipped" data-original-title="{{ gis_lastupdate }}">updated {{ date }} ago</span>.{% endblocktrans %}
+        <i class="fas fa-warning"></i>
+        {% blocktrans with gis_lastupdate|timesince:utc_now as date %}The GIS database is not up to date and was only <span class="tooltipped" data-original-title="{{ gis_lastupdate }}">updated {{ date }} ago</span>.{% endblocktrans %}
       </div>
       {% else %}
       <div class="alert alert-danger">
-	<i class="fas fa-times"></i> {% blocktrans %}The GIS database is not available. Renderings cannot be processed at this time.{% endblocktrans %}
+        <i class="fas fa-times"></i> {% blocktrans %}The GIS database is not available. Renderings cannot be processed at this time.{% endblocktrans %}
       </div>
       {% endif %}
       {% endif %}

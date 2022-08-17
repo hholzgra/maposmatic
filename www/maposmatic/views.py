@@ -79,9 +79,7 @@ def about(request):
 
     return render(request,
                   'maposmatic/about.html',
-                  { 'form': form,
-                    'queued': job_list.count()
-                  }
+                  { }
                  )
 
 def privacy(request):
@@ -117,9 +115,7 @@ def donate(request):
 
     return render(request,
                   'maposmatic/donate.html',
-                  { 'form': form,
-                    'queued': job_list.count()
-                  }
+                  { }
                  )
 
 def donate_thanks(request):

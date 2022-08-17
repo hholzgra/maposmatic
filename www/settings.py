@@ -319,8 +319,17 @@ MAP_LANGUAGES_LIST.append(("C", _(u"No localization")))
 REFRESH_JOB_WAITING = 15
 REFRESH_JOB_RENDERING = 10
 
-def is_daemon_running():
-    return 0 == os.system('systemctl is-active maposmatic-render.service')
+QUEUE_NAMES = ['default', 'api', 'multipage']
+
+# We are having this check in the settings file as it is somewhat
+# platform specific. The below implementation assumes that the
+# renderer process(es) are running as systemD services which
+# should be a sensible default these days.
+def is_daemon_running(queue_name=None):
+    name = ''
+    if queue_name is not None:
+        name = "@" + queue_name
+    return 0 == os.system('systemctl is-active maposmatic-render%s.service' % name)
 
 # Logging
 logconfig.setup_maposmatic_logging(

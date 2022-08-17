@@ -25,7 +25,7 @@ import json
 from django.core.exceptions import ValidationError
 from django.core.files import File
 from django.core.files.base import ContentFile
-from django.http import HttpResponseRedirect, HttpResponseBadRequest, HttpResponseNotFound, HttpResponse, HttpResponseNotAllowed, Http404
+from django.http import HttpResponseRedirect, HttpResponseBadRequest, HttpResponseNotFound, HttpResponse, HttpResponseNotAllowed, HttpResponseForbidden, Http404
 from django.forms.models import model_to_dict
 from django.shortcuts import get_object_or_404
 from django.db import connections
@@ -621,3 +621,29 @@ def _process_poi_file(file):
         raise RuntimeError('Cannot parse POI file: %s' % e)
 
     return result
+
+def cancel_job(request):
+    """API handler for canceling rendering requests"""
+
+    if request.method != 'POST':
+        return HttpResponseNotAllowed(['POST'])
+
+    if request.content_type == 'application/json':
+        input = json.loads(request.body.decode('utf-8-sig'))
+    else:
+        input = json.loads(request.POST['job'])
+
+    if not "id" in input or not "nonce" in input:
+        return HttpResponseBadRequest()
+
+    job = get_object_or_404(models.MapRenderingJob, id = input['id'])
+
+    reply = model_to_dict(job)
+
+    if input['nonce'] != reply['nonce']:
+        return HttpResponseForbidden()
+
+    if job.is_waiting():
+        job.cancel()
+
+    return HttpResponse('')

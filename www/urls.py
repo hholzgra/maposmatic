@@ -108,6 +108,7 @@ urlpatterns = [
     url(r'^apis/job-stati',             apis.job_stati),
     url(r'^apis/jobs$',                 apis.jobs),
     url(r'^apis/jobs/(\d*)$',           apis.jobs),
+    url(r'^apis/cancel_job$',           apis.cancel_job),
 
     # versioned
     url(r'^apis/v1/paper_formats',         apis.paper_formats),
@@ -117,6 +118,7 @@ urlpatterns = [
     url(r'^apis/v1/job-stati',             apis.job_stati),
     url(r'^apis/v1/jobs$',                 apis.jobs),
     url(r'^apis/v1/jobs/(\d*)$',           apis.jobs),
+    url(r'^apis/v1/cancel_job$',           apis.cancel_job),
 
     # Feeds
     url(r'feeds/maps/$', feeds.MapsFeed(), name='rss-feed'),

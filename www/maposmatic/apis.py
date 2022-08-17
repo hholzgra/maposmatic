@@ -646,4 +646,4 @@ def cancel_job(request):
     if job.is_waiting():
         job.cancel()
 
-    return HttpResponse('')
+    return HttpResponse(status=204)

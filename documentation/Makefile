@@ -33,7 +33,7 @@ pdf: api-docs.pdf user-guide.pdf README.pdf INSTALL.pdf
 clean:
 	rm -f *.html *.pdf *~
 
-install: all
+install: html
 	cp *.html ../www/maposmatic/templates/generated
 
 .PHONY = html clean all install

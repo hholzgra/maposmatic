@@ -152,6 +152,8 @@ def new(request):
             job.stylesheet = form.cleaned_data.get('stylesheet')
             job.overlay = ",".join(form.cleaned_data.get('overlay'))
             job.layout = form.cleaned_data.get('layout')
+            if job.layout.startswith('multi'):
+                job.queue = 'multipage'
             job.paper_width_mm = form.cleaned_data.get('paper_width_mm')
             job.paper_height_mm = form.cleaned_data.get('paper_height_mm')
             job.status = 0 # Submitted
@@ -163,7 +165,7 @@ def new(request):
             job.submitteremail = form.cleaned_data.get('submitteremail')
             job.map_language = form.cleaned_data.get('map_language')
             job.index_queue_at_submission = (models.MapRenderingJob.objects
-                                             .queue_size() + 1)
+                                             .queue_size(job.queue) + 1)
             job.nonce = helpers.generate_nonce(models.MapRenderingJob.NONCE_SIZE)
 
             job.save()
@@ -325,6 +327,10 @@ def recreate(request):
             newjob.stylesheet = job.stylesheet
             newjob.overlay = job.overlay
             newjob.layout = job.layout
+            newjob.queue = "default"
+            if job.layout.startswith('multi'):
+                newjob.queue = 'multipage'
+
             newjob.paper_width_mm = job.paper_width_mm
             newjob.paper_height_mm = job.paper_height_mm
 

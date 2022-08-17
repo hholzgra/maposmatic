@@ -393,6 +393,8 @@ def _jobs_post(request):
     if not job.layout:
         job.layout = 'plain'
 
+    job.queue = 'api'
+
     if not result['error']:
         job.status = 0
         if www.settings.SUBMITTER_IP_LIFETIME != 0:
@@ -400,7 +402,7 @@ def _jobs_post(request):
         else:
             job.submitterip = None
 
-        job.index_queue_at_submission = (models.MapRenderingJob.objects.queue_size())
+        job.index_queue_at_submission = (models.MapRenderingJob.objects.queue_size(job.queue))
         job.nonce = helpers.generate_nonce(models.MapRenderingJob.NONCE_SIZE)
         try:
             job.full_clean()

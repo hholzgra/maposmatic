@@ -85,6 +85,7 @@ class MapRenderingJob(models.Model):
     stylesheet = models.CharField(max_length=256)
     overlay = models.CharField(max_length=256, null=True, blank=True)
     layout = models.CharField(max_length=256)
+    indexer = models.CharField(max_length=256, null=True)
     paper_width_mm = models.IntegerField()
     paper_height_mm = models.IntegerField()
     bitmap_dpi = models.IntegerField(default=72)

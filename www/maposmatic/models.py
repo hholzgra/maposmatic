@@ -45,24 +45,11 @@ def get_poi_file_path(instance, filename):
     return ""
 
 class MapRenderingJobManager(models.Manager):
-    def to_render(self):
-        return MapRenderingJob.objects.filter(status=0).order_by('submission_time')
+    def to_render(self, queue_name = 'default'):
+        return MapRenderingJob.objects.filter(status=0).filter(queue=queue_name).order_by('submission_time')
 
-    def queue_size(self):
-        return MapRenderingJob.objects.filter(status=0).count()
-
-    # We try to find a rendered map from the last 15 days, which still
-    # has its thumbnail present.
-    def get_random_with_thumbnail(self):
-        fifteen_days_before = datetime.now() - timedelta(15)
-        maps = (MapRenderingJob.objects.filter(status=2)
-            .filter(submission_time__gte=fifteen_days_before)
-            .filter(resultmsg='ok')
-            .order_by('?')[0:10])
-        for m in maps:
-            if m.get_thumbnail():
-                return m
-        return None
+    def queue_size(self, queue_name = 'default'):
+        return MapRenderingJob.objects.filter(status=0).filter(queue=queue_name).count()
 
     def get_by_filename(self, name):
         """Tries to find the parent MapRenderingJob of a given file from its
@@ -98,6 +85,7 @@ class MapRenderingJob(models.Model):
     stylesheet = models.CharField(max_length=256)
     overlay = models.CharField(max_length=256, null=True, blank=True)
     layout = models.CharField(max_length=256)
+    indexer = models.CharField(max_length=256, null=True)
     paper_width_mm = models.IntegerField()
     paper_height_mm = models.IntegerField()
     bitmap_dpi = models.IntegerField(default=72)
@@ -126,6 +114,8 @@ class MapRenderingJob(models.Model):
 
     renderstep = models.CharField(max_length=80,null=True,blank=True)
 
+    queue = models.CharField(max_length=40,null=False,blank=False, default='default')
+    
     nonce = models.CharField(max_length=NONCE_SIZE, blank=True)
 
     class Meta:
@@ -325,17 +315,7 @@ class MapRenderingJob(models.Model):
         return None
 
     def current_position_in_queue(self):
-        return MapRenderingJob.objects.filter(status=0).filter(id__lte=self.id).count()
-
-    # Estimate the date at which the rendering will be started
-    def rendering_estimated_start_time(self):
-        waiting_time = datetime.now() - self.submission_time
-        progression = self.index_queue_at_submission - self.current_position_in_queue()
-        if progression == 0:
-            return datetime.now()
-        mean_job_rendering_time = waiting_time // progression
-        estimated_time_left = mean_job_rendering_time * self.current_position_in_queue()
-        return datetime.now() + estimated_time_left
+        return MapRenderingJob.objects.filter(status=0).filter(queue=self.queue).filter(id__lte=self.id).count()
 
     def get_absolute_url(self):
         return reverse('map-by-id', args=[self.id])

@@ -199,7 +199,7 @@ Expects render job named parameters as a JSON collection.
 
 Possible parameters:
 
-osmid:: ID of an object in the osm2pgsql
+osmid:: ID of an object in the osm2pgsql polygon table
 bbox_top:: 
 bbox_bottom:: 
 bbox_left:: 
@@ -317,7 +317,7 @@ Example results
 ----
 HTTP/1.1 202 Accepted
 [...]
-Location: /api/jobs/36
+Location: /api/jobs/214
 Content-Type: text/json
 
 {
@@ -325,15 +325,16 @@ Content-Type: text/json
     "bbox_left": 8.52,
     "bbox_right": 8.50,
     "bbox_top": 52.02,
-    "id": 36,
+    "id": 214,
     "interactive": "https://api.get-map.org/maps/214"
     "language": "en_US.UTF-8",
     "layout": "plain",
+    "nonce": "ESubNGmuwYGxPEGM",
     "paper_height_mm": 297,
     "paper_width_mm": 210,
     "status": 0,
-    "styles": "CartoOSM"
-    "title": "API Test",
+    "styles": "CartoOSM",
+    "title": "API Test"
 }
 ----
 
@@ -402,6 +403,35 @@ Content-type: application/json
     "title": "GPX test"
 }
 ----
+
+
+Cancel a submitted job
+~~~~~~~~~~~~~~~~~~~~~~
+
+Request URL
+^^^^^^^^^^^
+
+----
+POST https://api.get-map.org/apis/cancel_job
+----
+
+Expects id and nonce of job to cancel as a JSON collection.
+
+Nonce is only returned when creating a job, so only the creator
+should be able to cancel a job but nobody else.
+
+Required parameters:
+
+id:: ID of job to cancel
+nonce:: nonce string as returned on job creation call
+
+Return codes
+^^^^^^^^^^^^
+
+204:: 'No content' when job was cancelled successfully, or already no longer in a wait queue
+400:: 'Bad request' when either id or nonce parameter are missing
+403:: 'Forbidden' when the given nonce does not match the jobs actual nonce
+404:: 'Not found' when no job with the given id exists
 
 
 

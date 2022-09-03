@@ -79,9 +79,7 @@ def about(request):
 
     return render(request,
                   'maposmatic/about.html',
-                  { 'form': form,
-                    'queued': job_list.count()
-                  }
+                  { }
                  )
 
 def privacy(request):
@@ -117,9 +115,7 @@ def donate(request):
 
     return render(request,
                   'maposmatic/donate.html',
-                  { 'form': form,
-                    'queued': job_list.count()
-                  }
+                  { }
                  )
 
 def donate_thanks(request):
@@ -156,6 +152,8 @@ def new(request):
             job.stylesheet = form.cleaned_data.get('stylesheet')
             job.overlay = ",".join(form.cleaned_data.get('overlay'))
             job.layout = form.cleaned_data.get('layout')
+            if job.layout.startswith('multi'):
+                job.queue = 'multipage'
             job.paper_width_mm = form.cleaned_data.get('paper_width_mm')
             job.paper_height_mm = form.cleaned_data.get('paper_height_mm')
             job.status = 0 # Submitted
@@ -167,7 +165,7 @@ def new(request):
             job.submitteremail = form.cleaned_data.get('submitteremail')
             job.map_language = form.cleaned_data.get('map_language')
             job.index_queue_at_submission = (models.MapRenderingJob.objects
-                                             .queue_size())
+                                             .queue_size(job.queue) + 1)
             job.nonce = helpers.generate_nonce(models.MapRenderingJob.NONCE_SIZE)
 
             job.save()
@@ -252,11 +250,11 @@ def map_full(request, id, nonce=None):
     isredirected = request.session.get('redirected', False)
     request.session.pop('redirected', None)
 
-    queue_size = models.MapRenderingJob.objects.queue_size()
+    queue_size = job.index_queue_at_submission
     progress = 100
     if queue_size:
-        progress = 20 + int(80 * (queue_size -
-            job.current_position_in_queue()) / float(queue_size))
+       progress = int(100 * (queue_size -
+           job.current_position_in_queue()) / float(queue_size))
 
     refresh = job.is_rendering() and \
         www.settings.REFRESH_JOB_RENDERING or \
@@ -329,6 +327,10 @@ def recreate(request):
             newjob.stylesheet = job.stylesheet
             newjob.overlay = job.overlay
             newjob.layout = job.layout
+            newjob.queue = "default"
+            if job.layout.startswith('multi'):
+                newjob.queue = 'multipage'
+
             newjob.paper_width_mm = job.paper_width_mm
             newjob.paper_height_mm = job.paper_height_mm
 
@@ -340,7 +342,7 @@ def recreate(request):
             newjob.submittermail = None # TODO
             newjob.map_language = job.map_language
             newjob.index_queue_at_submission = (models.MapRenderingJob.objects
-                                               .queue_size())
+                                                .queue_size() + 1)
             newjob.nonce = helpers.generate_nonce(models.MapRenderingJob.NONCE_SIZE)
 
             newjob.save()
@@ -641,11 +643,11 @@ def api_rendering_status(request, id, nonce=None):
     isredirected = request.session.get('redirected', False)
     request.session.pop('redirected', None)
 
-    queue_size = models.MapRenderingJob.objects.queue_size()
+    queue_size = job.index_queue_at_submission
     progress = 100
     if queue_size:
-        progress = 20 + int(80 * (queue_size -
-            job.current_position_in_queue()) / float(queue_size))
+       progress = int(100 * (queue_size -
+           job.current_position_in_queue()) / float(queue_size))
 
     refresh = job.is_rendering() and \
         www.settings.REFRESH_JOB_RENDERING or \

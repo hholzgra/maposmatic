@@ -11,9 +11,9 @@
       data-html="true"
       data-original-title="{% trans "Platform status" %}"
       data-placement="bottom"
-      data-content='<p>{% trans "Rendering daemon: " %}<i class="pull-right fas fa-{% if daemon_running %}check{% else %}times{% endif %}"></i></p>
-      <p>{% trans "GIS database: " %}<i class="pull-right fas fa-{% if gis_lag_ok %}check{% else %}{% if gis_lastupdate %}warning{% else %}times{% endif %}{% endif %}"></i></p>
-    <p>{% trans "WayMarked database: " %}<i class="pull-right fas fa-{% if waymarked_lag_ok %}check{% else %}{% if waymarked_lastupdate %}warning{% else %}times{% endif %}{% endif %}"></i></p>'
+      data-content='<p class="text-{{queues_overall_state}}">{% trans "Rendering queue(s): " %}<i class="pull-right fas fa-{{queues_overall_symbol}}"></i></p>
+      <p class="text-{% if gis_lag_ok %}success{% else %}{% if gis_lastupdate %}warning{% else %}danger{% endif %}{% endif %}">{% trans "GIS database: " %}<i class="pull-right fas fa-{% if gis_lag_ok %}check{% else %}{% if gis_lastupdate %}hourglass-half{% else %}times{% endif %}{% endif %}"></i></p>
+    <p class="text-{% if waymarked_lag_ok %}success{% else %}{% if waymarked_lastupdate %}warning{% else %}danger{% endif %}{% endif %}">{% trans "WayMarked database: " %}<i class="pull-right fas fa-{% if waymarked_lag_ok %}check{% else %}{% if waymarked_lastupdate %}hourglass-half{% else %}times{% endif %}{% endif %}"></i></p>'
     class="navbar-brand popovered" href="#"><i class="fas fa-{{ platform_status }}"></i> {{BRAND_NAME}}</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar-collapse" aria-expanded="false" aria-label="{% trans "Toggle navigation" %}">
@@ -22,63 +22,63 @@
     
     <div id="navbar" class="navbar-collapse collapse justify-content-end">
       <ul class="navbar-nav mr-auto">
-	<li class="nav-item {% block menu-home   %}{% endblock %}"><a class="nav-link" href="{% url "main"   %}"><i class="fas fa-home"></i> {% trans "Home" %}</a></li>
-	<li class="nav-item {% block menu-new    %}{% endblock %}"><a class="nav-link" href="{% url "new"    %}"><i class="fas fa-edit"></i> {% trans "Create map" %}</a></li>
-	<li class="nav-item {% block menu-maps   %}{% endblock %}"><a class="nav-link" href="{% url "maps"   %}"><i class="fas fa-list"></i> {% trans "Maps" %}</a></li>
-	
-	<li class="nav-item dropdown">
-	  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"><i class="fas fa-comment"></i> {% trans "About" %} <b class="caret"></b></a>
-	  <div class="dropdown-menu">
-	    <a class="dropdown-item" href="{% url "about"             %}"><i class="fas fa-comment"></i> {% trans "About Maposmatic" %}</a>
-	    <div class="dropdown-divider"></div>
-	    <a class="dropdown-item" href="{% url "documentation_user_guide"  %}"><i class="fas fa-book"></i> {% trans "User Guide"     %}</a>
-	    <a class="dropdown-item" href="{% url "documentation_api"         %}"><i class="fas fa-book"></i> {% trans "API Docs"       %}</a>
-	    <div class="dropdown-divider"></div>
-	    <a class="dropdown-item" href="https://github.com/hholzgra/maposmatic/" target="_blank"><i class="fab fa-lg fa-git-square"></i> MapOSMatic project</a>
-	    <a class="dropdown-item" href="https://github.com/hholzgra/ocitysmap/" target="_blank"><i class="fab fa-lg fa-git-square"></i> OCitysMap project</a>
-	    <a class="dropdown-item" href="https://github.com/hholzgra/maposmatic-vagrant/" target="_blank"><i class="fab fa-lg fa-git-square"></i> MapOSMatic Vagrant Box</a>
-	    <div class="dropdown-divider"></div>
-	    <a class="dropdown-item" href="{% url "rss-feed"          %}"><i class="fas fa-rss-square"></i> {% trans "Maps feed" %}</a>
-	    <a class="dropdown-item" href="{% url "error-feed"        %}"><i class="fas fa-rss-square"></i> {% trans "Errors feed" %}</a>
-	  </div>
-	</li>
+        <li class="nav-item {% block menu-home   %}{% endblock %}"><a class="nav-link" href="{% url "main"   %}"><i class="fas fa-home"></i> {% trans "Home" %}</a></li>
+        <li class="nav-item {% block menu-new    %}{% endblock %}"><a class="nav-link" href="{% url "new"    %}"><i class="fas fa-edit"></i> {% trans "Create map" %}</a></li>
+        <li class="nav-item {% block menu-maps   %}{% endblock %}"><a class="nav-link" href="{% url "maps"   %}"><i class="fas fa-list"></i> {% trans "Maps" %}</a></li>
 
-	{% if PAYPAL_ID %}
-	<li class="nav-item {% block menu-donate %}{% endblock %}"><a class="nav-item" href="{% url "donate" %}"><i class="fas fa-gift"></i> {% trans "Donate" %}</a></li>
-	{% endif %}
-	
-	<li class="nav-item dropdown">
+        <li class="nav-item dropdown">
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button"><i class="fas fa-comment"></i> {% trans "About" %} <b class="caret"></b></a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="{% url "about"             %}"><i class="fas fa-comment"></i> {% trans "About Maposmatic" %}</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url "documentation_user_guide"  %}"><i class="fas fa-book"></i> {% trans "User Guide"     %}</a>
+            <a class="dropdown-item" href="{% url "documentation_api"         %}"><i class="fas fa-book"></i> {% trans "API Docs"       %}</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://github.com/hholzgra/maposmatic/" target="_blank"><i class="fab fa-lg fa-git-square"></i> MapOSMatic project</a>
+            <a class="dropdown-item" href="https://github.com/hholzgra/ocitysmap/" target="_blank"><i class="fab fa-lg fa-git-square"></i> OCitysMap project</a>
+            <a class="dropdown-item" href="https://github.com/hholzgra/maposmatic-vagrant/" target="_blank"><i class="fab fa-lg fa-git-square"></i> MapOSMatic Vagrant Box</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url "rss-feed"          %}"><i class="fas fa-rss-square"></i> {% trans "Maps feed" %}</a>
+            <a class="dropdown-item" href="{% url "error-feed"        %}"><i class="fas fa-rss-square"></i> {% trans "Errors feed" %}</a>
+          </div>
+        </li>
+
+        {% if PAYPAL_ID %}
+        <li class="nav-item {% block menu-donate %}{% endblock %}"><a class="nav-item" href="{% url "donate" %}"><i class="fas fa-gift"></i> {% trans "Donate" %}</a></li>
+        {% endif %}
+
+        <li class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
             <span class="{{LANGUAGE_CODE|language_flag}}"> </span> {{ LANGUAGES|getitem:LANGUAGE_CODE }} <b class="caret"></b>
           </a>
           <div class="dropdown-menu bg-light">
             <form action="/i18n/setlang/" method="post" name="langsel" class="form-inline form-horizontal">
-	      <input name="next" type="hidden" value="{{ request.path }}" />
+              <input name="next" type="hidden" value="{{ request.path }}" />
               <input name="language" type="hidden" value="{{ LANGUAGE_CODE }}" />
               {% for language in LANGUAGES_LIST %}
               <a class="dropdown-item" href="javascript:(function() { document.langsel.language.value = '{{ language.0 }}'; document.langsel.submit(); })();"><span class="{{language.0|language_flag}}"> </span> {{ language.1 }}</a>
               {% endfor %}
             </form>
           </div>
-	</li>
+        </li>
 
-	{% if WEBLATE_BASE_URL %}
-	  {% if LANGUAGE_CODE != "en" %}
-	  <li class="nav-item">
-	    <a class="nav-link" target=_blank" href="{{ WEBLATE_BASE_URL }}engage/maposmatic/?utm_source=widget">
-	      <img src="{{ WEBLATE_BASE_URL }}widgets/maposmatic/{{ LANGUAGE_CODE }}/svg-badge.svg" alt="Translation status" />
-	    </a>
-	  </li>
+        {% if WEBLATE_BASE_URL %}
+          {% if LANGUAGE_CODE != "en" %}
+          <li class="nav-item">
+            <a class="nav-link" target=_blank" href="{{ WEBLATE_BASE_URL }}engage/maposmatic/?utm_source=widget">
+              <img src="{{ WEBLATE_BASE_URL }}widgets/maposmatic/{{ LANGUAGE_CODE }}/svg-badge.svg" alt="Translation status" />
+            </a>
+          </li>
           {% endif %}
-	{% endif %}
+        {% endif %}
 
       </ul>
 
       <form action="{% url "maps" %}" method="get" class="form-inline">
-	<div class="md-form">
-	  <i class="fas fa-search"></i>
-	  {{ searchform.query }}
-	</div>
+        <div class="md-form">
+          <i class="fas fa-search"></i>
+          {{ searchform.query }}
+        </div>
       </form>
     </div>
   </div>

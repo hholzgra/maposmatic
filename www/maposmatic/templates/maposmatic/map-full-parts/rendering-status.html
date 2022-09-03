@@ -40,10 +40,11 @@
       <div style="height: 2em"></div>
 
     {% if map.needs_waiting %}
-      <div id="queue-progress" class="progress progress-striped active">
-        <div class="bar" style="width: {{ progress }}%; text-align: right; padding-right: 10px;">
-          {{ map.current_position_in_queue }} / {{ queue_size }}
-        </div>
+      <div class="progress">
+        <div id="queue-progress" class="progress-bar progress-bar-striped progress-bar-animated"" role="progressbar"
+	     style="width: {{ progress }}%" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">
+	  <span class="text-dark font-weight-bold">{{ map.current_position_in_queue }} {% trans "jobs ahead of us" %}</span>
+	</div>
       </div>
     {% endif %}
 

@@ -125,6 +125,7 @@
 	  {% endif %}
 	  {% if map.needs_waiting and map.current_position_in_queue %}
 	  <p class="queue-position">#{{ map.current_position_in_queue }}</p>
+	  <p class="queue-name">{% trans "in queue:" %} {{ map.queue }}</p>
 	  {% endif %}
         </div>
       </div>

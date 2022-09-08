@@ -247,6 +247,10 @@ $('#error-modal').modal('show')
             <legend>{% trans "Layout" %}</legend>
             {{ form.layout }}
           </fieldset>
+          <fieldset>
+            <legend>{% trans "Indexer" %}</legend>
+            {{ form.indexer }}
+          </fieldset>
 	</div>
 	<div class="col-lg-6">
           <img id="layout-preview" align="right" src="/media/img/layout/{{request.session.new_layout}}.png"/>

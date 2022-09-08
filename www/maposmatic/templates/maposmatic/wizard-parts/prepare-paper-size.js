@@ -55,7 +55,10 @@ function preparePaperSize() {
     };
   }
 
+  // make the next two lines work with select boxes, too
   args['layout'] = $('input[name=layout]:checked').val();
+  args['indexer'] = $('input[name=indexer]:checked').val();
+
   args['stylesheet'] = $('input[name=stylesheet]:checked').val();
   if (!args['stylesheet']) {
       args['stylesheet'] = $('#id_stylesheet :selected').val();

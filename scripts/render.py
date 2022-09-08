@@ -456,6 +456,9 @@ class JobRenderer(threading.Thread):
                         self.job.lon_bottom_right)
 
             config.language = self.job.map_language
+
+            config.indexer = self.job.indexer
+
             config.stylesheet = renderer.get_stylesheet_by_name(
                 self.job.stylesheet)
             config.overlays = []

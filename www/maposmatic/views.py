@@ -142,6 +142,7 @@ def new(request):
         form = forms.MapRenderingJobForm(request.POST, request.FILES)
         if form.is_valid():
             request.session['new_layout'] = form.cleaned_data.get('layout')
+            request.session['new_indexer'] = form.cleaned_data.get('indexer')
             request.session['new_stylesheet'] = form.cleaned_data.get('stylesheet')
             request.session['new_overlay'] = form.cleaned_data.get('overlay')
             request.session['new_paper_width_mm'] = form.cleaned_data.get('paper_width_mm')
@@ -154,6 +155,7 @@ def new(request):
             job.layout = form.cleaned_data.get('layout')
             if job.layout.startswith('multi'):
                 job.queue = 'multipage'
+            job.indexer = form.cleaned_data.get('indexer')
             job.paper_width_mm = form.cleaned_data.get('paper_width_mm')
             job.paper_height_mm = form.cleaned_data.get('paper_height_mm')
             job.status = 0 # Submitted
@@ -190,6 +192,11 @@ def new(request):
             init_vals['layout'] = request.session['new_layout']
         else:
            request.session['new_layout'] = oc.get_all_renderer_names()[0]
+
+        if not 'indexer' in init_vals and 'new_indexer' in request.session :
+            init_vals['indexer'] = request.session['new_indexer']
+        else:
+           request.session['new_indexer'] = 'Street' # TODO make configurable
 
         if not 'stylesheet' in init_vals and 'new_stylesheet' in request.session:
             init_vals['stylesheet'] = request.session['new_stylesheet']
@@ -324,9 +331,11 @@ def recreate(request):
             newjob.lat_bottom_right = job.lat_bottom_right
             newjob.lon_bottom_right = job.lon_bottom_right
 
+            newjob.layout = job.layout
+            newjob.indexer = job.indexer
             newjob.stylesheet = job.stylesheet
             newjob.overlay = job.overlay
-            newjob.layout = job.layout
+
             newjob.queue = "default"
             if job.layout.startswith('multi'):
                 newjob.queue = 'multipage'

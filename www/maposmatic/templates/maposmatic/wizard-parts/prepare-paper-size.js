@@ -22,7 +22,7 @@ function choose_paper_buttons(layout)
 	$('#multi_page_sizes').hide();
     }
 }
-	
+
 
 
 var best_fit_width  = 0;
@@ -34,7 +34,7 @@ function preparePaperSize() {
     $('#nextlink').show();
     return;
   }
-    
+
   $('#paper-wait').show();
   $('#paper-size').hide();
   $('#paper-size-loading-error').hide();
@@ -80,7 +80,7 @@ function preparePaperSize() {
 
        disable_all_papersizes();
        choose_paper_buttons(args['layout']);
-       
+
        for (i in data) {
 	   var w = data[i]['width'];
 	   var h = data[i]['height'];
@@ -92,8 +92,8 @@ function preparePaperSize() {
 
 	       best_fit_width  = parseInt(w);
 	       best_fit_height = parseInt(h);
-	       best_fit_scale  = parseInt( data[i][(data[i]['portrait_ok']) ? 'portrait_scale' : 'landscape_scale']); 
-	       
+	       best_fit_scale  = parseInt( data[i][(data[i]['portrait_ok']) ? 'portrait_scale' : 'landscape_scale']);
+
 	       $("#best_width").text(w);
 	       $("#best_height").text(h);
 
@@ -326,15 +326,15 @@ function show_paper_preview(canvas_name, w, h, scale)
 
     // show actual selected area
     ctx.fillStyle = "#DEDEFF";
-    if (scale) { // only set on single page formats	
+    if (scale) { // only set on single page formats
 	var canvas_aspect = tw / th;
 	var selection_aspect = best_fit_width / best_fit_height;
-	
+
 	var aw = tw;
 	var ah = th;
 	var oh = 0;
 	var ow = 0;
-	
+
 	if (selection_aspect > canvas_aspect) {
 	    ah = ah * canvas_aspect / selection_aspect;
 	    oh = (th - ah) / 2;
@@ -342,12 +342,12 @@ function show_paper_preview(canvas_name, w, h, scale)
 	    aw = aw * selection_aspect / canvas_aspect;
 	    ow = (tw - aw) / 2;
 	}
-	
+
 	ctx.fillRect(dw + ow, dh + oh, aw, ah);
     } else {
 	ctx.fillRect(dw, dh, tw, th);
     }
-    
+
     // dashed paper diagonals
     ctx.beginPath();
     ctx.strokeStyle = "#000000";
@@ -367,7 +367,7 @@ function show_paper_preview(canvas_name, w, h, scale)
 	ctx.fillText('ca. 1:' + scale, dw+tw/2, dh+th/4);
 	ctx.fillText('zoom '+ scaleDenominator2zoom(scale), dw+tw/2, dh+3*th/4);
     }
-    
+
     // the actual paper size rectangle frame
     ctx.strokeStyle = "#000000";
     ctx.setLineDash([]);
@@ -379,13 +379,13 @@ function show_paper_preview(canvas_name, w, h, scale)
 function enable_button(buttons, txt)
 {
     for (button of buttons)
-    { 
+    {
 	button.classList.remove("btn-success");
 	button.classList.remove("btn-outline-secondary");
 	button.classList.add("btn-primary");
-	
+
 	button.removeAttribute("disabled");
-	
+
 	button.setAttribute("title", txt);
     }
 }
@@ -393,11 +393,11 @@ function enable_button(buttons, txt)
 function disable_button(buttons)
 {
     for (button of buttons)
-    { 
+    {
 	button.classList.remove("btn-primary");
 	button.classList.remove("btn-success");
 	button.classList.add("btn-outline-secondary");
-	
+
 	button.setAttribute("disabled", "");
 
 	button.setAttribute("title", "");
@@ -407,7 +407,7 @@ function disable_button(buttons)
 function mark_button(buttons)
 {
     for (button of buttons)
-    { 
+    {
 	button.classList.remove("btn-primary");
 	button.classList.add("btn-success");
     }
@@ -416,7 +416,7 @@ function mark_button(buttons)
 function unmark_button(buttons)
 {
     for (button of buttons)
-    { 
+    {
 	button.classList.remove("btn-success");
 	button.classList.add("btn-primary");
     }

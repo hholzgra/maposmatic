@@ -62,8 +62,8 @@ class MapRenderingJobForm(forms.ModelForm):
                   'submittermail')
 
     mode = forms.CharField(initial='bbox', widget=forms.HiddenInput)
-    layout = forms.ChoiceField(choices=(), widget=forms.RadioSelect(attrs= { 'onchange' : 'clearPaperSize(this.value); $("#layout-preview").attr("src","/media/img/layout/"+this.value+".png");'}))
-    indexer = forms.ChoiceField(choices=(), widget=forms.RadioSelect())
+    layout = forms.ChoiceField(choices=(), widget=forms.Select(attrs= { 'onchange' : 'clearPaperSize(this.value); $("#layout-preview").attr("src","/media/img/layout/"+this.value+".png");'}))
+    indexer = forms.ChoiceField(choices=(), widget=forms.Select())
     stylesheet = forms.ChoiceField(choices=(), widget=forms.Select(attrs= { 'onchange' : '$("#style-preview").attr("src","/media/img/style/"+this.value+".jpg");'}))
     overlay = forms.MultipleChoiceField(choices=(), widget=forms.SelectMultiple(attrs= { 'class': 'multipleSelect' }), required=False)
     paper_width_mm = forms.IntegerField(widget=forms.NumberInput(attrs= {'onchange' : 'change_papersize();', 'style': 'width: 5em;'}), min_value=100, max_value=2000)

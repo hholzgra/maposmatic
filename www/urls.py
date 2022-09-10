@@ -140,6 +140,10 @@ urlpatterns = [
         views.heatmap,
         name='heatmap'),
     url(r'^apis/heatdata/(\d*)$',     apis.heatdata),
+
+    url(r'^congo/$',
+        views.congo,
+        name='congo'),
 ]
 
 if settings.DEBUG:

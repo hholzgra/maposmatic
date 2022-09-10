@@ -89,6 +89,13 @@ def privacy(request):
                   { }
                  )
 
+def congo(request):
+    """The congo health map page."""
+    return render(request,
+                  'maposmatic/congo.html',
+                  { }
+                 )
+
 def documentation_user_guide(request):
     """The user guide page."""
     return render(request,

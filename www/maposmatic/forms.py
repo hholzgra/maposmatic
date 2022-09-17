@@ -97,6 +97,7 @@ class MapRenderingJobForm(forms.ModelForm):
         self._ocitysmap = ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH)
 
         layout_renderers = self._ocitysmap.get_all_renderers()
+        indexers = self._ocitysmap.get_all_indexers()
         stylesheets = self._ocitysmap.get_all_style_configurations()
         overlays = self._ocitysmap.get_all_overlay_configurations()
 
@@ -123,10 +124,8 @@ class MapRenderingJobForm(forms.ModelForm):
         if not self.fields['layout'].initial:
             self.fields['layout'].initial = layout_renderers[0].name
 
-        self.fields['indexer'].choices = [
-            ('Street', 'Streets and selected amenities'),
-            ('Health', 'Health related facilities'),
-            ]
+        # TODO get these from ocitysmap instead of hardcoding here
+        self.fields['indexer'].choices = self._ocitysmap.get_all_indexers_name_desc()
 
         if not self.fields['indexer'].initial:
             self.fields['indexer'].initial = 'Street' # TODO: make configurable

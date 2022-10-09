@@ -27,6 +27,10 @@
     <tr><td><strong>{% trans "Overlays" %}</strong></td>
       <td>{{ obj.overlay|add_blank_after_comma }}</td></tr>
     {% endif %}
+    {% if obj.indexer %}
+    <tr><td><strong>{% trans "Indexer" %}</strong></td>
+      <td>{{ obj.indexer }}</td></tr>
+    {% endif %}
     {% if obj.track %}
     <tr><td><strong>{% trans "GPX Track" %}</strong></td>
       <td>{{ obj.track|file_basename }}</td></tr>

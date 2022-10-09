@@ -79,15 +79,20 @@ def about(request):
 
     return render(request,
                   'maposmatic/about.html',
-                  { 'form': form,
-                    'queued': job_list.count()
-                  }
+                  { }
                  )
 
 def privacy(request):
     """The privacy statement page."""
     return render(request,
                   'maposmatic/privacy.html',
+                  { }
+                 )
+
+def congo(request):
+    """The congo health map page."""
+    return render(request,
+                  'maposmatic/congo.html',
                   { }
                  )
 
@@ -117,9 +122,7 @@ def donate(request):
 
     return render(request,
                   'maposmatic/donate.html',
-                  { 'form': form,
-                    'queued': job_list.count()
-                  }
+                  { }
                  )
 
 def donate_thanks(request):
@@ -146,6 +149,7 @@ def new(request):
         form = forms.MapRenderingJobForm(request.POST, request.FILES)
         if form.is_valid():
             request.session['new_layout'] = form.cleaned_data.get('layout')
+            request.session['new_indexer'] = form.cleaned_data.get('indexer')
             request.session['new_stylesheet'] = form.cleaned_data.get('stylesheet')
             request.session['new_overlay'] = form.cleaned_data.get('overlay')
             request.session['new_paper_width_mm'] = form.cleaned_data.get('paper_width_mm')
@@ -156,6 +160,9 @@ def new(request):
             job.stylesheet = form.cleaned_data.get('stylesheet')
             job.overlay = ",".join(form.cleaned_data.get('overlay'))
             job.layout = form.cleaned_data.get('layout')
+            if job.layout.startswith('multi'):
+                job.queue = 'multipage'
+            job.indexer = form.cleaned_data.get('indexer')
             job.paper_width_mm = form.cleaned_data.get('paper_width_mm')
             job.paper_height_mm = form.cleaned_data.get('paper_height_mm')
             job.status = 0 # Submitted
@@ -167,7 +174,7 @@ def new(request):
             job.submitteremail = form.cleaned_data.get('submitteremail')
             job.map_language = form.cleaned_data.get('map_language')
             job.index_queue_at_submission = (models.MapRenderingJob.objects
-                                             .queue_size())
+                                             .queue_size(job.queue) + 1)
             job.nonce = helpers.generate_nonce(models.MapRenderingJob.NONCE_SIZE)
 
             job.save()
@@ -192,6 +199,11 @@ def new(request):
             init_vals['layout'] = request.session['new_layout']
         else:
            request.session['new_layout'] = oc.get_all_renderer_names()[0]
+
+        if not 'indexer' in init_vals and 'new_indexer' in request.session :
+            init_vals['indexer'] = request.session['new_indexer']
+        else:
+           request.session['new_indexer'] = 'Street' # TODO make configurable
 
         if not 'stylesheet' in init_vals and 'new_stylesheet' in request.session:
             init_vals['stylesheet'] = request.session['new_stylesheet']
@@ -252,11 +264,11 @@ def map_full(request, id, nonce=None):
     isredirected = request.session.get('redirected', False)
     request.session.pop('redirected', None)
 
-    queue_size = models.MapRenderingJob.objects.queue_size()
+    queue_size = job.index_queue_at_submission
     progress = 100
     if queue_size:
-        progress = 20 + int(80 * (queue_size -
-            job.current_position_in_queue()) / float(queue_size))
+       progress = int(100 * (queue_size -
+           job.current_position_in_queue()) / float(queue_size))
 
     refresh = job.is_rendering() and \
         www.settings.REFRESH_JOB_RENDERING or \
@@ -326,9 +338,15 @@ def recreate(request):
             newjob.lat_bottom_right = job.lat_bottom_right
             newjob.lon_bottom_right = job.lon_bottom_right
 
+            newjob.layout = job.layout
+            newjob.indexer = job.indexer
             newjob.stylesheet = job.stylesheet
             newjob.overlay = job.overlay
-            newjob.layout = job.layout
+
+            newjob.queue = "default"
+            if job.layout.startswith('multi'):
+                newjob.queue = 'multipage'
+
             newjob.paper_width_mm = job.paper_width_mm
             newjob.paper_height_mm = job.paper_height_mm
 
@@ -340,7 +358,7 @@ def recreate(request):
             newjob.submittermail = None # TODO
             newjob.map_language = job.map_language
             newjob.index_queue_at_submission = (models.MapRenderingJob.objects
-                                               .queue_size())
+                                                .queue_size() + 1)
             newjob.nonce = helpers.generate_nonce(models.MapRenderingJob.NONCE_SIZE)
 
             newjob.save()
@@ -391,6 +409,12 @@ def api_nominatim(request):
 
     return HttpResponse(content=json.dumps(contents),
                         content_type='text/json')
+
+def heatmap(request, days=7):
+    return render(request, 'maposmatic/heatmap.html',
+                  { 'days' : days ,
+                  })
+
 
 def api_nominatim_reverse(request, lat, lon):
     """Nominatim reverse geocoding query gateway."""
@@ -635,11 +659,11 @@ def api_rendering_status(request, id, nonce=None):
     isredirected = request.session.get('redirected', False)
     request.session.pop('redirected', None)
 
-    queue_size = models.MapRenderingJob.objects.queue_size()
+    queue_size = job.index_queue_at_submission
     progress = 100
     if queue_size:
-        progress = 20 + int(80 * (queue_size -
-            job.current_position_in_queue()) / float(queue_size))
+       progress = int(100 * (queue_size -
+           job.current_position_in_queue()) / float(queue_size))
 
     refresh = job.is_rendering() and \
         www.settings.REFRESH_JOB_RENDERING or \

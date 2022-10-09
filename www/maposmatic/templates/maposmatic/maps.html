@@ -76,6 +76,9 @@
 	      {% if map.overlay %}
               <tr><td><strong>{% trans "Overlay(s)" %}</strong></td><td>{{ map.overlay|add_blank_after_comma }}</td></tr>
 	      {% endif %}
+	      {% if map.indexer %}
+              <tr><td><strong>{% trans "Indexer" %}</strong></td><td>{{ map.indexer }}</td></tr>
+	      {% endif %}
 	      {% if map.track %}
               <tr><td><strong>{% trans "GPX track" %}</strong></td><td>{{ map.track|file_basename }}</td></tr>
 	      {% endif %}
@@ -125,6 +128,7 @@
 	  {% endif %}
 	  {% if map.needs_waiting and map.current_position_in_queue %}
 	  <p class="queue-position">#{{ map.current_position_in_queue }}</p>
+	  <p class="queue-name">{% trans "in queue:" %} {{ map.queue }}</p>
 	  {% endif %}
         </div>
       </div>

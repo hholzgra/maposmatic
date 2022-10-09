@@ -319,9 +319,20 @@ a.carousel-control { display: none; }
     padding-bottom: 10px;
 }
 
-.queue-position { position: absolute;
-  top: -15px; right: 0; color: #eee; text-align: right;
-  font-weight: bold; line-height: 100pt; font-size: 100pt;
-  letter-spacing: -2px; vertical-align: top; z-index: 999;
+.queue-position {
+    color: #eee;
+    text-align: center;
+    font-weight: bold;
+    font-size: 60pt;
+    letter-spacing: -2px;
+    align: center;
+}
+
+.queue-name {
+    color: #7f7f7f;
+    text-align: center;
+    font-size: 16pt;
+    letter-spacing: -2px;
+    align: center;
 }
 

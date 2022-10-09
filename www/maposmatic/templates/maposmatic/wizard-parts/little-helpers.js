@@ -30,3 +30,9 @@ function metric_dist(lat1, lon1, lat2, lon2)
     return Math.acos(dist) * 10000 / 90;
 }
 
+function load_preview(id, base)
+{
+    var base2 = "/media/img/layout/" + base;
+     $(id).attr("src", base2 + ".png");
+     $(id).attr("srcset", base2 + ".png, " + base2 + "-1.5x.png 1.5x, " + base2 + "-2x.png 2x");
+}

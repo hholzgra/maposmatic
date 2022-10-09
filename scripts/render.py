@@ -114,7 +114,7 @@ class ThreadingJobRenderer:
                         'timeout': self.__timeout / 60
                       }
             msg = template.render(context)
-            
+
             mailer.sendmail(DAEMON_ERRORS_EMAIL_FROM,
                     [admin[1] for admin in ADMINS], msg)
             LOG.info("Email notification sent.")
@@ -196,8 +196,8 @@ class ForkingJobRenderer:
                         'title': self.__job.maptitle,
                         'timeout': self.__timeout / 60
             }
-            msg = template.render(context)        
-            
+            msg = template.render(context)
+
             mailer.sendmail(DAEMON_ERRORS_EMAIL_FROM,
                     [admin[1] for admin in ADMINS], msg)
             LOG.info("Email notification sent.")
@@ -309,7 +309,7 @@ class JobRenderer(threading.Thread):
                         'title': self.job.maptitle
                       }
             msg = template.render(context)
-            
+
             mailer.sendmail(DAEMON_ERRORS_EMAIL_FROM, self.job.submittermail, msg.encode("utf8"))
             LOG.info("Email notification sent.")
         except Exception as e:
@@ -359,7 +359,7 @@ class JobRenderer(threading.Thread):
                       'tb': ''.join(traceback.format_exception(*exc_info))
                     }
             msg = template.render(context)
-            
+
             mailer.sendmail(DAEMON_ERRORS_EMAIL_FROM,
                     [admin[1] for admin in ADMINS], msg)
             LOG.info("Error report sent.")
@@ -440,6 +440,7 @@ class JobRenderer(threading.Thread):
 
             # TODO have the create form provide this
             config.origin_url = 'https://print.get-map.org' + self.job.get_absolute_url()
+
             config.title = self.job.maptitle
             config.osmid = self.job.administrative_osmid
 
@@ -456,6 +457,9 @@ class JobRenderer(threading.Thread):
                         self.job.lon_bottom_right)
 
             config.language = self.job.map_language
+
+            config.indexer = self.job.indexer
+
             config.stylesheet = renderer.get_stylesheet_by_name(
                 self.job.stylesheet)
             config.overlays = []

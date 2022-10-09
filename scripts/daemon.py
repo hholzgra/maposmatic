@@ -63,8 +63,9 @@ class MapOSMaticDaemon:
     stalls the queue.
     """
 
-    def __init__(self, frequency=_DEFAULT_POLL_FREQUENCY):
+    def __init__(self, frequency=_DEFAULT_POLL_FREQUENCY, queue_name="default"):
         self.frequency = frequency
+        self.queue_name = queue_name
         LOG.info("MapOSMatic rendering daemon started.")
         self.rollback_orphaned_jobs()
 
@@ -89,7 +90,7 @@ class MapOSMaticDaemon:
 
         while True:
             try:
-                job = MapRenderingJob.objects.to_render()[0]
+                job = MapRenderingJob.objects.to_render(self.queue_name)[0]
                 self.dispatch(job)
 
                 # check disk space after rendering 
@@ -144,8 +145,8 @@ class MapOSMaticDaemon:
 
 class ForkingMapOSMaticDaemon(MapOSMaticDaemon):
 
-    def __init__(self, frequency=_DEFAULT_POLL_FREQUENCY):
-        MapOSMaticDaemon.__init__(self, frequency)
+    def __init__(self, frequency=_DEFAULT_POLL_FREQUENCY, queue_name="default"):
+        MapOSMaticDaemon.__init__(self, frequency, queue_name)
         LOG.info('This is the forking daemon. Will fork to process each job.')
 
     def get_renderer(self, job, prefix):
@@ -273,7 +274,10 @@ if __name__ == '__main__':
         sys.exit(1)
 
     try:
-        daemon = ForkingMapOSMaticDaemon()
+        if len(sys.argv) == 2:
+            daemon = ForkingMapOSMaticDaemon(queue_name=sys.argv[1])
+        else:
+            daemon = ForkingMapOSMaticDaemon()
         daemon.serve()
     except Exception as e:
         LOG.exception('Fatal error during daemon execution!')

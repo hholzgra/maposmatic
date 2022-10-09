@@ -55,14 +55,15 @@ class MapRenderingJobForm(forms.ModelForm):
     """
     class Meta:
         model = models.MapRenderingJob
-        fields = ('layout', 'stylesheet', 'overlay',
+        fields = ('layout', 'indexer', 'stylesheet', 'overlay',
                   'maptitle', 'administrative_city',
                   'lat_upper_left', 'lon_upper_left',
                   'lat_bottom_right', 'lon_bottom_right',
                   'submittermail')
 
     mode = forms.CharField(initial='bbox', widget=forms.HiddenInput)
-    layout = forms.ChoiceField(choices=(), widget=forms.RadioSelect(attrs= { 'onchange' : 'clearPaperSize(this.value); $("#layout-preview").attr("src","/media/img/layout/"+this.value+".png");'}))
+    layout = forms.ChoiceField(choices=(), widget=forms.Select(attrs= { 'onchange' : 'clearPaperSize(this.value); load_preview("#layout-preview", this.value);'}))
+    indexer = forms.ChoiceField(choices=(), widget=forms.Select())
     stylesheet = forms.ChoiceField(choices=(), widget=forms.Select(attrs= { 'onchange' : '$("#style-preview").attr("src","/media/img/style/"+this.value+".jpg");'}))
     overlay = forms.MultipleChoiceField(choices=(), widget=forms.SelectMultiple(attrs= { 'class': 'multipleSelect' }), required=False)
     paper_width_mm = forms.IntegerField(widget=forms.NumberInput(attrs= {'onchange' : 'change_papersize();', 'style': 'width: 5em;'}), min_value=100, max_value=2000)
@@ -96,31 +97,23 @@ class MapRenderingJobForm(forms.ModelForm):
         self._ocitysmap = ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH)
 
         layout_renderers = self._ocitysmap.get_all_renderers()
+        indexers = self._ocitysmap.get_all_indexers()
         stylesheets = self._ocitysmap.get_all_style_configurations()
         overlays = self._ocitysmap.get_all_overlay_configurations()
 
         self.fields['layout'].choices = []
         # TODO move descriptions to ocitysmap side
         for r in layout_renderers:
-            if r.name == 'plain':
-                description = _(u"Full-page layout without street index")
-            elif r.name == 'single_page_index_side':
-                description = _(u"Full-page layout with the street index on the side")
-            elif r.name == 'single_page_index_bottom':
-                description = _(u"Full-page layout with the street index at the bottom")
-            elif r.name == 'single_page_index_extra_page':
-                description = _(u"Full-page layout with the street index on extra page (PDF only)")
-            elif r.name == 'tk25':
-                description = _(u"TK25 full page layout")
-            elif r.name == 'multi_page':
-                description = _(u"Multi-page layout")
-            else:
-                continue
-                # description = mark_safe(_(u"The %(layout_name)s layout") % {'layout_name':r.name})
-            self.fields['layout'].choices.append((r.name, description))
+            self.fields['layout'].choices.append((r.name, r.description))
 
         if not self.fields['layout'].initial:
             self.fields['layout'].initial = layout_renderers[0].name
+
+        # TODO get these from ocitysmap instead of hardcoding here
+        self.fields['indexer'].choices = self._ocitysmap.get_all_indexers_name_desc()
+
+        if not self.fields['indexer'].initial:
+            self.fields['indexer'].initial = 'Street' # TODO: make configurable
 
         style_choices = {"": []}
         for s in stylesheets:
@@ -136,7 +129,7 @@ class MapRenderingJobForm(forms.ModelForm):
                 group = s.group
             else:
                 group = ""
-                
+
             if group not in style_choices:
                 style_choices[group] = []
             style_choices[s.group].append((s.name, description))
@@ -185,6 +178,7 @@ class MapRenderingJobForm(forms.ModelForm):
         city = cleaned_data.get("administrative_city")
         title = cleaned_data.get("maptitle")
         layout = cleaned_data.get("layout")
+        indexer = cleaned_data.get("indexer")
         stylesheet = cleaned_data.get("stylesheet")
         overlay_array = []
         try:
@@ -198,6 +192,11 @@ class MapRenderingJobForm(forms.ModelForm):
             msg = _(u"Layout required")
             self._errors["layout"] = ErrorList([msg])
             del cleaned_data["layout"]
+
+        if indexer == '':
+            msg = _(u"Indexer required")
+            self._errors["indexer"] = ErrorList([msg])
+            del cleaned_data["indexer"]
 
         if stylesheet == '':
             msg = _(u"Stylesheet required")
@@ -293,6 +292,7 @@ class MapPaperSizeForm(forms.Form):
     """
     osmid            = forms.IntegerField(required=False)
     layout           = forms.CharField(max_length=256)
+    indexer          = forms.CharField(max_length=256)
     stylesheet       = forms.CharField(max_length=256)
     lat_upper_left   = forms.FloatField(required=False, min_value=-90.0, max_value=90.0)
     lon_upper_left   = forms.FloatField(required=False, min_value=-180.0, max_value=180.0)

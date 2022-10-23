@@ -460,6 +460,9 @@ class JobRenderer(threading.Thread):
 
             config.indexer = self.job.indexer
 
+            config.logo = self.job.logo
+            config.extra_logo = self.job.extra_logo
+
             config.stylesheet = renderer.get_stylesheet_by_name(
                 self.job.stylesheet)
             config.overlays = []

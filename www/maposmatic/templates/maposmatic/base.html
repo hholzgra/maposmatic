@@ -166,9 +166,16 @@
 					    // TODO: attribution (shows on all zoom levels ...)
 					});
 
-	var map = L.map(elt.attr('id'), { loadingControl: true } );
+	var map = L.map(elt.attr('id'));
 	map.addLayer(osmLayer);
 	map.addLayer(treeLayer);
+
+	var loadingControl = L.Control.loading({
+//	    separate: true,
+//	    position: 'bottomleft',
+	    delayIndicator: 100,
+        });
+        map.addControl(loadingControl);
 
         /*
         {% if OUTER_BOUNDS_JSON and OUTER_BOUNDS_JSON|length > 0%}

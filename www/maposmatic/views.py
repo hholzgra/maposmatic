@@ -343,6 +343,9 @@ def recreate(request):
             newjob.stylesheet = job.stylesheet
             newjob.overlay = job.overlay
 
+            newjob.logo = job.logo
+            newjob.extra_logo = job.extra_logo
+
             newjob.queue = "default"
             if job.layout.startswith('multi'):
                 newjob.queue = 'multipage'

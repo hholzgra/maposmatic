@@ -83,6 +83,9 @@
 
     <script src="/media/node_modules/leaflet-gpx/gpx.js"></script>
 
+    <link rel="stylesheet" href="/media/node_modules/leaflet-loading/src/Control.Loading.css" />
+    <script src="/media/node_modules/leaflet-loading/src/Control.Loading.js"></script>
+
     <script src="/media/node_modules/fastsearch/dist/fastsearch.js"></script>
 
     <link rel="stylesheet" href="/media/node_modules/fastselect/dist/fastselect.css" />
@@ -156,17 +159,16 @@
 
       function create_map(elt) {
         var osmLayer    = L.tileLayer.provider('OpenStreetMap.Mapnik');
-        var germanLayer = L.tileLayer.provider('OpenStreetMap.DE');
+	var treeLayer   = L.tileLayer('https://mymapnik.rudzick.it/MeinMapnikWMS/tiles/osm_hq/webmercator_hq/{z}/{x}/{y}.png',
+					{
+					    minZoom: 20,
+					    maxZoom: 24,
+					    // TODO: attribution (shows on all zoom levels ...)
+					});
 
-        var map = L.map(elt.attr('id')).addLayer(osmLayer);
-
-        /*
-        var baseLayers = {
-                           'OSM':    osmLayer, 
-                           'German': germanLayer
-                         };
-        L.control.layers(baseLayers).addTo(map);
-        */
+	var map = L.map(elt.attr('id'), { loadingControl: true } );
+	map.addLayer(osmLayer);
+	map.addLayer(treeLayer);
 
         /*
         {% if OUTER_BOUNDS_JSON and OUTER_BOUNDS_JSON|length > 0%}

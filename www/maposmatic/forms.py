@@ -105,7 +105,7 @@ class MapRenderingJobForm(forms.ModelForm):
         self.fields['layout'].choices = []
         # TODO move descriptions to ocitysmap side
         for r in layout_renderers:
-            self.fields['layout'].choices.append((r.name, r.description))
+            self.fields['layout'].choices.append((r.name, self._ocitysmap.translate(r.description)))
 
         if not self.fields['layout'].initial:
             self.fields['layout'].initial = layout_renderers[0].name

@@ -224,7 +224,8 @@ def new(request):
         _ocitysmap = ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH)
 
         # TODO: create tempates for these button lines ...
-        papersize_buttons += "<p><button id='paper_best_fit' type='button' class='btn btn-primary papersize papersize_best_fit' onclick='set_papersize(0,0);'><i class='fas fa-square fa-2x'></i></button> <b>Best fit</b> (<span id='best_width'>?</span>&times;<span id='best_height'>?</span>mm²)</p>"
+        best_fit = _("Best fit")
+        papersize_buttons += "<p><button id='paper_best_fit' type='button' class='btn btn-primary papersize papersize_best_fit' onclick='set_papersize(0,0);'><i class='fas fa-square fa-2x'></i></button> <b>%s</b> (<span id='best_width'>?</span>&times;<span id='best_height'>?</span>mm²)</p>" % best_fit
         for p in _ocitysmap.get_all_paper_sizes():
             if p[1] is not None:
                 papersize_buttons += "<p>"

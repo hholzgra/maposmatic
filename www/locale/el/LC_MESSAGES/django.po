@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MapOSMatic\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-06 10:34+0100\n"
+"POT-Creation-Date: 2022-11-06 13:14+0100\n"
 "PO-Revision-Date: 2015-01-04 17:34+0000\n"
 "Last-Translator: Konstantinos Stampoulis\n"
 "Language-Team: Greek (http://www.transifex.com/projects/p/maposmatic/"
@@ -107,27 +107,27 @@ msgstr "Ίδιο γεωγραφικό μήκος"
 msgid "Bounding Box too large"
 msgstr "Το πλαίσιο οριοθέτησης είναι πολύ μεγάλο"
 
-#: www/maposmatic/models.py:225
+#: www/maposmatic/models.py:227
 #, python-format
 msgid "%(title)s %(format)s Map"
 msgstr "Χάρτης %(title)s %(format)s"
 
-#: www/maposmatic/models.py:233
+#: www/maposmatic/models.py:235
 #, python-format
 msgid "%(title)s %(format)s Index"
 msgstr "Ευρετήριο %(title)s %(format)s"
 
-#: www/maposmatic/models.py:333
+#: www/maposmatic/models.py:335
 #, python-format
 msgid "Invalid layout '%s'"
 msgstr ""
 
-#: www/maposmatic/models.py:337
+#: www/maposmatic/models.py:339
 #, python-format
 msgid "Invalid style '%s'"
 msgstr ""
 
-#: www/maposmatic/nominatim.py:245 www/maposmatic/views.py:539
+#: www/maposmatic/nominatim.py:245 www/maposmatic/views.py:543
 msgid "Administrative area too big for rendering"
 msgstr "Η διοικητική περιοχή είναι πολύ μεγάλη για επεξεργασία"
 
@@ -665,7 +665,7 @@ msgstr "Ροή χαρτών"
 msgid "Donate"
 msgstr "Δωρεές"
 
-#: www/maposmatic/templates/maposmatic/base.html:121
+#: www/maposmatic/templates/maposmatic/base.html:124
 msgid ""
 "MapOSMatic is a free software webservice to generate maps of cities using "
 "OpenStreetMap data."
@@ -673,7 +673,7 @@ msgstr ""
 "Το MapOSMatic είναι υπηρεσία ελεύθερου λογισμικού για παροχή χαρτών πόλεων "
 "με χρήση των δεδομένων του OpenStreetMap."
 
-#: www/maposmatic/templates/maposmatic/base.html:137
+#: www/maposmatic/templates/maposmatic/base.html:140
 msgid "Privacy statement"
 msgstr ""
 
@@ -1861,6 +1861,10 @@ msgid ""
 "  "
 msgstr ""
 
+#: www/maposmatic/templates/maposmatic/suggest.js:41
+msgid "Start typing for suggestions..."
+msgstr "Ξεκινήστε να πληκτρολογείτε για προτάσεις..."
+
 #: www/maposmatic/templatetags/extratags.py:48
 msgid "Waiting for rendering to begin..."
 msgstr "Αναμονή για να ξεκινήσει η επεξεργασία..."
@@ -2014,108 +2018,15 @@ msgstr ""
 msgid "Accept"
 msgstr ""
 
-#: www/templates/render_email_exception.txt:1
-#: www/templates/render_email_failure.txt:1
-#: www/templates/render_email_success.txt:1
-#: www/templates/render_email_timeout.txt:1
 #, fuzzy
-#| msgid "Rendering daemon: "
-msgid "MapOSMatic rendering daemon"
-msgstr "Διακομιστής επεξεργασίας:"
+#~| msgid "Rendering daemon: "
+#~ msgid "MapOSMatic rendering daemon"
+#~ msgstr "Διακομιστής επεξεργασίας:"
 
-#: www/templates/render_email_exception.txt:7
-#: www/templates/render_email_failure.txt:7
-#, fuzzy, python-format
-#| msgid "Rendering daemon: "
-msgid "Rendering of job #%(jobid)s failed"
-msgstr "Διακομιστής επεξεργασίας:"
-
-#: www/templates/render_email_exception.txt:10
-#, python-format
-msgid ""
-"\n"
-"An error occured while rendering job %(jobid)s!\n"
-"\n"
-"%(tb)s\n"
-"\n"
-"Job information:\n"
-"\n"
-"%(jobinfo)s\n"
-"\n"
-"You can view the job page at <%(url)s>.\n"
-"\n"
-"-- \n"
-"MapOSMatic\n"
-msgstr ""
-
-#: www/templates/render_email_failure.txt:10
-#, python-format
-msgid ""
-"\n"
-"Hello %(to)s,\n"
-"\n"
-"unfortunately your map rendering request for\n"
-"\n"
-"  %(title)s\n"
-"\n"
-"has failed.\n"
-"\n"
-"You can check for failure details on the request detail page:\n"
-"\n"
-"  %(url)s\n"
-"\n"
-"-- \n"
-"MapOSMatic\n"
-msgstr ""
-
-#: www/templates/render_email_success.txt:7
-#, python-format
-msgid "Rendering of job #%(jobid)s succeeded"
-msgstr ""
-
-#: www/templates/render_email_success.txt:10
-#, python-format
-msgid ""
-"\n"
-"Hello %(to)s,\n"
-"\n"
-"your map rendering request for\n"
-"\n"
-"  %(title)s\n"
-"\n"
-"has successfully been processed now, and the results can be downloaded\n"
-"from the rendering jobs detail pages:\n"
-"\n"
-"  %(url)s\n"
-"\n"
-"-- \n"
-"MapOSMatic\n"
-msgstr ""
-
-#: www/templates/render_email_timeout.txt:7
-#, python-format
-msgid "Rendering of job #%(jobid)s timed out"
-msgstr ""
-
-#: www/templates/render_email_timeout.txt:10
-#, python-format
-msgid ""
-"\n"
-"Hello %(to)s,\n"
-"\n"
-"unfortunately your map rendering request for\n"
-"\n"
-"  %(title)s\n"
-"\n"
-"has been runnning for more than %(timeout)s minutes and had to be "
-"cancelled.\n"
-"\n"
-"You may want to retry with a smaller map area or with a less complex map\n"
-"style or less map overlays.\n"
-"\n"
-"-- \n"
-"MapOSMatic\n"
-msgstr ""
+#, fuzzy
+#~| msgid "Rendering daemon: "
+#~ msgid "Rendering of job #%(jobid)s failed"
+#~ msgstr "Διακομιστής επεξεργασίας:"
 
 #~ msgid "Full-page layout without street index"
 #~ msgstr "Ολοσέλιδη διάταξη χωρίς ευρετήριο οδών"
@@ -2171,9 +2082,6 @@ msgstr ""
 
 #~ msgid "Rendering cancelled: %(date)s"
 #~ msgstr "Επεξεργασία ακυρώθηκε: %(date)s"
-
-#~ msgid "Start typing for suggestions..."
-#~ msgstr "Ξεκινήστε να πληκτρολογείτε για προτάσεις..."
 
 #, fuzzy
 #~| msgid "Rendering daemon: "

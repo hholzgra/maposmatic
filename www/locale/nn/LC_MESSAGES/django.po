@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MapOSMatic\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-06 10:34+0100\n"
+"POT-Creation-Date: 2022-11-06 13:14+0100\n"
 "PO-Revision-Date: 2013-11-20 12:37+0000\n"
 "Last-Translator: Hakan Tandogan <hakan.tandogan@gmail.com>\n"
 "Language-Team: Norwegian Nynorsk (http://www.transifex.com/projects/p/"
@@ -97,27 +97,27 @@ msgstr ""
 msgid "Bounding Box too large"
 msgstr ""
 
-#: www/maposmatic/models.py:225
+#: www/maposmatic/models.py:227
 #, python-format
 msgid "%(title)s %(format)s Map"
 msgstr ""
 
-#: www/maposmatic/models.py:233
+#: www/maposmatic/models.py:235
 #, python-format
 msgid "%(title)s %(format)s Index"
 msgstr ""
 
-#: www/maposmatic/models.py:333
+#: www/maposmatic/models.py:335
 #, python-format
 msgid "Invalid layout '%s'"
 msgstr ""
 
-#: www/maposmatic/models.py:337
+#: www/maposmatic/models.py:339
 #, python-format
 msgid "Invalid style '%s'"
 msgstr ""
 
-#: www/maposmatic/nominatim.py:245 www/maposmatic/views.py:539
+#: www/maposmatic/nominatim.py:245 www/maposmatic/views.py:543
 msgid "Administrative area too big for rendering"
 msgstr ""
 
@@ -520,13 +520,13 @@ msgstr ""
 msgid "Donate"
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/base.html:121
+#: www/maposmatic/templates/maposmatic/base.html:124
 msgid ""
 "MapOSMatic is a free software webservice to generate maps of cities using "
 "OpenStreetMap data."
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/base.html:137
+#: www/maposmatic/templates/maposmatic/base.html:140
 msgid "Privacy statement"
 msgstr ""
 
@@ -1492,6 +1492,10 @@ msgid ""
 "  "
 msgstr ""
 
+#: www/maposmatic/templates/maposmatic/suggest.js:41
+msgid "Start typing for suggestions..."
+msgstr ""
+
 #: www/maposmatic/templatetags/extratags.py:48
 msgid "Waiting for rendering to begin..."
 msgstr ""
@@ -1627,104 +1631,4 @@ msgstr ""
 
 #: www/templates/cookielaw/banner.html:39
 msgid "Accept"
-msgstr ""
-
-#: www/templates/render_email_exception.txt:1
-#: www/templates/render_email_failure.txt:1
-#: www/templates/render_email_success.txt:1
-#: www/templates/render_email_timeout.txt:1
-msgid "MapOSMatic rendering daemon"
-msgstr ""
-
-#: www/templates/render_email_exception.txt:7
-#: www/templates/render_email_failure.txt:7
-#, python-format
-msgid "Rendering of job #%(jobid)s failed"
-msgstr ""
-
-#: www/templates/render_email_exception.txt:10
-#, python-format
-msgid ""
-"\n"
-"An error occured while rendering job %(jobid)s!\n"
-"\n"
-"%(tb)s\n"
-"\n"
-"Job information:\n"
-"\n"
-"%(jobinfo)s\n"
-"\n"
-"You can view the job page at <%(url)s>.\n"
-"\n"
-"-- \n"
-"MapOSMatic\n"
-msgstr ""
-
-#: www/templates/render_email_failure.txt:10
-#, python-format
-msgid ""
-"\n"
-"Hello %(to)s,\n"
-"\n"
-"unfortunately your map rendering request for\n"
-"\n"
-"  %(title)s\n"
-"\n"
-"has failed.\n"
-"\n"
-"You can check for failure details on the request detail page:\n"
-"\n"
-"  %(url)s\n"
-"\n"
-"-- \n"
-"MapOSMatic\n"
-msgstr ""
-
-#: www/templates/render_email_success.txt:7
-#, python-format
-msgid "Rendering of job #%(jobid)s succeeded"
-msgstr ""
-
-#: www/templates/render_email_success.txt:10
-#, python-format
-msgid ""
-"\n"
-"Hello %(to)s,\n"
-"\n"
-"your map rendering request for\n"
-"\n"
-"  %(title)s\n"
-"\n"
-"has successfully been processed now, and the results can be downloaded\n"
-"from the rendering jobs detail pages:\n"
-"\n"
-"  %(url)s\n"
-"\n"
-"-- \n"
-"MapOSMatic\n"
-msgstr ""
-
-#: www/templates/render_email_timeout.txt:7
-#, python-format
-msgid "Rendering of job #%(jobid)s timed out"
-msgstr ""
-
-#: www/templates/render_email_timeout.txt:10
-#, python-format
-msgid ""
-"\n"
-"Hello %(to)s,\n"
-"\n"
-"unfortunately your map rendering request for\n"
-"\n"
-"  %(title)s\n"
-"\n"
-"has been runnning for more than %(timeout)s minutes and had to be "
-"cancelled.\n"
-"\n"
-"You may want to retry with a smaller map area or with a less complex map\n"
-"style or less map overlays.\n"
-"\n"
-"-- \n"
-"MapOSMatic\n"
 msgstr ""

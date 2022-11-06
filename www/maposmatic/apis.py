@@ -239,6 +239,8 @@ def _jobs_post(request):
                   'bbox_left',
                   'bbox_right',
                   'bbox_top',
+                  'extra_logo',
+                  'indexer',
                   'min_lat',
                   'max_lat',
                   'min_lon',
@@ -246,6 +248,7 @@ def _jobs_post(request):
                   'import_urls',
                   'language',
                   'layout',
+                  'logo',
                   'orientation',
                   'overlays',
                   'paper_height',
@@ -300,6 +303,15 @@ def _jobs_post(request):
             job.overlay = input['overlays']
         else:
             job.overlay = ",".join(input['overlays'])
+
+    if 'indexer' in input:
+        job.indexer = input['indexer']
+
+    if 'logo' in input:
+        job.logo = input['logo']
+
+    if 'extra_logo' in input:
+        job.extra_logo = input['extra_logo']
 
     job.paper_width_mm  = 210
     job.paper_height_mm = 297

@@ -201,6 +201,16 @@ it does not show the actual selected map area though. It is
 just using pre-rendered examples to give you a rough idea
 what each layout looks like.
 
+For all but the "Full-page layout without index" layout the actual
+index generator can be selected. The default selection "Streets and
+selected amenities" generates a classic street index, but there are
+also a few "special interest" alternatives available.
+
+Right now these are:
+
+* Healt related facitilies - a work-in-progress index of health facilities and districts
+* OSM notes index - an experimental indexshowing current OSM notes for the selected area 
+* Tree genus / species index - showing what kinds of different trees are growing in an area, most useful for small areays like allotment colonies
 
 Select a map style
 ~~~~~~~~~~~~~~~~~~

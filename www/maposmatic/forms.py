@@ -29,6 +29,7 @@ from django import forms
 from django.utils.safestring import mark_safe
 from django.utils.html import escape
 from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import get_language
 from django.forms.utils import ErrorList
 import time
 
@@ -94,7 +95,7 @@ class MapRenderingJobForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(MapRenderingJobForm, self).__init__(*args, **kwargs)
 
-        self._ocitysmap = ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH)
+        self._ocitysmap = ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH, get_language())
 
         layout_renderers = self._ocitysmap.get_all_renderers()
         indexers = self._ocitysmap.get_all_indexers()

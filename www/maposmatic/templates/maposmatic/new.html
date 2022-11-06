@@ -38,6 +38,10 @@
 {% include "maposmatic/suggest.js" %}
 {% include "maposmatic/wizard.js" %}
 $('.multipleSelect').fastselect({
+    placeholder: '{% trans "Choose overlay(s)" %}',
+    searchPlaceholder: '{% trans "Search overlay" %}',
+    noResultsText: '{% trans "No results" %}',
+    userOptionPrefix: '{% trans "Add" %} ',
     onItemSelect: function($item, itemModel) {
         $("#overlay-preview").attr("src","/media/img/overlay/"+itemModel.value+".jpg");
     }

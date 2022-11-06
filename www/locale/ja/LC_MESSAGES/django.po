@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MapOSMatic\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-06 13:14+0100\n"
+"POT-Creation-Date: 2022-11-06 13:18+0100\n"
 "PO-Revision-Date: 2019-08-04 13:32+0000\n"
 "Last-Translator: zoar <k_zoar@k-side.net>\n"
 "Language-Team: Japanese <http://translate.get-map.org/projects/maposmatic/"
@@ -748,7 +748,7 @@ msgid "Previous"
 msgstr ""
 
 #: www/maposmatic/templates/maposmatic/index-parts/carousel.html:51
-#: www/maposmatic/templates/maposmatic/new.html:146
+#: www/maposmatic/templates/maposmatic/new.html:150
 msgid "Next"
 msgstr "次へ"
 
@@ -881,29 +881,29 @@ msgstr "領域選択"
 #: www/maposmatic/templates/maposmatic/map-feed.html:22
 #: www/maposmatic/templates/maposmatic/map-full.html:80
 #: www/maposmatic/templates/maposmatic/maps.html:74
-#: www/maposmatic/templates/maposmatic/new.html:121
-#: www/maposmatic/templates/maposmatic/new.html:247
+#: www/maposmatic/templates/maposmatic/new.html:125
+#: www/maposmatic/templates/maposmatic/new.html:251
 msgid "Layout"
 msgstr "レイアウト"
 
 #: www/maposmatic/templates/maposmatic/map-feed.html:24
 #: www/maposmatic/templates/maposmatic/map-full.html:82
 #: www/maposmatic/templates/maposmatic/maps.html:75
-#: www/maposmatic/templates/maposmatic/new.html:285
+#: www/maposmatic/templates/maposmatic/new.html:289
 msgid "Stylesheet"
 msgstr "スタイルシート"
 
 #: www/maposmatic/templates/maposmatic/map-feed.html:27
 #: www/maposmatic/templates/maposmatic/map-full.html:85
-#: www/maposmatic/templates/maposmatic/new.html:131
-#: www/maposmatic/templates/maposmatic/new.html:314
+#: www/maposmatic/templates/maposmatic/new.html:135
+#: www/maposmatic/templates/maposmatic/new.html:318
 msgid "Overlays"
 msgstr "オーバーレイ"
 
 #: www/maposmatic/templates/maposmatic/map-feed.html:31
 #: www/maposmatic/templates/maposmatic/map-full.html:89
 #: www/maposmatic/templates/maposmatic/maps.html:80
-#: www/maposmatic/templates/maposmatic/new.html:251
+#: www/maposmatic/templates/maposmatic/new.html:255
 #, fuzzy
 #| msgid "index"
 msgid "Indexer"
@@ -1129,60 +1129,80 @@ msgstr "検索に一致する地図はありませんでした。"
 msgid "Create a new map!"
 msgstr "新規地図が作成されました！"
 
-#: www/maposmatic/templates/maposmatic/new.html:103
+#: www/maposmatic/templates/maposmatic/new.html:41
+#, fuzzy
+#| msgid "Overlay(s)"
+msgid "Choose overlay(s)"
+msgstr "オーバーレイ"
+
+#: www/maposmatic/templates/maposmatic/new.html:42
+#, fuzzy
+#| msgid "Map overlays"
+msgid "Search overlay"
+msgstr "地図オーバーレイ"
+
+#: www/maposmatic/templates/maposmatic/new.html:43
+msgid "No results"
+msgstr ""
+
+#: www/maposmatic/templates/maposmatic/new.html:44
+msgid "Add"
+msgstr ""
+
+#: www/maposmatic/templates/maposmatic/new.html:107
 msgid "Generate your own map"
 msgstr "あなたの地図を作成する"
 
-#: www/maposmatic/templates/maposmatic/new.html:109
+#: www/maposmatic/templates/maposmatic/new.html:113
 msgid "Back"
 msgstr "戻る"
 
-#: www/maposmatic/templates/maposmatic/new.html:116
+#: www/maposmatic/templates/maposmatic/new.html:120
 msgid "Map area"
 msgstr "地図の範囲"
 
-#: www/maposmatic/templates/maposmatic/new.html:126
+#: www/maposmatic/templates/maposmatic/new.html:130
 msgid "Style"
 msgstr "スタイル"
 
-#: www/maposmatic/templates/maposmatic/new.html:136
+#: www/maposmatic/templates/maposmatic/new.html:140
 msgid "Paper"
 msgstr "用紙"
 
-#: www/maposmatic/templates/maposmatic/new.html:141
+#: www/maposmatic/templates/maposmatic/new.html:145
 msgid "Submit"
 msgstr "確認"
 
-#: www/maposmatic/templates/maposmatic/new.html:148
+#: www/maposmatic/templates/maposmatic/new.html:152
 msgid "Generate"
 msgstr "生成"
 
-#: www/maposmatic/templates/maposmatic/new.html:162
+#: www/maposmatic/templates/maposmatic/new.html:166
 msgid "Geographic area"
 msgstr "地理的範囲"
 
-#: www/maposmatic/templates/maposmatic/new.html:165
+#: www/maposmatic/templates/maposmatic/new.html:169
 msgid "City search"
 msgstr "都市名の検索"
 
-#: www/maposmatic/templates/maposmatic/new.html:168
+#: www/maposmatic/templates/maposmatic/new.html:172
 msgid "File upload"
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:195
+#: www/maposmatic/templates/maposmatic/new.html:199
 #, fuzzy
 #| msgid "Umap data file"
 msgid "Upload files"
 msgstr "Umapデータファイル"
 
-#: www/maposmatic/templates/maposmatic/new.html:204
+#: www/maposmatic/templates/maposmatic/new.html:208
 msgid ""
 "Upload GPX, Umap, or general GeoJSON files here. <br/> You can select "
 "multiple files at once. If you re-open the file selection dialog to select "
 "files, your selection will replace the previous one."
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:216
+#: www/maposmatic/templates/maposmatic/new.html:220
 #, fuzzy
 #| msgid ""
 #| "<b>Note:</b> The uploaded file will not be made available to anyone, the "
@@ -1197,11 +1217,11 @@ msgstr ""
 "使って作成された地図は<b>一般に公開されます</b>。<br/>公開したくないデータは"
 "アップロード<b>しない</b>でください。"
 
-#: www/maposmatic/templates/maposmatic/new.html:228
+#: www/maposmatic/templates/maposmatic/new.html:232
 msgid "Geographic area selection"
 msgstr "地理的範囲の選択"
 
-#: www/maposmatic/templates/maposmatic/new.html:230
+#: www/maposmatic/templates/maposmatic/new.html:234
 msgid ""
 "Start by choosing the city or geographic area you want to render. "
 "Suggestions will appear as you start typing. If you can't find the city you "
@@ -1214,11 +1234,11 @@ msgstr ""
 "合や、自分でレンダリングの範囲を選択したい場合は <em>地理的範囲</em>タブを選"
 "択し、ミニマップを使ってレンダリングの範囲を設定できます。"
 
-#: www/maposmatic/templates/maposmatic/new.html:266
+#: www/maposmatic/templates/maposmatic/new.html:270
 msgid "Map layout"
 msgstr "地図のレイアウト"
 
-#: www/maposmatic/templates/maposmatic/new.html:268
+#: www/maposmatic/templates/maposmatic/new.html:272
 msgid ""
 "The map layout determines how the map and the index are rendered. The "
 "<em>Multi-page layout</em> produces a booklet very suitable for printing and "
@@ -1227,11 +1247,11 @@ msgstr ""
 "地図のレイアウトでは地図と索引の描画方法を選択します。<em>複数ページレイアウ"
 "ト</em>では小冊子の印刷や製本に適したレイアウトで作成します。"
 
-#: www/maposmatic/templates/maposmatic/new.html:297
+#: www/maposmatic/templates/maposmatic/new.html:301
 msgid "Map stylesheet"
 msgstr "地図スタイルシート"
 
-#: www/maposmatic/templates/maposmatic/new.html:299
+#: www/maposmatic/templates/maposmatic/new.html:303
 msgid ""
 "The map stylesheet determines the style and appearance of the map itself. "
 "Note that the stylesheet also drives what details will be visible on the map."
@@ -1239,11 +1259,11 @@ msgstr ""
 "地図スタイルシートでは地図自体の表示スタイルを決めます。スタイルによって地図"
 "上に表示される地物も決定されます。"
 
-#: www/maposmatic/templates/maposmatic/new.html:326
+#: www/maposmatic/templates/maposmatic/new.html:330
 msgid "Map overlays"
 msgstr "地図オーバーレイ"
 
-#: www/maposmatic/templates/maposmatic/new.html:328
+#: www/maposmatic/templates/maposmatic/new.html:332
 msgid ""
 "Overlays render extra objects on top of the chosen base style. Multiple "
 "overlays can be selected to add different kinds of additional information on "
@@ -1253,87 +1273,87 @@ msgstr ""
 "きます。地図上に様々な種類の追加情報を表示するために複数のオーバーレイ情報を"
 "選択できます。"
 
-#: www/maposmatic/templates/maposmatic/new.html:344
+#: www/maposmatic/templates/maposmatic/new.html:348
 msgid "Paper size"
 msgstr "用紙サイズ"
 
-#: www/maposmatic/templates/maposmatic/new.html:344
+#: www/maposmatic/templates/maposmatic/new.html:348
 msgid "(width x height)"
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:377
+#: www/maposmatic/templates/maposmatic/new.html:381
 msgid "An error occured while retrieving compatible paper sizes."
 msgstr "適切な印刷紙サイズの呼び出しに失敗しました。"
 
-#: www/maposmatic/templates/maposmatic/new.html:386
+#: www/maposmatic/templates/maposmatic/new.html:390
 msgid "Calculating available paper formats for your map..."
 msgstr "地図を印刷するための用紙サイズを計算しています..."
 
-#: www/maposmatic/templates/maposmatic/new.html:394
+#: www/maposmatic/templates/maposmatic/new.html:398
 msgid "Paper format and size"
 msgstr "印刷用紙のサイズと方向"
 
-#: www/maposmatic/templates/maposmatic/new.html:396
+#: www/maposmatic/templates/maposmatic/new.html:400
 msgid "Select the desired format, size and orientation for your map."
 msgstr "印刷する用紙とサイズ、向きを選択してください。"
 
-#: www/maposmatic/templates/maposmatic/new.html:399
+#: www/maposmatic/templates/maposmatic/new.html:403
 msgid ""
 "You can choose from the suggested standard sizes, the \"best fit\" size for "
 "the map area you selected, or specify a width and height of your own choice."
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:415
+#: www/maposmatic/templates/maposmatic/new.html:419
 msgid "Map title"
 msgstr "地図タイトル"
 
-#: www/maposmatic/templates/maposmatic/new.html:421
+#: www/maposmatic/templates/maposmatic/new.html:425
 msgid "Locale"
 msgstr "地図の言語"
 
-#: www/maposmatic/templates/maposmatic/new.html:440
+#: www/maposmatic/templates/maposmatic/new.html:444
 msgid "Your Email address (for notifications, optional)"
 msgstr "あなたのメールアドレス(通知用オプション)"
 
-#: www/maposmatic/templates/maposmatic/new.html:443
+#: www/maposmatic/templates/maposmatic/new.html:447
 #, fuzzy
 #| msgid "Clear selected area"
 msgid "will be deleted after"
 msgstr "選択した領域をクリア"
 
-#: www/maposmatic/templates/maposmatic/new.html:443
+#: www/maposmatic/templates/maposmatic/new.html:447
 msgid "hours"
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:452
+#: www/maposmatic/templates/maposmatic/new.html:456
 msgid "Summary"
 msgstr "概要"
 
-#: www/maposmatic/templates/maposmatic/new.html:455
+#: www/maposmatic/templates/maposmatic/new.html:459
 msgid "Location:"
 msgstr "場所:"
 
-#: www/maposmatic/templates/maposmatic/new.html:456
+#: www/maposmatic/templates/maposmatic/new.html:460
 msgid "Layout:"
 msgstr "レイアウト:"
 
-#: www/maposmatic/templates/maposmatic/new.html:457
+#: www/maposmatic/templates/maposmatic/new.html:461
 msgid "Stylesheet:"
 msgstr "スタイルシート:"
 
-#: www/maposmatic/templates/maposmatic/new.html:458
+#: www/maposmatic/templates/maposmatic/new.html:462
 msgid "Overlay:"
 msgstr "オーバーレイ:"
 
-#: www/maposmatic/templates/maposmatic/new.html:459
+#: www/maposmatic/templates/maposmatic/new.html:463
 msgid "Paper format:"
 msgstr "印刷紙形式:"
 
-#: www/maposmatic/templates/maposmatic/new.html:468
+#: www/maposmatic/templates/maposmatic/new.html:472
 msgid "Almost there!"
 msgstr "もうすぐです！"
 
-#: www/maposmatic/templates/maposmatic/new.html:470
+#: www/maposmatic/templates/maposmatic/new.html:474
 msgid ""
 "You're almost ready to request to map rendering! Select the map language, "
 "eventually adjust the title of your map, and you're good to go!"
@@ -1669,6 +1689,20 @@ msgstr ""
 msgid "Start typing for suggestions..."
 msgstr "文字を入力すると内容提案が表示されます"
 
+#: www/maposmatic/templates/maposmatic/wizard-parts/wizardmap.js:21
+msgid "Select area"
+msgstr ""
+
+#: www/maposmatic/templates/maposmatic/wizard-parts/wizardmap.js:22
+#, fuzzy
+#| msgid "Geographic area selection"
+msgid "Remove selection"
+msgstr "地理的範囲の選択"
+
+#: www/maposmatic/templates/maposmatic/wizard-parts/wizardmap.js:25
+msgid "Select area within current zoom"
+msgstr ""
+
 #: www/maposmatic/templatetags/extratags.py:48
 msgid "Waiting for rendering to begin..."
 msgstr "描画の開始を待っています…"
@@ -1822,6 +1856,16 @@ msgstr ""
 #, fuzzy
 #~| msgid "Rendering failed!"
 #~ msgid "Rendering of job #%(jobid)s failed"
+#~ msgstr "レンダリングに失敗しました！"
+
+#, fuzzy
+#~| msgid "Rendering failed!"
+#~ msgid "Rendering of job #%(jobid)s succeeded"
+#~ msgstr "レンダリングに失敗しました！"
+
+#, fuzzy
+#~| msgid "Rendering failed!"
+#~ msgid "Rendering of job #%(jobid)s timed out"
 #~ msgstr "レンダリングに失敗しました！"
 
 #~ msgid "Full-page layout without street index"

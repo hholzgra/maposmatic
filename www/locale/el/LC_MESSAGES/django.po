@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MapOSMatic\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-06 13:14+0100\n"
+"POT-Creation-Date: 2022-11-06 13:18+0100\n"
 "PO-Revision-Date: 2015-01-04 17:34+0000\n"
 "Last-Translator: Konstantinos Stampoulis\n"
 "Language-Team: Greek (http://www.transifex.com/projects/p/maposmatic/"
@@ -822,7 +822,7 @@ msgid "Previous"
 msgstr ""
 
 #: www/maposmatic/templates/maposmatic/index-parts/carousel.html:51
-#: www/maposmatic/templates/maposmatic/new.html:146
+#: www/maposmatic/templates/maposmatic/new.html:150
 msgid "Next"
 msgstr ""
 
@@ -994,22 +994,22 @@ msgstr "Πλαίσιο οριοθέτησης"
 #: www/maposmatic/templates/maposmatic/map-feed.html:22
 #: www/maposmatic/templates/maposmatic/map-full.html:80
 #: www/maposmatic/templates/maposmatic/maps.html:74
-#: www/maposmatic/templates/maposmatic/new.html:121
-#: www/maposmatic/templates/maposmatic/new.html:247
+#: www/maposmatic/templates/maposmatic/new.html:125
+#: www/maposmatic/templates/maposmatic/new.html:251
 msgid "Layout"
 msgstr "Σχέδιο"
 
 #: www/maposmatic/templates/maposmatic/map-feed.html:24
 #: www/maposmatic/templates/maposmatic/map-full.html:82
 #: www/maposmatic/templates/maposmatic/maps.html:75
-#: www/maposmatic/templates/maposmatic/new.html:285
+#: www/maposmatic/templates/maposmatic/new.html:289
 msgid "Stylesheet"
 msgstr "Στυλ"
 
 #: www/maposmatic/templates/maposmatic/map-feed.html:27
 #: www/maposmatic/templates/maposmatic/map-full.html:85
-#: www/maposmatic/templates/maposmatic/new.html:131
-#: www/maposmatic/templates/maposmatic/new.html:314
+#: www/maposmatic/templates/maposmatic/new.html:135
+#: www/maposmatic/templates/maposmatic/new.html:318
 #, fuzzy
 #| msgid "Map details"
 msgid "Overlays"
@@ -1018,7 +1018,7 @@ msgstr "Λεπτομέρειες χάρτη"
 #: www/maposmatic/templates/maposmatic/map-feed.html:31
 #: www/maposmatic/templates/maposmatic/map-full.html:89
 #: www/maposmatic/templates/maposmatic/maps.html:80
-#: www/maposmatic/templates/maposmatic/new.html:251
+#: www/maposmatic/templates/maposmatic/new.html:255
 #, fuzzy
 #| msgid "index"
 msgid "Indexer"
@@ -1265,77 +1265,97 @@ msgstr "Δεν βρέθηκε χάρτης που ταιριάζει το ερώ
 msgid "Create a new map!"
 msgstr "Δημιουργήστε νέο χάρτη!"
 
-#: www/maposmatic/templates/maposmatic/new.html:103
+#: www/maposmatic/templates/maposmatic/new.html:41
+#, fuzzy
+#| msgid "Map details"
+msgid "Choose overlay(s)"
+msgstr "Λεπτομέρειες χάρτη"
+
+#: www/maposmatic/templates/maposmatic/new.html:42
+#, fuzzy
+#| msgid "Map details"
+msgid "Search overlay"
+msgstr "Λεπτομέρειες χάρτη"
+
+#: www/maposmatic/templates/maposmatic/new.html:43
+msgid "No results"
+msgstr ""
+
+#: www/maposmatic/templates/maposmatic/new.html:44
+msgid "Add"
+msgstr ""
+
+#: www/maposmatic/templates/maposmatic/new.html:107
 msgid "Generate your own map"
 msgstr "Δημιουργήστε το δικό σας χάρτη"
 
-#: www/maposmatic/templates/maposmatic/new.html:109
+#: www/maposmatic/templates/maposmatic/new.html:113
 msgid "Back"
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:116
+#: www/maposmatic/templates/maposmatic/new.html:120
 #, fuzzy
 #| msgid "Map locale"
 msgid "Map area"
 msgstr "Τοπικές ρυθμίσεις χάρτη"
 
-#: www/maposmatic/templates/maposmatic/new.html:126
+#: www/maposmatic/templates/maposmatic/new.html:130
 #, fuzzy
 #| msgid "Stylesheet"
 msgid "Style"
 msgstr "Στυλ"
 
-#: www/maposmatic/templates/maposmatic/new.html:136
+#: www/maposmatic/templates/maposmatic/new.html:140
 #, fuzzy
 #| msgid "Paper size"
 msgid "Paper"
 msgstr "Μέγεθος χαρτιού"
 
-#: www/maposmatic/templates/maposmatic/new.html:141
+#: www/maposmatic/templates/maposmatic/new.html:145
 msgid "Submit"
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:148
+#: www/maposmatic/templates/maposmatic/new.html:152
 msgid "Generate"
 msgstr "Δημιουργία"
 
-#: www/maposmatic/templates/maposmatic/new.html:162
+#: www/maposmatic/templates/maposmatic/new.html:166
 msgid "Geographic area"
 msgstr "Γεωγραφική περιοχή"
 
-#: www/maposmatic/templates/maposmatic/new.html:165
+#: www/maposmatic/templates/maposmatic/new.html:169
 msgid "City search"
 msgstr "Αναζήτηση πόλης"
 
-#: www/maposmatic/templates/maposmatic/new.html:168
+#: www/maposmatic/templates/maposmatic/new.html:172
 msgid "File upload"
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:195
+#: www/maposmatic/templates/maposmatic/new.html:199
 #, fuzzy
 #| msgid "Map details"
 msgid "Upload files"
 msgstr "Λεπτομέρειες χάρτη"
 
-#: www/maposmatic/templates/maposmatic/new.html:204
+#: www/maposmatic/templates/maposmatic/new.html:208
 msgid ""
 "Upload GPX, Umap, or general GeoJSON files here. <br/> You can select "
 "multiple files at once. If you re-open the file selection dialog to select "
 "files, your selection will replace the previous one."
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:216
+#: www/maposmatic/templates/maposmatic/new.html:220
 msgid ""
 "<b>Note:</b> The uploaded files will not be made available to anyone, the "
 "map created using this file <b>will be publicly visible</b> though.<br/>Do "
 "<b>NOT</b> upload any data you don't want to be publicly visible."
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:228
+#: www/maposmatic/templates/maposmatic/new.html:232
 msgid "Geographic area selection"
 msgstr "Επιλογή γεωγραφικής περιοχής"
 
-#: www/maposmatic/templates/maposmatic/new.html:230
+#: www/maposmatic/templates/maposmatic/new.html:234
 #, fuzzy
 #| msgid ""
 #| "Start by choosing the city or geographic area you want to\n"
@@ -1360,13 +1380,13 @@ msgstr ""
 "μικρό χάρτη για να ορίσετε\n"
 "τα όρια της παρεχόμενης περιοχής."
 
-#: www/maposmatic/templates/maposmatic/new.html:266
+#: www/maposmatic/templates/maposmatic/new.html:270
 #, fuzzy
 #| msgid "Multi-page layout"
 msgid "Map layout"
 msgstr "Πολυσέλιδη διάταξη"
 
-#: www/maposmatic/templates/maposmatic/new.html:268
+#: www/maposmatic/templates/maposmatic/new.html:272
 #, fuzzy
 #| msgid ""
 #| "The map layout determines how the map and the index are\n"
@@ -1390,13 +1410,13 @@ msgstr ""
 "είναι\n"
 "ορατά στον χάρτη."
 
-#: www/maposmatic/templates/maposmatic/new.html:297
+#: www/maposmatic/templates/maposmatic/new.html:301
 #, fuzzy
 #| msgid "Stylesheet"
 msgid "Map stylesheet"
 msgstr "Στυλ"
 
-#: www/maposmatic/templates/maposmatic/new.html:299
+#: www/maposmatic/templates/maposmatic/new.html:303
 #, fuzzy
 #| msgid ""
 #| "The map layout determines how the map and the index are\n"
@@ -1419,32 +1439,32 @@ msgstr ""
 "είναι\n"
 "ορατά στον χάρτη."
 
-#: www/maposmatic/templates/maposmatic/new.html:326
+#: www/maposmatic/templates/maposmatic/new.html:330
 #, fuzzy
 #| msgid "Map details"
 msgid "Map overlays"
 msgstr "Λεπτομέρειες χάρτη"
 
-#: www/maposmatic/templates/maposmatic/new.html:328
+#: www/maposmatic/templates/maposmatic/new.html:332
 msgid ""
 "Overlays render extra objects on top of the chosen base style. Multiple "
 "overlays can be selected to add different kinds of additional information on "
 "top of the map."
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:344
+#: www/maposmatic/templates/maposmatic/new.html:348
 msgid "Paper size"
 msgstr "Μέγεθος χαρτιού"
 
-#: www/maposmatic/templates/maposmatic/new.html:344
+#: www/maposmatic/templates/maposmatic/new.html:348
 msgid "(width x height)"
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:377
+#: www/maposmatic/templates/maposmatic/new.html:381
 msgid "An error occured while retrieving compatible paper sizes."
 msgstr "Παρουσιάστηκε σφάλμα κατά την ανάκτηση συμβατών μεγεθών χαρτιού."
 
-#: www/maposmatic/templates/maposmatic/new.html:386
+#: www/maposmatic/templates/maposmatic/new.html:390
 #, fuzzy
 #| msgid ""
 #| "<i class=\"glyphicon glyphicon-refresh\"></i> Calculating available paper "
@@ -1454,77 +1474,77 @@ msgstr ""
 "<i class=\"glyphicon glyphicon-refresh\"></i> Υπολογισμός διαθέσιμων μορφών "
 "χαρτιού για τον χάρτη σας..."
 
-#: www/maposmatic/templates/maposmatic/new.html:394
+#: www/maposmatic/templates/maposmatic/new.html:398
 msgid "Paper format and size"
 msgstr "Μορφή και μέγεθος χαρτιού"
 
-#: www/maposmatic/templates/maposmatic/new.html:396
+#: www/maposmatic/templates/maposmatic/new.html:400
 msgid "Select the desired format, size and orientation for your map."
 msgstr ""
 "Επιλέξτε την επιθυμητή μορφή, το μέγεθος και τον προσανατολισμό του χάρτη "
 "σας."
 
-#: www/maposmatic/templates/maposmatic/new.html:399
+#: www/maposmatic/templates/maposmatic/new.html:403
 msgid ""
 "You can choose from the suggested standard sizes, the \"best fit\" size for "
 "the map area you selected, or specify a width and height of your own choice."
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:415
+#: www/maposmatic/templates/maposmatic/new.html:419
 msgid "Map title"
 msgstr "Τίτλος χάρτη"
 
-#: www/maposmatic/templates/maposmatic/new.html:421
+#: www/maposmatic/templates/maposmatic/new.html:425
 #, fuzzy
 #| msgid "Map locale"
 msgid "Locale"
 msgstr "Τοπικές ρυθμίσεις χάρτη"
 
-#: www/maposmatic/templates/maposmatic/new.html:440
+#: www/maposmatic/templates/maposmatic/new.html:444
 msgid "Your Email address (for notifications, optional)"
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:443
+#: www/maposmatic/templates/maposmatic/new.html:447
 #, fuzzy
 #| msgid "Clear selected area"
 msgid "will be deleted after"
 msgstr "Εκκαθάριση επιλεγμένης περιοχής"
 
-#: www/maposmatic/templates/maposmatic/new.html:443
+#: www/maposmatic/templates/maposmatic/new.html:447
 msgid "hours"
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:452
+#: www/maposmatic/templates/maposmatic/new.html:456
 msgid "Summary"
 msgstr "Περίληψη"
 
-#: www/maposmatic/templates/maposmatic/new.html:455
+#: www/maposmatic/templates/maposmatic/new.html:459
 msgid "Location:"
 msgstr "Περιοχή:"
 
-#: www/maposmatic/templates/maposmatic/new.html:456
+#: www/maposmatic/templates/maposmatic/new.html:460
 msgid "Layout:"
 msgstr "Σχέδιο:"
 
-#: www/maposmatic/templates/maposmatic/new.html:457
+#: www/maposmatic/templates/maposmatic/new.html:461
 msgid "Stylesheet:"
 msgstr "Στυλ:"
 
-#: www/maposmatic/templates/maposmatic/new.html:458
+#: www/maposmatic/templates/maposmatic/new.html:462
 #, fuzzy
 #| msgid "Map details"
 msgid "Overlay:"
 msgstr "Λεπτομέρειες χάρτη"
 
-#: www/maposmatic/templates/maposmatic/new.html:459
+#: www/maposmatic/templates/maposmatic/new.html:463
 msgid "Paper format:"
 msgstr "Είδος χαρτιού:"
 
-#: www/maposmatic/templates/maposmatic/new.html:468
+#: www/maposmatic/templates/maposmatic/new.html:472
 msgid "Almost there!"
 msgstr "Σχεδόν φτάσαμε!"
 
-#: www/maposmatic/templates/maposmatic/new.html:470
+#: www/maposmatic/templates/maposmatic/new.html:474
 #, fuzzy
 #| msgid ""
 #| "You're almost ready to request to map rendering! Select the map\n"
@@ -1865,6 +1885,20 @@ msgstr ""
 msgid "Start typing for suggestions..."
 msgstr "Ξεκινήστε να πληκτρολογείτε για προτάσεις..."
 
+#: www/maposmatic/templates/maposmatic/wizard-parts/wizardmap.js:21
+msgid "Select area"
+msgstr ""
+
+#: www/maposmatic/templates/maposmatic/wizard-parts/wizardmap.js:22
+#, fuzzy
+#| msgid "Geographic area selection"
+msgid "Remove selection"
+msgstr "Επιλογή γεωγραφικής περιοχής"
+
+#: www/maposmatic/templates/maposmatic/wizard-parts/wizardmap.js:25
+msgid "Select area within current zoom"
+msgstr ""
+
 #: www/maposmatic/templatetags/extratags.py:48
 msgid "Waiting for rendering to begin..."
 msgstr "Αναμονή για να ξεκινήσει η επεξεργασία..."
@@ -2026,6 +2060,16 @@ msgstr ""
 #, fuzzy
 #~| msgid "Rendering daemon: "
 #~ msgid "Rendering of job #%(jobid)s failed"
+#~ msgstr "Διακομιστής επεξεργασίας:"
+
+#, fuzzy
+#~| msgid "Rendering daemon: "
+#~ msgid "Rendering of job #%(jobid)s succeeded"
+#~ msgstr "Διακομιστής επεξεργασίας:"
+
+#, fuzzy
+#~| msgid "Rendering daemon: "
+#~ msgid "Rendering of job #%(jobid)s timed out"
 #~ msgstr "Διακομιστής επεξεργασίας:"
 
 #~ msgid "Full-page layout without street index"

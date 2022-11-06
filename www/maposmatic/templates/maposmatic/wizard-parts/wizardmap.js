@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load l10n %}
 {% load extratags %}
 
 function wizardmap(elt) {
@@ -15,7 +16,16 @@ function wizardmap(elt) {
     strokeWidth: 2
   };
   var countryquery = null;
-  locationFilter = new L.LocationFilter({buttonPosition: 'topright'});
+  var locationFilter = new L.LocationFilter({
+      enableButton: {
+          enableText:  '{% trans "Select area" %}',
+          disableText: '{% trans "Remove selection" %}'
+      },
+      adjustButton: {
+          text: '{% trans "Select area within current zoom" %}'
+      },
+      buttonPosition: 'topright'
+  });
   locationFilter.on("change", function (e) {
       bbox = e.target.getBounds();
       map.fitBounds(bbox);

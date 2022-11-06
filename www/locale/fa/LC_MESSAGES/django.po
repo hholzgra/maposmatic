@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: MapOSMatic\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-11-06 13:14+0100\n"
+"POT-Creation-Date: 2022-11-06 13:18+0100\n"
 "PO-Revision-Date: 2018-03-20 08:50+0000\n"
 "Last-Translator: imni <iriman@chmail.ir>\n"
 "Language-Team: Persian (http://www.transifex.com/dittaeva/maposmatic/"
@@ -793,7 +793,7 @@ msgid "Previous"
 msgstr ""
 
 #: www/maposmatic/templates/maposmatic/index-parts/carousel.html:51
-#: www/maposmatic/templates/maposmatic/new.html:146
+#: www/maposmatic/templates/maposmatic/new.html:150
 msgid "Next"
 msgstr ""
 
@@ -960,22 +960,22 @@ msgstr "محدوده"
 #: www/maposmatic/templates/maposmatic/map-feed.html:22
 #: www/maposmatic/templates/maposmatic/map-full.html:80
 #: www/maposmatic/templates/maposmatic/maps.html:74
-#: www/maposmatic/templates/maposmatic/new.html:121
-#: www/maposmatic/templates/maposmatic/new.html:247
+#: www/maposmatic/templates/maposmatic/new.html:125
+#: www/maposmatic/templates/maposmatic/new.html:251
 msgid "Layout"
 msgstr "طرح"
 
 #: www/maposmatic/templates/maposmatic/map-feed.html:24
 #: www/maposmatic/templates/maposmatic/map-full.html:82
 #: www/maposmatic/templates/maposmatic/maps.html:75
-#: www/maposmatic/templates/maposmatic/new.html:285
+#: www/maposmatic/templates/maposmatic/new.html:289
 msgid "Stylesheet"
 msgstr "سبک"
 
 #: www/maposmatic/templates/maposmatic/map-feed.html:27
 #: www/maposmatic/templates/maposmatic/map-full.html:85
-#: www/maposmatic/templates/maposmatic/new.html:131
-#: www/maposmatic/templates/maposmatic/new.html:314
+#: www/maposmatic/templates/maposmatic/new.html:135
+#: www/maposmatic/templates/maposmatic/new.html:318
 #, fuzzy
 #| msgid "Map details"
 msgid "Overlays"
@@ -984,7 +984,7 @@ msgstr "جزئیات نقشه"
 #: www/maposmatic/templates/maposmatic/map-feed.html:31
 #: www/maposmatic/templates/maposmatic/map-full.html:89
 #: www/maposmatic/templates/maposmatic/maps.html:80
-#: www/maposmatic/templates/maposmatic/new.html:251
+#: www/maposmatic/templates/maposmatic/new.html:255
 #, fuzzy
 #| msgid "index"
 msgid "Indexer"
@@ -1230,77 +1230,97 @@ msgstr "نقشه‌ای مطابق جستجوی شما پیدا نشد."
 msgid "Create a new map!"
 msgstr "یک نقشهٔ جدید بسازید!"
 
-#: www/maposmatic/templates/maposmatic/new.html:103
+#: www/maposmatic/templates/maposmatic/new.html:41
+#, fuzzy
+#| msgid "Map details"
+msgid "Choose overlay(s)"
+msgstr "جزئیات نقشه"
+
+#: www/maposmatic/templates/maposmatic/new.html:42
+#, fuzzy
+#| msgid "Map details"
+msgid "Search overlay"
+msgstr "جزئیات نقشه"
+
+#: www/maposmatic/templates/maposmatic/new.html:43
+msgid "No results"
+msgstr ""
+
+#: www/maposmatic/templates/maposmatic/new.html:44
+msgid "Add"
+msgstr ""
+
+#: www/maposmatic/templates/maposmatic/new.html:107
 msgid "Generate your own map"
 msgstr "نقشهٔ خودتان را بسازید"
 
-#: www/maposmatic/templates/maposmatic/new.html:109
+#: www/maposmatic/templates/maposmatic/new.html:113
 msgid "Back"
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:116
+#: www/maposmatic/templates/maposmatic/new.html:120
 #, fuzzy
 #| msgid "Map locale"
 msgid "Map area"
 msgstr "زبان نقشه"
 
-#: www/maposmatic/templates/maposmatic/new.html:126
+#: www/maposmatic/templates/maposmatic/new.html:130
 #, fuzzy
 #| msgid "Stylesheet"
 msgid "Style"
 msgstr "سبک"
 
-#: www/maposmatic/templates/maposmatic/new.html:136
+#: www/maposmatic/templates/maposmatic/new.html:140
 #, fuzzy
 #| msgid "Paper size"
 msgid "Paper"
 msgstr "اندازهٔ کاغذ"
 
-#: www/maposmatic/templates/maposmatic/new.html:141
+#: www/maposmatic/templates/maposmatic/new.html:145
 msgid "Submit"
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:148
+#: www/maposmatic/templates/maposmatic/new.html:152
 msgid "Generate"
 msgstr "بساز"
 
-#: www/maposmatic/templates/maposmatic/new.html:162
+#: www/maposmatic/templates/maposmatic/new.html:166
 msgid "Geographic area"
 msgstr "ناحیهٔ جغرافیایی"
 
-#: www/maposmatic/templates/maposmatic/new.html:165
+#: www/maposmatic/templates/maposmatic/new.html:169
 msgid "City search"
 msgstr "جستجوی شهر"
 
-#: www/maposmatic/templates/maposmatic/new.html:168
+#: www/maposmatic/templates/maposmatic/new.html:172
 msgid "File upload"
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:195
+#: www/maposmatic/templates/maposmatic/new.html:199
 #, fuzzy
 #| msgid "Map details"
 msgid "Upload files"
 msgstr "جزئیات نقشه"
 
-#: www/maposmatic/templates/maposmatic/new.html:204
+#: www/maposmatic/templates/maposmatic/new.html:208
 msgid ""
 "Upload GPX, Umap, or general GeoJSON files here. <br/> You can select "
 "multiple files at once. If you re-open the file selection dialog to select "
 "files, your selection will replace the previous one."
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:216
+#: www/maposmatic/templates/maposmatic/new.html:220
 msgid ""
 "<b>Note:</b> The uploaded files will not be made available to anyone, the "
 "map created using this file <b>will be publicly visible</b> though.<br/>Do "
 "<b>NOT</b> upload any data you don't want to be publicly visible."
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:228
+#: www/maposmatic/templates/maposmatic/new.html:232
 msgid "Geographic area selection"
 msgstr "انتخاب ناحیهٔ جغرافیایی"
 
-#: www/maposmatic/templates/maposmatic/new.html:230
+#: www/maposmatic/templates/maposmatic/new.html:234
 #, fuzzy
 #| msgid ""
 #| "Start by choosing the city or geographic area you want to\n"
@@ -1324,13 +1344,13 @@ msgstr ""
 "<em>منطقهٔ جغرافیایی</em> بروید و با استفاده از نقشهٔ کوچک\n"
 "محدودهٔ موردنظرتان را مشخص کنید."
 
-#: www/maposmatic/templates/maposmatic/new.html:266
+#: www/maposmatic/templates/maposmatic/new.html:270
 #, fuzzy
 #| msgid "Multi-page layout"
 msgid "Map layout"
 msgstr "چندصفحه‌ای"
 
-#: www/maposmatic/templates/maposmatic/new.html:268
+#: www/maposmatic/templates/maposmatic/new.html:272
 #, fuzzy
 #| msgid ""
 #| "The map layout determines how the map and the index are\n"
@@ -1353,13 +1373,13 @@ msgstr ""
 "می‌کند که چه جزئیاتی\n"
 "روی نقشه نشان داده شود."
 
-#: www/maposmatic/templates/maposmatic/new.html:297
+#: www/maposmatic/templates/maposmatic/new.html:301
 #, fuzzy
 #| msgid "Stylesheet"
 msgid "Map stylesheet"
 msgstr "سبک"
 
-#: www/maposmatic/templates/maposmatic/new.html:299
+#: www/maposmatic/templates/maposmatic/new.html:303
 #, fuzzy
 #| msgid ""
 #| "The map layout determines how the map and the index are\n"
@@ -1381,32 +1401,32 @@ msgstr ""
 "می‌کند که چه جزئیاتی\n"
 "روی نقشه نشان داده شود."
 
-#: www/maposmatic/templates/maposmatic/new.html:326
+#: www/maposmatic/templates/maposmatic/new.html:330
 #, fuzzy
 #| msgid "Map details"
 msgid "Map overlays"
 msgstr "جزئیات نقشه"
 
-#: www/maposmatic/templates/maposmatic/new.html:328
+#: www/maposmatic/templates/maposmatic/new.html:332
 msgid ""
 "Overlays render extra objects on top of the chosen base style. Multiple "
 "overlays can be selected to add different kinds of additional information on "
 "top of the map."
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:344
+#: www/maposmatic/templates/maposmatic/new.html:348
 msgid "Paper size"
 msgstr "اندازهٔ کاغذ"
 
-#: www/maposmatic/templates/maposmatic/new.html:344
+#: www/maposmatic/templates/maposmatic/new.html:348
 msgid "(width x height)"
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:377
+#: www/maposmatic/templates/maposmatic/new.html:381
 msgid "An error occured while retrieving compatible paper sizes."
 msgstr "هنگام دریافت اندازه‌های مناسب کاغذ خطایی رخ داد."
 
-#: www/maposmatic/templates/maposmatic/new.html:386
+#: www/maposmatic/templates/maposmatic/new.html:390
 #, fuzzy
 #| msgid ""
 #| "<i class=\"glyphicon glyphicon-refresh\"></i> Calculating available paper "
@@ -1416,75 +1436,75 @@ msgstr ""
 "<i class=\"glyphicon glyphicon-refresh\"></i> در حال محاسبهٔ قالب‌های کاغذ "
 "مناسب برای نقشهٔ شما..."
 
-#: www/maposmatic/templates/maposmatic/new.html:394
+#: www/maposmatic/templates/maposmatic/new.html:398
 msgid "Paper format and size"
 msgstr "قالب و اندازهٔ کاغذ"
 
-#: www/maposmatic/templates/maposmatic/new.html:396
+#: www/maposmatic/templates/maposmatic/new.html:400
 msgid "Select the desired format, size and orientation for your map."
 msgstr "قالب، اندازه و جهت دلخواهتان را برای نقشه انتخاب کنید."
 
-#: www/maposmatic/templates/maposmatic/new.html:399
+#: www/maposmatic/templates/maposmatic/new.html:403
 msgid ""
 "You can choose from the suggested standard sizes, the \"best fit\" size for "
 "the map area you selected, or specify a width and height of your own choice."
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:415
+#: www/maposmatic/templates/maposmatic/new.html:419
 msgid "Map title"
 msgstr "نام نقشه"
 
-#: www/maposmatic/templates/maposmatic/new.html:421
+#: www/maposmatic/templates/maposmatic/new.html:425
 #, fuzzy
 #| msgid "Map locale"
 msgid "Locale"
 msgstr "زبان نقشه"
 
-#: www/maposmatic/templates/maposmatic/new.html:440
+#: www/maposmatic/templates/maposmatic/new.html:444
 msgid "Your Email address (for notifications, optional)"
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:443
+#: www/maposmatic/templates/maposmatic/new.html:447
 #, fuzzy
 #| msgid "Clear selected area"
 msgid "will be deleted after"
 msgstr "پاک‌کردن ناحیهٔ انتخابی"
 
-#: www/maposmatic/templates/maposmatic/new.html:443
+#: www/maposmatic/templates/maposmatic/new.html:447
 msgid "hours"
 msgstr ""
 
-#: www/maposmatic/templates/maposmatic/new.html:452
+#: www/maposmatic/templates/maposmatic/new.html:456
 msgid "Summary"
 msgstr "خلاصه"
 
-#: www/maposmatic/templates/maposmatic/new.html:455
+#: www/maposmatic/templates/maposmatic/new.html:459
 msgid "Location:"
 msgstr "مکان:"
 
-#: www/maposmatic/templates/maposmatic/new.html:456
+#: www/maposmatic/templates/maposmatic/new.html:460
 msgid "Layout:"
 msgstr "طرح:"
 
-#: www/maposmatic/templates/maposmatic/new.html:457
+#: www/maposmatic/templates/maposmatic/new.html:461
 msgid "Stylesheet:"
 msgstr "سبک:"
 
-#: www/maposmatic/templates/maposmatic/new.html:458
+#: www/maposmatic/templates/maposmatic/new.html:462
 #, fuzzy
 #| msgid "Map details"
 msgid "Overlay:"
 msgstr "جزئیات نقشه"
 
-#: www/maposmatic/templates/maposmatic/new.html:459
+#: www/maposmatic/templates/maposmatic/new.html:463
 msgid "Paper format:"
 msgstr "قالب کاغذ:"
 
-#: www/maposmatic/templates/maposmatic/new.html:468
+#: www/maposmatic/templates/maposmatic/new.html:472
 msgid "Almost there!"
 msgstr "تقریباً تمومه!"
 
-#: www/maposmatic/templates/maposmatic/new.html:470
+#: www/maposmatic/templates/maposmatic/new.html:474
 #, fuzzy
 #| msgid ""
 #| "You're almost ready to request to map rendering! Select the map\n"
@@ -1824,6 +1844,20 @@ msgstr ""
 msgid "Start typing for suggestions..."
 msgstr "برای دریافت پیشنهاد، شروع به نوشتن کنید..."
 
+#: www/maposmatic/templates/maposmatic/wizard-parts/wizardmap.js:21
+msgid "Select area"
+msgstr ""
+
+#: www/maposmatic/templates/maposmatic/wizard-parts/wizardmap.js:22
+#, fuzzy
+#| msgid "Geographic area selection"
+msgid "Remove selection"
+msgstr "انتخاب ناحیهٔ جغرافیایی"
+
+#: www/maposmatic/templates/maposmatic/wizard-parts/wizardmap.js:25
+msgid "Select area within current zoom"
+msgstr ""
+
 #: www/maposmatic/templatetags/extratags.py:48
 msgid "Waiting for rendering to begin..."
 msgstr "انتظار تا شروع ساخت نقشه..."
@@ -1979,6 +2013,16 @@ msgstr ""
 #, fuzzy
 #~| msgid "Rendering daemon: "
 #~ msgid "Rendering of job #%(jobid)s failed"
+#~ msgstr "برنامهٔ رندرگیری: "
+
+#, fuzzy
+#~| msgid "Rendering daemon: "
+#~ msgid "Rendering of job #%(jobid)s succeeded"
+#~ msgstr "برنامهٔ رندرگیری: "
+
+#, fuzzy
+#~| msgid "Rendering daemon: "
+#~ msgid "Rendering of job #%(jobid)s timed out"
 #~ msgstr "برنامهٔ رندرگیری: "
 
 #~ msgid "Full-page layout without street index"

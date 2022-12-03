@@ -444,7 +444,7 @@ $('#error-modal').modal('show')
             <legend>{% trans "Your Email address (for notifications, optional)" %}</legend>
             {{ form.submittermail }} 
 	    {% if SUBMITTER_MAIL_LIFETIME %}
-	      ({% trans "will be deleted after" %}{{ SUBMITTER_MAIL_LIFETIME }} {% trans "hours" %})
+	      ({% trans "will be deleted after" %} {{ SUBMITTER_MAIL_LIFETIME }} {% trans "hours" %})
 	    {% endif %}
           </fieldset>
 	</div>

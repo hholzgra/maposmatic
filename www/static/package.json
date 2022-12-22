@@ -29,7 +29,7 @@
     "leaflet-heatmap": "^1.0.0",
     "leaflet-loading": "^0.1.24",
     "leaflet-providers": "^1.6.0",
-    "leaflet-search": "^2.9.8",
+    "leaflet-search": "^3.0.5",
     "leaflet.locatecontrol": "^0.66.2",
     "leaflet.locationfilter": "git+https://github.com/marcoqu/leaflet-locationfilter.git",
     "leaflet.restoreview": "git+https://github.com/makinacorpus/Leaflet.RestoreView.git",

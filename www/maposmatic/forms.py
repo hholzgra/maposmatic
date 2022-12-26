@@ -81,7 +81,7 @@ class MapRenderingJobForm(forms.ModelForm):
             map_lang_flag_list.append((lang_key, lang_name))
         else:
             country_code = lang_key[3:5].lower()
-            lang_html = mark_safe("<span class='flag-icon flag-icon-%s'> </span> %s"
+            lang_html = mark_safe("<span class='fi fi-%s'> </span> %s"
                                        % (country_code, lang_name))
             map_lang_flag_list.append((lang_key, lang_html))
 

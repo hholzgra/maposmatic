@@ -118,7 +118,7 @@ def bbox_km(value):
 def language_flag(value):
     if value in www.settings.LANGUAGE_FLAGS:
         if www.settings.LANGUAGE_FLAGS[value] != None:
-            return ("flag-icon flag-icon-%s" % www.settings.LANGUAGE_FLAGS[value])
+            return ("fi fi-%s" % www.settings.LANGUAGE_FLAGS[value])
     return "fa fa-flag"
 
 def locale_base(value):

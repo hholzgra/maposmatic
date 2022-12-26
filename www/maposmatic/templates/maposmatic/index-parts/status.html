@@ -15,8 +15,8 @@
                      d-flex justify-content-between align-items-center"
               >{{key}}
          <span
-              class="badge badge-pill 
-                     badge-{{value.running|yesno:"success,danger,warning"}}"
+              class="badge rounded-pill 
+                     text-bg-{{value.running|yesno:"success,danger,warning"}}"
                      title="{% blocktrans with size=value.size qp=value.size|pluralize %} {{size}} job{{ qp }} in the rendering queue.{% endblocktrans %}">
           {% if value.size > 0 %}
           {{value.size}}

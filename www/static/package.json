@@ -22,7 +22,7 @@
     "fastsearch": "^1.11.1",
     "fastselect": "^0.7.3",
     "flag-icons": "^6.6.6",
-    "jquery": "^3.5.1",
+    "jquery": "^3.6.3",
     "leaflet": "^1.4.0",
     "leaflet-easybutton": "^2.4.0",
     "leaflet-gpx": "^1.0.0",

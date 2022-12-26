@@ -50,39 +50,11 @@
 
 
     {% if map.is_waiting %}
-      <a class="btn btn-large disabled tooltipped"
-         data-placement="right"
-         data-original-title="{% with map.submission_time|timesince as date %}
-           {% blocktrans %}Pending, submitted {{ date }} ago{% endblocktrans %}
-         {% endwith %}">
-        <i class="fas fa-hourglas"></i> {% trans "Pending..." %}
-      </a>
-
-      {% ifequal nonce map.nonce %}
-      <div style="height: 2em"></div>
-      <form method="post" action="{% url "cancel" %}">
-        <input type="hidden" name="id" value="{{ map.id }}" />
-        <input type="hidden" name="nonce" value="{{ map.nonce }}" />
-        <button type="submit" class="btn btn-large btn-danger tooltipped"
-                data-placement="right"
-                data-original-title="
-                  {% blocktrans with map.current_position_in_queue as pos %}Cancel this queued request (position {{ pos }} in the queue){% endblocktrans %}">
-          {% blocktrans %}<i class="fas fa-times"></i> Cancel{% endblocktrans %}
-        </button>
-      </form>
-
-      {% endifequal %}
+      <i class="fas fa-hourglass"></i> {% trans "Pending..." %}
     {% endif %}
 
     {% if map.is_rendering %}
-      <a class="btn btn-large disabled tooltipped"
-         data-placement="right"
-         data-original-title="
-         {% with map.startofrendering_time|timesince:map.endofrendering_time as date %}
-           {% blocktrans %}Rendering is in progress, started {{ date }} ago{% endblocktrans %}
-         {% endwith %}">
-        <i class="fas fa-redo"></i> {% trans "Rendering..." %} {{ status }}
-      </a>
+      <i class="fas fa-pen-to-square"></i> {% trans "Rendering..." %} {{ status }}
     {% endif %}
 
     {% if not map.needs_waiting %}
@@ -155,6 +127,19 @@
 
     {% if map.needs_waiting %}
     <span class="refresh-time pull-right">{% blocktrans %}Updating in <span>{{ refresh }}</span>s...{% endblocktrans %}</span>
+      {% if map.is_waiting %}
+        {% ifequal nonce map.nonce %}
+          <div style="height: 2em"></div>
+          <form method="post" action="{% url "cancel" %}">
+            <input type="hidden" name="id" value="{{ map.id }}" />
+            <input type="hidden" name="nonce" value="{{ map.nonce }}" />
+            <button type="submit" class="btn btn-large btn-danger tooltipped"
+                    data-placement="right"
+                    data-original-title="{% blocktrans with map.current_position_in_queue as pos %}Cancel this queued request (position {{ pos }} in the queue){% endblocktrans %}">{% blocktrans %}<i class="fas fa-times"></i> Cancel{% endblocktrans %}
+            </button>
+          </form>
+        {% endifequal %}
+      {% endif %}
     {% endif %}
     </div>
     <div class="col-md-3">

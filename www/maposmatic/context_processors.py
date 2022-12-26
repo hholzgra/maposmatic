@@ -172,9 +172,9 @@ def all(request):
     if daemon_running and gis_lag_ok and waymarked_lag_ok:
         platform_status = 'check'
     elif daemon_running and gis_lastupdate and not (gis_lag_ok and waymarked_lag_ok):
-        platform_status = 'warning'
+        platform_status = 'triangle-exclamation'
     else:
-        platform_status = 'times'
+        platform_status = 'hourglas-clock'
 
     return {
         'DEBUG': www.settings.DEBUG,

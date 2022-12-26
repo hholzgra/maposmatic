@@ -16,7 +16,7 @@ function wizardmap(elt) {
     strokeWidth: 2
   };
   var countryquery = null;
-  var locationFilter = new L.LocationFilter({
+  locationFilter = new L.LocationFilter({
       enableButton: {
           enableText:  '{% trans "Select area" %}',
           disableText: '{% trans "Remove selection" %}'

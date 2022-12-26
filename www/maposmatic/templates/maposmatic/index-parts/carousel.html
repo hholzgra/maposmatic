@@ -2,13 +2,13 @@
 {% load l10n %}
 {% load extratags %}
 
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+<div id="carousel-example-generic" class="carousel slide" data-bs-ride="carousel">
   <!-- Indicators -->
-  <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-  </ol>
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carousel-example-generic" data-bs-slide-to="0" aria-label="Plain Layout" class="active" aria-current="true"></button>
+    <button type="button" data-bs-target="#carousel-example-generic" data-bs-slide-to="1" aria-label="Index Layout"></button>
+    <button type="button" data-bs-target="#carousel-example-generic" data-bs-slide-to="2" aria-label="Multi Page Layout"></button>
+  </div>
   
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
@@ -42,13 +42,13 @@
   </div>
   
   <!-- Controls -->
-  <a class="carousel-control-prev" href="#carousel-example-generic" role="button" data-slide="prev">
+  <button class="carousel-control-prev" type="button" data-bs-target="#carousel-example-generic" data-bs-silde="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">{% trans "Previous" %}</span>
-  </a>
-  <a class="carousel-control-next" href="#carousel-example-generic" role="button" data-slide="next">
+    <span class="visually-hidden">{% trans "Previous" %}</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carousel-example-generic" data-bs-slide="next">
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">{% trans "Next" %}</span>
-  </a>
+    <span class="visually-hidden">{% trans "Next" %}</span>
+  </button>
 
 </div> <!-- Carousel -->

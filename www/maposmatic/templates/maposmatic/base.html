@@ -45,21 +45,9 @@
 
     <script src="/media/node_modules/jquery/dist/jquery.js"></script>
 
-    <script src="/media/node_modules/popper.js/dist/umd/popper.js"></script>
-    <script src="/media/node_modules/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/media/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
     <link rel="stylesheet" href="/media/node_modules/bootstrap/dist/css/bootstrap.css" />
 
-    <!--
-    <link rel="stylesheet" href="/media/node_modules/mdbootstrap/css/bootstrap.css">
-    <link rel="stylesheet" href="/media/node_modules/mdbootstrap/css/mdb.min.css">
-    <link rel="stylesheet" href="/media/node_modules/mdbootstrap/css/style.css">
-
-    <script type="text/javascript" src="/media/node_modules/mdbootstrap/js/jquery.min.js"></script>
-    <script type="text/javascript" src="/media/node_modules/mdbootstrap/js/popper.min.js"></script>
-    <script type="text/javascript" src="/media/node_modules/mdbootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/media/node_modules/mdbootstrap/js/mdb.min.js"></script>
-    -->
-    
     <script src="/media/node_modules/leaflet/dist/leaflet.js"></script>
     <link rel="stylesheet" href="/media/node_modules/leaflet/dist/leaflet.css" />
 
@@ -147,9 +135,6 @@
       // Set focus to the search field
       $('#id_query').focus();
 
-      $('.tooltipped').tooltip();
-      $('.popovered').popover({ trigger: 'hover' });
-
       function set_map_bounds(map, array, closest) {
         try {
           map.fitBounds([[array[0][0],array[0][1]],[array[1][0],array[1][1]]]);
@@ -234,7 +219,10 @@
         create_map(elt);
       });
       {% endif %}
-
+      var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+      var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+	  return new bootstrap.Popover(popoverTriggerEl)
+      });
       {% block extrajs %}{% endblock %}
     </script>
 

@@ -156,25 +156,20 @@
 	  </a>
 	  {% endif %}
 	  {% if map.is_done_ok and map.has_output_files %}
-	  <div class="btn-group">
-            {% with map.output_files.maps.pdf as file %}
-            <a href="{{ file.0 }}" class="btn btn-primary">
+	  <div class="dropdown">
+	    <button class="btn btn-primary dropdown-toggle" type="button" id="download_{{ map.id }}" data-bs-toggle="dropdown" aria-expanded="false">
               <i class="fas fa-download"></i> {% trans "Download" %}
-            </a>
-            {% endwith %}
-            <button class="btn btn-primary dropdown-toggle tooltipped"
-                    data-toggle="dropdown"
-                    data-original-title="{% trans "Download other formats and map indeces" %}">
-              <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu" aria-labelledby="download_{{ map.id ]}">
               {% for format,file in map.output_files.maps.items %}
-              <li><a href="{{ file.0 }}" title="{{ file.1 }}">{{ format|upper }} {% trans "map" %} ({{ file.2|filesizeformat }})</a></li>
+              <li><a class="dropdown-item" href="{{ file.0 }}" title="{{ file.1 }}">{{ format|upper }} {% trans "map" %} ({{ file.2|filesizeformat }})</a></li>
               {% endfor %}
 	      
               {% if map.output_files.indeces|length %}
               <li class="divider"></li>
-              {% for format,file in map.output_files.indeces.items %}<li><a href="{{ file.0 }}" title="{{ file.1 }}">{{ format|upper }} {% trans "index" %}</a></li>{% endfor %}
+              {% for format,file in map.output_files.indeces.items %}
+	      <li><a class="dropdown-item" href="{{ file.0 }}" title="{{ file.1 }}">{{ format|upper }} {% trans "index" %}</a></li>
+              {% endfor %}
               {% endif %}
             </ul>
 	  </div>
@@ -200,7 +195,7 @@
 	<div class="col-6">
 	  <form class="form-horizontal pull-right" method="post" action="{% url "recreate" %}">
 	    <input type="hidden" name="id" value="{{ map.id }}" />
-	    <button class="btn btn-secondary tooltipped"
+	    <button class="btn btn-primary tooltipped"
 		    data-original-title="{% trans "Recreate map" %}"
 		    type="submit" {% if map.needs_waiting or not map.can_recreate %}disabled="disabled"{% endif %}>
               <i class="fas fa-redo"></i> {% trans "Recreate" %}

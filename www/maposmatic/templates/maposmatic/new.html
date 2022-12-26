@@ -162,14 +162,14 @@ $('#error-modal').modal('show')
       <div class="tab" style="display: block" id="wizard-step-location">
 
         <ul class="nav nav-tabs" id="locTabs">
-          <li class="nav-item">
-            <a class="nav-link active" id="step-location-bbox-tab" data-toggle="tab" href="#step-location-bbox" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-globe-africa"></i> {% trans "Geographic area" %}</a>
+          <li class="nav-item" role="presentation">
+	    <button class="nav-link active" id="step-location-bbox-tab" data-bs-toggle="tab" data-bs-target="#step-location-bbox" type="button" role="tab" aria-controls="bt-step-location-bbox" aria-selected="true"><i class="fas fa-globe-africa"></i> {% trans "Geographic area" %}</button>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" id="step-location-admin-tab" data-toggle="tab" href="#step-location-admin" role="tab" aria-controls="admin" aria-selected="false"><i class="fas fa-search-location"></i> {% trans "City search" %}</a>
+          <li class="nav-item" role="presentation">
+	    <button class="nav-link" id="step-location-admin-tab" data-bs-toggle="tab" data-bs-target="#step-location-admin" type="button" role="tab" aria-controls="bt-step-location-bbox" aria-selected="false"><i class="fas fa-search-location"></i> {% trans "City search" %}</button>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" id="step-location-gpx-tab" data-toggle="tab" href="#step-location-gpx" role="tab" aria-controls="gpx" aria-selected="false"><i class="fas fa-upload"></i> {% trans "File upload" %}</a>
+          <li class="nav-item" role="presentation">
+	    <button class="nav-link" id="step-location-file-tab" data-bs-toggle="tab" data-bs-target="#step-location-file" type="button" role="tab" aria-controls="bt-step-location-file" aria-selected="false"><i class="fas fa-upload"></i> {% trans "File upload" %}</button>
           </li>
 	</ul>
 
@@ -177,7 +177,6 @@ $('#error-modal').modal('show')
           <div class="tab-pane active" id="step-location-bbox" role="tabpanel">
             {{ form.bbox }}
           </div>
-
           <div class="tab-pane" id="step-location-admin" role="tabpanel">
             <div style="position: relative;">
               {{ form.administrative_city }}
@@ -193,7 +192,7 @@ $('#error-modal').modal('show')
 
           </div>
 
-	  <div class="tab-pane" id="step-location-gpx" role="tabpanel">
+	  <div class="tab-pane" id="step-location-file" role="tabpanel">
 	    <div class="col-lg-12">
 	      <fieldset id="track-file">
 		<legend><i class="fas fa-file-upload"></i> {% trans "Upload files" %}</legend>
@@ -424,15 +423,15 @@ $('#error-modal').modal('show')
           <fieldset>
             <legend>{% trans "Locale" %}</legend>
 	    <div class="dropdown">
-	      <button id="map_language_button" type="button" class="btn dropdown-toggle" data-toggle="dropdown">
+	      <button id="map_language_button" type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expand="false">
 		{{ form.map_language.value }}
 	      </button>
 	      <input type="hidden" name="{{ form.map_language.name }}" id="{{ form.map_language.name }}"/>
-	      <div id="maplang_choices" role="menu" class="dropdown-menu bg-light" style="height: 400px; overflow-y: auto;">
+	      <ul id="maplang_choices" class="dropdown-menu bg-light" style="height: 400px; overflow-y: auto;" area-labeledby="map_language_button">
 		{% for choice in form.map_language.field.choices %}
-		<a class="dropdown-item" href="#" data-langcode="{{choice.0}}" onclick="$('#map_language_button').html($(this).html()); $('#{{ form.map_language.name }}').val('{{choice.0}}');">{{choice.1}} ({{choice.0|locale_base}})</a>
+		<li><a class="dropdown-item" href="#" data-langcode="{{choice.0}}" onclick="$('#map_language_button').html($(this).html()); $('#{{ form.map_language.name }}').val('{{choice.0}}');">{{choice.1}} ({{choice.0|locale_base}})</a></li>
 		{% endfor %}
-	      </div>
+	      </ul>
 	    </div>
           </fieldset>
 	</div>

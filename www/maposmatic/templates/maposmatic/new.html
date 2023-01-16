@@ -423,10 +423,10 @@ $('#error-modal').modal('show')
           <fieldset>
             <legend>{% trans "Locale" %}</legend>
 	    <div class="dropdown">
-	      <button id="map_language_button" type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expand="false">
-		{{ form.map_language.value }}
+  	      <button id="map_language_button" type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expand="false">en_US.UTF-8</button>
+		      <!-- {{ form.map_language.value }} -->
 	      </button>
-	      <input type="hidden" name="{{ form.map_language.name }}" id="{{ form.map_language.name }}"/>
+	      <input type="hidden" name="{{ form.map_language.name }}" id="{{ form.map_language.name }}" value="en_US.UTF-8"/>
 	      <ul id="maplang_choices" class="dropdown-menu bg-light" style="height: 400px; overflow-y: auto;" area-labeledby="map_language_button">
 		{% for choice in form.map_language.field.choices %}
 		<li><a class="dropdown-item" href="#" data-langcode="{{choice.0}}" onclick="$('#map_language_button').html($(this).html()); $('#{{ form.map_language.name }}').val('{{choice.0}}');">{{choice.1}} ({{choice.0|locale_base}})</a></li>

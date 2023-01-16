@@ -179,7 +179,7 @@ function country_lang(country_code)
     var list    = $('#maplang_choices');
     var success = 0;
 
-    list.children('a').each(function() {
+    list.find('a').each(function() {
 	var langcode = $(this)[0].dataset.langcode;
 	if (langcode.substring(3,5) == country_code.toUpperCase()) {
 	    $('#map_language_button').html($(this).html());
@@ -190,7 +190,7 @@ function country_lang(country_code)
     });
 
     if (!success) {
-	list.children('a').each(function() {
+	list.find('a').each(function() {
 	    var langcode = $(this)[0].dataset.langcode;
 	    if (langcode == "C") {
 		$('#map_language_button').html($(this).html());

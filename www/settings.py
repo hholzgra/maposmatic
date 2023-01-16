@@ -311,8 +311,9 @@ MAP_LANGUAGES = {
 #    "C": _(u"No localization"),
 }
 
-MAP_LANGUAGES_LIST= sorted(MAP_LANGUAGES.items(), key=lambda p: p[1])
-MAP_LANGUAGES_LIST.append(("C", _(u"No localization")))
+MAP_LANGUAGES_LIST= list(MAP_LANGUAGES.items())
+#MAP_LANGUAGES_LIST= sorted(MAP_LANGUAGES.items(), key=lambda p: p[1]) # See issue #106
+#MAP_LANGUAGES_LIST.append(("C", _(u"No localization")))
 
 # Job page refresh frequency, in seconds, for when the job is waiting in queue
 # and when the job is currently being rendered.

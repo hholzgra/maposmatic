@@ -186,7 +186,7 @@
 	  {% else %}
 	  <a class="btn disabled tooltipped"
              data-placement="top"
-             data-original-title="{{ map.status|job_status_to_str }}">
+             data-original-title="{{ map|job_status_to_str }}">
             <i class="fas fa-ban"></i> {% trans "Download" %}
 	  </a>
 	  {% endif %}

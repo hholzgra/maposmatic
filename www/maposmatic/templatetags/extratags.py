@@ -42,6 +42,16 @@ _alert_warn = "<div class='alert alert-warning' role='alert'>"
 _alert_err  = "<div class='alert alert-danger'  role='alert'>"
 _alert_end  = "</div>"
 
+def _lastline(filename):
+    with open(filename, "rb") as file:
+        try:
+            file.seek(-2, os.SEEK_END)
+            while file.read(1) != b'\n':
+                file.seek(-2, os.SEEK_CUR)
+        except OSError:
+            return ""
+        return str(file.readline().decode())
+
 @register.filter()
 def job_status_to_str(value):
     if value.status == 0:
@@ -53,7 +63,17 @@ def job_status_to_str(value):
             return mark_safe(_alert_ok + str(_("Rendering was successful.")) + _alert_end)
         else:
             if www.settings.CONTACT_EMAIL:
-                return mark_safe(_alert_err + str(_("%(arg)s!<br/>Please check the error log or contact %(email)s for more information." % {'arg': value.resultmsg, 'email': www.settings.CONTACT_EMAIL})) + _alert_end)
+                return mark_safe(_alert_err
+                                 + str(("<h4><i class='fas fa-triangle-exclamation'></i> <b>%(msg)s!</b></h4>"
+                                        + str(_("Please check the %(error_log)s for more details<br/>or contact %(email)s for more information.")))
+                                       % {
+                                           'msg':       value.resultmsg,
+                                           'email':     "<a href='mailto:%s?subject=Error on request %d'><i class='fas fa-envelope'></i> %s</a>" % (www.settings.CONTACT_EMAIL, value.id, www.settings.CONTACT_EMAIL),
+                                           'error_log': "<a target='_blank' href='%s'><i class='fas fa-file-lines'></i> %s</a>" % (value.get_errorlog(), _("error log")),
+                                       }
+                                 )
+                                 + "<hr/><tt>"+_lastline(value.get_errorlog_file()).replace(':',':<br/>')+"</tt>"
+                                 + _alert_end)
             else:
                 return mark_safe( _alert_err + _str(_("%(arg)s! Please check the error log for more information.") % {'arg': value.resultmsg}) + _alert_end)
     elif value.status == 3:

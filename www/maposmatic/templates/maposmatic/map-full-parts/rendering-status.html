@@ -34,7 +34,7 @@
       </table>
       
       <div>
-      {{ map.status|job_status_to_str }}
+      {{ map|job_status_to_str }}
       </div>
 
       <div style="height: 2em"></div>
@@ -108,13 +108,7 @@
 	</div>
 
       {% elif map.get_errorlog %}
-      <a class="btn btn-large tooltipped"
-         href="{{map.get_errorlog}}"
-         target="_blank"
-         data-placement="right"
-         data-original-title="{% trans "Something went wrong while processing this job." %}">
-        <i class="fas fa-ban"></i> {% trans "Error log" %}
-      </a>
+      <!-- no more error output here -->
       {% else %}
       <a class="btn btn-large disabled tooltipped"
          data-placement="right"

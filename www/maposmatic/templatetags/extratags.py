@@ -43,20 +43,20 @@ _alert_err  = "<div class='alert alert-danger'  role='alert'>"
 _alert_end  = "</div>"
 
 @register.filter()
-def job_status_to_str(value, arg="Rendering failed", autoescape=True):
-    if value == 0:
+def job_status_to_str(value):
+    if value.status == 0:
         return mark_safe(_alert_info + str(_("Waiting for rendering to begin...")) + _alert_end)
-    elif value == 1:
+    elif value.status == 1:
         return mark_safe(_alert_info + str(_("The rendering is in progress...")) + _alert_end)
-    elif value == 2:
-        if arg == 'ok':
+    elif value.status == 2:
+        if value.resultmsg == 'ok':
             return mark_safe(_alert_ok + str(_("Rendering was successful.")) + _alert_end)
         else:
             if www.settings.CONTACT_EMAIL:
-                return mark_safe(_alert_err + str(_("%(arg)s!<br/>Please check the error log or contact %(email)s for more information." % {'arg': arg, 'email': www.settings.CONTACT_EMAIL})) + _alert_end)
+                return mark_safe(_alert_err + str(_("%(arg)s!<br/>Please check the error log or contact %(email)s for more information." % {'arg': value.resultmsg, 'email': www.settings.CONTACT_EMAIL})) + _alert_end)
             else:
-                return mark_safe( _alert_err + _str(_("%(arg)s! Please check the error log for more information.") % {'arg': arg}) + _alert_end)
-    elif value == 3:
+                return mark_safe( _alert_err + _str(_("%(arg)s! Please check the error log for more information.") % {'arg': value.resultmsg}) + _alert_end)
+    elif value.status == 3:
         if arg == 'ok':
             return mark_safe(_alert_info + str(_("Rendering is obsolete: the rendering was successful, but the files are no longer available.")) + _alert_end)
         else:

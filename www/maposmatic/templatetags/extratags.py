@@ -66,25 +66,26 @@ def job_status_to_str(value):
             # TODO properly templatize this
             result = _alert_err
             result+= "<h4><i class='fas fa-triangle-exclamation'></i> <b>%s!</b></h4>" % value.resultmsg # TODO localize the result messages
-            
-            error_log_tail = escape(_lastline(value.get_errorlog_file())).replace(':',':<br/>')
-            if error_log_tail:
-                result+= _("Check the %(error_log)s for more details<br/>") % {
-                    'error_log': "<a target='_blank' href='%s'><i class='fas fa-file-lines'></i> %s</a>" % (value.get_errorlog(), _("error log")),
-                }
-                
-            if www.settings.CONTACT_EMAIL:
+
+            if not value.resultmsg.startswith("Not enough memory"):
+                error_log_tail = escape(_lastline(value.get_errorlog_file())).replace(':',':<br/>')
                 if error_log_tail:
-                    result+= "or "
-                result+= _("contact %(email)s for more information.") % {
-                    'email': "<a href='mailto:%(email)s?subject=[MapOSMatic] Error on request %(id)d'><i class='fas fa-envelope'></i> %(email)s</a>" % {
-                        "email": www.settings.CONTACT_EMAIL,
-                        "id":    value.id
-                      }
+                    result+= _("Check the %(error_log)s for more details<br/>") % {
+                        'error_log': "<a target='_blank' href='%s'><i class='fas fa-file-lines'></i> %s</a>" % (value.get_errorlog(), _("error log")),
                     }
+                
+                if www.settings.CONTACT_EMAIL:
+                    if error_log_tail:
+                        result+= "or "
+                        result+= _("contact %(email)s for more information.") % {
+                            'email': "<a href='mailto:%(email)s?subject=[MapOSMatic] Error on request %(id)d'><i class='fas fa-envelope'></i> %(email)s</a>" % {
+                                "email": www.settings.CONTACT_EMAIL,
+                                "id":    value.id
+                            }
+                        }
                     
-            if error_log_tail:
-                result+= "<hr/><tt>%s</tt>" % error_log_tail
+                if error_log_tail:
+                    result+= "<hr/><tt>%s</tt>" % error_log_tail
                     
             result += _alert_end
 

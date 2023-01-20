@@ -43,14 +43,14 @@ _alert_err  = "<div class='alert alert-danger'  role='alert'>"
 _alert_end  = "</div>"
 
 def _lastline(filename):
-    with open(filename, "rb") as file:
-        try:
+    try:
+        with open(filename, "rb") as file:
             file.seek(-2, os.SEEK_END)
             while file.read(1) != b'\n':
                 file.seek(-2, os.SEEK_CUR)
-        except OSError:
-            return ""
         return str(file.readline().decode())
+    except:
+            return ""
 
 @register.filter()
 def job_status_to_str(value):

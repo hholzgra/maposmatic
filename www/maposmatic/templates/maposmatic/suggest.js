@@ -38,7 +38,7 @@
  */
 (function suggest(input, list, target, timeout) {
 
-  input.attr('autocomplete', 'off').attr('placeholder', '{% trans "Start typing for suggestions..." %}').focus();
+  input.attr('autocomplete', 'off').attr('placeholder', '{% trans "Start typing for suggestions..." %}');
 
   var timeoutId = null;
   var ajaxquery = null;

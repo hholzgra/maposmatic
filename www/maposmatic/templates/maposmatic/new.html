@@ -46,6 +46,17 @@ $('.multipleSelect').fastselect({
         $("#overlay-preview").attr("src","/media/img/overlay/"+itemModel.value+".jpg");
     }
 });
+
+// give focus to admin_city input field when selecting the admin_city tab
+const admin_tab = document.querySelector('#step-location-admin-tab');
+admin_tab.addEventListener('show.bs.tab', function(e){
+  // no idea why the setTimeout() wrapper is needed, but it is. do not remove ...
+  setTimeout(function () {
+    var input =  $('#id_administrative_city');
+    input.focus();
+  }, 0);
+});
+
 {% if form.errors %}
 $('#error-modal').modal('show')
 {% endif%}

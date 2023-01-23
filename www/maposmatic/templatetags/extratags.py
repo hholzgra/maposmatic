@@ -91,7 +91,7 @@ def job_status_to_str(value):
 
             return mark_safe(result)
     elif value.status == 3:
-        if arg == 'ok':
+        if value.resultmsg == 'ok':
             return mark_safe(_alert_info + str(_("Rendering is obsolete: the rendering was successful, but the files are no longer available.")) + _alert_end)
         else:
             return mark_safe(_alert_warn + str(_("Obsolete failed rendering: the rendering failed, and the incomplete files have been removed.")) + _alert_end)

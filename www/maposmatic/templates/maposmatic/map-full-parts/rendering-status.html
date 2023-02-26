@@ -122,7 +122,7 @@
     {% if map.needs_waiting %}
     <span class="refresh-time pull-right">{% blocktrans %}Updating in <span>{{ refresh }}</span>s...{% endblocktrans %}</span>
       {% if map.is_waiting %}
-        {% ifequal nonce map.nonce %}
+        {% if nonce == map.nonce %}
           <div style="height: 2em"></div>
           <form method="post" action="{% url "cancel" %}">
             <input type="hidden" name="id" value="{{ map.id }}" />
@@ -132,7 +132,7 @@
                     data-original-title="{% blocktrans with map.current_position_in_queue as pos %}Cancel this queued request (position {{ pos }} in the queue){% endblocktrans %}">{% blocktrans %}<i class="fas fa-times"></i> Cancel{% endblocktrans %}
             </button>
           </form>
-        {% endifequal %}
+        {% endif %}
       {% endif %}
     {% endif %}
     </div>

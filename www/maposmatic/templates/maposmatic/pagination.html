@@ -29,18 +29,18 @@
 {% load l10n %}
 {% load extratags %}
 
-{% ifnotequal data.paginator.num_pages 1 %}
+{% if data.paginator.num_pages != 1 %}
 <div class="pull-right">
   <ul class="pagination">
     <li class="page-item {% if not data.has_previous %}disabled{% endif %}">
       <a class="page-link" href={% if data.has_previous %}"?{% if is_search %}query={{ query|urlencode }}&{% endif %}page={{ data.previous_page_number }}"{% else %}"#"{% endif %}>&laquo;</a>
     </li>
-    {% for num in pages %}<li class="page-item {% ifequal num data.number %}active{% endifequal %} {% ifequal num "..." %}disabled{% endifequal %}">
-      {% ifequal num "..." %}<a class="page-link">{{ num }}</a>{% else %}<a class="page-link" href="?{% if is_search %}query={{ query|urlencode }}&{% endif %}page={{ num }}">{{ num }}</a>{% endifequal %}
+    {% for num in pages %}<li class="page-item {% if num == data.number %}active{% endif %} {% if num == "..." %}disabled{% endif %}">
+      {% if num == "..." %}<a class="page-link">{{ num }}</a>{% else %}<a class="page-link" href="?{% if is_search %}query={{ query|urlencode }}&{% endif %}page={{ num }}">{{ num }}</a>{% endif %}
     </li>{% endfor %}
     <li class="page-item {% if not data.has_next %}disabled{% endif %}">
       <a class="page-link" href={% if data.has_next %}"?{% if is_search %}query={{ query|urlencode }}&{% endif %}page={{ data.next_page_number }}"{% else %}"#"{% endif %}>&raquo;</a>
     </li>
   </ul>
 </div>
-{% endifnotequal %}
+{% endif %}

@@ -24,7 +24,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 import django
-from django.conf.urls import url, include
+from django.urls import include, re_path
 from django.views.static import serve
 from django.views.generic import TemplateView
 from django.contrib.staticfiles.storage import staticfiles_storage
@@ -41,116 +41,116 @@ from .maposmatic import apis
 from . import settings
 
 urlpatterns = [
-    url(r'^$',
+    re_path(r'^$',
         views.index,
         name='main'),
 
-    url(r'^new/$',
+    re_path(r'^new/$',
         views.new,
         name='new'),
-    url(r'^recreate/$',
+    re_path(r'^recreate/$',
         views.recreate,
         name='recreate'),
-    url(r'^cancel/$',
+    re_path(r'^cancel/$',
         views.cancel,
         name='cancel'),
 
-    url(r'^maps/(?P<id>\d+)/(?P<nonce>[A-Za-z]{16})$',
+    re_path(r'^maps/(?P<id>\d+)/(?P<nonce>[A-Za-z]{16})$',
         views.map_full,
         name='map-by-id-and-nonce'),
-    url(r'^maps/(?P<id>\d+)$',
+    re_path(r'^maps/(?P<id>\d+)$',
         views.map_full,
         name='map-by-id'),
-    url(r'^maps/(?P<category>[a-z]+)$',
+    re_path(r'^maps/(?P<category>[a-z]+)$',
         views.maps,
         name='maps-list-cagetory'),
-    url(r'^maps/$',
+    re_path(r'^maps/$',
         views.maps,
         name='maps'),
 
-    url(r'^about/api/$',
+    re_path(r'^about/api/$',
         views.documentation_api,
         name='documentation_api'),
-    url(r'^about/user-guide/$',
+    re_path(r'^about/user-guide/$',
         views.documentation_user_guide,
         name='documentation_user_guide'),
-    url(r'^about/$',
+    re_path(r'^about/$',
         views.about,
         name='about'),
     
-    url(r'^privacy/$',
+    re_path(r'^privacy/$',
         views.privacy,
         name='privacy'),
 
-    url(r'^donate/$',
+    re_path(r'^donate/$',
         views.donate,
         name='donate'),
-    url(r'^donate-thanks/$',
+    re_path(r'^donate-thanks/$',
         views.donate_thanks,
         name='donate-thanks'),
 
     # API calls used by the web frontend
-    # url(r'^apis/nominatim/$', views.api_nominatim),
-    url(r'^apis/nominatim/$', views.api_geosearch),
-    url(r'^apis/reversegeo/([^/]*)/([^/]*)/$', views.api_postgis_reverse),
-    url(r'^apis/papersize', views.api_papersize),
-    url(r'^apis/boundingbox/([^/]*)/$', views.api_bbox),
-    url(r'^apis/polygon/([^/]*)/$',     views.api_polygon),
-    url(r'^apis/rendering-status/([^/]*)$', views.api_rendering_status),
+    # re_path(r'^apis/nominatim/$', views.api_nominatim),
+    re_path(r'^apis/nominatim/$', views.api_geosearch),
+    re_path(r'^apis/reversegeo/([^/]*)/([^/]*)/$', views.api_postgis_reverse),
+    re_path(r'^apis/papersize', views.api_papersize),
+    re_path(r'^apis/boundingbox/([^/]*)/$', views.api_bbox),
+    re_path(r'^apis/polygon/([^/]*)/$',     views.api_polygon),
+    re_path(r'^apis/rendering-status/([^/]*)$', views.api_rendering_status),
 
     # API calls for direct clients
 
     # unversioned
-    url(r'^apis/paper_formats',         apis.paper_formats),
-    url(r'^apis/layouts',               apis.layouts),
-    url(r'^apis/styles',                apis.styles),
-    url(r'^apis/overlays',              apis.overlays),
-    url(r'^apis/job-stati',             apis.job_stati),
-    url(r'^apis/jobs$',                 apis.jobs),
-    url(r'^apis/jobs/(\d*)$',           apis.jobs),
-    url(r'^apis/cancel_job$',           apis.cancel_job),
+    re_path(r'^apis/paper_formats',         apis.paper_formats),
+    re_path(r'^apis/layouts',               apis.layouts),
+    re_path(r'^apis/styles',                apis.styles),
+    re_path(r'^apis/overlays',              apis.overlays),
+    re_path(r'^apis/job-stati',             apis.job_stati),
+    re_path(r'^apis/jobs$',                 apis.jobs),
+    re_path(r'^apis/jobs/(\d*)$',           apis.jobs),
+    re_path(r'^apis/cancel_job$',           apis.cancel_job),
 
     # versioned
-    url(r'^apis/v1/paper_formats',         apis.paper_formats),
-    url(r'^apis/v1/layouts',               apis.layouts),
-    url(r'^apis/v1/styles',                apis.styles),
-    url(r'^apis/v1/overlays',              apis.overlays),
-    url(r'^apis/v1/job-stati',             apis.job_stati),
-    url(r'^apis/v1/jobs$',                 apis.jobs),
-    url(r'^apis/v1/jobs/(\d*)$',           apis.jobs),
-    url(r'^apis/v1/cancel_job$',           apis.cancel_job),
+    re_path(r'^apis/v1/paper_formats',         apis.paper_formats),
+    re_path(r'^apis/v1/layouts',               apis.layouts),
+    re_path(r'^apis/v1/styles',                apis.styles),
+    re_path(r'^apis/v1/overlays',              apis.overlays),
+    re_path(r'^apis/v1/job-stati',             apis.job_stati),
+    re_path(r'^apis/v1/jobs$',                 apis.jobs),
+    re_path(r'^apis/v1/jobs/(\d*)$',           apis.jobs),
+    re_path(r'^apis/v1/cancel_job$',           apis.cancel_job),
 
     # Feeds
-    url(r'feeds/maps/$', feeds.MapsFeed(), name='rss-feed'),
-    url(r'feeds/errors/$', feeds.ErrorFeed(), name='error-feed'),
+    re_path(r'feeds/maps/$', feeds.MapsFeed(), name='rss-feed'),
+    re_path(r'feeds/errors/$', feeds.ErrorFeed(), name='error-feed'),
 
     # Internationalization
-    url(r'^i18n/', include('django.conf.urls.i18n')),
+    re_path(r'^i18n/', include('django.conf.urls.i18n')),
 
     # robots.txt
-    url(r'^robots\.txt$', TemplateView.as_view(template_name="robots.txt", content_type='text/plain')),
+    re_path(r'^robots\.txt$', TemplateView.as_view(template_name="robots.txt", content_type='text/plain')),
 
     # favicons 
-    url(r'^favicon\.png$', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.png'))),
-    url(r'^favicon\.ico$', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico'))),
-    url(r'^apple-touch-icon.*\.png$', RedirectView.as_view(url=staticfiles_storage.url('img/apple-touch-icon.png'))),
+    re_path(r'^favicon\.png$', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.png'))),
+    re_path(r'^favicon\.ico$', RedirectView.as_view(url=staticfiles_storage.url('img/favicon.ico'))),
+    re_path(r'^apple-touch-icon.*\.png$', RedirectView.as_view(url=staticfiles_storage.url('img/apple-touch-icon.png'))),
 
     # test
-    url(r'heatmap/(\d*)$',
+    re_path(r'heatmap/(\d*)$',
         views.heatmap,
         name='heatmap'),
-    url(r'^apis/heatdata/(\d*)$',     apis.heatdata),
+    re_path(r'^apis/heatdata/(\d*)$',     apis.heatdata),
 
-    url(r'^congo/$',
+    re_path(r'^congo/$',
         views.congo,
         name='congo'),
 ]
 
 if settings.DEBUG:
     urlpatterns.append(
-        url(r'^results/(?P<path>.*)$', serve,
+        re_path(r'^results/(?P<path>.*)$', serve,
          {'document_root': settings.RENDERING_RESULT_PATH}))
 
     urlpatterns.append(
-        url(r'^media/(?P<path>.*)$', serve,
+        re_path(r'^media/(?P<path>.*)$', serve,
          {'document_root': settings.LOCAL_MEDIA_PATH}))

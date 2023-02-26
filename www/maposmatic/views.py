@@ -36,7 +36,7 @@ from django.http import HttpResponseRedirect, HttpResponseBadRequest, HttpRespon
 from django.db.transaction import TransactionManagementError
 from django.shortcuts import get_object_or_404, render
 from django.template import RequestContext
-from django.utils.translation import ugettext, ugettext_lazy as _
+from django.utils.translation import gettext, gettext_lazy as _
 from django.core import serializers
 from django.forms.models import model_to_dict
 from django.core.exceptions import ValidationError
@@ -539,7 +539,7 @@ def api_geosearch(request):
                     or metric_size_lon > www.settings.BBOX_MAXIMUM_LENGTH_IN_METERS):
                     valid = False
                     reason = "area-too-big"
-                    reason_text = ugettext("Administrative area too big for rendering")
+                    reason_text = gettext("Administrative area too big for rendering")
                 else:
                     valid = True
                     reason = ""

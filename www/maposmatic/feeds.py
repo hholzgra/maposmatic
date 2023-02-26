@@ -30,7 +30,7 @@ import logging
 LOG = logging.getLogger('maposmatic')
 
 from django.contrib.gis.feeds import Feed
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from django.template.loader import render_to_string, get_template
 
 from www.maposmatic import models

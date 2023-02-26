@@ -128,6 +128,7 @@ TEST_RUNNER = 'django.test.runner.DiscoverRunner'
 # Available website translations. Note that the language codes must be
 # specified in Django i18n location (all lowercase, with the language and
 # locale separated by a dash instead of an underscore: pt_BR -> pt-br)
+# TODO regional codes like "pt-br" no longer accepted in Django 3.2?!?
 LANGUAGES = {
     "ar":    "العربية",
     "be":    "беларуская",
@@ -148,13 +149,13 @@ LANGUAGES = {
     "nb":    "Norwegian Bokmål",
     "nl":    "Nederlands",
     "pl":    "Polski",
-    "pt-br": "Português do Brasil",
-    "pt-pt": "Português",
+    # "pt-br": "Português do Brasil", # TODO: no longer works with Django 3.2
+    "pt": "Português", # WAS: pt-pt
     "ru":    "Русский",
     "sk":    "Slovenčina",
     "tr":    "Türkçe",
     "uk":    "українська",
-    "zh-tw": "繁體中文",
+    "zh": "繁體中文", # WAS: zh-tw
 }
 LANGUAGES_LIST = sorted(LANGUAGES.items(), key=lambda p: p[1])
 

@@ -41,6 +41,10 @@ PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
 MANAGERS = ADMINS
 
+# needed starting with Django 3.2 to silence warnings
+# see also e.g. https://koenwoortman.com/python-django-auto-created-primary-key-used-when-not-defining-primary-key-type/
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -350,3 +354,4 @@ FILE_UPLOAD_PERMISSIONS = 0o644
 MAINTENANCE_MODE = False  # True or False, *NOT* None
 MAINTENANCE_MODE_IGNORE_IP_ADDRESSES = ('217.146.146.90',)
 MAINTENANCE_MODE_TEMPLATE = '503.html'
+

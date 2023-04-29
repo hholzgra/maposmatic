@@ -36,3 +36,20 @@ function load_preview(id, base)
      $(id).attr("src", base2 + ".png");
      $(id).attr("srcset", base2 + ".png, " + base2 + "-1.5x.png 1.5x, " + base2 + "-2x.png 2x");
 }
+
+function indexer_visible(value)
+{
+    # TODO the format names should not be hard coded
+    switch (value) {
+    case 'single_page_index_side':
+    case 'single_page_index_bottom':
+    case 'single_page_index_extra_page':
+    case 'multi_page':
+	$('#fieldset-indexer').show();
+	break;
+    case 'plain':
+    default:
+	$('#fieldset-indexer').hide();
+	break;
+    }
+}

@@ -24,7 +24,7 @@ step you are in is visualized in an icon bullet bar.
 image::step-progress-bar.png[Step progress bar,width=80%,pdfwidth=80%,align=center]
 
 You can only navigate between steps with the [Next] and [Back] buttons
-though, as some steps depend on spefic input from previous steps.
+though, as some steps depend on specific input from previous steps.
 So it is not possible to navigate between arbitrary steps by clicking
 on the step icons.
 
@@ -159,11 +159,11 @@ uploaded data.
 You can modify the selected area if you only want to show part of the Umap
 information, or actually want to show it in a larger map context.
 
-image:umap-result.png[Umap Render Result,width=45%,pdfwidth=45%]
 image:umap-actual.png[Umap Original Online Map,width=45%,pdfwidth=45%]
+image:umap-result.png[Umap Render Result,width=45%,pdfwidth=45%]
 
-An actually rendered Umap map may look like the example on the left hand side above,
-while the right hand side shows how the original online Umap looks like.
+An actually rendered Umap map may look like the example on the right hand side above,
+while the left hand side shows how the original online Umap looks like.
 The results are not completely the same , especially when it comes to line stroke
 width, but this is mostly due to difference in size an resolution of the target
 devices, paper vs. screen. 

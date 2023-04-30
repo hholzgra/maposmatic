@@ -24,7 +24,7 @@ step you are in is visualized in an icon bullet bar.
 image::step-progress-bar.png[Step progress bar,width=80%,pdfwidth=80%,align=center]
 
 You can only navigate between steps with the [Next] and [Back] buttons
-though, as some steps depend on spefic input from previous steps.
+though, as some steps depend on specific input from previous steps.
 So it is not possible to navigate between arbitrary steps by clicking
 on the step icons.
 

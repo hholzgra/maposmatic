@@ -2,7 +2,7 @@ MapOSMatic User Guide
 =====================
 Hartmut Holzgraefe <hartmut@php.net>
 :toc:
-v0.1, May 5th, 2018
+v0.2, April 30th, 2023
 Work in progress
 
 :imagesdir: ./img

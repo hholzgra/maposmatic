@@ -498,49 +498,53 @@ Map data overlays
 Contour lines
 ^^^^^^^^^^^^^
 
-TODO ...
+The contour lines overlay comes in two variants, one showing one
+contour line every 10 meters of elevation (below left) and one showing
+a line every 100 meters only (below right). 
+
+image:overlay-contour100.png[Contours 100m overlay,width=45%,pdfwidth=45%]
+image:overlay-contour10.png[Contours 10m overlay,width=45%,pdfwidth=45%]
 
 
 WayMarkedTrails routes
 ^^^^^^^^^^^^^^^^^^^^^^
 
-TODO ...
-
+The WayMarkedTraisl overlays offer the same route overlays as the
+https://waymarkedtrails.org/[Waymarked Trails] website.
 
 Hiking
 ++++++
 
-TODO ...
-
+image:overlay-waymarked-hiking.png[Waymarked hiking  overlay,width=90%,pdfwidth=90%]
 
 Cycling
 +++++++
 
-TODO ...
+image:overlay-waymarked-cycling.png[Waymarked cycling overlay,width=90%,pdfwidth=90%]
 
 
 Mountain bike
 +++++++++++++
 
-TODO ...
+image:overlay-waymarked-mtb.png[Waymarked mountainbike overlay,width=90%,pdfwidth=90%]
 
 
 Riding
 ++++++
 
-TODO ...
+image:overlay-waymarked-riding.png[Waymarked riding overlay,width=90%,pdfwidth=90%]
 
 
 Skating
 +++++++
 
-TODO ...
+image:overlay-waymarked-skating.png[Waymarked skating overlay,width=90%,pdfwidth=90%]
 
 
 Slopes
 ++++++
 
-TODO ...
+image:overlay-waymarked-slopes.png[Waymarked slopes overlay,width=90%,pdfwidth=90%]
 
 
 Transport overlays
@@ -550,6 +554,8 @@ Public transport map
 ++++++++++++++++++++
 
 TODO ...
+
+image:overlay-ptmap.png[Public transport map,width=90%,pdfwidth=90%]
 
 
 OpenRailwayMap

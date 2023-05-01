@@ -3,7 +3,7 @@
 {% load extratags %}
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-  <div class="container">
+  <div class="container-fluid">
 
     <a tabindex="0"
        class="navbar-brand"
@@ -16,8 +16,7 @@
     <p class="text-{% if waymarked_lag_ok %}success{% else %}{% if waymarked_lastupdate %}warning{% else %}danger{% endif %}{% endif %}">{% trans "WayMarked database: " %}<i class="pull-right fas fa-{% if waymarked_lag_ok %}check{% else %}{% if waymarked_lastupdate %}hourglass-half{% else %}times{% endif %}{% endif %}"></i></p>'
        ><i class="fas fa-{{ platform_status }}"></i> {{BRAND_NAME}}</a>
 
-
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbar" aria-controls="navbar-collapse" aria-expanded="false" aria-label="{% trans "Toggle navigation" %}">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar-collapse" aria-expanded="false" aria-label="{% trans "Toggle navigation" %}">
       <span class="navbar-toggler-icon"></span>
     </button>
     

@@ -39,7 +39,7 @@ function load_preview(id, base)
 
 function indexer_visible(value)
 {
-    # TODO the format names should not be hard coded
+    // TODO the format names should not be hard coded
     switch (value) {
     case 'single_page_index_side':
     case 'single_page_index_bottom':

@@ -58,7 +58,7 @@ urlpatterns = [
     re_path(r'^maps/(?P<id>\d+)/(?P<nonce>[A-Za-z]{16})$',
         views.map_full,
         name='map-by-id-and-nonce'),
-    re_path(r'^maps/(?P<id>\d+)$',
+    re_path(r'^maps/(?P<id>\d+)[/]?$',
         views.map_full,
         name='map-by-id'),
     re_path(r'^maps/(?P<category>[a-z]+)$',

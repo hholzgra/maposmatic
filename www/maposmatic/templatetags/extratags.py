@@ -109,6 +109,20 @@ def file_basename(value):
     except:
       return ""
 
+def file_readable_size(value):
+    path = os.path.join(www.settings.MEDIA_ROOT, value.name)
+    if os.path.isfile(path):
+        stats = os.stat(path)
+        size  = stats.st_size
+
+        for unit in ["B", "KiB", "MiB", "GiB", "TiB"]:
+            if size < 1024.0:
+                return "%.1f%s" % (size, unit)
+            size = size / 1024
+
+    else:
+        return "not found"
+
 def add_blank_after_comma(value):
     return value.replace(",",", ")
 
@@ -174,6 +188,7 @@ register.filter('feedparsed', feedparsed)
 register.filter('abs', lambda x: abs(x))
 register.filter('getitem', lambda d,i: d.get(i,''))
 register.filter('file_basename', file_basename)
+register.filter('file_readable_size', file_readable_size)
 register.filter('add_blank_after_comma', add_blank_after_comma)
 register.filter('latitude', latitude)
 register.filter('longitude', longitude)

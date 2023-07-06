@@ -88,7 +88,7 @@
 	      {% if map.uploads.all %}
 	      <tr><td><strong>{% trans "Uploaded files" %}</strong></td><td>
 		{% for upload in map.uploads.all %}
- 	        <tt>{{ upload.uploaded_file|file_basename }}</tt> <em>({{ upload.file_type }}, {{ upload.uploaded_file.size|filesizeformat }})</em><br/>
+ 	        <tt>{{ upload.uploaded_file|file_basename }}</tt> <em>({{ upload.file_type }}, {{ upload.uploaded_file|file_readable_size }})</em><br/>
 	        {% endfor %}
 	      </td></tr>
  	      {% endif %}

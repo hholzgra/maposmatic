@@ -100,15 +100,18 @@ def job_status_to_str(value):
 
     return ''
 
+@register.filter()
 def feedparsed(value):
     return datetime.datetime(*value[:6])
 
+@register.filter()
 def file_basename(value):
     try:
       return os.path.basename(value.name)
     except:
       return ""
 
+@register.filter()
 def file_readable_size(value):
     path = os.path.join(www.settings.MEDIA_ROOT, value.name)
     if os.path.isfile(path):
@@ -123,6 +126,7 @@ def file_readable_size(value):
     else:
         return "not found"
 
+@register.filter()
 def add_blank_after_comma(value):
     return value.replace(",",", ")
 
@@ -135,6 +139,7 @@ def _dd2dms(value):
 
     return (degrees, minutes, seconds)
 
+@register.filter()
 def latitude(value):
     latitude = float(value)
     (degrees, minutes, seconds) = _dd2dms(latitude)
@@ -142,6 +147,7 @@ def latitude(value):
 
     return "%d°%d'%d\"%s" % (degrees, minutes, seconds, hemisphere)
 
+@register.filter()
 def longitude(value):
     latitude = float(value)
     (degrees, minutes, seconds) = _dd2dms(latitude)
@@ -149,6 +155,7 @@ def longitude(value):
 
     return "%d°%d'%d\"%s" % (degrees, minutes, seconds, hemisphere)
 
+@register.filter()
 def bbox_km(value):
     boundingbox = ocitysmap.coords.BoundingBox(
         value.lat_upper_left,
@@ -163,15 +170,18 @@ def bbox_km(value):
 
     return "ca. %d x %d m²" % (width, height)
 
+@register.filter()
 def language_flag(value):
     if value in www.settings.LANGUAGE_FLAGS:
         if www.settings.LANGUAGE_FLAGS[value] != None:
             return ("fi fi-%s" % www.settings.LANGUAGE_FLAGS[value])
     return "fa fa-flag"
 
+@register.filter()
 def locale_base(value):
     return re.sub('\..*', '', value)
 
+@register.filter()
 def paper_size(value):
     w = value.paper_width_mm
     h = value.paper_height_mm
@@ -184,15 +194,5 @@ def paper_size(value):
     else:
         return "%s (%d×%d mm²)" % (size_name, w, h)
 
-register.filter('feedparsed', feedparsed)
 register.filter('abs', lambda x: abs(x))
 register.filter('getitem', lambda d,i: d.get(i,''))
-register.filter('file_basename', file_basename)
-register.filter('file_readable_size', file_readable_size)
-register.filter('add_blank_after_comma', add_blank_after_comma)
-register.filter('latitude', latitude)
-register.filter('longitude', longitude)
-register.filter('bbox_km', bbox_km)
-register.filter('language_flag', language_flag)
-register.filter('locale_base', locale_base)
-register.filter('paper_size', paper_size)

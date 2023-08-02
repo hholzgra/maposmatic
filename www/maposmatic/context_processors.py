@@ -98,6 +98,29 @@ def get_waymarked_database_last_update():
 
     return None
 
+def get_osmnames_table_ok():
+    cursor = None
+
+    try:
+        cursor = connections['osm'].cursor()
+        if cursor is None:
+            return False
+
+        cursor.execute("""select osm_id from place where name = 'Bielefeld'""")
+        id = cursor.fetchone()
+        if id is None or id[0] <= 0:
+            return False
+
+        return True
+    except:
+        pass
+    finally:
+        # Close the DB cursor if necessary
+        if cursor is not None and not cursor.closed:
+            cursor.close()
+
+    return False
+
 def queue_states():
     queues = {}
 
@@ -169,6 +192,8 @@ def all(request):
         and datetime.datetime.utcnow() -  waymarked_lastupdate < datetime.timedelta(minutes=120)
         or False)
 
+    osmnames_ok = get_osmnames_table_ok()
+
     if daemon_running and gis_lag_ok and waymarked_lag_ok:
         platform_status = 'check'
     elif daemon_running and gis_lastupdate and not (gis_lag_ok and waymarked_lag_ok):
@@ -203,6 +228,7 @@ def all(request):
         'gis_lag_ok': gis_lag_ok,
         'waymarked_lastupdate': waymarked_lastupdate,
         'waymarked_lag_ok': waymarked_lag_ok,
+        'osmnames_ok': osmnames_ok,
         'utc_now': datetime.datetime.utcnow(),
         'platform_status': platform_status,
 

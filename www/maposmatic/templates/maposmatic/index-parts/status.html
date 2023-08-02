@@ -62,5 +62,15 @@
       {% endif %}
       {% endif %}
 
+      {% if osmnames_ok %}
+      <div class="alert alert-success">
+        <i class="fas fa-check"></i> {% blocktrans %}The OsmNames Places table data is OK.{% endblocktrans %}
+      </div>
+      {% else %}
+      <div class="alert alert-danger">
+        <i class="fas fa-times"></i> {% blocktrans %}The OsmNames Places table data is missing.{% endblocktrans %}
+      </div>
+      {% endif %}
+
     </p>
 </div>

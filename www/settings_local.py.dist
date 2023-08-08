@@ -177,7 +177,7 @@ WEBLATE_BASE_URL = 'https://translate.get-map.org/'
 
 # contact information, to be displayed in page footer if set
 CONTACT_EMAIL = 'your-name@example.org'
-CONTACT_CHAT  = 'irc://irc.freenode.net/#maposmatic'
+CONTACT_CHAT  = 'irc://irc.oftc.org/#maposmatic'
 
 # custom footer text
 EXTRA_FOOTER = ''

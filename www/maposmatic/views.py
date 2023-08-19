@@ -50,6 +50,8 @@ import www.settings
 
 import psycopg2
 
+from ipware import get_client_ip
+
 LOG = logging.getLogger('maposmatic')
 
 def index(request):
@@ -177,6 +179,13 @@ def new(request):
                                              .queue_size(job.queue) + 1)
             job.nonce = helpers.generate_nonce(models.MapRenderingJob.NONCE_SIZE)
 
+            client_ip, is_routable = get_client_ip(request)
+            LOG.warning("client IP is %s" % client_ip)
+            if client_ip is not None and client_ip == www.settings.SPECIAL_IP:
+                job.extra_text = "Karte gedruckt vom FOSSGIS e.V."
+                job.logo = "bundled:FOSSGIS_Logo.svg"
+                job.extra_logo = "bundled:osm-logo.svg"
+            
             job.save()
 
             files = request.FILES.getlist('uploadfile')
@@ -345,6 +354,7 @@ def recreate(request):
 
             newjob.logo = job.logo
             newjob.extra_logo = job.extra_logo
+            newjob.extra_text = job.extra_text
 
             newjob.queue = "default"
             if job.layout.startswith('multi'):

@@ -462,6 +462,7 @@ class JobRenderer(threading.Thread):
 
             config.logo = self.job.logo
             config.extra_logo = self.job.extra_logo
+            config.extra_text = self.job.extra_text
 
             config.stylesheet = renderer.get_stylesheet_by_name(
                 self.job.stylesheet)

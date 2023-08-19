@@ -113,6 +113,7 @@ class MapRenderingJob(models.Model):
     submittermail = models.EmailField(null=True,blank=True)
     index_queue_at_submission = models.IntegerField()
     map_language = models.CharField(max_length=16, null=True, blank=True, default='en_US.UTF-8')
+    extra_text = models.CharField(max_length=200, null=True, blank=True)
 
     renderstep = models.CharField(max_length=80,null=True,blank=True)
 

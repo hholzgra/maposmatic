@@ -94,7 +94,7 @@
  	      {% endif %}
               <tr><td><strong>{% trans "Paper format" %}</strong></td><td>{{ map|paper_size }}</td></tr>
               <tr><td><strong>{% trans "Map locale" %}</strong></td><td>{{ MAP_LANGUAGES|getitem:map.map_language }}</td></tr>
-	      
+	      <tr><td><strong>{% trans "Queue" %}</strong></td><td>{{ map.queue }}</td></tr>
               {% with date=map.submission_time|date:"DATETIME_FORMAT" %}
               <tr><td><strong>{% trans "Request submitted" %}</strong></td><td title="{{ date }}">{% blocktrans with map.submission_time|timesince as since %}{{since}} ago{% endblocktrans %}</td></tr>
               {% endwith %}

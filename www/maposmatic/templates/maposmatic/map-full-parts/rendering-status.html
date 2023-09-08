@@ -7,6 +7,7 @@
   <div class="row">
     <div class="col-md-9">
       <table class="table table-striped">
+	<tr><td><strong>{% trans "Queue" %}</strong></td><td>{{ map.queue }}</td></tr>
         {% with date=map.submission_time|date:"DATETIME_FORMAT" %}
 	<tr><td><strong>{% trans "Request submitted" %}</strong></td><td title="{{ date }}">{% blocktrans with map.submission_time|timesince as since %}{{since}} ago{% endblocktrans %}</td></tr>
         {% endwith %}

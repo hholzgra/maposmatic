@@ -279,7 +279,7 @@ def map_full(request, id, nonce=None):
                                 'nonce': nonce, 'refresh': refresh,
                                 'progress': progress, 'queue_size': queue_size })
 
-def maps(request, category=None):
+def maps(request, category=None, extra=None):
     """Displays all maps and jobs, sorted by submission time, or maps matching
     the search terms when provided."""
 
@@ -301,6 +301,8 @@ def maps(request, category=None):
                     .order_by('-submission_time'))
         if category == 'errors':
             map_list = map_list.filter(status=2).exclude(resultmsg='ok')
+        elif category == 'queue' and extra is not None:
+            map_list = map_list.filter(queue=extra)
 
     paginator = Paginator(map_list, www.settings.ITEMS_PER_PAGE)
 

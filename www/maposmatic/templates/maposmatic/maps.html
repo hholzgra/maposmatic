@@ -43,8 +43,23 @@
 {% endwith %}
 {% endwith %}
 
-<h1>{% trans "Maps" %}</h1>
-<br style="clear: both;" />
+<div class="d-flex justify-content-between">
+      <div class="fs-1">
+        {% trans "Maps" %} 
+	{% if category == "queue" and extra %}
+	  of queue <i>{{ extra }}</i>
+	{% endif %}
+      </div>
+      <div>
+	Queue:
+	<select onChange="url='/maps'; if (this.value) { url+='/queue/'+this.value }; {% if form.cleaned_data.query %} url+='?query={{form.cleaned_data.query}}'; {% endif %} window.location.href=url;">
+	  <option value=""> </option>
+	  {% for key, value in queue_states.items %}
+	  <option value="{{key}}" {% if category == "queue" and extra == key %}selected="selected"{% endif %}>{{ key }}</option>
+	  {% endfor %}
+	</select>
+      </div>
+ </div>
 
 {% for map in maps.object_list %}
 <div class="span12 map map-status-{{ map.status }}">

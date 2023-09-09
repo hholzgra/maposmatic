@@ -317,7 +317,10 @@ def maps(request, category=None, extra=None):
         maps = paginator.page(paginator.num_pages)
 
     return render(request, 'maposmatic/maps.html',
-                              { 'maps': maps, 'form': form,
+                              { 'maps': maps,
+                                'form': form,
+                                'category': category,
+                                'extra': extra,
                                 'is_search': form.is_valid(),
                                 'pages': helpers.get_pages_list(maps, paginator) })
 

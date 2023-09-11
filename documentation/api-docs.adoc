@@ -360,7 +360,7 @@ Request Url
 ^^^^^^^^^^^
 
 ----
-https://api.get-map.org/apis/jobs/
+https://api.get-map.org/apis/jobs/{id}
 ----
 
 Return codes

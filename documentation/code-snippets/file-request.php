@@ -1,7 +1,7 @@
 <?php
 require_once 'HTTP/Request2.php';
 
-define('BASE_URL', 'https://api.get-map.org/apis/v1/');
+define('BASE_URL', 'https://api.get-map.org/apis/');
 define('GPX_FILE', 'A1.gpx');
 
 $data = [];

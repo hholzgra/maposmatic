@@ -1,7 +1,7 @@
 <?php
 require_once 'HTTP/Request2.php';
 
-define('BASE_URL', 'https://api.get-map.org/apis/v1/');
+define('BASE_URL', 'https://api.get-map.org/apis/');
 
 $data = ['title'       => 'PHP Test',
          'bbox_bottom' => 52.00,

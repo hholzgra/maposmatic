@@ -368,3 +368,5 @@ class UploadFile(models.Model):
     file_type = models.CharField(max_length = 4, choices = FILE_TYPES)
 
     job = models.ManyToManyField(MapRenderingJob, related_name = 'uploads')
+
+    keep_until = models.DateTimeField(null = True, blank = True)

@@ -47,7 +47,7 @@ LOG = logging.getLogger('maposmatic')
 
 def styles(request):
     result = {}
-    for style in ocitysmap.OCitySMap().get_all_style_configurations():
+    for style in ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH).get_all_style_configurations():
         result[style.name] = { "description": style.description, 
                                "annotation": style.annotation,
                                "preview_url": request.build_absolute_uri('/media/img/style/'+style.name+'.png')
@@ -59,7 +59,7 @@ def styles(request):
 
 def overlays(request):
     result = {}
-    for overlay in ocitysmap.OCitySMap().get_all_overlay_configurations():
+    for overlay in ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH).get_all_overlay_configurations():
         result[overlay.name] = { "description": overlay.description, 
                                  "annotation": overlay.annotation,
                                  "preview_url": request.build_absolute_uri('/media/img/overlay/'+overlay.name+'.png')
@@ -83,7 +83,7 @@ def paper_formats(request):
 
 def layouts(request):
     result = {}
-    for renderer in ocitysmap.OCitySMap().get_all_renderers():
+    for renderer in ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH).get_all_renderers():
         result[renderer.name] = { "description": renderer.description,
                                   "preview_url": request.build_absolute_uri('/media/img/layout/'+renderer.name+'.png')
                          }

@@ -1,0 +1,40 @@
+{% load i18n %}
+{% load l10n %}
+{% load extratags %}
+
+    <div class="tab" id="wizard-step-layout">
+      <div class="row">
+	<div class="col-lg-6">
+          <fieldset>
+            <legend>{% trans "Layout" %}</legend>
+            {{ form.layout }}
+          </fieldset>
+          <fieldset id="fieldset-indexer">
+            <legend>{% trans "Indexer" %}</legend>
+            {{ form.indexer }}
+          </fieldset>
+	</div>
+	<div class="col-lg-6">
+          <img id="layout-preview" align="right"
+	       src="/media/img/layout/{{request.session.new_layout}}.png"
+	       srcset="/media/img/layout/{{request.session.new_layout}}.png, /media/img/layout/{{request.session.new_layout}}-1.5x.png 1.5x, /media/img/layout/{{request.session.new_layout}}-2x.png 2x"
+	       />
+	</div>
+      </div>
+
+      <div class="row">
+	<div class="col-lg-12">
+	  <div class="alert alert-info">
+	    <h4>{% trans "Map layout" %}</h4>
+	    <p>
+	      {% blocktrans trimmed %}
+	      The map layout determines how the map and the index are
+	      rendered. The <em>Multi-page layout</em> produces a booklet very suitable for
+	      printing and binding.
+	      {% endblocktrans %}
+	    </p>
+	  </div>
+	</div>
+      </div>
+    </div>
+

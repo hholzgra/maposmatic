@@ -1,0 +1,70 @@
+{% load i18n %}
+{% load l10n %}
+{% load extratags %}
+
+    <div class="tab" id="wizard-step-lang-title">
+      <div class="row">
+	<div class="col-lg-8">
+          <fieldset>
+            <legend>{% trans "Map title" %}</legend>
+            {{ form.maptitle }}
+          </fieldset>
+	</div>
+	<div class="col-lg-4">
+          <fieldset>
+            <legend>{% trans "Locale" %}</legend>
+	    <div class="dropdown">
+  	      <button id="map_language_button" type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expand="false">en_US.UTF-8</button>
+		      <!-- {{ form.map_language.value }} -->
+	      </button>
+	      <input type="hidden" name="{{ form.map_language.name }}" id="{{ form.map_language.name }}" value="en_US.UTF-8"/>
+	      <ul id="maplang_choices" class="dropdown-menu bg-light" style="height: 400px; overflow-y: auto;" area-labeledby="map_language_button">
+		{% for choice in form.map_language.field.choices %}
+		<li><a class="dropdown-item" href="#" data-langcode="{{choice.0}}" onclick="$('#map_language_button').html($(this).html()); $('#{{ form.map_language.name }}').val('{{choice.0}}');">{{choice.1}} ({{choice.0|locale_base}})</a></li>
+		{% endfor %}
+	      </ul>
+	    </div>
+          </fieldset>
+	</div>
+      </div>
+      <div class="row">
+	<div class="col-lg-12">
+	  <br/>
+          <fieldset>
+            <legend>{% trans "Your Email address (for notifications, optional)" %}</legend>
+            {{ form.submittermail }} 
+	    {% if SUBMITTER_MAIL_LIFETIME %}
+	      ({% trans "will be deleted after" %} {{ SUBMITTER_MAIL_LIFETIME }} {% trans "hours" %})
+	    {% endif %}
+          </fieldset>
+	</div>
+      </div>
+
+      <div class="row" style="margin-top: 30px;">
+	<div class="col-lg-12">
+          <fieldset id="summary">
+            <legend>{% trans "Summary" %}</legend>
+            <table class="table table-striped">
+              <tbody>
+		<tr><td>{% trans "Location:" %}</td><td id="summary-location"></td></tr>
+		<tr><td>{% trans "Layout:" %}</td><td id="summary-layout"></td></tr>
+		<tr><td>{% trans "Stylesheet:" %}</td><td id="summary-stylesheet"></td></tr>
+		<tr><td>{% trans "Overlay:" %}</td><td id="summary-overlay"></td></tr>
+		<tr><td>{% trans "Paper format:" %}</td><td id="summary-paper-size"></td></tr>
+              </tbody>
+            </table>
+          </fieldset>
+
+	</div>
+      </div>
+
+      <div class="alert alert-info">
+	<h4>{% trans "Almost there!" %}</h4>
+	<p>
+	  {% blocktrans trimmed %}
+	  You're almost ready to request to map rendering! Select the map language,
+	  eventually adjust the title of your map, and you're good to go!
+	  {% endblocktrans %}
+	</p>
+      </div>
+    </div>

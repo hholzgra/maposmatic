@@ -1,0 +1,76 @@
+{% load i18n %}
+{% load l10n %}
+{% load extratags %}
+
+    <div class="tab" id="wizard-step-paper-size">
+      <div class="row" id="paper-size">
+	<div class="col-lg-6">
+	  <div align="center">
+            <fieldset>
+              <legend>{% trans "Paper size" %} {% trans "(width x height)" %}</legend>
+	      <div id="papersize_formline">
+		{{ form.paper_width_mm }}mm <i class="fas fa-arrows-alt-h"></i>
+		&times;
+		{{ form.paper_height_mm }}mm <i class="fas fa-arrows-alt-v"></i>
+	      </div>
+            </fieldset>
+	  </div>
+	  <div height="1ex">&nbsp;</div>
+	  <div align="center">
+	    <canvas id="paper_canvas" width="400" height="400" align="center">
+	  </div>
+	  </canvas>
+	</div>
+	<div class="col-lg-6">
+	  <div id='single_page_sizes'>
+	  <fieldset>
+	    <legend>Paper size suggestions</legend>
+	    {{ papersize_suggestions }}
+	  </fieldset>
+	  </div>
+	  <div id='multi_page_sizes' style='display: none'>
+	  <fieldset>
+	    <legend>Multipage size suggestions</legend>
+	    {{ multipage_papersize_suggestions }}
+	  </fieldset>
+	  </div>
+	</div>
+      </div>
+
+      <div class="row">
+	<div class="col-lg-12">
+	  <div class="alert alert-error" id="paper-size-loading-error">
+            {% blocktrans %}An error occured while retrieving compatible paper sizes.{% endblocktrans %}
+	  </div>
+	</div>
+      </div>
+
+      <div class="row">
+	<div class="col-lg-12">
+	  <div class="alert alert-info" id="paper-size-loading">
+	    <i class="fas fa-redo"></i>
+            {% blocktrans %}Calculating available paper formats for your map...{% endblocktrans %}
+	  </div>
+	</div>
+      </div>
+      
+      <div class="row">
+	<div class="col-lg-12">
+	  <div class="alert alert-info">
+	    <h4>{% trans "Paper format and size" %}</h4>
+	    <p>
+              {% blocktrans trimmed %}
+	      Select the desired format, size and orientation for your map.
+	      {% endblocktrans %}
+              {% blocktrans trimmed %}
+	      You can choose from the suggested standard sizes, the "best
+	      fit" size for the map area you selected, or specify a width
+	      and height of your own choice.
+	      {% endblocktrans %}
+	    </p>
+	  </div>
+	</div>
+      </div>
+      
+    </div>
+

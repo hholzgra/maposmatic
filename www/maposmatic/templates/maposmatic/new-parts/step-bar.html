@@ -1,0 +1,50 @@
+{% load i18n %}
+{% load l10n %}
+{% load extratags %}
+
+<div class="row justify-content-around">
+  <div class="col-lg-2">
+    <button type="button" class="btn btn-default" id="prevlink" onclick="nextPrev(-1)"><i class="fas fa-arrow-left"></i>  {% trans "Back" %}</button>
+  </div>
+  <div class="stepwizard col-lg-6">
+    <div class="stepwizard-row setup-panel">
+
+      <div class="stepwizard-step">
+	<i class="btn btn-light btn-circle"><i class="fas fa-globe active"></i></i>
+	<p>{% trans "Map area" %}</p>
+      </div>
+
+      <div class="stepwizard-step">
+	<i class="btn btn-light btn-circle"><i class="fas fa-file"></i></i>
+	<p>{% trans "Layout" %}</p>
+      </div>
+
+      <div class="stepwizard-step">
+	<i class="btn btn-light btn-circle"><i class="fas fa-image"></i></i>
+	<p>{% trans "Style" %}</p>
+      </div>
+
+      <div class="stepwizard-step">
+	<i class="btn btn-light btn-circle"><i class="fas fa-bars"></i></i>
+	<p>{% trans "Overlays" %}</p>
+      </div>
+
+      <div class="stepwizard-step">
+	<i class="btn btn-light btn-circle"><i class="fas fa-file"></i></i>
+	<p>{% trans "Paper" %}</p>
+      </div>
+
+      <div class="stepwizard-step">
+	<i class="btn btn-light btn-circle"><i class="fas fa-check"></i></i>
+	<p>{% trans "Submit" %}</p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-2" style="align: right">
+    <button type="button" class="btn btn-success" id="nextlink" onclick="nextPrev(1)"><i class="fas fa-arrow-right"></i> {% trans "Next" %}</button>
+    <button id="formsubmit" type="submit" class="btn btn-success" value="submit" onclick="$('#submitme').click()">
+      {% trans "Generate" %}&nbsp;<i class="fas fa-check-circle"></i>
+    </button>
+  </div>
+</div>
+

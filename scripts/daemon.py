@@ -29,16 +29,19 @@ import threading
 import time
 from functools import reduce
 import glob
+from datetime import datetime
 
 import django
 django.setup()
 
-from www.maposmatic.models import MapRenderingJob
-from www.settings import RENDERING_RESULT_PATH, RENDERING_RESULT_MAX_SIZE_GB, RENDERING_RESULT_MAX_PURGE_ITERATIONS
+from www.maposmatic.models import MapRenderingJob, UploadFile
+from www.settings import RENDERING_RESULT_PATH, RENDERING_RESULT_MAX_SIZE_GB, RENDERING_RESULT_MAX_PURGE_ITERATIONS, MEDIA_ROOT
 
 import render
 
 from django import db
+
+LOG = logging.getLogger('maposmatic')
 
 _DEFAULT_POLL_FREQUENCY = 10        # Daemon job polling frequency, in seconds
 
@@ -265,9 +268,16 @@ class RenderingsGarbageCollector:
                     pass
 
 
-#    records = UploadFile.objects.filter(keep_until__lte = datetime.now())
 
-#    for record in records:
+    LOG.info("Cleanup remove old upload files")
+    files = UploadFile.objects.filter(keep_until__lte = datetime.now())
+
+    for file in files:
+        try:
+            os.remove(os.path.join(MEDIA_ROOT, file.uploaded_file.name))
+            LOG.info("Cleanup: removed %s" % file.upload_file.name)
+        except:
+            pass
 
 if __name__ == '__main__':
     if (not os.path.exists(RENDERING_RESULT_PATH)

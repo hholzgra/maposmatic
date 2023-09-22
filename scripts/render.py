@@ -490,27 +490,7 @@ class JobRenderer(threading.Thread):
 
             config.paper_width_mm = self.job.paper_width_mm
             config.paper_height_mm = self.job.paper_height_mm
-        except KeyboardInterrupt:
-            self.result = RESULT_KEYBOARD_INTERRUPT
-            LOG.info("Rendering of job #%d interrupted!" % self.job.id)
-            return self.result
-        except MemoryError:
-            self.result = RESULT_MEMORY_EXCEEDED
-            LOG.exception("Not enough memory to render job #%d" % self.job.id)
-            self._email_exception(sys.exc_info())
-            return self.result
-        except Exception as e:
-            self.result = RESULT_PREPARATION_EXCEPTION
-            LOG.exception("Rendering of job #%d failed (exception occurred during"
-                          " data preparation)!" % self.job.id)
-            errfile = result_file_prefix + "-errors.txt"
-            fp = open(errfile, "w")
-            traceback.print_exc(file=fp)
-            fp.close()
-            self._email_exception(sys.exc_info())
-            return self.result
 
-        try:
             # Get the list of output formats (PNG, PDF, SVGZ, CSV)
             # that the renderer accepts.
             renderer_cls = renderers.get_renderer_class_by_name(self.job.layout)

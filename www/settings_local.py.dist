@@ -179,8 +179,10 @@ WEBLATE_BASE_URL = 'https://translate.get-map.org/'
 CONTACT_EMAIL = 'your-name@example.org'
 CONTACT_CHAT  = 'irc://irc.oftc.org/#maposmatic'
 
-# custom footer text
-EXTRA_FOOTER = ''
+# custom branding
+EXTRA_FOOTER = ''   # extra text for the annotation footer
+EXTRA_LOGO   = ''   # custom logo to put in header
+EXTRA_IP     = None # optionally: add extra info for specific client IP only 
 
 # show this in a warning box on top of the page when set
 MAINTENANCE_NOTICE = ''

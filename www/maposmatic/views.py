@@ -131,14 +131,16 @@ def donate_thanks(request):
     """The thanks for donation page."""
     return render(request, 'maposmatic/donate-thanks.html')
 
-def create_upload_file(job, file):
+def create_upload_file(job, file, keep_until = None):
     first_line = file.readline().decode("utf-8-sig")
     LOG.info("firstline type %s" % type(first_line))
     if first_line.startswith(u'<?xml'):
         file_type = 'gpx'
     else:
         file_type = 'umap'
-    file_instance =  models.UploadFile(uploaded_file = file, file_type = file_type)
+    file_instance =  models.UploadFile(uploaded_file = file,
+                                       file_type = file_type,
+                                       keep_until = keep_until)
     file_instance.save()
     file_instance.job.add(job)
 
@@ -188,8 +190,12 @@ def new(request):
             job.save()
 
             files = request.FILES.getlist('uploadfile')
+            if form.cleaned_data.get('delete_files_after_rendering'):
+                keep_until = None
+            else:
+                keep_until = '1999-01-01'
             for file in files:
-                create_upload_file(job, file)
+                create_upload_file(job, file, keep_until)
 
             return HttpResponseRedirect(reverse('map-by-id-and-nonce',
                                                 args=[job.id, job.nonce]))

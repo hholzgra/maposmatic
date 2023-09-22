@@ -74,6 +74,7 @@ class MapRenderingJobForm(forms.ModelForm):
                              fields=(forms.FloatField(), forms.FloatField(),
                                      forms.FloatField(), forms.FloatField()))
     uploadfile = MultiFileField(required=False)
+    delete_files_after_rendering = forms.BooleanField(required=False)
 
     map_lang_flag_list = []
     for lang_key, lang_name in www.settings.MAP_LANGUAGES_LIST:

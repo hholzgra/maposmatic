@@ -350,10 +350,13 @@ logconfig.setup_maposmatic_logging(
 LOG = logging.getLogger('maposmatic')
 
 # File upload settings
+# make sure files and dirs are group-writable
+# render user should be in www-data group to be able to clean up
 
-# make sure that files that exceed FILE_UPLOAD_MAX_MEMORY_SIZE
-# are still readable 
-FILE_UPLOAD_PERMISSIONS = 0o644
+FILE_UPLOAD_PERMISSIONS = 0o664
+FILE_UPLOAD_DIRECTORY_PERMISSIONS = 0o664
+
+# Maintenance mode settings
 
 MAINTENANCE_MODE = False  # True or False, *NOT* None
 MAINTENANCE_MODE_IGNORE_IP_ADDRESSES = ('217.146.146.90',)

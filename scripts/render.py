@@ -518,16 +518,13 @@ class JobRenderer(threading.Thread):
             else:
                 self.result = RESULT_RENDERING_EXCEPTION
                 LOG.exception("Rendering of job #%d faild, no output files generated" % self.job.id)
-                return self.result
         except KeyboardInterrupt:
             self.result = RESULT_KEYBOARD_INTERRUPT
             LOG.info("Rendering of job #%d interrupted!" % self.job.id)
-            return self.result
         except MemoryError:
             self.result = RESULT_MEMORY_EXCEEDED
             LOG.exception("Not enough memory to render job #%d" % self.job.id)
             self._email_exception(sys.exc_info())
-            return self.result
         except Exception as e:
             self.result = RESULT_RENDERING_EXCEPTION
             LOG.exception("Rendering of job #%d failed (exception occurred during"
@@ -537,9 +534,13 @@ class JobRenderer(threading.Thread):
             traceback.print_exc(file=fp)
             fp.close()
             self._email_exception(sys.exc_info())
-            return self.result
 
-        self._email_submitter("render_email_success.txt")
+        if self.result == RESULT_SUCCESS:
+            self._email_submitter("render_email_success.txt")
+
+        for file in self.job.uploads.all():
+            if file.keep_until is None:
+                os.remove(os.path.join(MEDIA_ROOT, file.uploaded_file.name))
 
         return self.result
 

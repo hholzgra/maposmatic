@@ -2,88 +2,116 @@
 {% load l10n %}
 {% load extratags %}
 
-    <div class="col-lg-12" >
+<div class="col-lg-12" >
 
-      <div class="tab" style="display: block" id="wizard-step-location">
+  <div class="tab" style="display: block" id="wizard-step-location">
 
-        <ul class="nav nav-tabs" id="locTabs">
-          <li class="nav-item" role="presentation">
-	    <button class="nav-link active" id="step-location-bbox-tab" data-bs-toggle="tab" data-bs-target="#step-location-bbox" type="button" role="tab" aria-controls="bt-step-location-bbox" aria-selected="true"><i class="fas fa-globe-africa"></i> {% trans "Geographic area" %}</button>
-          </li>
-          <li class="nav-item" role="presentation">
-	    <button class="nav-link" id="step-location-admin-tab" data-bs-toggle="tab" data-bs-target="#step-location-admin" type="button" role="tab" aria-controls="bt-step-location-bbox" aria-selected="false"><i class="fas fa-search-location"></i> {% trans "City search" %}</button>
-          </li>
-          <li class="nav-item" role="presentation">
-	    <button class="nav-link" id="step-location-file-tab" data-bs-toggle="tab" data-bs-target="#step-location-file" type="button" role="tab" aria-controls="bt-step-location-file" aria-selected="false"><i class="fas fa-upload"></i> {% trans "File upload" %}</button>
-          </li>
-	</ul>
+    <ul class="nav nav-tabs" id="locTabs">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="step-location-bbox-tab" data-bs-toggle="tab" data-bs-target="#step-location-bbox" type="button" role="tab" aria-controls="bt-step-location-bbox" aria-selected="true"><i class="fas fa-globe-africa"></i> {% trans "Geographic area" %}</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="step-location-admin-tab" data-bs-toggle="tab" data-bs-target="#step-location-admin" type="button" role="tab" aria-controls="bt-step-location-bbox" aria-selected="false"><i class="fas fa-search-location"></i> {% trans "City search" %}</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="step-location-file-tab" data-bs-toggle="tab" data-bs-target="#step-location-file" type="button" role="tab" aria-controls="bt-step-location-file" aria-selected="false"><i class="fas fa-upload"></i> {% trans "File upload" %}</button>
+      </li>
+    </ul>
 
-        <div class="tab-content" id="step-location-tabs">
-          <div class="tab-pane active" id="step-location-bbox" role="tabpanel">
-            {{ form.bbox }}
-          </div>
-          <div class="tab-pane" id="step-location-admin" role="tabpanel">
-            <div style="position: relative;">
-              {{ form.administrative_city }}
-              <i class="fas fa-redo suggest-icon" id="loading-icon"></i>
-              <i class="fas fa-exclamation-triangle suggest-icon" id="error-icon"></i>
-              <ul id="suggest" class="dropdown-menu" role="menu"
-                  aria-labelledby="id_administrative_city">
-              </ul>
-
-            </div>
-
-	    {{ form.administrative_osmid }}
-
-          </div>
-
-	  <div class="tab-pane" id="step-location-file" role="tabpanel">
-	    <div class="col-lg-12">
-	      <fieldset id="track-file">
-		<legend><i class="fas fa-file-upload"></i> {% trans "Upload files" %}</legend>
-		{{ form.uploadfile }}
-		<tt id="file-list">
-		</tt>
-	      </fieldset>
-
-	      <div style='height: 2ex'></div>
-
-	      <div class="alert alert-secondary">
-                {% blocktrans trimmed %}
-		Upload GPX, Umap, or general GeoJSON files here.
-		<br/>
-		You can select multiple files at once. If you re-open the
-		file selection dialog to select files, your selection will
-		replace the previous one.
-		{% endblocktrans %}
-	      </div>
-
-	      <div style='height: 2ex'></div>
-
-              <div class="alert alert-danger">
-		{% blocktrans trimmed %}
-		<b>Note:</b> The uploaded files will not be made available to anyone, the map created using this
-		file <b>will be publicly visible</b> though.<br/>Do <b>NOT</b> upload any data you don't want to be publicly
-		visible.
-		{% endblocktrans %}
-	      </div>
-	    </div>
-	  </div>
-
-        </div>
+    <div class="tab-content" id="step-location-tabs">
+      <div class="tab-pane active" id="step-location-bbox" role="tabpanel">
+        {{ form.bbox }}
 
         <div class="alert alert-info">
           <h4>{% trans "Geographic area selection" %}</h4>
+
           <p>
-    	    {% blocktrans trimmed %}
-	    Start by choosing the city or geographic area you want to
-	    render. Suggestions will appear as you start typing. If you can't find the city
-	    you want, or if you prefer to choose the exact area you want to render
-	    yourself, select the <em>Geographic area</em> tab and use the mini-map to set
-	    the limits of the rendered area.
-	    {% endblocktrans %}
+            {% blocktrans trimmed %}
+            Start by choosing the geographic area you want to
+            render. Use <em>Select area</em> to select a specific bounding box,
+            or just use the visible area.
+            {% endblocktrans %}
           </p>
         </div>
       </div>
 
+      <div class="tab-pane" id="step-location-admin" role="tabpanel">
+        <div style="position: relative;">
+          {{ form.administrative_city }}
+          <i class="fas fa-redo suggest-icon" id="loading-icon"></i>
+          <i class="fas fa-exclamation-triangle suggest-icon" id="error-icon"></i>
+          <ul id="suggest" class="dropdown-menu" role="menu"
+              aria-labelledby="id_administrative_city">
+          </ul>
+
+        </div>
+
+        {{ form.administrative_osmid }}
+
+        <div class="alert alert-info">
+          <h4>{% trans "City search" %}</h4>
+
+          <p>
+            {% blocktrans trimmed %}
+            Start by choosing the city or geographic area you want to
+            render. Suggestions will appear as you start typing, based on what
+            is found in the local database.
+            {% endblocktrans %}
+          </p>
+        </div>
+      </div>
+
+      <div class="tab-pane" id="step-location-file" role="tabpanel">
+        <div class="col-lg-12">
+
+          <div class="container">
+            <div class="row">
+              <div class="col">
+                <fieldset id="track-file">
+                  <legend><i class="fas fa-file-upload"></i> {% trans "Upload files" %}</legend>
+                  {{ form.uploadfile }}
+                  <tt id="file-list">
+                  </tt>
+                </fieldset>
+                <fieldset>
+                  {{ form.delete_files_after_rendering }}
+                  <label>{% trans "Delete files after rendering" %}</label>
+                </fieldset>
+              </div>
+              <div class="col">
+                <div class="alert alert-danger">
+                  {% blocktrans trimmed %}
+                  <b>Note:</b>
+                  The uploaded files will not be made available to anyone,
+                  the map created using this
+                  file <b>will be publicly visible</b> though.<br/>Do <b>NOT</b> upload any data you don't want to be publicly
+                  visible.
+                  {% endblocktrans %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="alert alert-info">
+            <h4>{% trans "File upload" %}</h4>
+
+            <p>
+              {% blocktrans trimmed %}
+              Upload GPX, Umap, or general GeoJSON files here.
+              <br/>
+              You can select multiple files at once.
+              <br/>
+              If you re-open the file selection dialog to select files
+              your selection will replace the previous one.
+              {% endblocktrans %}
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
+
+  </div>
+</div>

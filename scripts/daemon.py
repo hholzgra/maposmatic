@@ -265,6 +265,10 @@ class RenderingsGarbageCollector:
                     pass
 
 
+#    records = UploadFile.objects.filter(keep_until__lte = datetime.now())
+
+#    for record in records:
+
 if __name__ == '__main__':
     if (not os.path.exists(RENDERING_RESULT_PATH)
         or not os.path.isdir(RENDERING_RESULT_PATH)):

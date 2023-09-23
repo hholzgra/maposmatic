@@ -70,13 +70,13 @@
                 <fieldset id="track-file">
                   <legend><i class="fas fa-file-upload"></i> {% trans "Upload files" %}</legend>
                   {{ form.uploadfile }}
-                  <tt id="file-list">
-                  </tt>
+                  <tt id="file-list"> <!-- TODO: not used yet --></tt>
                 </fieldset>
                 <fieldset>
                   {{ form.delete_files_after_rendering }}
                   <label>{% trans "Delete files after rendering" %}</label>
                 </fieldset>
+		<button type="button" id="upload_preview_button" class="btn btn-primary" style="display:none" onclick=" $('#step-location-bbox-tab').tab('show');"><i class="fa-solid fa-magnifying-glass"></i> {% trans "Upload preview" %}</button>
               </div>
               <div class="col">
                 <div class="alert alert-danger">

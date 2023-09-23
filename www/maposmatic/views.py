@@ -193,7 +193,10 @@ def new(request):
             if form.cleaned_data.get('delete_files_after_rendering'):
                 keep_until = None
             else:
-                keep_until = '1999-01-01'
+                if www.settings.UPLOAD_FILE_LIFETIME > 0:
+                    keep_until = datetime.datetime.now() + datetime.timedelta(days=www.settings.UPLOAD_FILE_LIFETIME)
+                else:
+                    keep_until = '2999-12-30' # arbitrary 'max' value
             for file in files:
                 create_upload_file(job, file, keep_until)
 

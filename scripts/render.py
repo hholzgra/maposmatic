@@ -540,7 +540,12 @@ class JobRenderer(threading.Thread):
 
         for file in self.job.uploads.all():
             if file.keep_until is None:
-                os.remove(os.path.join(MEDIA_ROOT, file.uploaded_file.name))
+                try:
+                    os.remove(os.path.join(MEDIA_ROOT, file.uploaded_file.name))
+                    file.deleted_on = datetime.datetime.now()
+                    file.save()
+                except Exception as e:
+                    LOG.warning("Purging upload file %s failed: %s" % (file.uploaded_file.name, e))
 
         return self.result
 

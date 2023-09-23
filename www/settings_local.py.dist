@@ -172,6 +172,9 @@ SUBMITTER_IP_LIFETIME=-1
 # set to 0 to keep them forever
 SUBMITTER_MAIL_LIFETIME=24
 
+# Upload file lifetime in days, set to 0 for "forever"
+UPLOAD_FILE_LIFETIME=365
+
 # Weblate base URL - link to translation service
 WEBLATE_BASE_URL = 'https://translate.get-map.org/'
 

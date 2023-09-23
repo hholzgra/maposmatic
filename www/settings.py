@@ -354,7 +354,7 @@ LOG = logging.getLogger('maposmatic')
 # render user should be in www-data group to be able to clean up
 
 FILE_UPLOAD_PERMISSIONS = 0o664
-FILE_UPLOAD_DIRECTORY_PERMISSIONS = 0o664
+FILE_UPLOAD_DIRECTORY_PERMISSIONS = 0o775
 
 # Maintenance mode settings
 

@@ -369,4 +369,6 @@ class UploadFile(models.Model):
 
     job = models.ManyToManyField(MapRenderingJob, related_name = 'uploads')
 
+    created_on = models.DateTimeField(auto_now = True)
     keep_until = models.DateTimeField(null = True, blank = True)
+    deleted_on = models.DateTimeField(null = True, blank = True)

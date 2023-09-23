@@ -46,10 +46,15 @@ function add_upload_layer(filename, new_layer) {
     // TODO: fill file list display
     // $("#file-list").text(txt);
 
-    $('#step-location-bbox-tab').tab('show'); // Select geo location tab
-
+    // we need to have the map visible to correctly apply the new bounds, apparently
+    // so we are quickly switching between tabs back and forth
+    $('#step-location-bbox-tab').tab('show');
     locationFilter.setBounds(upload_file_bounds);
     locationFilter.enable();
+    $('#step-location-file-tab').tab('show');
+
+    // enable "to preview" button
+    $('#upload_preview_button').show();
 }
 
 function get_layer_titles() {

@@ -66,7 +66,7 @@
           {% if LANGUAGE_CODE != "en" %}
           <li class="nav-item">
             <a class="nav-link" target=_blank" href="{{ WEBLATE_BASE_URL }}engage/maposmatic/?utm_source=widget">
-              <img src="{{ WEBLATE_BASE_URL }}widgets/maposmatic/{{ LANGUAGE_CODE }}/svg-badge.svg" alt="Translation status" />
+              <img src="{{ WEBLATE_BASE_URL }}widgets/maposmatic/{{ LANGUAGE_CODE }}/svg-badge.svg" alt="{% trans "Translation status" %}" />
             </a>
           </li>
           {% endif %}

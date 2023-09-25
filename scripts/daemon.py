@@ -270,7 +270,7 @@ class RenderingsGarbageCollector:
 
 
     LOG.info("Cleanup remove old upload files")
-    files = UploadFile.objects.filter(keep_until__lte = datetime.now())
+    files = UploadFile.objects.filter(keep_until__lte = datetime.now(), deleted_on__isnull = True)
 
     for file in files:
         try:

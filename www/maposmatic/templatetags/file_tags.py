@@ -1,5 +1,7 @@
 import os
 
+from django.utils.translation import gettext_lazy as _
+
 import www.settings
 
 from .extratags import register
@@ -24,4 +26,4 @@ def file_readable_size(value):
             size = size / 1024
 
     else:
-        return "not found"
+        return _("no longer present")

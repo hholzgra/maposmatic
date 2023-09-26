@@ -419,6 +419,10 @@ class JobRenderer(threading.Thread):
             except Exception as e:
                 LOG.warning("PNG color reduction failed: %s" % e)
 
+    def _status_update(self, msg):
+        self.job.renderstep = msg
+        self.job.save()
+
     def run(self):
         """Renders the given job, encapsulating all processing errors and
         exceptions.
@@ -437,6 +441,8 @@ class JobRenderer(threading.Thread):
             config = ocitysmap.RenderingConfiguration()
             result_file_prefix = os.path.join(RENDERING_RESULT_PATH, self.job.files_prefix())
             os.makedirs(os.path.dirname(result_file_prefix), exist_ok=True)
+
+            config.status_update = self._status_update
 
             # TODO have the create form provide this
             config.origin_url = 'https://print.get-map.org' + self.job.get_absolute_url()

@@ -702,5 +702,5 @@ def api_rendering_status(request, id, nonce=None):
                                 'refresh':    refresh,
                                 'progress':   progress,
                                 'queue_size': queue_size,
-                                'status':     'working'
+                                'status':     job.renderstep or "working",
                               })

@@ -28,7 +28,7 @@ def _lastline(filename):
 @register.filter()
 def job_status_to_str(value):
     if value.status == 0:
-        return mark_safe(_alert_info + str(_("Waiting for rendering to begin...")) + _alert_end)
+        return mark_safe(_alert_info + str(_("Waiting for rendering to begin, %d jobs still ahead of us") % value.current_position_in_queue()) + _alert_end)
     elif value.status == 1:
         return mark_safe(_alert_info + str(_("The rendering is in progress...")) + _alert_end)
     elif value.status == 2:

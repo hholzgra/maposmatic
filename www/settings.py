@@ -91,6 +91,7 @@ TEMPLATES = [
             'debug': True,
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
+                'django_settings_export.settings_export',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.i18n',
                 'django.template.context_processors.media',
@@ -102,6 +103,10 @@ TEMPLATES = [
             ],
         },
     },
+]
+
+SETTINGS_EXPORT = [
+    'CONTACT_EMAIL',
 ]
 
 MIDDLEWARE = (
@@ -326,8 +331,8 @@ MAP_LANGUAGES_LIST= list(MAP_LANGUAGES.items())
 
 # Job page refresh frequency, in seconds, for when the job is waiting in queue
 # and when the job is currently being rendered.
-REFRESH_JOB_WAITING = 15
-REFRESH_JOB_RENDERING = 10
+REFRESH_JOB_WAITING = 5
+REFRESH_JOB_RENDERING = 2
 
 QUEUE_NAMES = ['default', 'api', 'multipage']
 

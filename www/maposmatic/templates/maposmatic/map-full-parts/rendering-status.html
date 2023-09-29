@@ -40,7 +40,7 @@
 
       <div style="height: 2em"></div>
 
-    {% if map.needs_waiting %}
+    {% if map.is_waiting %}
       <div class="progress">
         <div id="queue-progress" class="progress-bar progress-bar-striped progress-bar-animated"" role="progressbar"
 	     style="width: {{ progress }}%" aria-valuenow="{{ progress }}" aria-valuemin="0" aria-valuemax="100">

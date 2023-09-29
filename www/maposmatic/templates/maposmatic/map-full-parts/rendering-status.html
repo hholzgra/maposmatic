@@ -11,13 +11,13 @@
         {% with date=map.submission_time|date:"DATETIME_FORMAT" %}
 	<tr><td><strong>{% trans "Request submitted" %}</strong></td><td title="{{ date }}">{% blocktrans with map.submission_time|timesince as since %}{{since}} ago{% endblocktrans %}</td></tr>
         {% endwith %}
-	
+
         {% if map.is_rendering %}
         {% with date=map.startofrendering_time|date:"DATETIME_FORMAT" duration=map.submission_time|timesince:map.startofrendering_time %}
 	<tr><td><strong>{% trans "Rendering started" %}</strong></td><td title="{{ date }}">{% blocktrans with map.submission_time|timesince as since %}{{since}} ago{% endblocktrans %}, {% blocktrans %}after {{ duration}} in the queue{% endblocktrans %}</td></tr>
         {% endwith %}
         {% endif %}
-	
+
         {% if map.is_done or map.is_obsolete %}
         {% with date=map.startofrendering_time|date:"DATETIME_FORMAT" duration=map.submission_time|timesince:map.startofrendering_time %}
 	<tr><td><strong>{% trans "Rendering started" %}</strong></td><td title="{{ date }}">{% blocktrans with map.startofrendering_time|timesince as since %}{{since}} ago{% endblocktrans %}, {% blocktrans %}after {{ duration}} in the queue{% endblocktrans %}</td></tr>
@@ -26,29 +26,67 @@
 	<tr><td><strong>{% trans "Rendering completed" %}</strong></td><td title="{{ date }}">{% blocktrans with map.endofrendering_time|timesince as since %}{{since}} ago{% endblocktrans %}, {% blocktrans %}after {{ duration }} {% endblocktrans %}</td></tr>
         {% endwith %}
         {% endif %}
-	
+
         {% if map.is_cancelled %}
         {% with map.endofrendering_time|date:"DATETIME_FORMAT" as date %}
         <tr><td><strong>{% trans "Rendering cancelled" %}</strong></td><td>{{ date }}</td></tr>
         {% endwith %}
         {% endif %}
       </table>
-      
-      <div>
-      {{ map|job_status_to_str }}
+
+
+      {% if   map.status == 0 %}
+      <div class='alert alert-info' role='alert'>
+	<span class='spinner-border spinner-border-sm text-primary'></span>&nbsp;
+	{% blocktrans with counter=map.current_position_in_queue %}
+	Waiting for rendering to begin, {{ counter }} jobs still ahead of us
+	{% endblocktrans %}
       </div>
+      {% elif map.status == 1 %}
+      <div class='alert alert-info' role='alert'>
+	<span class='spinner-border spinner-border-sm text-primary'></span>&nbsp;
+	{{ map.renderstep }}
+      </div>
+      {% elif map.status == 2 %}
+	{% if map.resultmsg == "ok" %}
+      <div class='alert alert-info' role='alert'>
+  	  {% trans "Rendering was successful." %}
+      </div>
+	{% else %}
+      <div class='alert alert-danger' role='alert'>
+	<h4><i class='fas fa-triangle-exclamation'></i> <b>{{ map.resultmsg }}</b></h4>
+	  {% if not map.resultmsg|startswith:'Not enough memory' %}
+	    {% if map|error_log_tail %}
+             {% blocktrans with url=map.get_errorlog %}
+	        Check the <a target='_blank' href='{{ url }}'><i class='fas fa-file-lines'></i> error log</a> for more details<br>
+	      {% endblocktrans %}
+	      {% if settings.CONTACT_EMAIL %}
+	        {% blocktrans with email=map|email_url %}
+                  or contact {{ email }} for more information.
+	        {% endblocktrans %}
+	      {% endif %}
+	      <hr><tt>{{ map|error_log_tail }}</tt>
+	    {% endif %}
+          {% endif %}
+      </div>
+        {% endif %}
+      {% elif map.status == 3 %}
+      <div class='alert alert-warning' role='alert'>
+        {% if map.resultmsg == "ok" %}
+          {% trans "Rendering is obsolete: the rendering was successful, but the files are no longer available." %}
+        {% else %}
+          {% trans "Obsolete failed rendering: the rendering failed, and the incomplete files have been removed." %}
+        {% endif %}
+      </div>
+      {% elif map.status == 4 %}
+      <div class='alert alert-warning' role='alert'>
+	{% trans "The rendering was cancelled by the user." %}
+      </div>
+      {% else %}
+      <div class='alert alert-danger' role='alert'>{% trans "Unknown status" %} '{{ map.status }}'</div>
+      {% endif %}
 
-      <div style="height: 2em"></div>
-
-    {% if map.is_waiting %}
-      <i class="fas fa-hourglass"></i> {% trans "Pending..." %}
-    {% endif %}
-
-    {% if map.is_rendering %}
-      <i class="fas fa-pen-to-square"></i> {% trans "Rendering..." %} {{ status }}
-    {% endif %}
-
-    {% if not map.needs_waiting %}
+      {% if not map.needs_waiting %}
       <form method="post" action="{% url "recreate" %}">
         <input type="hidden" name="id" value="{{ map.id }}" />
 	<button class="btn btn-primary tooltipped" align="right"
@@ -111,7 +149,7 @@
     {% endif %}
 
     {% if map.needs_waiting %}
-    <span class="refresh-time pull-right">{% blocktrans %}Updating in <span>{{ refresh }}</span>s...{% endblocktrans %}</span>
+      <input id="refreshtime" type="hidden" value="{{ refresh }}"</input>
       {% if map.is_waiting %}
         {% if nonce == map.nonce %}
           <div style="height: 2em"></div>

@@ -44,6 +44,9 @@ from . import paper_tags, rss_feed_tags, job_tags
 def add_blank_after_comma(value):
     return value.replace(",",", ")
 
+@register.filter('startswith')
+def startswith(text, starts):
+    return text.startswith(starts)
 
 register.filter('abs', lambda x: abs(x))
 register.filter('getitem', lambda d,i: d.get(i,''))

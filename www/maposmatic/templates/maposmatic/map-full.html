@@ -37,11 +37,15 @@
 {% block extrajs %}
 {% if map.needs_waiting %}
   setInterval(function() {
-    var t = $('.refresh-time > span').text() - 1;
-    $('.refresh-time > span').text(t);
-    if (t == 0) {
-      $('.refresh-time').text('{% trans "Updating now..." %}');
-      $('#map-rendering-status').load("../../apis/rendering-status/{{ map.id }}")
+    var f = $('#refreshtime');
+    if (f.length) {
+      t = f.val();
+      if (t == 0) {
+        $('#map-rendering-status').load("../../apis/rendering-status/{{ map.id }}");
+        f.val(-42);
+      } else if (t > 0) {
+        f.val(t - 1);
+      }
     }
   }, 1000);
 {% endif %}

@@ -97,7 +97,6 @@
       </form>
     {% endif %}
 
-    {% if map.is_done %}
       {% if map.has_output_files %}
         <div style="height: 2em"></div>
 	<div class="card card-default">
@@ -146,7 +145,6 @@
       </a>
       {% endif %}
 
-    {% endif %}
 
     {% if map.needs_waiting %}
       <input id="refreshtime" type="hidden" value="{{ refresh }}"</input>

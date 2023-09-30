@@ -255,7 +255,7 @@ class MapRenderingJob(models.Model):
         Their actual presence is checked if the job is considered done and not
         yet obsolete."""
 
-        if self.is_done():
+        if self.is_rendering() or self.is_done():
             files = self.output_files()
             return len(files['maps']) + len(files['indeces']) + len(files['thumbnail'])
 

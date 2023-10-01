@@ -190,21 +190,18 @@
 	  </div>
 	  {% endif %}
 	  {% if not map.is_done_ok and not map.needs_waiting %}
-	  {% if map.get_errorlog %}
-	  <a class="btn btn-large tooltipped"
+  	    {% if map.get_errorlog %}
+	  <a class="btn btn-large btn-danger"
              href="{{map.get_errorlog}}"
              target="_blank"
-             data-placement="right"
-             data-original-title="{% trans "Something went wrong while processing this job." %}">
+	     title="{% trans "Something went wrong, view the error log." %}">
             <i class="fas fa-ban"></i> {% trans "Error log" %}
 	  </a>
-	  {% else %}
-	  <a class="btn disabled tooltipped"
-             data-placement="top"
-             data-original-title="{{ map|job_status_to_str }}">
-            <i class="fas fa-ban"></i> {% trans "Download" %}
+	    {% else %}
+	  <a class="btn btn-warning disabled">
+            <i class="fas fa-ban"></i> {% trans "No Downloads" %}
 	  </a>
-	  {% endif %}
+	    {% endif %}
 	  {% endif %}
 	</div>
 	<div class="col-6">

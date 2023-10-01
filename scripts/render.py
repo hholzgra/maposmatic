@@ -504,8 +504,12 @@ class JobRenderer(threading.Thread):
 
             # Compute the intersection of the accepted output formats
             # with the desired output formats.
-            output_formats = \
-                list(set(compatible_output_formats) & set(RENDERING_RESULT_FORMATS))
+            output_formats = []
+            for format in RENDERING_RESULT_FORMATS:
+                if format in compatible_output_formats:
+                    output_formats.append(format)
+#            output_formats = \
+#                list(set(RENDERING_RESULT_FORMATS) &set(compatible_output_formats))
 
             output_count = renderer.render(config, self.job.layout,
                             output_formats, result_file_prefix)

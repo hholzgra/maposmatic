@@ -369,6 +369,7 @@ class JobRenderer(threading.Thread):
         self._email_submitter("render_email_failure.txt")
 
     def _gen_thumbnail(self, prefix, paper_width_mm, paper_height_mm):
+        # TODO make this a renderer method
         LOG.info('Creating map thumbnail...')
 
         if self.job.layout == "multi_page":
@@ -508,8 +509,6 @@ class JobRenderer(threading.Thread):
             for format in RENDERING_RESULT_FORMATS:
                 if format in compatible_output_formats:
                     output_formats.append(format)
-#            output_formats = \
-#                list(set(RENDERING_RESULT_FORMATS) &set(compatible_output_formats))
 
             output_count = renderer.render(config, self.job.layout,
                             output_formats, result_file_prefix)

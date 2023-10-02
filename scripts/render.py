@@ -421,6 +421,7 @@ class JobRenderer(threading.Thread):
                 LOG.warning("PNG color reduction failed: %s" % e)
 
     def _status_update(self, msg):
+        LOG.warning("Status update: %s" % msg)
         self.job.renderstep = msg
         self.job.save()
 

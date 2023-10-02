@@ -516,6 +516,7 @@ class JobRenderer(threading.Thread):
 
             # Create thumbnail
             try:
+                config.status_update("Generating preview thumbnail")
                 self._gen_thumbnail(result_file_prefix, config.paper_width_mm,
                                     config.paper_height_mm)
             except:

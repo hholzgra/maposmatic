@@ -111,8 +111,12 @@ from them (but not the actual uploaded files themselves) will be visible to
 everyone. So do not upload any sensitive data you don't want to to be seen in 
 public, or that you don't have the permission to share in public.
 
-Once files have been selected and verified, the form switches back to the
-area selection tabl, where it will show a preview of the imported file
+Regarding the uploaded files themselves you can select to delete them right after
+use, or to keep them on the server for (currently) a year, allowing to re-run the
+rendering job at a later date.
+
+Once files have been selected and verified you can switch back to the
+area selection tab, where it will show a preview of the imported file
 contents, and the optimal map area to display all contained data.
 
 image::gpx-selected.png[GPX Preview,width=80%,pdfwidth=80%,align=center]

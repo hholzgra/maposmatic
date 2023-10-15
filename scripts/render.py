@@ -404,7 +404,8 @@ class JobRenderer(threading.Thread):
                 img = Image.open(prefix + '.png')
                 try:
                     img = img.convert('RGB')
-                    img.save(prefix + '.jpg', quality=50)
+                    img.save(prefix + '.jpg.tmp', quality=50)
+                    os.rename(prefix + '.jpg.tmp', prefix + '.jpg')
                 except Exception as e:
                     LOG.warning("PNG to JPEG conversion failed: %s" % e)
                 img.thumbnail((200, 200), Image.ANTIALIAS)
@@ -414,9 +415,10 @@ class JobRenderer(threading.Thread):
             img.close()
 
             try:
-                pngquant_cmd = [ "pngquant", "--output", "%s.8bit.png" % prefix,
+                pngquant_cmd = [ "pngquant", "--output", "%s.8bit.tmp" % prefix,
                                  "%s.png" % prefix ]
                 subprocess.check_call(pngquant_cmd)
+                os.rename(prefix + '.8bit.tmp', prefix + '8bit.png')
             except Exception as e:
                 LOG.warning("PNG color reduction failed: %s" % e)
 

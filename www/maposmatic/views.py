@@ -420,13 +420,13 @@ def reedit(request):
         bounds = "L.latLngBounds(L.latLng(%f,%f),L.latLng(%f,%f))" % (job.lat_upper_left,
                                                                       job.lon_upper_left,
                                                                       job.lat_bottom_right,
-                                                                      job.lon_bottom_right),
+                                                                      job.lon_bottom_right)
 
         return render(request,
                       'maposmatic/new.html',
                       {
                           'form' : form,
-                          'SELECTION_BOUNDS': bounds
+                          'SELECTION_BOUNDS': bounds,
                       })
 
     return HttpResponseBadRequest("ERROR: Invalid request")

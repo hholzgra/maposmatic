@@ -3,62 +3,6 @@
 {% load extratags %}
 
 function wizardmap(elt) {
-  var map = create_map($('#step-location-map'));
-  var lock = false;
-  var bbox = null;
-  var bbox_style = {
-    fill: true,
-    fillColor: "#FFFFFF",
-    fillOpacity: 0.5,
-    stroke: true,
-    strokeOpacity: 0.8,
-    strokeColor: "#FF0000",
-    strokeWidth: 2
-  };
-  var countryquery = null;
-  locationFilter = new L.LocationFilter({
-      enableButton: {
-          enableText:  '{% trans "Select area" %}',
-          disableText: '{% trans "Remove selection" %}'
-      },
-      adjustButton: {
-          text: '{% trans "Select area within current zoom" %}'
-      },
-      buttonPosition: 'topright'
-  });
-  locationFilter.on("change", function (e) {
-      bbox = e.target.getBounds();
-      map.fitBounds(bbox);
-      update_fields();
-  });
-  locationFilter.on("enabled", function (e) {
-      bbox = e.target.getBounds();
-      map.fitBounds(bbox);
-      update_fields();
-  });
-  locationFilter.on("disabled", function (e) {
-      bbox = null;
-      update_fields();
-  });
-  locationFilter.addTo(map);
-
-  // locate client position
-  L.control.locate().addTo(map);
-
-  // search button
-  map.addControl( new L.Control.Search({
-      url: '//nominatim.openstreetmap.org/search?format=json&q={s}',
-      jsonpParam: 'json_callback',
-      propertyName: 'display_name',
-      propertyLoc: ['lat','lon'],
-      circleLocation: true,
-      markerLocation: false,
-      autoType: false,
-      autoCollapse: true,
-      minLength: 2,
-      zoom: 14
-  }) );
-
   /**
    * Update the 4 text fields with the area coordinates.
    *
@@ -148,6 +92,62 @@ function wizardmap(elt) {
     lock = false;
   };
 
+
+  var map = create_map($('#step-location-map'));
+  var lock = false;
+  var bbox = null;
+  var bbox_style = {
+    fill: true,
+    fillColor: "#FFFFFF",
+    fillOpacity: 0.5,
+    stroke: true,
+    strokeOpacity: 0.8,
+    strokeColor: "#FF0000",
+    strokeWidth: 2
+  };
+  var countryquery = null;
+  locationFilter = new L.LocationFilter({
+      enableButton: {
+          enableText:  '{% trans "Select area" %}',
+          disableText: '{% trans "Remove selection" %}'
+      },
+      adjustButton: {
+          text: '{% trans "Select area within current zoom" %}'
+      },
+      buttonPosition: 'topright'
+  });
+  locationFilter.on("change", function (e) {
+      bbox = e.target.getBounds();
+      map.fitBounds(bbox);
+      update_fields();
+  });
+  locationFilter.on("enabled", function (e) {
+      bbox = e.target.getBounds();
+      map.fitBounds(bbox);
+      update_fields();
+  });
+  locationFilter.on("disabled", function (e) {
+      bbox = null;
+      update_fields();
+  });
+  locationFilter.addTo(map);
+
+  // locate client position
+  L.control.locate().addTo(map);
+
+  // search button
+  map.addControl( new L.Control.Search({
+      url: '//nominatim.openstreetmap.org/search?format=json&q={s}',
+      jsonpParam: 'json_callback',
+      propertyName: 'display_name',
+      propertyLoc: ['lat','lon'],
+      circleLocation: true,
+      markerLocation: false,
+      autoType: false,
+      autoCollapse: true,
+      minLength: 2,
+      zoom: 14
+  }) );
 
   // Bind events.
   map.on('moveend', update_fields);

@@ -398,9 +398,38 @@ def recreate(request):
     return HttpResponseBadRequest("ERROR: Invalid request")
 
 def reedit(request):
-    form = forms.MapRenderingJobForm()
+    if request.method == 'POST':
+        form = forms.MapRecreateForm(request.POST)
+        if form.is_valid():
+            job = get_object_or_404(models.MapRenderingJob,
+                                    id=form.cleaned_data['id'])
+        init_vals = {
+            'layout':           job.layout,
+            'stylesheet':       job.stylesheet,
+            'overlay':          job.overlay.split(","),
+            'maptitle':         job.maptitle,
+            'submittermail':    job.submittermail,
+        }
 
-    return render(request, 'maposmatic/new.html', { 'form' : form })
+        request.session['new_layout']     = job.layout
+        request.session['new_stylesheet'] = job.stylesheet
+        request.session['new_overlay']    = job.overlay.split(",")
+
+        form = forms.MapRenderingJobForm(initial=init_vals)
+
+        bounds = "L.latLngBounds(L.latLng(%f,%f),L.latLng(%f,%f))" % (job.lat_upper_left,
+                                                                      job.lon_upper_left,
+                                                                      job.lat_bottom_right,
+                                                                      job.lon_bottom_right),
+
+        return render(request,
+                      'maposmatic/new.html',
+                      {
+                          'form' : form,
+                          'SELECTION_BOUNDS': bounds
+                      })
+
+    return HttpResponseBadRequest("ERROR: Invalid request")
 
 def cancel(request):
     if request.method == 'POST':

@@ -676,3 +676,28 @@ def cancel_job(request):
         job.cancel()
 
     return HttpResponse(status=204)
+
+def api_reverse_papersize(request, w, h):
+    """API to do a reverse papersize name lookup by width and height"""
+    w = int(w)
+    h = int(h)
+
+    oc = ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH)
+
+    paper_size = 'foobar'
+    paper_orientation = "landscape" if (w > h) else "portrait"
+
+    for paper in oc.get_all_paper_sizes():
+        if int(paper[1]) == w and int(paper[2]) == h:
+            paper_size = paper[0]
+            break
+        if int(paper[1]) == h and int(paper[2]) == w:
+            paper_size = paper[0]
+            break
+
+    if paper_size:
+        return HttpResponse(content=json.dumps((paper_size, paper_orientation)),
+                            content_type='text/json')
+    else:
+        return HttpResponseBadRequest("ERROR: Paper size not found")
+

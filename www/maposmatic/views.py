@@ -397,6 +397,11 @@ def recreate(request):
 
     return HttpResponseBadRequest("ERROR: Invalid request")
 
+def reedit(request):
+    form = forms.MapRenderingJobForm()
+
+    return render(request, 'maposmatic/new.html', { 'form' : form })
+
 def cancel(request):
     if request.method == 'POST':
         form = forms.MapCancelForm(request.POST)

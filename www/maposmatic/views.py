@@ -403,12 +403,17 @@ def reedit(request):
         if form.is_valid():
             job = get_object_or_404(models.MapRenderingJob,
                                     id=form.cleaned_data['id'])
+
+        paper_size, paper_orientation = get_paper_from_size(job.paper_width_mm, job.paper_height_mm)
+
         init_vals = {
             'layout':           job.layout,
             'stylesheet':       job.stylesheet,
             'overlay':          job.overlay.split(","),
             'maptitle':         job.maptitle,
             'submittermail':    job.submittermail,
+            'default_papersize':        paper_size,
+            'default_paperorientation': paper_orientation,
         }
 
         request.session['new_layout']     = job.layout

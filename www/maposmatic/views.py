@@ -409,6 +409,7 @@ def reedit(request):
 
         init_vals = {
             'layout':           job.layout,
+            'indexer':          job.indexer,
             'stylesheet':       job.stylesheet,
             'overlay':          job.overlay.split(","),
             'maptitle':         job.maptitle,
@@ -418,6 +419,7 @@ def reedit(request):
         }
 
         request.session['new_layout']     = job.layout
+        request.session['new_indexer']    = job.indexer
         request.session['new_stylesheet'] = job.stylesheet
         request.session['new_overlay']    = job.overlay.split(",")
 

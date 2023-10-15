@@ -47,6 +47,7 @@ from django.utils.safestring import mark_safe
 import ocitysmap
 from www.maposmatic import helpers, forms, nominatim, models
 import www.settings
+from www.maposmatic.apis import get_paper_from_size
 
 import psycopg2
 

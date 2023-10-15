@@ -44,7 +44,7 @@ def get_latest_blog_posts():
     f = feedparser.parse(www.settings.FRONT_PAGE_FEED)
     return f.entries[:4]
 
-def get_osm_database_last_update():
+def get_osm_database_last_update(name):
     """Returns the timestamp of the last PostGIS database update, which is
     placed into the maposmatic_admin table in the PostGIS database by the
     planet-update incremental update script."""
@@ -52,18 +52,18 @@ def get_osm_database_last_update():
     cursor = None
 
     try:
-        cursor = connections['osm'].cursor()
+        cursor = connections[name].cursor()
         if cursor is None:
             return None
-
+    
         cursor.execute("""select last_update from maposmatic_admin""")
         last_update = cursor.fetchone()
         if last_update is None or len(last_update) != 1:
             return None
-
+    
         return last_update[0]
-    except:
-        pass
+    except Exception as e:
+        LOG.warning("Last update exception: %s" % str(e))
     finally:
         # Close the DB cursor if necessary
         if cursor is not None and not cursor.closed:
@@ -182,9 +182,14 @@ def all(request):
 
     daemon_running = all_queues_running()
 
-    gis_lastupdate = get_osm_database_last_update()
+    gis_lastupdate = get_osm_database_last_update("osm")
     gis_lag_ok = (gis_lastupdate
         and datetime.datetime.utcnow() - gis_lastupdate < datetime.timedelta(minutes=30)
+        or False)
+
+    gis5_lastupdate = get_osm_database_last_update("osm5")
+    gis5_lag_ok = (gis5_lastupdate
+        and datetime.datetime.utcnow() - gis5_lastupdate < datetime.timedelta(minutes=30)
         or False)
 
     waymarked_lastupdate = get_waymarked_database_last_update()
@@ -194,9 +199,9 @@ def all(request):
 
     osmnames_ok = get_osmnames_table_ok()
 
-    if daemon_running and gis_lag_ok and waymarked_lag_ok:
+    if daemon_running and gis_lag_ok and gis5_lag_ok and waymarked_lag_ok:
         platform_status = 'check'
-    elif daemon_running and gis_lastupdate and not (gis_lag_ok and waymarked_lag_ok):
+    elif daemon_running and gis_lastupdate and not (gis_lag_ok and gis5_lag_ok and waymarked_lag_ok):
         platform_status = 'triangle-exclamation'
     else:
         platform_status = 'hourglas-clock'
@@ -226,6 +231,8 @@ def all(request):
         'daemon_running': daemon_running,
         'gis_lastupdate': gis_lastupdate,
         'gis_lag_ok': gis_lag_ok,
+        'gis5_lastupdate': gis5_lastupdate,
+        'gis5_lag_ok': gis5_lag_ok,
         'waymarked_lastupdate': waymarked_lastupdate,
         'waymarked_lag_ok': waymarked_lag_ok,
         'osmnames_ok': osmnames_ok,

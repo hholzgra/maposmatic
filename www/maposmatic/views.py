@@ -163,11 +163,12 @@ def new(request):
     if request.method == 'POST':
         form = forms.MapRenderingJobForm(request.POST, request.FILES)
         if form.is_valid():
-            request.session['new_layout'] = form.cleaned_data.get('layout')
-            request.session['new_indexer'] = form.cleaned_data.get('indexer')
-            request.session['new_stylesheet'] = form.cleaned_data.get('stylesheet')
-            request.session['new_overlay'] = form.cleaned_data.get('overlay')
-            request.session['new_paper_width_mm'] = form.cleaned_data.get('paper_width_mm')
+            # remember some settings as future defaults
+            request.session['new_layout']          = form.cleaned_data.get('layout')
+            request.session['new_indexer']         = form.cleaned_data.get('indexer')
+            request.session['new_stylesheet']      = form.cleaned_data.get('stylesheet')
+            request.session['new_overlay']         = form.cleaned_data.get('overlay')
+            request.session['new_paper_width_mm']  = form.cleaned_data.get('paper_width_mm')
             request.session['new_paper_height_mm'] = form.cleaned_data.get('paper_height_mm')
 
             job = form.save(commit=False)

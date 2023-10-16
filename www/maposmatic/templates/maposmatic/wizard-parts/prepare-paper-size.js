@@ -23,6 +23,12 @@ function choose_paper_buttons(layout)
     }
 }
 
+function myParseInt(val)
+{
+    var parsed = parseInt(val);
+    if (isNaN(parsed)) return 0;
+    return parsed;
+}
 
 
 var best_fit_width  = 0;
@@ -96,16 +102,16 @@ function preparePaperSize() {
 	       $('#id_paper_width_mm').attr("min", w);
 	       $('#id_paper_height_mm').attr("min", h);
 
-	       best_fit_width  = parseInt(w);
-	       best_fit_height = parseInt(h);
-	       best_fit_scale  = parseInt( data[i][(data[i]['portrait_ok']) ? 'portrait_scale' : 'landscape_scale']);
+	       best_fit_width  = myParseInt(w);
+	       best_fit_height = myParseInt(h);
+	       best_fit_scale  = myParseInt( data[i][(data[i]['portrait_ok']) ? 'portrait_scale' : 'landscape_scale']);
 
 	       $("#best_width").text(w);
 	       $("#best_height").text(h);
 
 	       // if current values are below limits -> enforce min size
-	       if (w > parseInt($('#id_paper_width_mm').val())
-		   || h > parseInt($('#id_paper_height_mm').val())) {
+	       if (w > myParseInt($('#id_paper_width_mm').val())
+		   || h > myParseInt($('#id_paper_height_mm').val())) {
 		   $('#id_paper_width_mm').val(w);
 		   $('#id_paper_height_mm').val(h);
 	       }
@@ -114,7 +120,7 @@ function preparePaperSize() {
 	   }
 
 	   if (data[i]['portrait_ok']) {
-	       var scale = Math.round(parseInt(data[i]['portrait_scale']));
+	       var scale = Math.round(myParseInt(data[i]['portrait_scale']));
 	       var scale_txt = "";
 	       if (scale) {
 		   scale_txt = "Scale ca. 1:" + scale + "; zoom factor " + data[i]['portrait_zoom'];
@@ -122,7 +128,7 @@ function preparePaperSize() {
 	       enable_papersize(w, h, scale_txt);
 	   }
 	   if (data[i]['landscape_ok']) {
-	       var scale = Math.round(parseInt(data[i]['landscape_scale']));
+	       var scale = Math.round(myParseInt(data[i]['landscape_scale']));
 	       var scale_txt = "";
 	       if (scale) {
 		   scale_txt = "Scale ca. 1:" + scale + "; zoom factor " + data[i]['landscape_zoom'];
@@ -142,11 +148,11 @@ function preparePaperSize() {
 
 function change_papersize()
 {
-    w = parseInt($('#id_paper_width_mm').val());
-    h = parseInt($('#id_paper_height_mm').val());
+    w = myParseInt($('#id_paper_width_mm').val());
+    h = myParseInt($('#id_paper_height_mm').val());
 
-    wmin = parseInt($('#id_paper_width_mm').attr('min'));
-    hmin = parseInt($('#id_paper_height_mm').attr('min'));
+    wmin = myParseInt($('#id_paper_width_mm').attr('min'));
+    hmin = myParseInt($('#id_paper_height_mm').attr('min'));
 
     if (w < wmin) {
 	w = wmin;
@@ -171,10 +177,10 @@ function set_papersize(paper_width, paper_height)
 
     if (paper_width == 0 && paper_height == 0) {
 	id = ".papersize_best_fit";
-	paper_width = parseInt($("#best_width").text());
-	paper_height = parseInt($("#best_height").text());
-    } else if (paper_width == parseInt($("#best_width").text())
-	       && paper_height == parseInt($("#best_height").text())) {
+	paper_width = myParseInt($("#best_width").text());
+	paper_height = myParseInt($("#best_height").text());
+    } else if (paper_width == myParseInt($("#best_width").text())
+	       && paper_height == myParseInt($("#best_height").text())) {
 	id = ".papersize_best_fit";
     } else {
 	id = ".papersize_" + paper_width + "_" + paper_height;
@@ -207,8 +213,8 @@ function show_paper_preview(canvas_name, w, h, scale)
     var cw = canvas.width-1;
     var ch = canvas.height-1;
 
-    w = parseInt(w);
-    h = parseInt(h);
+    w = myParseInt(w);
+    h = myParseInt(h);
 
     if (w > h) {
 	tw = (cw - 20)
@@ -454,8 +460,8 @@ function enable_papersize(w, h, txt)
 	id = ".papersize_" + w + "_" + h;
     } else {
 	id = ".papersize_best_fit";
-	w = parseInt($("#best_width").text());
-	h = parseInt($("#best_height").text());
+	w = myParseInt($("#best_width").text());
+	h = myParseInt($("#best_height").text());
     }
 
     var buttons = $(id);

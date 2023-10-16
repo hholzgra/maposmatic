@@ -3,7 +3,7 @@
 {% load extratags %}
 
 function wizardmap(elt, bounds=false) {
-  /**
+   /**
    * Update the 4 text fields with the area coordinates.
    *
    * If a feature has been drawned (bbox != null), the bounding box of the
@@ -106,7 +106,7 @@ function wizardmap(elt, bounds=false) {
     strokeWidth: 2
   };
   var countryquery = null;
-  locationFilter = new L.LocationFilter({
+  var filterParams = {
       enableButton: {
           enableText:  '{% trans "Select area" %}',
           disableText: '{% trans "Remove selection" %}'
@@ -115,7 +115,14 @@ function wizardmap(elt, bounds=false) {
           text: '{% trans "Select area within current zoom" %}'
       },
       buttonPosition: 'topright'
-  });
+  };
+  if (bounds) {
+      filterParams["bounds"] = bounds;
+      filterParams["enable"] = true;
+      map.fitBounds(bounds);
+  }
+
+  locationFilter = new L.LocationFilter(filterParams);
   locationFilter.on("change", function (e) {
       bbox = e.target.getBounds();
       map.fitBounds(bbox);
@@ -131,10 +138,6 @@ function wizardmap(elt, bounds=false) {
       update_fields();
   });
   locationFilter.addTo(map);
-  if (bounds) {
-    locationFilter.setBounds(bounds);
-    locationFilter.enable();
-  }
 
   // locate client position
   L.control.locate().addTo(map);

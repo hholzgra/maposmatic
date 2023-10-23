@@ -35,13 +35,9 @@ from slugify import slugify
 import logging
 LOG = logging.getLogger('maposmatic')
 
+# TODO: legacy function that was once used in old migration
+#       0005_auto_20170521_0103, keep or remove?
 def get_track_path(instance, filename):
-    return ""
-
-def get_umap_path(instance, filename):
-    return ""
-
-def get_poi_file_path(instance, filename):
     return ""
 
 class MapRenderingJobManager(models.Manager):
@@ -164,13 +160,6 @@ class MapRenderingJob(models.Model):
         self.resultmsg = resultmsg
         self.save()
 
-    def rendering_time_gt_1min(self):
-        if self.needs_waiting():
-            return False
-
-        delta = self.endofrendering_time - self.startofrendering_time
-        return delta.seconds > 60
-
     def __is_ok(self):              return self.resultmsg == 'ok'
 
     def is_waiting(self):           return self.status == 0
@@ -178,12 +167,9 @@ class MapRenderingJob(models.Model):
     def needs_waiting(self):        return self.status  < 2
 
     def is_done(self):              return self.status == 2
-    def is_done_ok(self):           return self.is_done() and self.__is_ok()
     def is_done_failed(self):       return self.is_done() and not self.__is_ok()
 
     def is_obsolete(self):          return self.status == 3
-    def is_obsolete_ok(self):       return self.is_obsolete() and self.__is_ok()
-    def is_obsolete_failed(self):   return self.is_obsolete() and not self.__is_ok()
 
     def is_cancelled(self):         return self.status == 4
 

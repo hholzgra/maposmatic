@@ -99,9 +99,9 @@ urlpatterns = [
     # re_path(r'^apis/nominatim/$', views.api_nominatim),
     re_path(r'^apis/nominatim/$', views.api_geosearch),
     re_path(r'^apis/reversegeo/([^/]*)/([^/]*)/$', views.api_postgis_reverse),
-    re_path(r'^apis/papersize', views.api_papersize),
-    re_path(r'^apis/boundingbox/([^/]*)/$', views.api_bbox),
-    re_path(r'^apis/polygon/([^/]*)/$',     views.api_polygon),
+    re_path(r'^apis/papersize', apis.api_papersize),
+    re_path(r'^apis/boundingbox/([^/]*)/$', apis.api_bbox),
+    re_path(r'^apis/polygon/([^/]*)/$',     apis.api_polygon),
     re_path(r'^apis/rendering-status/([^/]*)$', views.api_rendering_status),
 
     # API calls for direct clients

@@ -32,7 +32,22 @@ from django.urls import reverse
 
 import www.settings
 from www.maposmatic import helpers, forms, models
-from www.maposmatic.apis import get_paper_from_size
+
+def _get_paper_from_size(w, h):
+    oc = ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH)
+
+    paper_size = None
+    paper_orientation = "landscape" if (w > h) else "portrait"
+
+    for paper in oc.get_all_paper_sizes():
+        if int(paper[1]) == w and int(paper[2]) == h:
+            paper_size = paper[0]
+            break
+        if int(paper[1]) == h and int(paper[2]) == w:
+            paper_size = paper[0]
+            break
+
+    return paper_size, paper_orientation
 
 
 def reedit(request):
@@ -42,7 +57,7 @@ def reedit(request):
             job = get_object_or_404(models.MapRenderingJob,
                                     id=form.cleaned_data['id'])
 
-        paper_size, paper_orientation = get_paper_from_size(job.paper_width_mm, job.paper_height_mm)
+        paper_size, paper_orientation = _get_paper_from_size(job.paper_width_mm, job.paper_height_mm)
 
         init_vals = {
             'layout':           job.layout,

@@ -26,6 +26,7 @@
 import logging
 LOG = logging.getLogger('maposmatic')
 
+import datetime
 from ipware import get_client_ip
 
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
@@ -33,10 +34,10 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.utils.translation import gettext, gettext_lazy as _
 from django.utils.safestring import mark_safe
+from django.urls import reverse
 
 import www.settings
 from www.maposmatic import helpers, forms, models
-
 
 import ocitysmap
 

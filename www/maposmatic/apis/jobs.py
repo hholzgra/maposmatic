@@ -22,9 +22,19 @@ LOG = logging.getLogger('maposmatic')
 import json
 import urllib.parse
 
+import gpxpy
+import gpxpy.gpx
+
+import requests
+from tempfile import NamedTemporaryFile
+
+
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404
 from django.forms.models import model_to_dict
+from django.core.exceptions import ValidationError
+from django.core.files import File
+from django.core.files.base import ContentFile
 
 import ocitysmap
 

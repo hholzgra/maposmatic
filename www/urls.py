@@ -96,13 +96,13 @@ urlpatterns = [
         name='donate-thanks'),
 
     # API calls used by the web frontend
-    # re_path(r'^apis/nominatim/$', views.api_nominatim),
-    re_path(r'^apis/nominatim/$', views.api_geosearch),
-    re_path(r'^apis/reversegeo/([^/]*)/([^/]*)/$', views.api_postgis_reverse),
+    # re_path(r'^apis/nominatim/$', api.api_nominatim), # TODO: make configurable
+    re_path(r'^apis/nominatim/$', apis.api_geosearch),
+    re_path(r'^apis/reversegeo/([^/]*)/([^/]*)/$', apis.api_postgis_reverse),
     re_path(r'^apis/papersize', apis.api_papersize),
     re_path(r'^apis/boundingbox/([^/]*)/$', apis.api_bbox),
     re_path(r'^apis/polygon/([^/]*)/$',     apis.api_polygon),
-    re_path(r'^apis/rendering-status/([^/]*)$', views.api_rendering_status),
+    re_path(r'^apis/rendering-status/([^/]*)$', apis.api_rendering_status),
 
     # API calls for direct clients
 

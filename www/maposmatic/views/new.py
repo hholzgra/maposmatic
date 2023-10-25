@@ -41,6 +41,19 @@ from www.maposmatic import helpers, forms, models
 
 import ocitysmap
 
+def _create_upload_file(job, file, keep_until = None):
+    first_line = file.readline().decode("utf-8-sig")
+    LOG.info("firstline type %s" % type(first_line))
+    if first_line.startswith(u'<?xml'):
+        file_type = 'gpx'
+    else:
+        file_type = 'umap'
+    file_instance =  models.UploadFile(uploaded_file = file,
+                                       file_type = file_type,
+                                       keep_until = keep_until)
+    file_instance.save()
+    file_instance.job.add(job)
+
 def _papersize_buttons(basename, width=None, height=None):
     format = "<button id='{0}_{1}_{2}' type='button' class='btn btn-primary papersize papersize_{1}_{2}' onclick='set_papersize({1}, {2});'><i class='fas fa-{3} fa-2x'></i></button> "
 
@@ -106,7 +119,7 @@ def new(request):
                 else:
                     keep_until = '2999-12-30' # arbitrary 'max' value
             for file in files:
-                create_upload_file(job, file, keep_until)
+                _create_upload_file(job, file, keep_until)
 
             return HttpResponseRedirect(reverse('map-by-id-and-nonce',
                                                 args=[job.id, job.nonce]))

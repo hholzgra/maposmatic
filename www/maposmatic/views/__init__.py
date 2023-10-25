@@ -1,5 +1,3 @@
-from .views         import *
-
 from .index         import index
 
 from .about         import about
@@ -12,3 +10,8 @@ from .map_full      import map_full
 from .new           import new
 from .recreate      import recreate
 from .reedit        import reedit
+from .cancel        import cancel
+
+from .heatmap       import heatmap
+
+from .congo         import congo

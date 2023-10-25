@@ -16,36 +16,18 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# API calls for MapOSMatic
-
-from os import path
-
-import json
-
-from django.core.exceptions import ValidationError
-from django.core.files import File
-from django.core.files.base import ContentFile
-from django.http import HttpResponseRedirect, HttpResponseBadRequest, HttpResponseNotFound, HttpResponse, HttpResponseNotAllowed, HttpResponseForbidden, Http404
-from django.forms.models import model_to_dict
-from django.shortcuts import get_object_or_404
-from django.db import connections
-
-from www.maposmatic import helpers, forms, nominatim, models
-import www.settings
-
-import gpxpy
-import gpxpy.gpx
-
-import requests
-from tempfile import NamedTemporaryFile
-import urllib.parse
-
 import logging
 LOG = logging.getLogger('maposmatic')
 
+import json
 
+from django.http import HttpResponse
+from django.db import connections
 
+import ocitysmap
 
+import www.settings
+from www.maposmatic import helpers, forms, models
 
 
 def heatdata(request, days=1):
@@ -97,30 +79,4 @@ select (north + south)/2 as lat
         raise RuntimeError(e)
 
     
-
-def cancel_job(request):
-    """API handler for canceling rendering requests"""
-
-    if request.method != 'POST':
-        return HttpResponseNotAllowed(['POST'])
-
-    if request.content_type == 'application/json':
-        input = json.loads(request.body.decode('utf-8-sig'))
-    else:
-        input = json.loads(request.POST['job'])
-
-    if not "id" in input or not "nonce" in input:
-        return HttpResponseBadRequest()
-
-    job = get_object_or_404(models.MapRenderingJob, id = input['id'])
-
-    reply = model_to_dict(job)
-
-    if input['nonce'] != reply['nonce']:
-        return HttpResponseForbidden()
-
-    if job.is_waiting():
-        job.cancel()
-
-    return HttpResponse(status=204)
 

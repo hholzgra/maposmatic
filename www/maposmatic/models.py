@@ -167,7 +167,7 @@ class MapRenderingJob(models.Model):
     def needs_waiting(self):        return self.status  < 2
 
     def is_done(self):              return self.status == 2
-    def is_done_failed(self):       return self.is_done() and not self.__is_ok()
+    def is_done_ok(self):           return self.is_done() and self.__is_ok()
 
     def is_obsolete(self):          return self.status == 3
 

@@ -30,6 +30,8 @@ from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.urls import reverse
 
+import ocitysmap
+
 import www.settings
 from www.maposmatic import helpers, forms, models
 

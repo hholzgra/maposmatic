@@ -177,7 +177,7 @@ def new(request):
                 multisize_buttons += "<b>%s</b> (%s&times;%smm²)</p>" % (p[0], repr(p[1]), repr(p[2]))
 
         return render(request, 'maposmatic/new.html',
-                      { 'form' : form ,
-                        'papersize_suggestions': mark_safe(papersize_buttons),
+                      { 'form' :                           form ,
+                        'papersize_suggestions':           mark_safe(papersize_buttons),
                         'multipage_papersize_suggestions': mark_safe(multisize_buttons),
                       })

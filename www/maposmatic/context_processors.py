@@ -202,22 +202,23 @@ def all(request):
         platform_status = 'hourglas-clock'
 
     return {
+        'BBOX_MAXIMUM_LENGTH_IN_METERS': www.settings.BBOX_MAXIMUM_LENGTH_IN_METERS,
+        'BRAND_NAME':                    www.settings.BRAND_NAME,
+        'CONTACT_CHAT':                  www.settings.CONTACT_CHAT,
+        'CONTACT_EMAIL':                 www.settings.CONTACT_EMAIL,
         'DEBUG':                         www.settings.DEBUG,
+        'EXTRA_FOOTER':                  www.settings.EXTRA_FOOTER,
         'LANGUAGES':                     www.settings.LANGUAGES,
         'LANGUAGES_LIST':                www.settings.LANGUAGES_LIST,
         'LANGUAGE_FLAGS':                www.settings.LANGUAGE_FLAGS,
-        'MAP_LANGUAGES':                 www.settings.MAP_LANGUAGES,
-        'BBOX_MAXIMUM_LENGTH_IN_METERS': www.settings.BBOX_MAXIMUM_LENGTH_IN_METERS,
-        'BRAND_NAME':                    www.settings.BRAND_NAME,
-        'MAX_BOUNDING_BOX':              www.settings.MAX_BOUNDING_BOX,
-
-        'PAYPAL_ID':                     www.settings.PAYPAL_ID,
-        'CONTACT_EMAIL':                 www.settings.CONTACT_EMAIL,
-        'CONTACT_CHAT':                  www.settings.CONTACT_CHAT,
-        'EXTRA_FOOTER':                  www.settings.EXTRA_FOOTER,
         'MAINTENANCE_NOTICE':            www.settings.MAINTENANCE_NOTICE,
-
+        'MAP_LANGUAGES':                 www.settings.MAP_LANGUAGES,
+        'MAX_BOUNDING_BOX':              www.settings.MAX_BOUNDING_BOX,
+        'OUTER_BOUNDS_JSON':             www.settings.MAX_BOUNDING_OUTER,
+        'PAYPAL_ID':                     www.settings.PAYPAL_ID,
         'PIWIK_BASE_URL':                www.settings.PIWIK_BASE_URL,
+        'SUBMITTER_IP_LIFETIME':         www.settings.SUBMITTER_IP_LIFETIME,
+        'SUBMITTER_MAIL_LIFETIME':       www.settings.SUBMITTER_MAIL_LIFETIME,
         'WEBLATE_BASE_URL':              www.settings.WEBLATE_BASE_URL,
 
         'searchform':                    forms.MapSearchForm(request.GET),
@@ -234,11 +235,6 @@ def all(request):
 
         'paypal_lang_code':              paypal_lang_code,
         'paypal_country_code':           paypal_country_code,
-
-        'OUTER_BOUNDS_JSON':             www.settings.MAX_BOUNDING_OUTER,
-
-        'SUBMITTER_MAIL_LIFETIME':       www.settings.SUBMITTER_MAIL_LIFETIME,
-        'SUBMITTER_IP_LIFETIME':         www.settings.SUBMITTER_IP_LIFETIME,
 
         'queue_states':                  queue_states(),
         'queues_overall_state':          queues_overall_state(),

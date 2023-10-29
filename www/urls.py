@@ -34,7 +34,7 @@ from django.views.generic.base import RedirectView
 # from django.contrib import admin
 # admin.autodiscover()
 
-from .maposmatic import feeds
+from .maposmatic import rss_feeds
 from .maposmatic import views
 from .maposmatic import apis
 
@@ -95,8 +95,8 @@ urlpatterns = [
     re_path(r'^apis/v1/cancel_job$',                           apis.cancel_job),
 
     # Feeds
-    re_path(r'feeds/maps/$',                                   feeds.MapsFeed(),               name='rss-feed'),
-    re_path(r'feeds/errors/$',                                 feeds.ErrorFeed(),              name='error-feed'),
+    re_path(r'feeds/maps/$',                                   rss_feeds.MapsFeed(),           name='rss-feed'),
+    re_path(r'feeds/errors/$',                                 rss_feeds.ErrorFeed(),          name='error-feed'),
 
     # experimental
     re_path(r'heatmap/(\d*)$',                                 views.heatmap,                  name='heatmap'),

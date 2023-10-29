@@ -1,1 +1,2 @@
-from .feeds import MapsFeed, ErrorFeed
+from .feeds  import MapsFeed
+from .ErrorFeed import ErrorFeed

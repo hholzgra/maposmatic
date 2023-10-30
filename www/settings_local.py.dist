@@ -36,13 +36,15 @@ import sys
 OCITYSMAP_PATH='/home/maposmatic/ocitysmap'
 sys.path.append(OCITYSMAP_PATH)
 
-
+# Debug mode. Set to False on a production environnement
 DEBUG = True
 
+# With DEBUG set to False error will be set to the following emails
 ADMINS = (
     ('MapOSMatic admin', 'your-name@example.org'),
 )
 
+# various databases used 
 DATABASES = {
     # default MapOSMatic django database    
     'default': {
@@ -77,11 +79,16 @@ DATABASES = {
 # (~/.ocitysmap.conf)
 OCITYSMAP_CFG_PATH = None
 
+# Where rendered maps are to be stored
 RENDERING_RESULT_PATH = '/path/to/rendering/results/'
 RENDERING_RESULT_URL = '/results/' # Either a relative URL or an absolute URL
-RENDERING_RESULT_FORMATS = ['pdf', 'svgz', 'png', 'csv']
+
+# When / how fast old maps should get purged
 RENDERING_RESULT_MAX_SIZE_GB = 10
 RENDERING_RESULT_MAX_PURGE_ITERATIONS = 10
+
+# File formats to render
+RENDERING_RESULT_FORMATS = ['pdf', 'svgz', 'png', 'csv']
 
 # Default output log file when the env variable MAPOSMATIC_LOG_FILE is not set
 DEFAULT_MAPOSMATIC_LOG_FILE = '/path/to/maposmatic/logs/maposmatic.log'
@@ -147,7 +154,6 @@ DAEMON_ERRORS_JOB_URL = 'http://example.org/jobs/%d'
 
 # highest rendering request ID still using the old filename scheme
 # before the switch to sluggify 
-
 LAST_OLD_ID = 0
 
 

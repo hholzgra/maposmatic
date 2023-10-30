@@ -83,8 +83,7 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(PROJECT_PATH, 'templates'),
             os.path.join(PROJECT_PATH, 'maposmatic/templates'),
-            # TODO ocitysmap path should not be hardcoded
-            os.path.join('/home/maposmatic/ocitysmap/templates'),
+            OCITYSMAP_PATH,
         ],
         'APP_DIRS': True,
         'OPTIONS': {

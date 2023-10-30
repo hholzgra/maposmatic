@@ -32,6 +32,11 @@ import sys
 # sys.path.append('/path/to/ocitysmap')
 # sys.path.append('/path/to/lib/python/site-packages')
 
+# path to OCitysMap installation
+OCITYSMAP_PATH='/home/maposmatic/ocitysmap'
+sys.path.append(OCITYSMAP_PATH)
+
+
 DEBUG = True
 
 ADMINS = (

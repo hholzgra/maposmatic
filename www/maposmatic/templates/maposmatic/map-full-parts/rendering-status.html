@@ -60,7 +60,7 @@
              {% blocktrans with url=map.get_errorlog %}
 	        Check the <a target='_blank' href='{{ url }}'><i class='fas fa-file-lines'></i> error log</a> for more details<br>
 	      {% endblocktrans %}
-	      {% if settings.CONTACT_EMAIL %}
+	      {% if CONTACT_EMAILX %}
 	        {% blocktrans with email=map|email_url %}
                   or contact {{ email }} for more information.
 	        {% endblocktrans %}

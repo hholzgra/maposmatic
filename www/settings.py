@@ -91,7 +91,6 @@ TEMPLATES = [
             'debug': True,
             'context_processors': [
                 'django.contrib.auth.context_processors.auth',
-                'django_settings_export.settings_export',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.i18n',
                 'django.template.context_processors.media',
@@ -103,10 +102,6 @@ TEMPLATES = [
             ],
         },
     },
-]
-
-SETTINGS_EXPORT = [
-  'CONTACT_EMAIL',
 ]
 
 MIDDLEWARE = (

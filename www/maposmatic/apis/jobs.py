@@ -190,13 +190,15 @@ def _jobs_post(request):
     job.paper_width_mm  = 210
     job.paper_height_mm = 297
 
-    # TODO: either both or none of width/height need to be set
-    # TODO: size and width/height are mutually exclusive
-    if 'paper_width' in input:
-        job.paper_width_mm = input['paper_width']
-    if 'paper_height' in input:
-        job.paper_height_mm = input['paper_height']
-    if 'paper_size' in input:
+    if 'paper_width' in input or 'paper_height' in input:
+        if 'paper_size' in input:
+            result['error']['paper_size'] = "paper_size and paper_width/height are mutually exclusive"
+        elif 'paper_width' in input and 'paper_height' in input:
+            job.paper_width_mm = input['paper_width']
+            job.paper_height_mm = input['paper_height']
+        else:
+            result['error']['paper_width'] = "both paper_width and paper_height need to be given"
+    elif 'paper_size' in input:
         try:
             _ocitysmap = ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH)
             p = _ocitysmap.get_paper_size_by_name(input['paper_size'])

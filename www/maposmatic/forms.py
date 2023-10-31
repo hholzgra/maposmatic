@@ -208,7 +208,7 @@ class MapRenderingJobForm(forms.ModelForm):
         if mode == 'admin':
             # TODO as bounding box override now exists (Issue #24)
             #      we need to do the same bbox checks here as in
-            # the mode=bbox section below?
+            #      the mode=bbox section below?
             if city == "":
                 msg = _(u"Administrative city required")
                 self._errors["administrative_city"] = ErrorList([msg])

@@ -206,17 +206,13 @@ class MapRenderingJobForm(forms.ModelForm):
             del cleaned_data["stylesheet"]
 
         if mode == 'admin':
+            # TODO as bounding box override now exists (Issue #24)
+            #      we need to do the same bbox checks here as in
+            # the mode=bbox section below?
             if city == "":
                 msg = _(u"Administrative city required")
                 self._errors["administrative_city"] = ErrorList([msg])
                 del cleaned_data["administrative_city"]
-
-            # Make sure that bbox and admin modes are exclusive
-            # TODO: we should maybe merge these two instead? (See also OcitysMap Github Issue #24)
-            cleaned_data["lat_upper_left"] = None
-            cleaned_data["lon_upper_left"] = None
-            cleaned_data["lat_bottom_right"] = None
-            cleaned_data["lon_bottom_right"] = None
 
             try:
                 self._check_osm_id(cleaned_data.get("administrative_osmid"))

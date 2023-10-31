@@ -452,7 +452,7 @@ class JobRenderer(threading.Thread):
             config.title = self.job.maptitle
             config.osmid = self.job.administrative_osmid
 
-            if config.osmid:
+            if config.osmid and not self.job.lat_upper_left:
                 bbox_wkt, area_wkt \
                     = renderer.get_geographic_info(config.osmid)
                 config.bounding_box = ocitysmap.coords.BoundingBox.parse_wkt(

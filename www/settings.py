@@ -195,8 +195,7 @@ LANGUAGE_FLAGS = {
 
 LOCALE_PATHS = [
     os.path.join(PROJECT_PATH, 'locale'),
-    # TODO ocitysmap path should not be hardcoded
-    os.path.join('/home/maposmatic/ocitysmap', 'locale'),
+    os.path.join(OCITYSMAP_PATH, 'locale'),
 ]
 
 # Associate a Django language code with:

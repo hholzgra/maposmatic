@@ -28,6 +28,8 @@ from django.db import connections
 import django.utils.translation
 import feedparser
 import datetime
+import git
+import os
 
 from .models import MapRenderingJob
 import www.settings
@@ -201,6 +203,12 @@ def all(request):
     else:
         platform_status = 'hourglas-clock'
 
+    try:
+        git_repo = git.Repo(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))) 
+        git_branch = git_repo.active_branch
+    except Exception as e:
+        git_branch = e
+
     return {
         'BBOX_MAXIMUM_LENGTH_IN_METERS': www.settings.BBOX_MAXIMUM_LENGTH_IN_METERS,
         'BRAND_NAME':                    www.settings.BRAND_NAME,
@@ -208,6 +216,7 @@ def all(request):
         'CONTACT_EMAIL':                 www.settings.CONTACT_EMAIL,
         'DEBUG':                         www.settings.DEBUG,
         'EXTRA_FOOTER':                  www.settings.EXTRA_FOOTER,
+        'GIT_BRANCH':                    git_branch,
         'LANGUAGES':                     www.settings.LANGUAGES,
         'LANGUAGES_LIST':                www.settings.LANGUAGES_LIST,
         'LANGUAGE_FLAGS':                www.settings.LANGUAGE_FLAGS,

@@ -14,7 +14,7 @@
        data-bs-content='<p class="text-{{queues_overall_state}}">{% trans "Rendering queue(s): " %}<i class="pull-right fas fa-{{queues_overall_symbol}}"></i></p>
       <p class="text-{% if gis_lag_ok %}success{% else %}{% if gis_lastupdate %}warning{% else %}danger{% endif %}{% endif %}">{% trans "GIS database: " %}<i class="pull-right fas fa-{% if gis_lag_ok %}check{% else %}{% if gis_lastupdate %}hourglass-half{% else %}times{% endif %}{% endif %}"></i></p>
     <p class="text-{% if waymarked_lag_ok %}success{% else %}{% if waymarked_lastupdate %}warning{% else %}danger{% endif %}{% endif %}">{% trans "WayMarked database: " %}<i class="pull-right fas fa-{% if waymarked_lag_ok %}check{% else %}{% if waymarked_lastupdate %}hourglass-half{% else %}times{% endif %}{% endif %}"></i></p>'
-       ><i class="fas fa-{{ platform_status }}"></i> {{BRAND_NAME}}</a>
+       ><i class="fas fa-{{ platform_status }}"></i> {{BRAND_NAME}}{% if DEBUG %} [DEV: {{GIT_BRANCH}}]{% endif %}</a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar-collapse" aria-expanded="false" aria-label="{% trans "Toggle navigation" %}">
       <span class="navbar-toggler-icon"></span>

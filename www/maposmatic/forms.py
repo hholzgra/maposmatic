@@ -174,17 +174,17 @@ class MapRenderingJobForm(forms.ModelForm):
         Returns the cleaned_data array.
         """
 
-        cleaned_data = self.cleaned_data
+        data = self.cleaned_data
 
-        mode = cleaned_data.get("mode")
-        city = cleaned_data.get("administrative_city")
-        title = cleaned_data.get("maptitle")
-        layout = cleaned_data.get("layout")
-        indexer = cleaned_data.get("indexer")
-        stylesheet = cleaned_data.get("stylesheet")
+        mode = data.get("mode")
+        city = data.get("administrative_city")
+        title = data.get("maptitle")
+        layout = data.get("layout")
+        indexer = data.get("indexer")
+        stylesheet = data.get("stylesheet")
         overlay_array = []
         try:
-            for overlay in cleaned_data.get("overlay"):
+            for overlay in data.get("overlay"):
                 overlay_array.append(overlay)
         except:
             pass
@@ -193,17 +193,14 @@ class MapRenderingJobForm(forms.ModelForm):
         if layout == '':
             msg = _(u"Layout required")
             self._errors["layout"] = ErrorList([msg])
-            del cleaned_data["layout"]
 
         if indexer == '':
             msg = _(u"Indexer required")
             self._errors["indexer"] = ErrorList([msg])
-            del cleaned_data["indexer"]
 
         if stylesheet == '':
             msg = _(u"Stylesheet required")
             self._errors["stylesheet"] = ErrorList([msg])
-            del cleaned_data["stylesheet"]
 
         if mode == 'admin':
             # TODO as bounding box override now exists (Issue #24)
@@ -212,64 +209,56 @@ class MapRenderingJobForm(forms.ModelForm):
             if city == "":
                 msg = _(u"Administrative city required")
                 self._errors["administrative_city"] = ErrorList([msg])
-                del cleaned_data["administrative_city"]
 
             try:
-                self._check_osm_id(cleaned_data.get("administrative_osmid"))
+                self._check_osm_id(data.get("administrative_osmid"))
             except Exception as ex:
                 msg = _(u"Error with osm city: %s" % ex)
                 self._errors['administrative_osmid'] \
                     = ErrorList([msg])
 
         elif mode == 'bbox':
+            msgs = []
+
             # Check bounding box corners are provided
             for f in [ "lat_upper_left", "lon_upper_left",
-                       "lat_bottom_right", "lon_bottom_right" ]:
-                val = cleaned_data.get(f)
-                if val is None:
-                    msg = _(u"Required")
-                    self._errors['bbox'] = ErrorList([msg])
-                    if f in cleaned_data:
-                        del cleaned_data[f]
+                       "lat_bottom_right", "lon_bottom_right"]:
+                if not f in data:
+                    msgs.append(_(u"Required field '%s' missing") % f)
 
             # Check latitude and longitude are different
-            if (cleaned_data.get("lat_upper_left")
-                == cleaned_data.get("lat_bottom_right")):
-                msg = _(u"Same latitude")
-                self._errors['bbox'] = ErrorList([msg])
-                del cleaned_data["lat_upper_left"]
-                del cleaned_data["lat_bottom_right"]
+            # TODO: relax this as auto-extend can deal with zero width OR height?
+            #       and even both being zero could be handled by having a min. width/height?
+            if (data.get("lat_upper_left") == data.get("lat_bottom_right")):
+                msgs.append(_(u"Same latitude"))
 
-            if (cleaned_data.get("lon_upper_left")
-                == cleaned_data.get("lon_bottom_right")):
-                msg = _(u"Same longitude")
-                self._errors['bbox'] = ErrorList([msg])
-                del cleaned_data["lon_upper_left"]
-                del cleaned_data["lon_bottom_right"]
+            if (data.get("lon_upper_left") == data.get("lon_bottom_right")):
+                msgs.append(_(u"Same longitude"))
 
             # Make sure that bbox and admin modes are exclusive
-            cleaned_data["administrative_city"] = ''
-            cleaned_data["administrative_osmid"] = None
+            data["administrative_city"] = ''
+            data["administrative_osmid"] = None
 
             # Don't try to instanciate a bounding box with empty coordinates
-            if self._errors:
-                return cleaned_data
+            if len(msgs):
+                self._errors['bbox'] = ErrorList(msgs)
+                return data
 
-            lat_upper_left = cleaned_data.get("lat_upper_left")
-            lon_upper_left = cleaned_data.get("lon_upper_left")
-            lat_bottom_right = cleaned_data.get("lat_bottom_right")
-            lon_bottom_right = cleaned_data.get("lon_bottom_right")
+            lat_upper_left = data.get("lat_upper_left")
+            lon_upper_left = data.get("lon_upper_left")
+            lat_bottom_right = data.get("lat_bottom_right")
+            lon_bottom_right = data.get("lon_bottom_right")
 
             boundingbox = ocitysmap.coords.BoundingBox(
                 lat_upper_left, lon_upper_left,
                 lat_bottom_right, lon_bottom_right)
+
             (metric_size_lat, metric_size_long) = boundingbox.spheric_sizes()
             if (metric_size_lat > www.settings.BBOX_MAXIMUM_LENGTH_IN_METERS
                 or metric_size_long > www.settings.BBOX_MAXIMUM_LENGTH_IN_METERS):
-                msg = _(u"Bounding Box too large")
-                self._errors['bbox'] = ErrorList([msg])
+                self._errors['bbox'] = ErrorList([_(u"Bounding Box too large")])
 
-        return cleaned_data
+        return data
 
     def _check_osm_id(self, osm_id):
         """Make sure that the supplied OSM Id is valid and can be accepted for
@@ -305,14 +294,14 @@ class MapRecreateForm(forms.Form):
     id = forms.IntegerField(widget=forms.HiddenInput, required=True)
 
     def clean(self):
-        cleaned_data = self.cleaned_data
+        data = self.cleaned_data
 
         try:
-            cleaned_data["id"] = int(cleaned_data.get("id", 0))
+            data["id"] = int(data.get("id", 0))
         except ValueError:
-            cleaned_data["id"] = 0
+            data["id"] = 0
 
-        return cleaned_data
+        return data
 
 class MapCancelForm(forms.Form):
     """
@@ -324,11 +313,11 @@ class MapCancelForm(forms.Form):
     nonce = forms.CharField(widget=forms.HiddenInput, required=True)
 
     def clean(self):
-        cleaned_data = self.cleaned_data
+        data = self.cleaned_data
 
         try:
-            cleaned_data["id"] = int(cleaned_data.get("id", 0))
+            data["id"] = int(data.get("id", 0))
         except ValueError:
-            cleaned_data["id"] = 0
+            data["id"] = 0
 
-        return cleaned_data
+        return data

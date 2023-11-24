@@ -1,0 +1,46 @@
+# MapOSMacti Overview
+
+## High level architecture
+
+The MapOSMatic project consists of two major component:
+
+* The OCitysMap render library
+* The MapOSMatic web frontend and render daemon
+
+These two are in the `ocitysmap` and `maposmatic` git repositories,
+respectively.
+
+Thre is also a third github repository `maposmatic-vagrant` providing
+a VM test setup for development and for runing self contained local
+instances.
+
+### OCitysMap
+
+The OcitysMap repo takes care of the actual map rendering, creating the
+map content itself, and decoration like a map title bar, indexes,
+annotation and copyright footer etc.
+
+OCitysMap is implemented as a Python library, and also comes with a
+command line rendering toll as an example implementation of a library
+client.
+
+OCitysMap relies on the Mapnik and CairoGraphics bindings for Python
+to render actual map content, and additiona decorations.
+
+By using Mapnik to render map content it can use the same Mapnik XML
+and CartoCSS stylesheets as are usually used for map tile rendering,
+and as Cairo Graphics not only supports bitmap output, but also vector
+formats like PDF and SVG maps can be created using these alternative
+file formats.
+
+### MapOSMatic
+
+The MapOSMatic repository actually provides two sub projects:
+
+* the actual web frontend implemented using the Django framework,
+  providing both a user frontend and a web API
+
+* a render daemon that performs the actual rendering of map
+  requests filed via the interactive web frontend or the API
+  in the background
+

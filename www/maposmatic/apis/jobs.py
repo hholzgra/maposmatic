@@ -187,6 +187,7 @@ def _jobs_post(request):
     if 'extra_logo' in input:
         job.extra_logo = input['extra_logo']
 
+    # TODO why hardcoded?
     job.paper_width_mm  = 210
     job.paper_height_mm = 297
 

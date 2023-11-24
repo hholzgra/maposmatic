@@ -28,6 +28,7 @@ LOG = logging.getLogger('maposmatic')
 
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404
+from django.urls import reverse
 
 import www.settings
 from www.maposmatic import helpers, forms, models

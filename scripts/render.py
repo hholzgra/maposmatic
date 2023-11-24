@@ -482,21 +482,8 @@ class JobRenderer(threading.Thread):
                     config.overlays.append(renderer.get_overlay_by_name(overlay))
 
             config.import_files = []
-            # legacy files, eventually remove these
-            config.gpx_file     = False
-            config.umap_file    = False
-            config.poi_file     = False
-
             for file in self.job.uploads.all():
                 config.import_files.append((file.file_type, os.path.join(MEDIA_ROOT, file.uploaded_file.name)))
-
-                # legacy files, eventually remove these
-                if file.file_type == 'gpx':
-                    config.gpx_file  = os.path.join(MEDIA_ROOT, file.uploaded_file.name)
-                if file.file_type == 'umap':
-                    config.umap_file = os.path.join(MEDIA_ROOT, file.uploaded_file.name)
-                if file.file_type == 'poi':
-                    config.poi_file  = os.path.join(MEDIA_ROOT, file.uploaded_file.name)
 
             config.paper_width_mm = self.job.paper_width_mm
             config.paper_height_mm = self.job.paper_height_mm

@@ -1,13 +1,6 @@
 # coding: utf-8
 
 # maposmatic, the web front-end of the MapOSMatic city map generation system
-# Copyright (C) 2009  David Decotigny
-# Copyright (C) 2009  Frédéric Lehobey
-# Copyright (C) 2009  Pierre Mauduit
-# Copyright (C) 2009  David Mentré
-# Copyright (C) 2009  Maxime Petazzoni
-# Copyright (C) 2009  Thomas Petazzoni
-# Copyright (C) 2009  Gaël Utard
 # Copyright (C) 2023  Hartmut Holzgraefe
 
 # This program is free software: you can redistribute it and/or modify
@@ -29,28 +22,11 @@ LOG = logging.getLogger('maposmatic')
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.urls import reverse
+from django.utils.translation import gettext, gettext_lazy as _
+from django.utils.safestring import mark_safe
 
-import ocitysmap
 
-import www.settings
-from www.maposmatic import helpers, forms, models
-
-def _get_paper_from_size(w, h):
-    oc = ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH)
-
-    paper_size = None
-    paper_orientation = "landscape" if (w > h) else "portrait"
-
-    for paper in oc.get_all_paper_sizes():
-        if int(paper[1]) == w and int(paper[2]) == h:
-            paper_size = paper[0]
-            break
-        if int(paper[1]) == h and int(paper[2]) == w:
-            paper_size = paper[0]
-            break
-
-    return paper_size, paper_orientation
-
+from www.maposmatic import helpers, forms, models, views
 
 def reedit(request):
     if request.method == 'POST':
@@ -59,7 +35,6 @@ def reedit(request):
             job = get_object_or_404(models.MapRenderingJob,
                                     id=form.cleaned_data['id'])
 
-        paper_size, paper_orientation = _get_paper_from_size(job.paper_width_mm, job.paper_height_mm)
 
         init_vals = {
             'layout':           job.layout,
@@ -68,17 +43,14 @@ def reedit(request):
             'overlay':          job.overlay.split(","),
             'maptitle':         job.maptitle,
             'submittermail':    job.submittermail,
-            'default_papersize':        paper_size,
-            'default_paperorientation': paper_orientation,
+            'paper_width_mm':   job.paper_width_mm,
+            'paper_height_mm':  job.paper_height_mm,
         }
-
-        request.session['new_layout']     = job.layout
-        request.session['new_indexer']    = job.indexer
-        request.session['new_stylesheet'] = job.stylesheet
-        request.session['new_overlay']    = job.overlay.split(",")
 
         form = forms.MapRenderingJobForm(initial=init_vals)
 
+        papersize_buttons, multisize_buttons = views._papersize_buttons()
+        
         bounds = "L.latLngBounds(L.latLng(%f,%f),L.latLng(%f,%f))" % (job.lat_upper_left,
                                                                       job.lon_upper_left,
                                                                       job.lat_bottom_right,
@@ -88,6 +60,8 @@ def reedit(request):
                       'maposmatic/new.html',
                       {
                           'form' : form,
+                          'papersize_suggestions':           mark_safe(papersize_buttons),
+                          'multipage_papersize_suggestions': mark_safe(multisize_buttons),
                           'SELECTION_BOUNDS': bounds,
                       })
 

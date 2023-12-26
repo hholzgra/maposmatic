@@ -326,7 +326,7 @@ def _jobs_post(request):
             result['id']              = reply['id']
             result['nonce']           = reply['nonce']
             result['status']          = reply['status']
-            result['status_msg']      = job_stati_dict(reply['status'])
+            result['status_msg']      = _job_stati_dict(reply['status'])
             if reply['status'] == 0:
                 result['queue_size'] = models.MapRenderingJob.objects.queue_size()
             else:

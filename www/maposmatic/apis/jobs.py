@@ -19,6 +19,8 @@
 import logging
 LOG = logging.getLogger('maposmatic')
 
+from os import path
+
 import json
 import urllib.parse
 
@@ -382,6 +384,7 @@ def _geojson_get_bounds(coords, bounds = [180, -180, 90, -90]):
     return bounds
 
 def _get_remote_file(url):
+    LOG.warning("fetching remote %s: " % url)
     r = requests.get(url)
     with NamedTemporaryFile(delete=False) as f:
         f.write(r.content)

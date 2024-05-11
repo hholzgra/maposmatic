@@ -13,22 +13,21 @@
 # Wasilis Mandratzis <inactive+Wasilis@transifex.com>, 2013
 # Wasilis Mandratzis <inactive+Wasilis@transifex.com>, 2013
 # Hartmut Holzgraefe <hartmut@php.net>, 2019, 2021.
-# Weblate Admin <admin@example.com>, 2021.
+# Weblate Admin <admin@example.com>, 2021, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: MapOSMatic\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-04-16 17:54+0200\n"
-"PO-Revision-Date: 2021-09-21 21:18+0000\n"
-"Last-Translator: Hartmut Holzgraefe <hartmut@php.net>\n"
-"Language-Team: German <https://translate.get-map.org/projects/maposmatic/"
-"maposmatic/de/>\n"
+"PO-Revision-Date: 2024-05-11 17:51+0000\n"
+"Last-Translator: Weblate Admin <admin@example.com>\n"
+"Language-Team: German <http://localhost/projects/maposmatic/maposmatic/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.6.2\n"
+"X-Generator: Weblate 5.5.3\n"
 
 #: www/maposmatic/feeds.py:45
 msgid "maps"
@@ -756,28 +755,22 @@ msgstr "Per Paypal spenden &raquo;"
 
 #: www/maposmatic/templates/maposmatic/index-parts/carousel.html:19
 #: www/maposmatic/templates/maposmatic/index-parts/carousel.html:21
-#, fuzzy
-#| msgid "Layout"
 msgid "Plain Layout"
-msgstr "Layout"
+msgstr "Einfaches Layout"
 
 #: www/maposmatic/templates/maposmatic/index-parts/carousel.html:28
 #: www/maposmatic/templates/maposmatic/index-parts/carousel.html:30
-#, fuzzy
-#| msgid "Layout"
 msgid "Index Layout"
-msgstr "Layout"
+msgstr "Layout mit Index"
 
 #: www/maposmatic/templates/maposmatic/index-parts/carousel.html:37
 #: www/maposmatic/templates/maposmatic/index-parts/carousel.html:39
-#, fuzzy
-#| msgid "Multi-page layout"
 msgid "Multi Page Layout"
-msgstr "Mehrseitig"
+msgstr "Mehrseitiges Layout"
 
 #: www/maposmatic/templates/maposmatic/index-parts/carousel.html:47
 msgid "Previous"
-msgstr ""
+msgstr "Zurück"
 
 #: www/maposmatic/templates/maposmatic/index-parts/carousel.html:51
 #: www/maposmatic/templates/maposmatic/new.html:161
@@ -1095,10 +1088,8 @@ msgstr "Stadtplan-Details"
 
 #: www/maposmatic/templates/maposmatic/map-full.html:101
 #: www/maposmatic/templates/maposmatic/maps.html:89
-#, fuzzy
-#| msgid "Upload files"
 msgid "Uploaded files"
-msgstr "Dateien hochlanden"
+msgstr "Hochgeladene Dateien"
 
 #: www/maposmatic/templates/maposmatic/map-full.html:117
 msgid "Map preview"
@@ -1126,7 +1117,7 @@ msgstr "Umap Datei"
 
 #: www/maposmatic/templates/maposmatic/maps.html:131
 msgid "in queue:"
-msgstr ""
+msgstr "in Warteschlange:"
 
 #: www/maposmatic/templates/maposmatic/maps.html:143
 #, python-format

@@ -132,4 +132,4 @@ locale files:
 ```
 
 Don't forget to restart the Django server or it won't pick up the new
-translated strings!
+translated strings.

@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/env python3
 # coding: utf-8
 
 # maposmatic, the web front-end of the MapOSMatic city map generation system

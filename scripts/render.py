@@ -408,7 +408,7 @@ class JobRenderer(threading.Thread):
                     os.rename(prefix + '.tmp.jpg', prefix + '.jpg')
                 except Exception as e:
                     LOG.warning("PNG to JPEG conversion failed: %s" % e)
-                img.thumbnail((200, 200), Image.ANTIALIAS)
+                img.thumbnail((200, 200), Image.Resampling.LANCZOS)
                 img.save(prefix + THUMBNAIL_SUFFIX)
             except Exception as e:
                 LOG.warning("PNG size reduction failed: %s" % e)

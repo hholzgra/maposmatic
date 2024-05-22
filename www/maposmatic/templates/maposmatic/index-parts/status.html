@@ -46,6 +46,23 @@
       {% endif %}
       {% endif %}
 
+      {% if osmcarto5_lag_ok %}
+      <div class="alert alert-success">
+        <i class="fas fa-check"></i> {% blocktrans with osmcarto5_lastupdate|timesince:utc_now as date %}The OSM 5.x database is online and up to date, <span class="tooltipped" data-original-title="{{ osmcarto5_lastupdate }}">updated {{ date }} ago</span>.{% endblocktrans %}
+      </div>
+      {% else %}
+      {% if osmcarto5_lastupdate %}
+      <div class="alert alert-warning">
+        <i class="fas fa-warning"></i>
+        {% blocktrans with osmcarto5_lastupdate|timesince:utc_now as date %}The OSM 5.x database is not up to date and was only <span class="tooltipped" data-original-title="{{ osmcarto5_lastupdate }}">updated {{ date }} ago</span>.{% endblocktrans %}
+      </div>
+      {% else %}
+      <div class="alert alert-danger">
+        <i class="fas fa-times"></i> {% blocktrans %}The OSM 5.x database is not available. Renderings cannot be processed at this time.{% endblocktrans %}
+      </div>
+      {% endif %}
+      {% endif %}
+
       {% if waymarked_lag_ok %}
       <div class="alert alert-success">
         <i class="fas fa-check"></i> {% blocktrans with waymarked_lastupdate|timesince:utc_now as date %}The Waymarked route database is online and up to date, <span class="tooltipped" data-original-title="{{ waymarked_lastupdate }}">updated {{ date }} ago</span>.{% endblocktrans %}

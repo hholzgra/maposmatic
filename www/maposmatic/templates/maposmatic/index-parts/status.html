@@ -29,6 +29,9 @@
         </ul>
       </div>
 
+      <div class="alert alert-success"> <!-- TODO: add overall database state -->
+        <h5>Database states:</h5>
+      
       {% if gis_lag_ok %}
       <div class="alert alert-success">
         <i class="fas fa-check"></i> {% blocktrans with gis_lastupdate|timesince:utc_now as date %}The GIS database is online and up to date, <span class="tooltipped" data-original-title="{{ gis_lastupdate }}">updated {{ date }} ago</span>.{% endblocktrans %}
@@ -88,6 +91,6 @@
         <i class="fas fa-times"></i> {% blocktrans %}The OsmNames Places table data is missing.{% endblocktrans %}
       </div>
       {% endif %}
-
+      </div>
     </p>
 </div>

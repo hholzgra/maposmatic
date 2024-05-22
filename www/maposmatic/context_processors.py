@@ -74,9 +74,8 @@ def get_osm_database_last_update(dbname='osm'):
     return None
 
 def get_waymarked_database_last_update():
-    """Returns the timestamp of the last PostGIS database update, which is
-    placed into the waymarked_admin table in the PostGIS database by the
-    waymarked-update incremental update script."""
+    """Returns the last update information from the status table
+    """
 
     cursor = None
 
@@ -90,7 +89,9 @@ def get_waymarked_database_last_update():
         if last_update is None or len(last_update) != 1:
             return None
 
-        return last_update[0]
+        return last_update[0].replace(tzinfo=None) # TODO we should add, not strip TZ
+        # see also e.g. https://stackoverflow.com/questions/796008/cant-subtract-offset-naive-and-offset-aware-datetimes
+        # and https://toptechtips.github.io/2023-04-03-python-offset-aware-offset-naive-timezones/
     except:
         pass
     finally:

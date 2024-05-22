@@ -9,27 +9,27 @@
       <table class="table table-striped">
 	<tr><td><strong>{% trans "Queue" %}</strong></td><td>{{ map.queue }}</td></tr>
         {% with date=map.submission_time|date:"DATETIME_FORMAT" %}
-	<tr><td><strong>{% trans "Request submitted" %}</strong></td><td title="{{ date }}">{% blocktrans with map.submission_time|timesince as since %}{{since}} ago{% endblocktrans %}</td></tr>
+	<tr><td><strong>{% trans "Request submitted" %}</strong></td><td title="{{ date }} UTC">{% blocktrans with map.submission_time|timesince as since %}{{since}} ago{% endblocktrans %}</td></tr>
         {% endwith %}
 
         {% if map.is_rendering %}
         {% with date=map.startofrendering_time|date:"DATETIME_FORMAT" duration=map.submission_time|timesince:map.startofrendering_time %}
-	<tr><td><strong>{% trans "Rendering started" %}</strong></td><td title="{{ date }}">{% blocktrans with map.submission_time|timesince as since %}{{since}} ago{% endblocktrans %}, {% blocktrans %}after {{ duration}} in the queue{% endblocktrans %}</td></tr>
+	<tr><td><strong>{% trans "Rendering started" %}</strong></td><td title="{{ date }} UTC">{% blocktrans with map.submission_time|timesince as since %}{{since}} ago{% endblocktrans %}, {% blocktrans %}after {{ duration}} in the queue{% endblocktrans %}</td></tr>
         {% endwith %}
         {% endif %}
 
         {% if map.is_done or map.is_obsolete %}
         {% with date=map.startofrendering_time|date:"DATETIME_FORMAT" duration=map.submission_time|timesince:map.startofrendering_time %}
-	<tr><td><strong>{% trans "Rendering started" %}</strong></td><td title="{{ date }}">{% blocktrans with map.startofrendering_time|timesince as since %}{{since}} ago{% endblocktrans %}, {% blocktrans %}after {{ duration}} in the queue{% endblocktrans %}</td></tr>
+	<tr><td><strong>{% trans "Rendering started" %}</strong></td><td title="{{ date }} UTC">{% blocktrans with map.startofrendering_time|timesince as since %}{{since}} ago{% endblocktrans %}, {% blocktrans %}after {{ duration}} in the queue{% endblocktrans %}</td></tr>
         {% endwith %}
         {% with date=map.endofrendering_time|date:"DATETIME_FORMAT" duration=map.startofrendering_time|timesince:map.endofrendering_time %}
-	<tr><td><strong>{% trans "Rendering completed" %}</strong></td><td title="{{ date }}">{% blocktrans with map.endofrendering_time|timesince as since %}{{since}} ago{% endblocktrans %}, {% blocktrans %}after {{ duration }} {% endblocktrans %}</td></tr>
+	<tr><td><strong>{% trans "Rendering completed" %}</strong></td><td title="{{ date }} UTC">{% blocktrans with map.endofrendering_time|timesince as since %}{{since}} ago{% endblocktrans %}, {% blocktrans %}after {{ duration }} {% endblocktrans %}</td></tr>
         {% endwith %}
         {% endif %}
 
         {% if map.is_cancelled %}
         {% with map.endofrendering_time|date:"DATETIME_FORMAT" as date %}
-        <tr><td><strong>{% trans "Rendering cancelled" %}</strong></td><td>{{ date }}</td></tr>
+        <tr><td><strong>{% trans "Rendering cancelled" %}</strong></td><td>{{ date }} UTC</td></tr>
         {% endwith %}
         {% endif %}
       </table>

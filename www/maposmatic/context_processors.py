@@ -46,7 +46,7 @@ def get_latest_blog_posts():
     f = feedparser.parse(www.settings.FRONT_PAGE_FEED)
     return f.entries[:4]
 
-def get_osm_database_last_update():
+def get_osm_database_last_update(dbname='osm'):
     """Returns the timestamp of the last PostGIS database update, which is
     placed into the maposmatic_admin table in the PostGIS database by the
     planet-update incremental update script."""
@@ -54,7 +54,7 @@ def get_osm_database_last_update():
     cursor = None
 
     try:
-        cursor = connections['osm'].cursor()
+        cursor = connections[dbname].cursor()
         if cursor is None:
             return None
 
@@ -184,10 +184,16 @@ def all(request):
 
     daemon_running = all_queues_running()
 
-    gis_lastupdate = get_osm_database_last_update()
+    gis_lastupdate = get_osm_database_last_update('osm')
     gis_lag_ok = (gis_lastupdate
         and datetime.datetime.utcnow() - gis_lastupdate < datetime.timedelta(minutes=30)
         or False)
+
+    osmcarto5_lastupdate = get_osm_database_last_update('osm5')
+    osmcarto5_lag_ok = (osmcarto5_lastupdate
+        and datetime.datetime.utcnow() - osmcarto5_lastupdate < datetime.timedelta(minutes=30)
+        or False)
+
 
     waymarked_lastupdate = get_waymarked_database_last_update()
     waymarked_lag_ok = (waymarked_lastupdate 
@@ -236,6 +242,8 @@ def all(request):
         'daemon_running':                daemon_running,
         'gis_lastupdate':                gis_lastupdate,
         'gis_lag_ok':                    gis_lag_ok,
+        'osmcarto5_lastupdate':          osmcarto5_lastupdate,
+        'osmcarto5_lag_ok':              osmcarto5_lag_ok,
         'waymarked_lastupdate':          waymarked_lastupdate,
         'waymarked_lag_ok':              waymarked_lag_ok,
         'osmnames_ok':                   osmnames_ok,

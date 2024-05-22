@@ -31,66 +31,87 @@
 
       <div class="alert alert-success"> <!-- TODO: add overall database state -->
         <h5>Database states:</h5>
-      
-        {% if gis_lag_ok %}
-          <div class="alert alert-success">
-            <i class="fas fa-check"></i> {% blocktrans with gis_lastupdate|timesince:utc_now as date %}The GIS database is online and up to date, <span class="tooltipped" data-original-title="{{ gis_lastupdate }}">updated {{ date }} ago</span>.{% endblocktrans %}
-          </div>
-        {% else %}
-          {% if gis_lastupdate %}
-            <div class="alert alert-warning">
-              <i class="fas fa-warning"></i>
-              {% blocktrans with gis_lastupdate|timesince:utc_now as date %}The GIS database is not up to date and was only <span class="tooltipped" data-original-title="{{ gis_lastupdate }}">updated {{ date }} ago</span>.{% endblocktrans %}
-            </div>
-          {% else %}
-            <div class="alert alert-danger">
-              <i class="fas fa-times"></i> {% blocktrans %}The GIS database is not available. Renderings cannot be processed at this time.{% endblocktrans %}
-            </div>
-          {% endif %}
-        {% endif %}
-  
-        {% if osmcarto5_lag_ok %}
-          <div class="alert alert-success">
-            <i class="fas fa-check"></i> {% blocktrans with osmcarto5_lastupdate|timesince:utc_now as date %}The OSM 5.x database is online and up to date, <span class="tooltipped" data-original-title="{{ osmcarto5_lastupdate }}">updated {{ date }} ago</span>.{% endblocktrans %}
-          </div>
-        {% else %}
-          {% if osmcarto5_lastupdate %}
-            <div class="alert alert-warning">
-              <i class="fas fa-warning"></i>
-              {% blocktrans with osmcarto5_lastupdate|timesince:utc_now as date %}The OSM 5.x database is not up to date and was only <span class="tooltipped" data-original-title="{{ osmcarto5_lastupdate }}">updated {{ date }} ago</span>.{% endblocktrans %}
-            </div>
-          {% else %}
-            <div class="alert alert-danger">
-              <i class="fas fa-times"></i> {% blocktrans %}The OSM 5.x database is not available. Renderings cannot be processed at this time.{% endblocktrans %}
-            </div>
-          {% endif %}
-        {% endif %}
-  
-        {% if waymarked_lag_ok %}
-          <div class="alert alert-success">
-            <i class="fas fa-check"></i> {% blocktrans with waymarked_lastupdate|timesince:utc_now as date %}The Waymarked route database is online and up to date, <span class="tooltipped" data-original-title="{{ waymarked_lastupdate }}">updated {{ date }} ago</span>.{% endblocktrans %}
-          </div>
-        {% else %}
-          {% if waymarked_lastupdate %}
-            <div class="alert alert-warning">
-              <i class="fas fa-warning"></i> {% blocktrans with waymarked_lastupdate|timesince:utc_now as date %}The Waymarked route database is not up to date and was only <span class="tooltipped" data-original-title="{{ waymarked_lastupdate }}">updated {{ date }} ago</span>.{% endblocktrans %}
-            </div>
-          {% else %}
-            <div class="alert alert-danger">
-              <i class="fas fa-times"></i> {% blocktrans %}The Waymarked route database is not available. Route overlays cannot be processed at this time.{% endblocktrans %}
-            </div>
-          {% endif %}
-        {% endif %}
 
-        {% if osmnames_ok %}
-          <div class="alert alert-success">
-            <i class="fas fa-check"></i> {% blocktrans %}The OsmNames Places table data is OK.{% endblocktrans %}
-          </div>
-        {% else %}
-          <div class="alert alert-danger">
-            <i class="fas fa-times"></i> {% blocktrans %}The OsmNames Places table data is missing.{% endblocktrans %}
-          </div>
-        {% endif %}
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-success
+                     d-flex justify-content-between align-items-center"
+              >OSM Generic
+            <span class="badge rounded-pill
+			 {% if gis_lastupdate %}
+			   {% if gis_lag_ok %}
+			     text-bg-success
+			   {% else %}
+			     text-bg-warning
+			   {% endif %}
+			 {% else %}
+			   text-bg-alert
+			 {% endif %}
+			 ">
+	      {% if gis_lastupdate %}
+                {% blocktrans with gis_lastupdate|timesince:utc_now as date %}<span class="tooltipped" data-original-title="{{ gis_lastupdate }}">{{ date }} ago</span>{% endblocktrans %}
+	      {% else %}
+	        Offline
+	      {% endif %}
+	    </span>
+          </li>
+	  
+          <li class="list-group-item list-group-item-success 
+                     d-flex justify-content-between align-items-center"
+              >OSM Carto 5.x
+          <span
+            <span class="badge rounded-pill
+			 {% if osmcarto5_lastupdate %}
+			   {% if osmcarto5_lag_ok %}
+			     text-bg-success
+			   {% else %}
+			     text-bg-warning
+			   {% endif %}
+			 {% else %}
+			   text-bg-alert
+			 {% endif %}
+			 ">
+	      {% if osmcarto5_lastupdate %}
+                {% blocktrans with osmcarto5_lastupdate|timesince:utc_now as date %}<span class="tooltipped" data-original-title="{{ osmcarto5_lastupdate }}">{{ date }} ago</span>{% endblocktrans %}
+	      {% else %}
+	        Offline
+	      {% endif %}
+            </span>
+          </li>
+	  
+          <li class="list-group-item list-group-item-success 
+                     d-flex justify-content-between align-items-center"
+              >WayMarked Routes
+            <span class="badge rounded-pill
+			 {% if waymarked_lastupdate %}
+			   {% if waymarked_lag_ok %}
+			     text-bg-success
+			   {% else %}
+			     text-bg-warning
+			   {% endif %}
+			 {% else %}
+			   text-bg-alert
+			 {% endif %}
+			 ">
+	      {% if waymarked_lastupdate %}
+                {% blocktrans with waymarked_lastupdate|timesince:utc_now as date %}<span class="tooltipped" data-original-title="{{ waymarked_lastupdate }}">{{ date }} ago</span>{% endblocktrans %}
+	      {% else %}
+	        Offline
+	      {% endif %}
+	    </span>
+          </li>
+
+          <li class="list-group-item list-group-item-success 
+                     d-flex justify-content-between align-items-center"
+              >Places
+          {% if osmnames_ok %}	    
+            <span class="badge rounded-pill text-bg-success">OK</span>
+	  {% else %}
+            <span class="badge rounded-pill text-bg-danger">Offline</span>
+	  {% endif %}
+          </li>
+        </ul>  
       </div>
+      
+      
     </p>
 </div>

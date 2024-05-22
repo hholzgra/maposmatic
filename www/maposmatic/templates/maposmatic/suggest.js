@@ -110,7 +110,16 @@
     var bbox = result.attr('bbox').split(',');
     var bounds = [[bbox[0], bbox[2]], [bbox[1], bbox[3]]];
     L.rectangle(bounds, {color: "#ff7800", weight: 1}).addTo(map);
-    map.fitBounds(bounds);
+    var corner1 = L.latLng(bbox[0], bbox[2]);
+    var corner2 = L.latLng(bbox[1], bbox[3]);
+    var bounds2 = L.latLngBounds(corner1, corner2);
+    // we need to have the map visible to correctly apply the new bounds, apparently
+    // so we are quickly switching between tabs back and forth
+    $('#step-location-bbox-tab').tab('show');
+    locationFilter.setBounds(bounds2);
+    locationFilter.enable();
+    $('#step-location-admin-tab').tab('show');
+    map.fitBounds(bounds2);
 
     setPrevNextLinks();
     $('#nextlink').focus();

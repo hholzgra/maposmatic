@@ -92,7 +92,7 @@ def _new_POST(request):
     job.nonce = helpers.generate_nonce(models.MapRenderingJob.NONCE_SIZE)
 
     client_ip, is_routable = get_client_ip(request)
-    if www.settings.EXTRA_IP is None or ( client_ip is not None and client_ip == www.settings.EXTRA_IP ):
+    if www.settings.EXTRA_IP is None or ( client_ip is not None and client_ip.startswith(www.settings.EXTRA_IP )):
         job.extra_text = www.settings.EXTRA_FOOTER
         job.logo = "bundled:osm-logo.svg"
         job.extra_logo = www.settings.EXTRA_LOGO

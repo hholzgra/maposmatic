@@ -197,7 +197,7 @@ def all(request):
 
     waymarked_lastupdate = get_waymarked_database_last_update()
     waymarked_lag_ok = (waymarked_lastupdate 
-        and datetime.datetime.utcnow() -  waymarked_lastupdate < datetime.timedelta(minutes=120)
+        and datetime.datetime.utcnow() -  waymarked_lastupdate < datetime.timedelta(minutes=30)
         or False)
 
     osmnames_ok = get_osmnames_table_ok()

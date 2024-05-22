@@ -93,6 +93,9 @@ def _new_POST(request):
 
     client_ip, is_routable = get_client_ip(request)
     if www.settings.EXTRA_IP is None or ( client_ip is not None and client_ip.startswith(www.settings.EXTRA_IP )):
+        # TODO make this behave more like MAINTENANCE_MODE_IGNORE_IP_ADDRESSES
+        # comparing to a list of addresses properly instead of just doing simple
+        # partial string comparison
         job.extra_text = www.settings.EXTRA_FOOTER
         job.logo = "bundled:osm-logo.svg"
         job.extra_logo = www.settings.EXTRA_LOGO

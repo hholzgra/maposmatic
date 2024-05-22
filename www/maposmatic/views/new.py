@@ -96,6 +96,7 @@ def _new_POST(request):
         job.extra_text = www.settings.EXTRA_FOOTER
         job.logo = "bundled:osm-logo.svg"
         job.extra_logo = www.settings.EXTRA_LOGO
+        job.queue = "api"
 
     job.save()
 

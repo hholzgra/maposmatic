@@ -58,6 +58,7 @@ RESULT_TIMEOUT_REACHED = 4
 RESULT_MEMORY_EXCEEDED = 5
 
 THUMBNAIL_SUFFIX = '_small.png'
+ERROR_SUFFIX = '-errors.txt'
 
 LOG = logging.getLogger('maposmatic')
 

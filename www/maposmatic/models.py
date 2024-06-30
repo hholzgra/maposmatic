@@ -249,13 +249,13 @@ class MapRenderingJob(models.Model):
 
     def remove_all_files(self):
         """Removes all the output files from this job, and returns the space
-        saved in bytes (Note: the thumbnail is not removed)."""
+        saved in bytes (Note: the error log and thumbnail are not removed)."""
 
         files = self.output_files()
         saved = 0
         removed = 0
 
-        for f in (list(files['maps'].values()) + list(files['indeces'].values()) + files['thumbnail']):
+        for f in (list(files['maps'].values()) + list(files['indeces'].values())):
             try:
                 os.remove(f[3])
                 removed += 1

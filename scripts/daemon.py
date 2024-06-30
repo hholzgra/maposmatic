@@ -206,6 +206,7 @@ class RenderingsGarbageCollector:
                         for f in glob.iglob(os.path.join(RENDERING_RESULT_PATH, '**'), recursive=True)
                         if not (os.path.isdir(f) or
                                 f.startswith('.') or
+                                f.endswith(render.ERROR_SUFFIX) or
                                 f.endswith(render.THUMBNAIL_SUFFIX))]))
 
         # Compute the total size occupied by the renderings, and the actual

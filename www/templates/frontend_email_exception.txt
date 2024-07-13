@@ -1,0 +1,24 @@
+{% load i18n %}{% load l10n %}{% load extratags %}{% autoescape off %}From: {% blocktrans %}MapOSMatic rendering daemon{% endblocktrans %} <{{from}}s>
+Sender: <{{from}}>
+Reply-To: {{replyto}}
+To: {{to}}
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 8bit
+Subject: {% blocktrans %}Web request exception caught{% endblocktrans %}
+Date: {{date}}
+
+{% blocktrans %}
+Exception Type : {{type}}
+Exception Value: {{value}}
+
+Request Method : {{method}}
+Request URL    : {{url}}
+
+Traceback:
+
+{{tb}}
+
+-- 
+MapOSMatic
+{% endblocktrans %}
+{% endautoescape %}

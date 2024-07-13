@@ -36,6 +36,7 @@ from django.views.generic.base import RedirectView
 
 from .maposmatic import rss_feeds
 from .maposmatic import views
+from .maposmatic.views import handlers
 from .maposmatic import apis
 
 from . import settings
@@ -119,3 +120,5 @@ if settings.DEBUG:
     urlpatterns.append( re_path(r'^results/(?P<path>.*)$', serve, {'document_root': settings.RENDERING_RESULT_PATH}))
 
     urlpatterns.append( re_path(r'^media/(?P<path>.*)$',   serve, {'document_root': settings.LOCAL_MEDIA_PATH}))
+else:
+    handler500 = views.handlers.myhandler500

@@ -29,6 +29,7 @@ LOG = logging.getLogger('maposmatic')
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
 
 import www.settings
 from www.maposmatic import helpers, forms, models

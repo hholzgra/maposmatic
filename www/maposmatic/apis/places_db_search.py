@@ -31,6 +31,7 @@ import json
 from django.http import HttpResponse, Http404
 from django.db import connections
 from django.db.transaction import TransactionManagementError
+from django.utils.translation import gettext, gettext_lazy as _
 
 import ocitysmap
 

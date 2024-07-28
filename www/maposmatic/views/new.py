@@ -41,6 +41,13 @@ from www.maposmatic import helpers, forms, models, views
 
 import ocitysmap
 
+def _is_spam(job):
+    if job.layout.startswith('multi') and job.lat_upper_left == 51.7 and job.stylesheet == 'Pencil':
+        return True
+    if job.maptitle == 'Gepardenforelle':
+        return True
+    return False
+
 def _create_upload_file(job, file, keep_until = None):
     first_line = file.readline().decode("utf-8-sig")
     LOG.info("firstline type %s" % type(first_line))
@@ -100,6 +107,14 @@ def _new_POST(request):
         job.logo = "bundled:osm-logo.svg"
         job.extra_logo = www.settings.EXTRA_LOGO
         job.queue = "api"
+
+    # check for known spam
+    if _is_spam(job):
+        LOG.warning("Spammer detected")
+        return render(request, 'maposmatic/spam.html',
+                      {
+                          },
+                      status = 418)
 
     job.save()
 

@@ -79,7 +79,7 @@ class MapRenderingJob(models.Model):
 
     maptitle = models.CharField(max_length=256, blank=True, default='')
     stylesheet = models.CharField(max_length=256)
-    overlay = models.CharField(max_length=256, null=True, blank=True)
+    overlay = models.CharField(max_length=4095, null=True, blank=True)
     layout = models.CharField(max_length=256)
     indexer = models.CharField(max_length=256, null=True, blank=True, default='Street')
     logo = models.CharField(max_length=256, null=True, blank=True, default='bundled:osm-logo.svg')

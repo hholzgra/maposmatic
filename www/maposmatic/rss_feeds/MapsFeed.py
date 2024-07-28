@@ -61,16 +61,14 @@ class MapsFeed(Feed):
                  .filter(endofrendering_time__gte=one_day_before)
                  .order_by('-endofrendering_time'))
 
-        if items.count():
-            return items
+        if items.count() == 0:
+          # Fall back to the last 10 entries, regardless of time
+          items = (models.MapRenderingJob.objects
+                  .filter(status=2)
+                  .filter(resultmsg='ok')
+                  .order_by('-endofrendering_time')[:10])
 
-        # Fall back to the last 10 entries, regardless of time
-        return (models.MapRenderingJob.objects
-                .filter(status=2)
-                .filter(resultmsg='ok')
-                .order_by('-endofrendering_time')[:10])
-
-        # Not sure what to do if we still don't have any items at this point.
+        return items
 
     def item_title(self, item):
         title = item.maptitle

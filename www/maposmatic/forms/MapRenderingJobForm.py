@@ -1,14 +1,7 @@
 # coding: utf-8
 
 # maposmatic, the web front-end of the MapOSMatic city map generation system
-# Copyright (C) 2009  David Decotigny
-# Copyright (C) 2009  Frédéric Lehobey
-# Copyright (C) 2009  Pierre Mauduit
-# Copyright (C) 2009  David Mentré
-# Copyright (C) 2009  Maxime Petazzoni
-# Copyright (C) 2009  Thomas Petazzoni
-# Copyright (C) 2009  Gaël Utard
-# Copyright (C) 2019  Hartmut Holzgraefe
+# Copyright (C) 2024  Hartmut Holzgraefe
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -23,32 +16,20 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# Forms for MapOSMatic
+import www.settings
 
 from django import forms
+from django.forms.utils import ErrorList
+from django.utils.translation import get_language, gettext_lazy as _
 from django.utils.safestring import mark_safe
 from django.utils.html import escape
-from django.utils.translation import gettext_lazy as _
-from django.utils.translation import get_language
-from django.forms.utils import ErrorList
-import time
+
+from www.maposmatic import models, widgets
 
 import ocitysmap
-from www.maposmatic import models, widgets
-import www.settings
 
 from multiupload.fields import MultiFileField
 
-class MapSearchForm(forms.Form):
-    """
-    The map search form, allowing search through the rendered maps.
-    """
-
-    query = forms.CharField(min_length=1, required=True,
-                widget=forms.TextInput(attrs=
-                    {'placeholder': _('Search for a map'),
-                     'class':       'span2',
-                     }))
 
 class MapRenderingJobForm(forms.ModelForm):
     """
@@ -305,54 +286,3 @@ class MapRenderingJobForm(forms.ModelForm):
         if metric_size_lat > www.settings.BBOX_MAXIMUM_LENGTH_IN_METERS or \
                 metric_size_long > www.settings.BBOX_MAXIMUM_LENGTH_IN_METERS:
             raise ValueError("Area too large")
-
-
-class MapPaperSizeForm(forms.Form):
-    """
-    The map paper size form, which is only used to analyze the
-    arguments of the POST request to /apis/papersize/
-    """
-    osmid            = forms.IntegerField(required=False)
-    layout           = forms.CharField(max_length=256)
-    indexer          = forms.CharField(max_length=256)
-    stylesheet       = forms.CharField(max_length=256)
-    lat_upper_left   = forms.FloatField(required=False, min_value=-90.0, max_value=90.0)
-    lon_upper_left   = forms.FloatField(required=False, min_value=-180.0, max_value=180.0)
-    lat_bottom_right = forms.FloatField(required=False, min_value=-90.0, max_value=90.0)
-    lon_bottom_right = forms.FloatField(required=False, min_value=-180.0, max_value=180.0)
-
-class MapRecreateForm(forms.Form):
-    """
-    The map recreate form, to reschedule an already processed job on the queue.
-    """
-
-    id = forms.IntegerField(widget=forms.HiddenInput, required=True)
-
-    def clean(self):
-        data = self.cleaned_data
-
-        try:
-            data["id"] = int(data.get("id", 0))
-        except ValueError:
-            data["id"] = 0
-
-        return data
-
-class MapCancelForm(forms.Form):
-    """
-    The map cancel form, to cancel a job (when the user has the matching
-    nonce).
-    """
-
-    id = forms.IntegerField(widget=forms.HiddenInput, required=True)
-    nonce = forms.CharField(widget=forms.HiddenInput, required=True)
-
-    def clean(self):
-        data = self.cleaned_data
-
-        try:
-            data["id"] = int(data.get("id", 0))
-        except ValueError:
-            data["id"] = 0
-
-        return data

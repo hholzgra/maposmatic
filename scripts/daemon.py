@@ -8,6 +8,7 @@
 # Copyright (C) 2009  Maxime Petazzoni
 # Copyright (C) 2009  Thomas Petazzoni
 # Copyright (C) 2009  Gaël Utard
+# Copyright (C) 2024  Hartmut Holzgraefe
 
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as
@@ -46,15 +47,13 @@ LOG = logging.getLogger('maposmatic')
 _DEFAULT_POLL_FREQUENCY = 10        # Daemon job polling frequency, in seconds
 
 _RESULT_MSGS = {
-    render.RESULT_SUCCESS: 'ok',
-    render.RESULT_KEYBOARD_INTERRUPT: 'Rendering interrupted',
+    render.RESULT_SUCCESS:               'ok',
+    render.RESULT_KEYBOARD_INTERRUPT:    'Rendering interrupted',
     render.RESULT_PREPARATION_EXCEPTION: 'Data preparation failed',
-    render.RESULT_RENDERING_EXCEPTION: 'Rendering failed',
-    render.RESULT_TIMEOUT_REACHED: 'Rendering took too long, canceled',
-    render.RESULT_MEMORY_EXCEEDED: 'Not enough memory to render, try a smaller region or a simpler stylesheet'
+    render.RESULT_RENDERING_EXCEPTION:   'Rendering failed',
+    render.RESULT_TIMEOUT_REACHED:       'Rendering took too long, canceled',
+    render.RESULT_MEMORY_EXCEEDED:       'Not enough memory to render, try a smaller region or a simpler stylesheet'
 }
-
-LOG = logging.getLogger('maposmatic')
 
 class MapOSMaticDaemon:
     """
@@ -200,6 +199,7 @@ class RenderingsGarbageCollector:
         the renderings directory is first created, oldest files last. Files are
         then pop()-ed out of the list and removed by cleanup_files() until
         we're back below the size threshold."""
+        SIZE_GB = 1024 * 1024 * 1024
 
         files = list(map(lambda f: self.get_file_info(f),
                     [os.path.join(f)
@@ -212,9 +212,10 @@ class RenderingsGarbageCollector:
         # Compute the total size occupied by the renderings, and the actual
         # threshold, in bytes.
         size = reduce(lambda x,y: x+y['size'], files, 0)
-        threshold = RENDERING_RESULT_MAX_SIZE_GB * 1024 * 1024 * 1024
+        threshold = RENDERING_RESULT_MAX_SIZE_GB * SIZE_GB
 
-        LOG.info("Cleanup status: %.1f of %.1f GB used" % (size / (1024*1024*1024), threshold / (1024*1024*1024)))
+        LOG.info("Cleanup status: %.1f of %.1f GB used"
+                 % (size / SIZE_GB, RENDERING_RESULT_MAX_SIZE_GB))
 
         # Stop here if we are below the threshold
         if size < threshold:
@@ -234,7 +235,8 @@ class RenderingsGarbageCollector:
         previous_job_id = 0
         while size > ( 0.9 * threshold):
             if iterations > RENDERING_RESULT_MAX_PURGE_ITERATIONS:
-                LOG.info("%d delete iterations done, pausing until next invocation" % RENDERING_RESULT_MAX_PURGE_ITERATIONS)
+                LOG.info("%d delete iterations done, pausing until next invocation"
+                         % RENDERING_RESULT_MAX_PURGE_ITERATIONS)
                 break
             if not len(files):
                 LOG.error("No files to remove and still above threshold! "

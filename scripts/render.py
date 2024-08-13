@@ -25,7 +25,6 @@
 import ctypes
 import datetime
 from PIL import Image
-import logging
 import multiprocessing
 import os
 import smtplib
@@ -33,6 +32,9 @@ import sys
 import threading
 import traceback
 import subprocess
+
+import logging
+LOG = logging.getLogger('maposmatic')
 
 import ocitysmap
 from ocitysmap import renderers
@@ -50,15 +52,15 @@ from django.template import Context, Template
 from www.settings import TEMPLATES
 from django.template.loader import render_to_string, get_template
 
-RESULT_SUCCESS = 0
-RESULT_KEYBOARD_INTERRUPT = 1
+RESULT_SUCCESS               = 0
+RESULT_KEYBOARD_INTERRUPT    = 1
 RESULT_PREPARATION_EXCEPTION = 2
-RESULT_RENDERING_EXCEPTION = 3
-RESULT_TIMEOUT_REACHED = 4
-RESULT_MEMORY_EXCEEDED = 5
+RESULT_RENDERING_EXCEPTION   = 3
+RESULT_TIMEOUT_REACHED       = 4
+RESULT_MEMORY_EXCEEDED       = 5
 
 THUMBNAIL_SUFFIX = '_small.png'
-ERROR_SUFFIX = '-errors.txt'
+ERROR_SUFFIX     = '-errors.txt'
 
 LOG = logging.getLogger('maposmatic')
 
@@ -248,7 +250,7 @@ class JobRenderer(threading.Thread):
 
     def __init__(self, job, prefix):
         threading.Thread.__init__(self, name='renderer-%d' % job.id)
-        self.job = job
+        self.job    = job
         self.prefix = prefix
         self.result = None
 

@@ -47,7 +47,8 @@ class MapSearchForm(forms.Form):
     query = forms.CharField(min_length=1, required=True,
                 widget=forms.TextInput(attrs=
                     {'placeholder': _('Search for a map'),
-                     'class': 'span2'}))
+                     'class':       'span2',
+                     }))
 
 class MapRenderingJobForm(forms.ModelForm):
     """
@@ -56,24 +57,56 @@ class MapRenderingJobForm(forms.ModelForm):
     """
     class Meta:
         model = models.MapRenderingJob
-        fields = ('layout', 'indexer', 'stylesheet', 'overlay',
-                  'maptitle', 'administrative_city',
-                  'lat_upper_left', 'lon_upper_left',
-                  'lat_bottom_right', 'lon_bottom_right',
-                  'submittermail')
+        fields = ('layout',
+                  'indexer',
+                  'stylesheet',
+                  'overlay',
+                  'maptitle',
+                  'administrative_city',
+                  'lat_upper_left',
+                  'lon_upper_left',
+                  'lat_bottom_right',
+                  'lon_bottom_right',
+                  'submittermail',
+                  )
 
-    mode = forms.CharField(initial='bbox', widget=forms.HiddenInput)
-    layout = forms.ChoiceField(choices=(), widget=forms.Select(attrs= { 'onchange' : 'clearPaperSize(this.value); load_preview("#layout-preview", this.value); indexer_visible(this.value);'}))
-    indexer = forms.ChoiceField(choices=(), widget=forms.Select())
-    stylesheet = forms.ChoiceField(choices=(), widget=forms.Select(attrs= { 'onchange' : '$("#style-preview").attr("src","/media/img/style/"+this.value+".jpg");'}))
-    overlay = forms.MultipleChoiceField(choices=(), widget=forms.SelectMultiple(attrs= { 'class': 'multipleSelect' }), required=False)
-    paper_width_mm = forms.IntegerField(widget=forms.NumberInput(attrs= {'onchange' : 'change_papersize();', 'style': 'width: 5em;'}), min_value=100, max_value=2000)
-    paper_height_mm = forms.IntegerField(widget=forms.NumberInput(attrs= {'onchange' : 'change_papersize();', 'style': 'width: 5em;'}), min_value=100, max_value=2000)
-    maptitle = forms.CharField(max_length=256, required=False)
-    bbox = widgets.AreaField(label=_("Area"),
-                             fields=(forms.FloatField(), forms.FloatField(),
-                                     forms.FloatField(), forms.FloatField()))
-    uploadfile = MultiFileField(required=False)
+    mode            = forms.CharField(initial='bbox',
+                                      widget=forms.HiddenInput,
+                                      )
+    layout          = forms.ChoiceField(choices=(),
+                                        widget=forms
+                                        .Select(attrs= { 'onchange' : 'clearPaperSize(this.value); load_preview("#layout-preview", this.value); indexer_visible(this.value);'}))
+    indexer         = forms.ChoiceField(choices=(),
+                                        widget=forms.Select())
+    stylesheet      = forms.ChoiceField(choices=(),
+                                        widget=forms.Select(attrs= { 'onchange' : '$("#style-preview").attr("src","/media/img/style/"+this.value+".jpg");'}))
+    overlay         = forms.MultipleChoiceField(choices=(),
+                                                widget=forms.SelectMultiple(attrs= { 'class': 'multipleSelect' }),
+                                                required=False)
+    paper_width_mm  = forms.IntegerField(widget=forms.NumberInput(attrs= { 'onchange' : 'change_papersize();',
+                                                                           'style':     'width: 5em;',
+                                                                          }),
+                                         min_value=100,
+                                         max_value=2000,
+                                         )
+    paper_height_mm = forms.IntegerField(widget=forms.NumberInput(attrs= { 'onchange' : 'change_papersize();',
+                                                                           'style':     'width: 5em;',
+                                                                          }),
+                                         min_value=100,
+                                         max_value=2000,
+                                         )
+    maptitle        = forms.CharField(max_length=256,
+                                      required=False,
+                                      )
+    bbox            = widgets.AreaField(label=_("Area"),
+                                        fields=(forms.FloatField(),
+                                                forms.FloatField(),
+                                                forms.FloatField(),
+                                                forms.FloatField()
+                                                )
+                                        )
+    uploadfile      = MultiFileField(required=False)
+
     delete_files_after_rendering = forms.BooleanField(required=False)
 
     map_lang_flag_list = []
@@ -86,12 +119,14 @@ class MapRenderingJobForm(forms.ModelForm):
                                        % (country_code, lang_name))
             map_lang_flag_list.append((lang_key, lang_html))
 
-    map_language = forms.ChoiceField(choices=map_lang_flag_list,
-                                     widget=forms.Select(
-                                        attrs={'style': 'min-width: 200px'}))
+        map_language = forms.ChoiceField(choices=map_lang_flag_list,
+                                         widget=forms.Select(
+                                             attrs={'style': 'min-width: 200px'},
+                                         ))
 
     administrative_osmid = forms.IntegerField(widget=forms.HiddenInput,
-                                              required=False)
+                                              required=False,
+                                              )
 
     def __init__(self, *args, **kwargs):
         super(MapRenderingJobForm, self).__init__(*args, **kwargs)
@@ -99,9 +134,9 @@ class MapRenderingJobForm(forms.ModelForm):
         self._ocitysmap = ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH, get_language())
 
         layout_renderers = self._ocitysmap.get_all_renderers()
-        indexers = self._ocitysmap.get_all_indexers()
-        stylesheets = self._ocitysmap.get_all_style_configurations()
-        overlays = self._ocitysmap.get_all_overlay_configurations()
+        indexers         = self._ocitysmap.get_all_indexers()
+        stylesheets      = self._ocitysmap.get_all_style_configurations()
+        overlays         = self._ocitysmap.get_all_overlay_configurations()
 
         self.fields['layout'].choices = []
         # TODO move descriptions to ocitysmap side
@@ -176,12 +211,12 @@ class MapRenderingJobForm(forms.ModelForm):
 
         data = self.cleaned_data
 
-        mode = data.get("mode")
-        city = data.get("administrative_city")
-        title = data.get("maptitle")
-        layout = data.get("layout")
-        indexer = data.get("indexer")
-        stylesheet = data.get("stylesheet")
+        mode          = data.get("mode")
+        city          = data.get("administrative_city")
+        title         = data.get("maptitle")
+        layout        = data.get("layout")
+        indexer       = data.get("indexer")
+        stylesheet    = data.get("stylesheet")
         overlay_array = []
         try:
             for overlay in data.get("overlay"):

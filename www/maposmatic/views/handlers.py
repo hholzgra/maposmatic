@@ -23,6 +23,7 @@ LOG = logging.getLogger('maposmatic')
 
 from django.shortcuts import render
 from django.template.loader import render_to_string, get_template
+from django.core import mail
 
 import www.settings
 from www.maposmatic import helpers, forms, models
@@ -45,21 +46,11 @@ def myhandler500(request):
                 'date':    datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S +0200 (CEST)'),
                }
 
-    msg = template.render(context)
+    body = template.render(context)
+    subject = 'Web request exception caught'
 
-    if www.settings.DAEMON_ERRORS_SMTP_ENCRYPT == "SSL":
-        mailer = smtplib.SMTP_SSL(www.settings.DAEMON_ERRORS_SMTP_HOST)
-    else:
-        mailer = smtplib.SMTP(www.settings.DAEMON_ERRORS_SMTP_HOST)
-    mailer.connect(www.settings.DAEMON_ERRORS_SMTP_HOST, www.settings.DAEMON_ERRORS_SMTP_PORT)
-    if www.settings.DAEMON_ERRORS_SMTP_ENCRYPT == "TLS":
-        mailer.starttls()
-    if www.settings.DAEMON_ERRORS_SMTP_USER and www.settings.DAEMON_ERRORS_SMTP_PASSWORD:
-        mailer.login(www.settings.DAEMON_ERRORS_SMTP_USER, www.settings.DAEMON_ERRORS_SMTP_PASSWORD)
+    mail.mail_admins(subject, body)
 
-    mailer.sendmail(www.settings.DAEMON_ERRORS_EMAIL_FROM,
-                    [admin[1] for admin in www.settings.ADMINS], msg)
-    
     return render(request,
                   '500.html',
                   {

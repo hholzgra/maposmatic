@@ -130,27 +130,19 @@ MAPOSMATIC_PID_FILE = '/var/run/maposmaticd.pid'
 # Feed URL for the RRS feed on the front page
 FRONT_PAGE_FEED = 'http://blog.osm-baustelle.de/index.php/feed/?cat=2'
 
-# Settings for exception emails: the from email address, and the list of
-# receipient email addresses. No emails are sent if the SMTP host is not
-# defined.
-DAEMON_ERRORS_SMTP_HOST = None
-DAEMON_ERRORS_SMTP_PORT = 25
-DAEMON_ERRORS_SMTP_ENCRYPT = None
-DAEMON_ERRORS_SMTP_USER = None
-DAEMON_ERRORS_SMTP_PASSWORD = None
-DAEMON_ERRORS_EMAIL_FROM = 'daemon@example.org'
-DAEMON_ERRORS_EMAIL_REPLY_TO = 'noreply@example.org'
+# Settings for notification emails
+DAEMON_ERRORS_EMAIL_FROM = 'webmaster@example.org'
+DAEMON_ERRORS_EMAIL_REPLY_TO = 'webmaster@example.org'
 DAEMON_ERRORS_JOB_URL = 'http://example.org/jobs/%d'
 
-# example email settings for using a Google Mail account
-# DAEMON_ERRORS_SMTP_HOST = 'smtp.googlemail.com'
-# DAEMON_ERRORS_SMTP_PORT = 587
-# DAEMON_ERRORS_SMTP_ENCRYPT = 'TLS'
-# DAEMON_ERRORS_SMTP_USER = '...@gmail.com'
-# DAEMON_ERRORS_SMTP_PASSWORD = "..."
-# DAEMON_ERRORS_EMAIL_FROM = '...@gmail.com'
-# DAEMON_ERRORS_EMAIL_REPLY_TO = '...@gmail.com'
-# DAEMON_ERRORS_JOB_URL = 'http://example.com/jobs/%d'
+EMAIL_HOST          = False; # "mail.example.org"
+EMAIL_PORT          = 25
+EMAIL_USE_TLS       = True
+EMAIL_HOST_USER     = "..."
+EMAIL_HOST_PASSWORD = "..."
+
+SERVER_EMAIL = 'webmaster@example.org'
+
 
 # highest rendering request ID still using the old filename scheme
 # before the switch to sluggify 

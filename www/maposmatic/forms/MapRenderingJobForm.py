@@ -280,6 +280,7 @@ class MapRenderingJobForm(forms.ModelForm):
         """Make sure that the supplied OSM Id is valid and can be accepted for
         rendering (bounding box not too large, etc.). Raise an exception in
         case of error."""
+
         bbox_wkt, area_wkt = self._ocitysmap.get_geographic_info(osm_id)
         bbox = ocitysmap.coords.BoundingBox.parse_wkt(bbox_wkt)
         (metric_size_lat, metric_size_long) = bbox.spheric_sizes()

@@ -77,11 +77,12 @@ class MapsFeed(Feed):
         return "#%d - %s" % (item.id, title)
 
     def item_geometry(self, item):
-        if item.administrative_city:
-            return None
-        else:
-            return (item.lon_upper_left, item.lat_upper_left,
-                    item.lon_bottom_right, item.lat_bottom_right)
+        if item.lon_upper_left is None:
+            # old / resubmitted jobs with boundary ID only
+            # TODO: extract actual bbox from OSM ID?
+            return(0,0,0,0)
+        return (item.lon_upper_left, item.lat_upper_left,
+                item.lon_bottom_right, item.lat_bottom_right)
 
     def item_pubdate(self, item):
         return item.endofrendering_time;

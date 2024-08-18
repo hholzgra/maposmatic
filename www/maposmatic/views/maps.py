@@ -30,6 +30,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.db.models import Q
 
 import www.settings
 from www.maposmatic import helpers, forms, models
@@ -41,10 +42,15 @@ def maps(request, category=None, extra=None):
     map_list = None
 
     form = forms.MapSearchForm(request.GET)
+
     if form.is_valid():
+        term  = form.cleaned_data['query']
+        query = Q(maptitle__icontains = term)
+        if term.isnumeric():
+            query.add(Q(id = term), Q.OR)
         map_list = (models.MapRenderingJob.objects
                     .order_by('-submission_time')
-                    .filter(maptitle__icontains=form.cleaned_data['query']))
+                    .filter(query))
         if len(map_list) == 1:
             return HttpResponseRedirect(reverse('map-by-id',
                                                 args=[map_list[0].id]))

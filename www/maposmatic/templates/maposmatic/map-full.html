@@ -54,7 +54,7 @@
 {% block page %}
 <div class="row-fluid" style="margin-top: 30px;">
   <div class="span8">
-    <h1>{{ map.maptitle }}</h1>
+    <h1 class="d-flex justify-content-between"><span>{{ map.maptitle }}</span><span>Map #: {{ map.id }}</span></h1>
 
     <div class="card card-default mb-3">
       <div class="card-header">{% trans "Rendering status" %}</div>

@@ -25,7 +25,6 @@
 import ctypes
 import datetime
 from PIL import Image
-import logging
 import multiprocessing
 import os
 import smtplib
@@ -34,31 +33,35 @@ import threading
 import traceback
 import subprocess
 
+import logging
+LOG = logging.getLogger('maposmatic')
+
 import ocitysmap
 from ocitysmap import renderers
 from www.maposmatic.models import MapRenderingJob
 from www.settings import ADMINS, OCITYSMAP_CFG_PATH, MEDIA_ROOT
 from www.settings import RENDERING_RESULT_PATH, RENDERING_RESULT_FORMATS
-from www.settings import DAEMON_ERRORS_SMTP_HOST, DAEMON_ERRORS_SMTP_PORT
-from www.settings import DAEMON_ERRORS_SMTP_ENCRYPT
-from www.settings import DAEMON_ERRORS_SMTP_USER, DAEMON_ERRORS_SMTP_PASSWORD
 from www.settings import DAEMON_ERRORS_EMAIL_FROM
 from www.settings import DAEMON_ERRORS_EMAIL_REPLY_TO
 from www.settings import DAEMON_ERRORS_JOB_URL
+from www.settings import EMAIL_HOST
 
 from django.template import Context, Template
 from www.settings import TEMPLATES
 from django.template.loader import render_to_string, get_template
+from django.utils.translation import gettext_lazy as _
 
-RESULT_SUCCESS = 0
-RESULT_KEYBOARD_INTERRUPT = 1
+from django.core import mail
+
+RESULT_SUCCESS               = 0
+RESULT_KEYBOARD_INTERRUPT    = 1
 RESULT_PREPARATION_EXCEPTION = 2
-RESULT_RENDERING_EXCEPTION = 3
-RESULT_TIMEOUT_REACHED = 4
-RESULT_MEMORY_EXCEEDED = 5
+RESULT_RENDERING_EXCEPTION   = 3
+RESULT_TIMEOUT_REACHED       = 4
+RESULT_MEMORY_EXCEEDED       = 5
 
 THUMBNAIL_SUFFIX = '_small.png'
-ERROR_SUFFIX = '-errors.txt'
+ERROR_SUFFIX     = '-errors.txt'
 
 LOG = logging.getLogger('maposmatic')
 
@@ -85,40 +88,25 @@ class ThreadingJobRenderer:
     def _email_timeout(self):
         """Send a notification about timeouts to the request submitter"""
 
-        if not DAEMON_ERRORS_SMTP_HOST or not self.__job.submittermail:
+        if not EMAIL_HOST or not self.__job.submittermail:
             return
 
         try:
-            LOG.info("Emailing timeout message to %s via %s:%d..." %
-                     (self.__job.submittermail,
-                      DAEMON_ERRORS_SMTP_HOST,
-                      DAEMON_ERRORS_SMTP_PORT))
-
-            if DAEMON_ERRORS_SMTP_ENCRYPT == "SSL":
-              mailer = smtplib.SMTP_SSL()
-            else:
-              mailer = smtplib.SMTP()
-            mailer.connect(DAEMON_ERRORS_SMTP_HOST, DAEMON_ERRORS_SMTP_PORT)
-            if DAEMON_ERRORS_SMTP_ENCRYPT == "TLS":
-                mailer.starttls()
-            if DAEMON_ERRORS_SMTP_USER and DAEMON_ERRORS_SMTP_PASSWORD:
-                mailer.login(DAEMON_ERRORS_SMTP_USER, DAEMON_ERRORS_SMTP_PASSWORD)
-
             template = get_template("render_email_timeout.txt")
-            context = { 'from': DAEMON_ERRORS_EMAIL_FROM,
-                        'replyto': DAEMON_ERRORS_EMAIL_REPLY_TO,
-                        'to': self.__job.submittermail,
-                        'jobid': self.__job.id,
-                        'date': datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S +0200 (CEST)'),
-                        'url': DAEMON_ERRORS_JOB_URL % self.__job.id,
-                        'title': self.__job.maptitle,
-                        'timeout': self.__timeout / 60
-                      }
-            msg = template.render(context)
+            context = {
+                'jobid':   self.__job.id,
+                'url':     DAEMON_ERRORS_JOB_URL % self.__job.id,
+                'title':   self.__job.maptitle,
+                'timeout': self.__timeout / 60,
+            }
+            body = template.render(context)
 
-            mailer.sendmail(DAEMON_ERRORS_EMAIL_FROM,
-                    [admin[1] for admin in ADMINS], msg)
-            LOG.info("Email notification sent.")
+            mail.send_mail( _('Rendering of job %d timed out') % self.__job.id,
+                            body,
+                            DAEMON_ERRORS_EMAIL_FROM,
+                            [ self.__job.submittermail ],
+                           )
+
         except Exception as e:
             LOG.exception("Could not send notification email to the submitter!")
 
@@ -168,40 +156,24 @@ class ForkingJobRenderer:
     def _email_timeout(self):
         """Send a notification about timeouts to the request submitter"""
 
-        if not DAEMON_ERRORS_SMTP_HOST or not self.__job.submittermail:
+        if not EMAIL_HOST or not self.__job.submittermail:
             return
 
         try:
-            LOG.info("Emailing timeout message to %s via %s:%d..." %
-                     (self.__job.submittermail,
-                      DAEMON_ERRORS_SMTP_HOST,
-                      DAEMON_ERRORS_SMTP_PORT))
-
-            if DAEMON_ERRORS_SMTP_ENCRYPT == "SSL":
-              mailer = smtplib.SMTP_SSL()
-            else:
-              mailer = smtplib.SMTP()
-            mailer.connect(DAEMON_ERRORS_SMTP_HOST, DAEMON_ERRORS_SMTP_PORT)
-            if DAEMON_ERRORS_SMTP_ENCRYPT == "TLS":
-                mailer.starttls()
-            if DAEMON_ERRORS_SMTP_USER and DAEMON_ERRORS_SMTP_PASSWORD:
-                mailer.login(DAEMON_ERRORS_SMTP_USER, DAEMON_ERRORS_SMTP_PASSWORD)
-
             template = get_template("render_email_timeout.txt")
-            context = { 'from': DAEMON_ERRORS_EMAIL_FROM,
-                        'replyto': DAEMON_ERRORS_EMAIL_REPLY_TO,
-                        'to': self.__job.submittermail,
-                        'jobid': self.__job.id,
-                        'date': datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S +0200 (CEST)'),
-                        'url': DAEMON_ERRORS_JOB_URL % self.__job.id,
-                        'title': self.__job.maptitle,
-                        'timeout': self.__timeout / 60
+            context = {
+                'jobid':   self.__job.id,
+                'url':     DAEMON_ERRORS_JOB_URL % self.__job.id,
+                'title':   self.__job.maptitle,
+                'timeout': self.__timeout / 60,
             }
-            msg = template.render(context)
+            body = template.render(context)
 
-            mailer.sendmail(DAEMON_ERRORS_EMAIL_FROM,
-                    [admin[1] for admin in ADMINS], msg)
-            LOG.info("Email notification sent.")
+            mail.send_mail( _('Rendering of job %d timed out') % self.__job.id,
+                            body,
+                            DAEMON_ERRORS_EMAIL_FROM,
+                            [ self.__job.submittermail ],
+                           )
         except Exception as e:
             LOG.exception("Could not send notification email to the submitter!")
 
@@ -248,7 +220,7 @@ class JobRenderer(threading.Thread):
 
     def __init__(self, job, prefix):
         threading.Thread.__init__(self, name='renderer-%d' % job.id)
-        self.job = job
+        self.job    = job
         self.prefix = prefix
         self.result = None
 
@@ -278,40 +250,33 @@ class JobRenderer(threading.Thread):
             ctypes.pythonapi.PyThreadState_SetAsyncExc(self.__get_my_tid(), 0)
             raise SystemError("PyThreadState_SetAsync failed")
 
-    def _email_submitter(self, template_name):
+    def _email_submitter(self, template_name, html_template_name =  None):
         """Send a notification with status and result URL to the request submitter"""
 
-        if not DAEMON_ERRORS_SMTP_HOST or not self.job.submittermail:
+        if not EMAIL_HOST or not self.job.submittermail:
             return
 
         try:
-            LOG.info("Emailing success/failure message to %s via %s:%d..." %
-                     (self.job.submittermail,
-                      DAEMON_ERRORS_SMTP_HOST,
-                      DAEMON_ERRORS_SMTP_PORT))
-
-            if DAEMON_ERRORS_SMTP_ENCRYPT == "SSL":
-              mailer = smtplib.SMTP_SSL(DAEMON_ERRORS_SMTP_HOST)
-            else:
-              mailer = smtplib.SMTP(DAEMON_ERRORS_SMTP_HOST)
-            mailer.connect(DAEMON_ERRORS_SMTP_HOST, DAEMON_ERRORS_SMTP_PORT)
-            if DAEMON_ERRORS_SMTP_ENCRYPT == "TLS":
-                mailer.starttls()
-            if DAEMON_ERRORS_SMTP_USER and DAEMON_ERRORS_SMTP_PASSWORD:
-                mailer.login(DAEMON_ERRORS_SMTP_USER, DAEMON_ERRORS_SMTP_PASSWORD)
-
+            context = {
+                'jobid': self.job.id,
+                'url':   DAEMON_ERRORS_JOB_URL % self.job.id,
+                'title': self.job.maptitle,
+            }
             template = get_template(template_name)
-            context = { 'from': DAEMON_ERRORS_EMAIL_FROM,
-                        'replyto': DAEMON_ERRORS_EMAIL_REPLY_TO,
-                        'to': self.job.submittermail,
-                        'jobid': self.job.id,
-                        'date': datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S +0200 (CEST)'),
-                        'url': DAEMON_ERRORS_JOB_URL % self.job.id,
-                        'title': self.job.maptitle
-                      }
-            msg = template.render(context)
+            body = template.render(context)
 
-            mailer.sendmail(DAEMON_ERRORS_EMAIL_FROM, self.job.submittermail, msg.encode("utf8"))
+            if html_template_name is not None:
+                template = get_template(html_template_name)
+                html = template.render(context)
+            else:
+                html = None
+
+            mail.send_mail( _('Rendering of job %d succeeded') % self.job.id,
+                            body,
+                            DAEMON_ERRORS_EMAIL_FROM,
+                            [ self.job.submittermail ],
+                            html_message = html
+                           )
             LOG.info("Email notification sent.")
         except Exception as e:
             LOG.exception("Could not send notification email to the submitter!")
@@ -321,25 +286,10 @@ class JobRenderer(threading.Thread):
         """This method can be used to send the given exception by email to the
         configured admins in the project's settings."""
 
-        if not ADMINS or not DAEMON_ERRORS_SMTP_HOST:
+        if not ADMINS or not EMAIL_HOST:
             return
 
         try:
-            LOG.info("Emailing rendering exceptions to the admins (%s) via %s:%d..." %
-                     (', '.join([admin[1] for admin in ADMINS]),
-                      DAEMON_ERRORS_SMTP_HOST,
-                      DAEMON_ERRORS_SMTP_PORT))
-
-            if DAEMON_ERRORS_SMTP_ENCRYPT == "SSL":
-              mailer = smtplib.SMTP_SSL()
-            else:
-              mailer = smtplib.SMTP(DAEMON_ERRORS_SMTP_HOST)
-            mailer.connect(DAEMON_ERRORS_SMTP_HOST, DAEMON_ERRORS_SMTP_PORT)
-            if DAEMON_ERRORS_SMTP_ENCRYPT == "TLS":
-                mailer.starttls()
-            if DAEMON_ERRORS_SMTP_USER and DAEMON_ERRORS_SMTP_PASSWORD:
-                mailer.login(DAEMON_ERRORS_SMTP_USER, DAEMON_ERRORS_SMTP_PASSWORD)
-
             jobinfo = []
             for k in sorted(self.job.__dict__.keys()):
                 # We don't care about state that much, especially since it
@@ -350,20 +300,17 @@ class JobRenderer(threading.Thread):
 
 
             template = get_template("render_email_exception.txt")
-            context = { 'from': DAEMON_ERRORS_EMAIL_FROM,
-                      'replyto': DAEMON_ERRORS_EMAIL_REPLY_TO,
-                      'to': ', '.join(['%s <%s>' % admin for admin in ADMINS]),
-                      'jobid': self.job.id,
-                      'jobinfo': '\n'.join(jobinfo),
-                      'date': datetime.datetime.now().strftime('%a, %d %b %Y %H:%M:%S +0200 (CEST)'),
-                      'url': DAEMON_ERRORS_JOB_URL % self.job.id,
-                      'tb': ''.join(traceback.format_exception(*exc_info))
-                    }
-            msg = template.render(context)
 
-            mailer.sendmail(DAEMON_ERRORS_EMAIL_FROM,
-                    [admin[1] for admin in ADMINS], msg)
-            LOG.info("Error report sent.")
+            context = {
+                'jobid':   self.job.id,
+                'jobinfo': '\n'.join(jobinfo),
+                'url':     DAEMON_ERRORS_JOB_URL % self.job.id,
+                'tb':      ''.join(traceback.format_exception(*exc_info)),
+            }
+            body = template.render(context)
+            subject = 'Rendering of job %d failed' % self.job.id
+
+            mail.mail_admins(subject, body)
         except Exception as e:
             LOG.exception("Could not send error email to the admins!")
 
@@ -537,7 +484,7 @@ class JobRenderer(threading.Thread):
             self._email_exception(sys.exc_info())
 
         if self.result == RESULT_SUCCESS:
-            self._email_submitter("render_email_success.txt")
+            self._email_submitter("render_email_success.txt", "render_email_success.html")
 
         for file in self.job.uploads.all():
             if file.keep_until is None:

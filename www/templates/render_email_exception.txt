@@ -1,12 +1,4 @@
-{% load i18n %}{% load l10n %}{% load extratags %}{% autoescape on %}From: {% blocktrans %}MapOSMatic rendering daemon{% endblocktrans %} <{{from}}s>
-Sender: <{{from}}>
-Reply-To: {{replyto}}
-To: {{to}}
-Content-Type: text/plain; charset=utf-8
-Content-Transfer-Encoding: 8bit
-Subject: {% blocktrans %}Rendering of job #{{jobid}} failed{% endblocktrans %}
-Date: {{date}}
-
+{% load i18n %}{% load l10n %}{% load extratags %}{% autoescape on %}
 {% blocktrans %}
 An error occured while rendering job {{jobid}}!
 

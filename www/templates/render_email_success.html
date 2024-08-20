@@ -1,16 +1,20 @@
 {% load i18n %}{% load l10n %}{% load extratags %}{% autoescape off %}{% blocktrans %}
+<html>
+  <body>
 Hello {{to}},
-
+<br/>
 your map rendering request for
-
+<br/>
   {{title}}
-
+<br/>
 has successfully been processed now, and the results can be downloaded
 from the rendering jobs detail pages:
-
-  {{url}}
-
--- 
-MapOSMatic
+<br/>
+  <a href="{{url}}">{{url}}</a>
+<br/>
+-- <br/>
+<b>MapOSMatic</b>
+  </body>
+</html>
 {% endblocktrans %}
 {% endautoescape %}

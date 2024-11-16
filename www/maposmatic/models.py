@@ -202,9 +202,10 @@ class MapRenderingJob(models.Model):
 
         allfiles = {'maps': {}, 'indeces': {}, 'thumbnail': [], 'errorlog': []}
 
-        formats = www.settings.RENDERING_RESULT_FORMATS
-        formats.append('8bit.png')
-        formats.append('jpg')
+        formats = www.settings.RENDERING_RESULT_FORMATS.copy()
+        if 'png' in formats:
+            formats.append('8bit.png')
+            formats.append('jpg')
         for format in formats:
             map_path = self.get_map_filepath("." + format)
             if format != 'csv' and os.path.exists(map_path):

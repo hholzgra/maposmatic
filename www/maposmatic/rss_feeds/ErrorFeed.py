@@ -76,11 +76,13 @@ class ErrorFeed(Feed):
         return "<strong>%s</strong><hr/><pre>%s</pre>" % (item.resultmsg, errortext)
 
     def item_geometry(self, item):
-        if item.administrative_city:
-            return None
-        else:
-            return (item.lon_upper_left, item.lat_upper_left,
-                    item.lon_bottom_right, item.lat_bottom_right)
+        try:
+            return (float(item.lon_upper_left),   float(item.lat_upper_left),
+                    float(item.lon_bottom_right), float(item.lat_bottom_right))
+        except:
+            # TODO check if administrative_id is set
+            # and retrieve bouding box from OSM data
+            return (-180.0, 90.0, 180.0, -90.0)
 
     def item_pubdate(self, item):
         return item.startofrendering_time;

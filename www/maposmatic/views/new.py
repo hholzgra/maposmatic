@@ -29,6 +29,8 @@ LOG = logging.getLogger('maposmatic')
 import datetime
 from ipware import get_client_ip
 
+from fnmatch import fnmatch
+
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.http import HttpResponseRedirect, HttpResponseNotAllowed
 from django.shortcuts import render
@@ -99,11 +101,15 @@ def _new_POST(request):
     job.nonce = helpers.generate_nonce(models.MapRenderingJob.NONCE_SIZE)
 
     client_ip, is_routable = get_client_ip(request)
-    if www.settings.EXTRA_IP is None or ( client_ip is not None and client_ip in www.settings.EXTRA_IP ):
-        job.extra_text = www.settings.EXTRA_FOOTER
-        job.logo = "bundled:osm-logo.svg"
-        job.extra_logo = www.settings.EXTRA_LOGO
-        job.queue = "api"
+
+    if www.settings.EXTRA_IP is not None and client_ip is not None:
+        for pattern in www.settings.EXTRA_IP:
+            if fnmatch(client_ip, pattern):
+                job.extra_text = www.settings.EXTRA_FOOTER
+                job.logo       = "bundled:osm-logo.svg"
+                job.extra_logo = www.settings.EXTRA_LOGO
+                job.queue      = "api"
+                break
 
     # check for known spam
     if _is_spam(job):

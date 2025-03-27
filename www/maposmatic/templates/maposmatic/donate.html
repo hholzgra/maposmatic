@@ -36,34 +36,19 @@
 {% block title %}{% trans "Donate" %}{% endblock %}
 {% block page %}
 <h1>{% trans "Donate" %}</h1>
-<h2>{% trans "Why are donations useful?" %}</h2>
-
-{% url "about" as about_url %}
 
 <p>
-{% blocktrans %}MapOSMatic is a project entirely developed and maintained by a
-team of volunteers (see our <a href="{{about_url}}">About</a> page for
-details). However, running the MapOSMatic service and making improvements to it
-has various costs beyond the time of the volunteer developers.{% endblocktrans %}
+{% blocktrans %}
+This site does not collect donations itself, but you are more than welcome 
+to donate to either the 
+<a href="https://supporting.openstreetmap.org/donate/">OpenStreetMap Foundation</a>
+or its German chapter
+<a href"https://fossgis.de/verein/spenden/">FOSSGIS e.V.</a> which is supporting
+us with a DinA1 printer for printing MapOSMatic maps on events.
+{% endblocktrans %}
 </p>
 
-<p>
-{% blocktrans %}Therefore, we are currently seeking donations to help us
-funding:{% endblocktrans %}
-</p>
-
-<ul>
-<li>{% blocktrans %}Participation to the transportation expenses of the
-MapOSMatic developers when they gather for <i>hackfests</i> (meeting of
-developers). You can read our <a href="http://news.maposmatic.org">blog</a> to
-learn more about what we achieve during those hackfests. We usually implement a
-huge number of improvements, new features and bug fixes during those meetings.
-They take place during the holidays of the developers, and we would like to at
-least compensate their travel expenses.{% endblocktrans %}</li>
-</ul>
-
-<h2>{% trans "Considering making a donation?" %}</h2>
-
+{% comment %}
 <p>
 {% blocktrans %}Donations can be done through the well-known <a
 href="http://www.paypal.com">PayPal</a> service. We accept donations of any
@@ -77,4 +62,6 @@ amount: all donations are helpful, even the smallest ones.{% endblocktrans %}
   <button type="submit" class="btn btn-large btn-primary" name="submit" alt="PayPal — The safer, easier way to pay online.">{% trans "Donate via PayPal &raquo;" %}</button>
   <img alt="" border="0" src="https://www.paypalobjects.com/{{paypal_lang_code}}/i/scr/pixel.gif" width="1" height="1"/>
 </form>
+{% endcomment %}
+
 {% endblock %}

@@ -46,9 +46,7 @@
           </div>
         </li>
 
-        {% if PAYPAL_ID %}
-        <li class="nav-item {% block menu-donate %}{% endblock %}"><a class="nav-item" href="{% url "donate" %}"><i class="fas fa-gift"></i> {% trans "Donate" %}</a></li>
-        {% endif %}
+        <li class="nav-item {% block menu-donate %}{% endblock %}"><a class="nav-link" href="{% url "donate" %}"><i class="fas fa-gift"></i> {% trans "Donate" %}</a></li>
 
         <li class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">

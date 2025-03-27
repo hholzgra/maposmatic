@@ -60,11 +60,11 @@
 </div>
 
 <div class="row">
-  <div class={% if PAYPAL_ID %}"col-md-4"{% else %}"col-md-6"{% endif %}>
+  <div class="col-md-4">
     {% include "maposmatic/index-parts/status.html" %}
   </div>
 
-  <div class={% if PAYPAL_ID %}"col-md-4"{% else %}"col-md-6"{% endif %}>
+  <div class="col-md-4">
     <div class="alert alert-success">
       <h2>{% trans "Latest news" %}</h2>
 
@@ -81,7 +81,6 @@
     </div>
   </div>
 
-  {% if PAYPAL_ID %}
   <div class="col-md-4">
     <div class="alert alert-info">
       <h2>{% trans "Donate" %}</h2>
@@ -89,6 +88,7 @@
       <p>
 	{% blocktrans %}You can donate to help us improve the service. See our <a href="/donate">donation</a> page for more information on how donations are processed and how they help us keep MapOSMatic free (and ad-free!).{% endblocktrans %}
       </p>
+      {% if PAYPAL_ID %}
       <br/>
       <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 	<input type="hidden" name="cmd" value="_s-xclick" />
@@ -97,9 +97,9 @@
 	<button type="submit" class="btn btn-large btn-primary" name="submit" alt="PayPal — The safer, easier way to pay online."><i class="fab fa-cc-paypal"></i> {% trans "Donate via PayPal &raquo;" %}</button>
 	<img alt="" border="0" src="https://www.paypalobjects.com/{{paypal_lang_code}}/i/scr/pixel.gif" width="1" height="1"/>
       </form>
+  {% endif %}
     </div>
   </div>
-  {% endif %}
 
 </div>
 {% endblock %}

@@ -119,6 +119,12 @@ MAX_BOUNDING_BOX = False
 # this area will be grayed out on the slippy map
 MAX_BOUNDING_OUTER = False
 
+# paper size lower and upper limits
+PAPER_WIDTH_MIN  =  100 # millimeters
+PAPER_HEIGHT_MIN =  100 # millimeters
+PAPER_WIDTH_MAX  = 2000 # millimeters
+PAPER_HEIGHT_MAX = 2000 # millimeters
+
 # Number of items displayed per page in the jobs and maps pages
 ITEMS_PER_PAGE = 25
 

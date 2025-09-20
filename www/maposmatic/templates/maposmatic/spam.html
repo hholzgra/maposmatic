@@ -1,0 +1,41 @@
+{% extends "maposmatic/base.html" %}
+
+{% comment %}
+ coding: utf-8
+
+ maposmatic, the web front-end of the MapOSMatic city map generation system
+ Copyright (C) 2024  Hartmut Holzgraefe
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU Affero General Public License as
+ published by the Free Software Foundation, either version 3 of the
+ License, or any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Affero General Public License for more details.
+
+ You should have received a copy of the GNU Affero General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+{% endcomment %}
+{% load i18n %}
+{% load l10n %}
+{% load extratags %}
+
+{% block title %}I am a Teapot!{% endblock %}
+{% block page %}
+<div class="jumbotron alert-danger">
+  <h1>{% trans "I am a Teapot!" %}</h1>
+
+  <p>
+ Note to whoever is trying sortof a DOS on the multipage queue right now: you are making me re-think my "do not track anything" policy on this service. 
+  </p>
+
+  <p>
+  Brew your covfefe elsewhere ...  
+  </p>
+
+</div>
+
+{% endblock %}

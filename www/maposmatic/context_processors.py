@@ -190,9 +190,9 @@ def all(request):
         and datetime.datetime.utcnow() - gis_lastupdate < datetime.timedelta(minutes=30)
         or False)
 
-    osmcarto5_lastupdate = get_osm_database_last_update('osm5')
-    osmcarto5_lag_ok = (osmcarto5_lastupdate
-        and datetime.datetime.utcnow() - osmcarto5_lastupdate < datetime.timedelta(minutes=30)
+    osmcarto_lastupdate = get_osm_database_last_update('flex')
+    osmcarto_lag_ok = (osmcarto_lastupdate
+        and datetime.datetime.utcnow() - osmcarto_lastupdate < datetime.timedelta(minutes=30)
         or False)
 
 
@@ -243,8 +243,8 @@ def all(request):
         'daemon_running':                daemon_running,
         'gis_lastupdate':                gis_lastupdate,
         'gis_lag_ok':                    gis_lag_ok,
-        'osmcarto5_lastupdate':          osmcarto5_lastupdate,
-        'osmcarto5_lag_ok':              osmcarto5_lag_ok,
+        'osmcarto_lastupdate':           osmcarto_lastupdate,
+        'osmcarto_lag_ok':               osmcarto_lag_ok,
         'waymarked_lastupdate':          waymarked_lastupdate,
         'waymarked_lag_ok':              waymarked_lag_ok,
         'osmnames_ok':                   osmnames_ok,

@@ -57,11 +57,11 @@
 	  
           <li class="list-group-item list-group-item-success 
                      d-flex justify-content-between align-items-center"
-              >OSM Carto 5.x
+              >OSM Carto flex
           <span
             <span class="badge rounded-pill
-			 {% if osmcarto5_lastupdate %}
-			   {% if osmcarto5_lag_ok %}
+			 {% if osmcarto_lastupdate %}
+			   {% if osmcarto_lag_ok %}
 			     text-bg-success
 			   {% else %}
 			     text-bg-warning
@@ -70,8 +70,8 @@
 			   text-bg-danger
 			 {% endif %}
 			 ">
-	      {% if osmcarto5_lastupdate %}
-                {% blocktrans with osmcarto5_lastupdate|timesince:utc_now as date %}<span class="tooltipped" data-original-title="{{ osmcarto5_lastupdate }}">{{ date }} ago</span>{% endblocktrans %}
+	      {% if osmcarto_lastupdate %}
+                {% blocktrans with osmcarto_lastupdate|timesince:utc_now as date %}<span class="tooltipped" data-original-title="{{ osmcarto_lastupdate }}">{{ date }} ago</span>{% endblocktrans %}
 	      {% else %}
 	        Offline
 	      {% endif %}

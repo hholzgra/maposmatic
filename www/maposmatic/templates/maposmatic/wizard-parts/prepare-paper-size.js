@@ -152,15 +152,15 @@ function change_papersize()
     h = myParseInt($('#id_paper_height_mm').val());
 
     wmin = myParseInt($('#id_paper_width_mm').attr('min'));
+    wmax = myParseInt($('#id_paper_width_mm').attr('max'));
     hmin = myParseInt($('#id_paper_height_mm').attr('min'));
+    hmax = myParseInt($('#id_paper_height_mm').attr('max'));
 
-    if (w < wmin) {
-	w = wmin;
-    }
-
-    if (h < hmin) {
-	h = hmin;
-    }
+    // TODO: show warning when exeeding limits
+    if (w < wmin) { w = wmin; }
+    if (h < hmin) { h = hmin; }
+    if (w > wmax) { w = wmax; }
+    if (h > hmax) { h = hmax; }
 
     set_papersize(w ,h);
 }

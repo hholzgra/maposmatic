@@ -68,12 +68,12 @@ class MapRenderingJobForm(forms.ModelForm):
                                                                            'style':     'width: 5em;',
                                                                           }),
                                          min_value=www.settings.PAPER_WIDTH_MIN,
-                                         max_value=www.settings.PAPER_HEIGHT_MAX,
+                                         max_value=www.settings.PAPER_WIDTH_MAX,
                                          )
     paper_height_mm = forms.IntegerField(widget=forms.NumberInput(attrs= { 'onchange' : 'change_papersize();',
                                                                            'style':     'width: 5em;',
                                                                           }),
-                                         min_value=www.settings.PAPER_WIDTH_MIN,
+                                         min_value=www.settings.PAPER_HEIGHT_MIN,
                                          max_value=www.settings.PAPER_HEIGHT_MAX,
                                          )
     maptitle        = forms.CharField(max_length=256,

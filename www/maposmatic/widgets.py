@@ -48,7 +48,7 @@ class AreaWidget(forms.TextInput):
 
         tpl = u"""<div id="step-location-map"></div>
         <div class="row-fluid step-location-map-bbox">
-          <div class="span12">
+          <div class="col-8">
             <input type="hidden" name="lat_upper_left" id="id_lat_upper_left"
                    value="%(tl_lat)s" title="%(tl_lat_help)s" />
             <span id='lat_upper_left_info' class="well well-sm"></span>

@@ -12,8 +12,8 @@
        title="{% trans "Platform status" %}"
        data-bs-html=true
        data-bs-content='<p class="text-{{queues_overall_state}}">{% trans "Rendering queue(s): " %}<i class="float-end fas fa-{{queues_overall_symbol}}"></i></p>
-      <p class="text-{% if gis_lag_ok %}success{% else %}{% if gis_lastupdate %}warning{% else %}danger{% endif %}{% endif %}">{% trans "GIS database: " %}<i class="pull-right fas fa-{% if gis_lag_ok %}check{% else %}{% if gis_lastupdate %}hourglass-half{% else %}times{% endif %}{% endif %}"></i></p>
-    <p class="text-{% if waymarked_lag_ok %}success{% else %}{% if waymarked_lastupdate %}warning{% else %}danger{% endif %}{% endif %}">{% trans "WayMarked database: " %}<i class="pull-right fas fa-{% if waymarked_lag_ok %}check{% else %}{% if waymarked_lastupdate %}hourglass-half{% else %}times{% endif %}{% endif %}"></i></p>'
+      <p class="text-{% if gis_lag_ok %}success{% else %}{% if gis_lastupdate %}warning{% else %}danger{% endif %}{% endif %}">{% trans "GIS database: " %}<i class="float-end fas fa-{% if gis_lag_ok %}check{% else %}{% if gis_lastupdate %}hourglass-half{% else %}times{% endif %}{% endif %}"></i></p>
+    <p class="text-{% if waymarked_lag_ok %}success{% else %}{% if waymarked_lastupdate %}warning{% else %}danger{% endif %}{% endif %}">{% trans "WayMarked database: " %}<i class="float-end fas fa-{% if waymarked_lag_ok %}check{% else %}{% if waymarked_lastupdate %}hourglass-half{% else %}times{% endif %}{% endif %}"></i></p>'
     ><i class="fas fa-{{ platform_status }}"></i> {{BRAND_NAME}}</a>
     {% if DEBUG %}
     <a class="btn btn-warning" role="button" href="https://github.com/hholzgra/maposmatic/tree/{{GIT_BRANCH}}"><i class="fas fa-person-digging"></i> {{GIT_BRANCH}}</a>
@@ -30,7 +30,7 @@
         <li class="nav-item {% block menu-maps   %}{% endblock %}"><a class="nav-link" href="{% url "maps"   %}"><i class="fas fa-list"></i> {% trans "Maps" %}</a></li>
 
         <li class="nav-item dropdown">
-          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button"><i class="fas fa-comment"></i> {% trans "About" %} <b class="caret"></b></a>
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button"><i class="fas fa-comment"></i> {% trans "About" %} </a>
           <div class="dropdown-menu">
             <a class="dropdown-item" href="{% url "about"             %}"><i class="fas fa-comment"></i> {% trans "About Maposmatic" %}</a>
             <div class="dropdown-divider"></div>
@@ -50,7 +50,7 @@
 
         <li class="nav-item dropdown">
           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-            <span class="{{LANGUAGE_CODE|language_flag}}"> </span> {{ LANGUAGES|getitem:LANGUAGE_CODE }} <b class="caret"></b>
+            <span class="{{LANGUAGE_CODE|language_flag}}"> </span> {{ LANGUAGES|getitem:LANGUAGE_CODE }} 
           </a>
           <div class="dropdown-menu bg-light">
             <form action="/i18n/setlang/" method="post" name="langsel" class="form-inline form-horizontal">

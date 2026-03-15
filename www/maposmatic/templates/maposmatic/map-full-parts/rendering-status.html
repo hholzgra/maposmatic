@@ -112,7 +112,7 @@
 	  <div id="download-icons" class="card-body">
 
 	    {% for format,file in map.output_files.maps.items %}
-	    <a href="{{ file.0 }}" title="{{ file.1 }}" class="btn btn-default">
+	    <a href="{{ file.0 }}" title="{{ file.1 }}" class="btn btn-secondary">
 	      {% if format == "pdf" %}
 	      <span class="far fa-file-pdf fa-5x"></span>
 	      {% elif format == "png" %}
@@ -133,7 +133,7 @@
 
 	    {% if map.output_files.indeces|length %}
             {% for format,file in map.output_files.indeces.items %}
-	    <a href="{{ file.0 }}" title="{{ file.1 }}" class="btn btn-default">
+	    <a href="{{ file.0 }}" title="{{ file.1 }}" class="btn btn-secondary">
 	      <span class="far fa-file fa-5x"></span>
 	      <br>{{format|upper}}
 	      <br>({{file.2|filesizeformat}})

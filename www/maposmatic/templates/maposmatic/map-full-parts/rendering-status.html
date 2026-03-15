@@ -146,7 +146,7 @@
       {% elif map.get_errorlog %}
       <!-- no more error output here -->
       {% else %}
-      <a class="btn btn-large disabled tooltipped"
+      <a class="btn btn-lg disabled tooltipped"
          data-placement="right"
          data-original-title="{% trans "The generated files are no longer available." %}">
         <i class="fas fa-ban"></i> {% trans "Download" %}
@@ -162,7 +162,7 @@
           <form method="post" action="{% url "cancel" %}">
             <input type="hidden" name="id" value="{{ map.id }}" />
             <input type="hidden" name="nonce" value="{{ map.nonce }}" />
-            <button type="submit" class="btn btn-large btn-danger tooltipped"
+            <button type="submit" class="btn btn-lg btn-danger tooltipped"
                     data-placement="right"
                     data-original-title="{% blocktrans with map.current_position_in_queue as pos %}Cancel this queued request (position {{ pos }} in the queue){% endblocktrans %}">{% blocktrans %}<i class="fas fa-times"></i> Cancel{% endblocktrans %}
             </button>

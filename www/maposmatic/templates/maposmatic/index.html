@@ -48,8 +48,8 @@
       </p>
 
       <p class="actions">
-        <a class="btn btn-large btn-primary pull-right" href="{% url "about" %}"><i class="fas fa-info-circle"></i> {% blocktrans %}Learn more{% endblocktrans %}</a>
-        <a class="btn btn-large btn-primary" href="{% url "new" %}"><i class="fas fa-globe"></i> {% blocktrans %}Create a map &raquo;{% endblocktrans %}</a>
+        <a class="btn btn-lg btn-primary float-end" href="{% url "about" %}"><i class="fas fa-info-circle"></i> {% blocktrans %}Learn more{% endblocktrans %}</a>
+        <a class="btn btn-lg btn-primary" href="{% url "new" %}"><i class="fas fa-globe"></i> {% blocktrans %}Create a map &raquo;{% endblocktrans %}</a>
       </p>
     </div>
 
@@ -94,7 +94,7 @@
 	<input type="hidden" name="cmd" value="_s-xclick" />
 	<input type="hidden" name="hosted_button_id" value="{{PAYPAL_ID}}" />
 	<input type="hidden" name="country" value="{{paypal_country_code}}" />
-	<button type="submit" class="btn btn-large btn-primary" name="submit" alt="PayPal — The safer, easier way to pay online."><i class="fab fa-cc-paypal"></i> {% trans "Donate via PayPal &raquo;" %}</button>
+	<button type="submit" class="btn btn-lg btn-primary" name="submit" alt="PayPal — The safer, easier way to pay online."><i class="fab fa-cc-paypal"></i> {% trans "Donate via PayPal &raquo;" %}</button>
 	<img alt="" border="0" src="https://www.paypalobjects.com/{{paypal_lang_code}}/i/scr/pixel.gif" width="1" height="1"/>
       </form>
   {% endif %}

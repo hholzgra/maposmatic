@@ -56,7 +56,7 @@
   <div class="col-8">
     <h1 class="d-flex justify-content-between"><span>{{ map.maptitle }}</span><span>Map #: {{ map.id }}</span></h1>
 
-    <div class="card card-default mb-3">
+    <div class="card mb-3">
       <div class="card-header">{% trans "Rendering status" %}</div>
       <div id="map-rendering-status" class="card-body">
 	{% include "maposmatic/map-full-parts/rendering-status.html" %}
@@ -120,7 +120,7 @@
     <div class="card card-default mb-3">
       <div class="card-header">{% trans "Map preview" %}</div>
       <div class="card-body">
-	<div class="span4 map mapthumbnail" id="map-{{ map.id }}"
+	<div class="col-4 map mapthumbnail" id="map-{{ map.id }}"
 	     data-geo-osm-id="{{ map.administrative_osmid }}"
 	     data-geo-from-lat="{{ map.lat_upper_left }}"
 	     data-geo-from-lon="{{ map.lon_upper_left }}"

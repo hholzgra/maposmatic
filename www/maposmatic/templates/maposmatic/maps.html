@@ -62,7 +62,7 @@
  </div>
 
 {% for map in maps.object_list %}
-<div class="span12 map map-status-{{ map.status }}">
+<div class="col-12 map map-status-{{ map.status }}">
   <div class="card card-info">
     <div class="card-header d-flex justify-content-between">
 	    <span><a href="{% url "map-by-id" map.id %}">{{ map.maptitle|default:_("(*** untitled map ***)")}}</a></span>

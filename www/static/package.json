@@ -21,7 +21,7 @@
     "fastselect": "^0.7.3",
     "flag-icons": "^6.6.6",
     "jquery": "^3.6.3",
-    "leaflet": "^1.9.3",
+    "leaflet": "^1.9.4",
     "leaflet-easybutton": "^2.4.0",
     "leaflet-gpx": "^1.7.0",
     "leaflet-heatmap": "^1.0.0",

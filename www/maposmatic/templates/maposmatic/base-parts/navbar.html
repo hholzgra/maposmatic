@@ -53,7 +53,7 @@
             <span class="{{LANGUAGE_CODE|language_flag}}"> </span> {{ LANGUAGES|getitem:LANGUAGE_CODE }} 
           </a>
           <div class="dropdown-menu bg-light">
-            <form action="/i18n/setlang/" method="post" name="langsel" class="form-inline form-horizontal">
+            <form action="/i18n/setlang/" method="post" name="langsel">
               <input name="next" type="hidden" value="{{ request.path }}" />
               <input name="language" type="hidden" value="{{ LANGUAGE_CODE }}" />
               {% for language in LANGUAGES_LIST %}
@@ -75,7 +75,7 @@
 
       </ul>
 
-      <form action="{% url "maps" %}" method="get" class="form-inline">
+      <form action="{% url "maps" %}" method="get" class="d-flex">
         <div class="md-form">
           <i class="fas fa-search"></i>
           {{ searchform.query }}

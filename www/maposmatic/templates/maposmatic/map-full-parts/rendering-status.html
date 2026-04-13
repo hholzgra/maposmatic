@@ -112,7 +112,7 @@
 	  <div id="download-icons" class="card-body">
 
 	    {% for format,file in map.output_files.maps.items %}
-	    <a href="{{ file.0 }}" title="{{ file.1 }}" class="btn btn-secondary">
+	    <a href="{{ file.0 }}" title="{{ file.1 }}" class="btn btn-light">
 	      {% if format == "pdf" %}
 	      <span class="far fa-file-pdf fa-5x"></span>
 	      {% elif format == "png" %}

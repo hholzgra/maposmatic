@@ -206,7 +206,7 @@
 	  {% endif %}
 	</div>
 	<div class="col-6">
-	  <form class="float-end" method="post" action="{% url "recreate" %}" style="display: inline;">
+	  <form method="post" action="{% url "recreate" %}" style="display: inline;">
 	    <input type="hidden" name="id" value="{{ map.id }}" />
 	    <button class="btn btn-primary tooltipped"
 		    data-original-title="{% trans "Recreate map" %}"

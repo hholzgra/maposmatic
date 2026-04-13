@@ -44,7 +44,7 @@ var languages = $('#id_map_language').html();
 jQuery.fn.reverse = [].reverse;
 
 
-$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+$('a[data-bs-toggle="tab"]').on('shown.bs.tab', function (e) {
   switch(e.target.id) {
   case 'step-location-admin-tab':
     // If we're switching to the administrative boundary / city search tab, reset

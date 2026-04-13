@@ -62,7 +62,7 @@
  </div>
 
 {% for map in maps.object_list %}
-<div class="span12 map map-status-{{ map.status }}">
+<div class="col-12 map map-status-{{ map.status }}">
   <div class="card card-info">
     <div class="card-header d-flex justify-content-between">
 	    <span><a href="{% url "map-by-id" map.id %}">{{ map.maptitle|default:_("(*** untitled map ***)")}}</a></span>
@@ -192,7 +192,7 @@
 	  {% endif %}
 	  {% if not map.is_done_ok and not map.needs_waiting %}
   	    {% if map.get_errorlog %}
-	  <a class="btn btn-large btn-danger"
+	  <a class="btn btn-lg btn-danger"
              href="{{map.get_errorlog}}"
              target="_blank"
 	     title="{% trans "Something went wrong, view the error log." %}">
@@ -206,7 +206,7 @@
 	  {% endif %}
 	</div>
 	<div class="col-6">
-	  <form class="form-horizontal pull-right" method="post" action="{% url "recreate" %}" style="display: inline;">
+	  <form method="post" action="{% url "recreate" %}" style="display: inline;">
 	    <input type="hidden" name="id" value="{{ map.id }}" />
 	    <button class="btn btn-primary tooltipped"
 		    data-original-title="{% trans "Recreate map" %}"
@@ -214,7 +214,7 @@
               <i class="fas fa-redo"></i> {% trans "Recreate" %}
 	    </button>
 	  </form>
-	  <form class="form-horizontal pull-right" method="post" action="{% url "reedit" %}" style="display: inline;">
+	  <form class="float-end" method="post" action="{% url "reedit" %}" style="display: inline;">
 	    <input type="hidden" name="id" value="{{ map.id }}" />
 	    <button class="btn btn-primary tooltipped"
 		    data-original-title="{% trans "Reedit map" %}"

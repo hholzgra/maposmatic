@@ -34,15 +34,13 @@ h2 {
 .navbar .nav { float: none; }
 .navbar .control-group { margin-bottom: 0px; }
 .navbar .controls { margin-left: 0px; }
-.navbar-inner { padding-top: 5px; padding-bottom: 5px; }
 
 /** Platform status in the top nav bar. */
 .menu-status > a { cursor: pointer; }
 .menu-status i { margin-top: 5px; }
-.menu-status .caret { border-top-color: #999; border-bottom-color: #999; }
 .menu-status p { margin-bottom: 0; }
 .menu-status .popover { padding: 0; left: 0 !important; }
-.menu-status .popover .arrow { left: 30% !important; }
+.menu-status .popover-arrow { left: 30% !important; }
 
 /** Page footer. */
 .footer { background: #f5f5f5; border-top: 1px solid #e5e5e5;
@@ -50,11 +48,6 @@ h2 {
 .footer address { display: inline; }
 .footer p { color: #777; }
 .footer p.hosted-by { font-size: smaller; }
-
-.caret-up { border-bottom: 4px solid #000000;
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-top: none; }
 
 /** Home page styling. */
 body.home .hero-unit h1 { margin-left: -5px; margin-bottom: 30px; }

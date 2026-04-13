@@ -107,12 +107,12 @@
 
       {% if map.has_output_files %}
         <div style="height: 2em"></div>
-	<div class="card card-default">
+	<div class="card">
 	  <div class="card-header">{% trans "Downloads" %}</div>
 	  <div id="download-icons" class="card-body">
 
 	    {% for format,file in map.output_files.maps.items %}
-	    <a href="{{ file.0 }}" title="{{ file.1 }}" class="btn btn-default">
+	    <a href="{{ file.0 }}" title="{{ file.1 }}" class="btn btn-light">
 	      {% if format == "pdf" %}
 	      <span class="far fa-file-pdf fa-5x"></span>
 	      {% elif format == "png" %}
@@ -133,7 +133,7 @@
 
 	    {% if map.output_files.indeces|length %}
             {% for format,file in map.output_files.indeces.items %}
-	    <a href="{{ file.0 }}" title="{{ file.1 }}" class="btn btn-default">
+	    <a href="{{ file.0 }}" title="{{ file.1 }}" class="btn btn-secondary">
 	      <span class="far fa-file fa-5x"></span>
 	      <br>{{format|upper}}
 	      <br>({{file.2|filesizeformat}})
@@ -146,7 +146,7 @@
       {% elif map.get_errorlog %}
       <!-- no more error output here -->
       {% else %}
-      <a class="btn btn-large disabled tooltipped"
+      <a class="btn btn-lg disabled tooltipped"
          data-placement="right"
          data-original-title="{% trans "The generated files are no longer available." %}">
         <i class="fas fa-ban"></i> {% trans "Download" %}
@@ -162,7 +162,7 @@
           <form method="post" action="{% url "cancel" %}">
             <input type="hidden" name="id" value="{{ map.id }}" />
             <input type="hidden" name="nonce" value="{{ map.nonce }}" />
-            <button type="submit" class="btn btn-large btn-danger tooltipped"
+            <button type="submit" class="btn btn-lg btn-danger tooltipped"
                     data-placement="right"
                     data-original-title="{% blocktrans with map.current_position_in_queue as pos %}Cancel this queued request (position {{ pos }} in the queue){% endblocktrans %}">{% blocktrans %}<i class="fas fa-times"></i> Cancel{% endblocktrans %}
             </button>

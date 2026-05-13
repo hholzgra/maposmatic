@@ -58,7 +58,7 @@ admin_tab.addEventListener('show.bs.tab', function(e){
 });
 
 {% if form.errors %}
-$('#error-modal').modal('show')
+new bootstrap.Modal(document.getElementById('error-modal')).show()
 {% endif%}
 {% endblock %}
 

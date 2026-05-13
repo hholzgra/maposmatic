@@ -90,7 +90,7 @@
       <form method="post" action="{% url "recreate" %}" style="display: inline;">
         <input type="hidden" name="id" value="{{ map.id }}" />
 	<button class="btn btn-primary tooltipped" align="right"
-                data-original-title="{% trans "Recreate map" %}"
+                title="{% trans "Recreate map" %}"
 		type="submit" {% if map.needs_waiting or not map.can_recreate %}disabled="disabled"{% endif %}>
           {% trans "Recreate" %} <i class="fas fa-redo"></i>
 	</button>
@@ -98,7 +98,7 @@
       <form method="post" action="{% url "reedit" %}" style="display: inline">
         <input type="hidden" name="id" value="{{ map.id }}" />
 	<button class="btn btn-primary tooltipped" align="right"
-                data-original-title="{% trans "Reedit map" %}"
+                title="{% trans "Reedit map" %}"
 		type="submit" {% if map.needs_waiting or not map.can_recreate %}disabled="disabled"{% endif %}>
           {% trans "Reedit" %} <i class="fa fa-edit"></i>
 	</button>
@@ -147,8 +147,8 @@
       <!-- no more error output here -->
       {% else %}
       <a class="btn btn-lg disabled tooltipped"
-         data-placement="right"
-         data-original-title="{% trans "The generated files are no longer available." %}">
+         data-bs-placement="right"
+         title="{% trans "The generated files are no longer available." %}">
         <i class="fas fa-ban"></i> {% trans "Download" %}
       </a>
       {% endif %}
@@ -163,8 +163,8 @@
             <input type="hidden" name="id" value="{{ map.id }}" />
             <input type="hidden" name="nonce" value="{{ map.nonce }}" />
             <button type="submit" class="btn btn-lg btn-danger tooltipped"
-                    data-placement="right"
-                    data-original-title="{% blocktrans with map.current_position_in_queue as pos %}Cancel this queued request (position {{ pos }} in the queue){% endblocktrans %}">{% blocktrans %}<i class="fas fa-times"></i> Cancel{% endblocktrans %}
+                    data-bs-placement="right"
+                    title="{% blocktrans with map.current_position_in_queue as pos %}Cancel this queued request (position {{ pos }} in the queue){% endblocktrans %}">{% blocktrans %}<i class="fas fa-times"></i> Cancel{% endblocktrans %}
             </button>
           </form>
         {% endif %}

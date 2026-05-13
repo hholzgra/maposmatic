@@ -47,7 +47,7 @@ class AreaWidget(forms.TextInput):
         alert = '<i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;%s' % _('Area too big to be rendered!')
 
         tpl = u"""<div id="step-location-map"></div>
-        <div class="row-fluid step-location-map-bbox">
+        <div class="row step-location-map-bbox">
           <div class="col-8">
             <input type="hidden" name="lat_upper_left" id="id_lat_upper_left"
                    value="%(tl_lat)s" title="%(tl_lat_help)s" />

@@ -8,13 +8,13 @@
 
     <ul class="nav nav-tabs" id="locTabs">
       <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="step-location-bbox-tab" data-bs-toggle="tab" data-bs-target="#step-location-bbox" type="button" role="tab" aria-controls="bt-step-location-bbox" aria-selected="true"><i class="fas fa-globe-africa"></i> {% trans "Geographic area" %}</button>
+        <button class="nav-link active" id="step-location-bbox-tab" data-bs-toggle="tab" data-bs-target="#step-location-bbox" type="button" role="tab" aria-controls="step-location-bbox" aria-selected="true"><i class="fas fa-globe-africa"></i> {% trans "Geographic area" %}</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="step-location-admin-tab" data-bs-toggle="tab" data-bs-target="#step-location-admin" type="button" role="tab" aria-controls="bt-step-location-bbox" aria-selected="false"><i class="fas fa-search-location"></i> {% trans "City search" %}</button>
+        <button class="nav-link" id="step-location-admin-tab" data-bs-toggle="tab" data-bs-target="#step-location-admin" type="button" role="tab" aria-controls="step-location-admin" aria-selected="false"><i class="fas fa-search-location"></i> {% trans "City search" %}</button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="step-location-file-tab" data-bs-toggle="tab" data-bs-target="#step-location-file" type="button" role="tab" aria-controls="bt-step-location-file" aria-selected="false"><i class="fas fa-upload"></i> {% trans "File upload" %}</button>
+        <button class="nav-link" id="step-location-file-tab" data-bs-toggle="tab" data-bs-target="#step-location-file" type="button" role="tab" aria-controls="step-location-file" aria-selected="false"><i class="fas fa-upload"></i> {% trans "File upload" %}</button>
       </li>
     </ul>
 
@@ -76,7 +76,7 @@
                   {{ form.delete_files_after_rendering }}
                   <label>{% trans "Delete files after rendering" %}</label>
                 </fieldset>
-		<button type="button" id="upload_preview_button" class="btn btn-primary" style="display:none" onclick=" $('#step-location-bbox-tab').tab('show');"><i class="fa-solid fa-magnifying-glass"></i> {% trans "Upload preview" %}</button>
+		<button type="button" id="upload_preview_button" class="btn btn-primary" style="display:none" onclick="new bootstrap.Tab(document.getElementById('step-location-bbox-tab')).show();"><i class="fa-solid fa-magnifying-glass"></i> {% trans "Upload preview" %}</button>
               </div>
               <div class="col">
                 <div class="alert alert-danger">

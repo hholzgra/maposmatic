@@ -19,12 +19,12 @@
     <a class="btn btn-warning" role="button" href="https://github.com/hholzgra/maposmatic/tree/{{GIT_BRANCH}}"><i class="fas fa-person-digging"></i> {{GIT_BRANCH}}</a>
     {% endif %}
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar-collapse" aria-expanded="false" aria-label="{% trans "Toggle navigation" %}">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="{% trans "Toggle navigation" %}">
       <span class="navbar-toggler-icon"></span>
     </button>
     
     <div id="navbar" class="navbar-collapse collapse justify-content-end">
-      <ul class="navbar-nav mr-auto">
+      <ul class="navbar-nav me-auto">
         <li class="nav-item {% block menu-home   %}{% endblock %}"><a class="nav-link" href="{% url "main"   %}"><i class="fas fa-home"></i> {% trans "Home" %}</a></li>
         <li class="nav-item {% block menu-new    %}{% endblock %}"><a class="nav-link" href="{% url "new"    %}"><i class="fas fa-edit"></i> {% trans "Create map" %}</a></li>
         <li class="nav-item {% block menu-maps   %}{% endblock %}"><a class="nav-link" href="{% url "maps"   %}"><i class="fas fa-list"></i> {% trans "Maps" %}</a></li>

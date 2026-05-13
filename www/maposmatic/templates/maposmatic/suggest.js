@@ -115,10 +115,10 @@
     var bounds2 = L.latLngBounds(corner1, corner2);
     // we need to have the map visible to correctly apply the new bounds, apparently
     // so we are quickly switching between tabs back and forth
-    $('#step-location-bbox-tab').tab('show');
+    new bootstrap.Tab(document.getElementById('step-location-bbox-tab')).show();
     locationFilter.setBounds(bounds2);
     locationFilter.enable();
-    $('#step-location-admin-tab').tab('show');
+    new bootstrap.Tab(document.getElementById('step-location-admin-tab')).show();
     map.fitBounds(bounds2);
 
     setPrevNextLinks();
@@ -129,7 +129,7 @@
   input.keypress(function(e) {
     if (e.keyCode == 13) {
       if (target.val()) {
-        $('#wizard').carousel('next');
+        bootstrap.Carousel.getInstance(document.getElementById('wizard')).next();
         return false;
       }
     }

@@ -48,10 +48,10 @@ function add_upload_layer(filename, new_layer) {
 
     // we need to have the map visible to correctly apply the new bounds, apparently
     // so we are quickly switching between tabs back and forth
-    $('#step-location-bbox-tab').tab('show');
+    new bootstrap.Tab(document.getElementById('step-location-bbox-tab')).show();
     locationFilter.setBounds(upload_file_bounds);
     locationFilter.enable();
-    $('#step-location-file-tab').tab('show');
+    new bootstrap.Tab(document.getElementById('step-location-file-tab')).show();
 
     // enable "to preview" button
     $('#upload_preview_button').show();

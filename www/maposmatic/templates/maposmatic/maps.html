@@ -155,7 +155,7 @@
 	  {% if map.is_waiting %}
 	  <a class="btn disabled tooltipped"
              data-placement="top"
-             data-original-title="{% with map.submission_time|timesince as date %}
+             title="{% with map.submission_time|timesince as date %}
 				  {% blocktrans %}Pending, submitted {{ date }} ago{% endblocktrans %}
 				  {% endwith %}">
             <i class="fas fa-hourglas"></i> {% trans "Pending..." %}
@@ -164,7 +164,7 @@
 	  {% if map.is_rendering %}
 	  <a class="btn disabled tooltipped"
              data-placement="top"
-             data-original-title="
+             title="
 				  {% with map.startofrendering_time|timesince:map.endofrendering_time as date %}
 				  {% blocktrans %}Rendering is in progress, started {{ date }} ago{% endblocktrans %}
 				  {% endwith %}">
@@ -209,7 +209,7 @@
 	  <form class="float-end" method="post" action="{% url "recreate" %}" style="display: inline;">
 	    <input type="hidden" name="id" value="{{ map.id }}" />
 	    <button class="btn btn-primary tooltipped"
-		    data-original-title="{% trans "Recreate map" %}"
+		    title="{% trans "Recreate map" %}"
 		    type="submit" {% if map.needs_waiting or not map.can_recreate %}disabled="disabled"{% endif %}>
               <i class="fas fa-redo"></i> {% trans "Recreate" %}
 	    </button>
@@ -217,7 +217,7 @@
 	  <form class="float-end" method="post" action="{% url "reedit" %}" style="display: inline;">
 	    <input type="hidden" name="id" value="{{ map.id }}" />
 	    <button class="btn btn-primary tooltipped"
-		    data-original-title="{% trans "Reedit map" %}"
+		    title="{% trans "Reedit map" %}"
 		    type="submit" {% if map.needs_waiting or not map.can_recreate %}disabled="disabled"{% endif %}>
               <i class="fa fa-edit"></i> {% trans "Reedit" %}
 	    </button>

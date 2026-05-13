@@ -48,7 +48,7 @@
 			 {% endif %}
 			 ">
 	      {% if gis_lastupdate %}
-                {% blocktrans with gis_lastupdate|timesince:utc_now as date %}<span class="tooltipped" data-original-title="{{ gis_lastupdate }}">{{ date }} ago</span>{% endblocktrans %}
+                {% blocktrans with gis_lastupdate|timesince:utc_now as date %}<span class="tooltipped" title="{{ gis_lastupdate }}">{{ date }} ago</span>{% endblocktrans %}
 	      {% else %}
 	        Offline
 	      {% endif %}
@@ -71,7 +71,7 @@
 			 {% endif %}
 			 ">
 	      {% if osmcarto_lastupdate %}
-                {% blocktrans with osmcarto_lastupdate|timesince:utc_now as date %}<span class="tooltipped" data-original-title="{{ osmcarto_lastupdate }}">{{ date }} ago</span>{% endblocktrans %}
+                {% blocktrans with osmcarto_lastupdate|timesince:utc_now as date %}<span class="tooltipped" title="{{ osmcarto_lastupdate }}">{{ date }} ago</span>{% endblocktrans %}
 	      {% else %}
 	        Offline
 	      {% endif %}
@@ -93,7 +93,7 @@
 			 {% endif %}
 			 ">
 	      {% if waymarked_lastupdate %}
-                {% blocktrans with waymarked_lastupdate|timesince:utc_now as date %}<span class="tooltipped" data-original-title="{{ waymarked_lastupdate }}">{{ date }} ago</span>{% endblocktrans %}
+                {% blocktrans with waymarked_lastupdate|timesince:utc_now as date %}<span class="tooltipped" title="{{ waymarked_lastupdate }}">{{ date }} ago</span>{% endblocktrans %}
 	      {% else %}
 	        Offline
 	      {% endif %}

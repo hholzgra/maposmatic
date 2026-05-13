@@ -154,7 +154,7 @@
 	<div class="col-6">
 	  {% if map.is_waiting %}
 	  <a class="btn disabled tooltipped"
-             data-placement="top"
+             data-bs-placement="top"
              title="{% with map.submission_time|timesince as date %}
 				  {% blocktrans %}Pending, submitted {{ date }} ago{% endblocktrans %}
 				  {% endwith %}">
@@ -163,7 +163,7 @@
 	  {% endif %}
 	  {% if map.is_rendering %}
 	  <a class="btn disabled tooltipped"
-             data-placement="top"
+             data-bs-placement="top"
              title="
 				  {% with map.startofrendering_time|timesince:map.endofrendering_time as date %}
 				  {% blocktrans %}Rendering is in progress, started {{ date }} ago{% endblocktrans %}

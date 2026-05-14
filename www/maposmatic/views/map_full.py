@@ -39,6 +39,21 @@ def map_full(request, id, nonce=None):
     """
 
     job = get_object_or_404(models.MapRenderingJob, id=id)
+
+    # checking for actual neighbors for next/prev buttons,
+    # taking into account that map IDs may start at a different value than 1
+    # and that there may be gaps in the SERIAL sequence
+    prev_job = (models.MapRenderingJob.objects
+                .filter(id__lt=job.id)
+                .order_by('-id')
+                .values_list('id', flat=True)
+                .first())
+    next_job = (models.MapRenderingJob.objects
+                .filter(id__gt=job.id)
+                .order_by('id')
+                .values_list('id', flat=True)
+                .first())
+
     isredirected = request.session.get('redirected', False)
     request.session.pop('redirected', None)
 
@@ -59,5 +74,7 @@ def map_full(request, id, nonce=None):
                                 'refresh':    refresh,
                                 'progress':   progress,
                                 'queue_size': queue_size,
+                                'prev_job':  prev_job,
+                                'next_job':  next_job,
                                })
 

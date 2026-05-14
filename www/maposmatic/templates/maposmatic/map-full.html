@@ -54,7 +54,23 @@
 {% block page %}
 <div class="row" style="margin-top: 30px;">
   <div class="col-8">
-    <h1 class="d-flex justify-content-between"><span>{{ map.maptitle }}</span><span>Map #: {{ map.id }}</span></h1>
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        {% if prev_job %}
+          <a href="{% url 'map-by-id' prev_job %}" class="btn btn-outline-secondary btn-sm">
+            <i class="fas fa-chevron-left"></i> {% trans "Previous" %}
+          </a>
+        {% endif %}
+      </div>
+      <h1>{{ map.maptitle }} <small class="text-body-secondary">#{{ map.id }}</small></h1>
+      <div>
+        {% if next_job %}
+          <a href="{% url 'map-by-id' next_job %}" class="btn btn-outline-secondary btn-sm">
+            {% trans "Next" %} <i class="fas fa-chevron-right"></i>
+          </a>
+        {% endif %}
+      </div>
+    </div>
 
     <div class="card mb-3">
       <div class="card-header">{% trans "Rendering status" %}</div>

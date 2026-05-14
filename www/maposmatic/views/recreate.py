@@ -76,7 +76,7 @@ def recreate(request):
             newjob.submittermail = None # TODO
             newjob.map_language = job.map_language
             newjob.index_queue_at_submission = (models.MapRenderingJob.objects
-                                                .queue_size() + 1)
+                                                .queue_size(job.queue) + 1)
             newjob.nonce = helpers.generate_nonce(models.MapRenderingJob.NONCE_SIZE)
 
             newjob.save()

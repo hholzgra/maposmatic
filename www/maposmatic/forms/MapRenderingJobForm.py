@@ -199,11 +199,11 @@ class MapRenderingJobForm(forms.ModelForm):
         indexer       = data.get("indexer")
         stylesheet    = data.get("stylesheet")
         overlay_array = []
-        try:
-            for overlay in data.get("overlay"):
+        for overlay in data.get("overlay"):
+            try:
                 overlay_array.append(overlay)
-        except:
-            pass
+            except:
+                pass
         overlay = ",".join(overlay_array)
 
         if layout == '':

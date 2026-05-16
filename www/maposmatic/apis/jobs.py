@@ -371,7 +371,10 @@ def _jobs_post(request):
 def _no_geometry(job):
     return not job.administrative_osmid and not job.lat_upper_left
 
-def _geojson_get_bounds(coords, bounds = [180, -180, 90, -90]):
+def _geojson_get_bounds(coords, bounds = None):
+    if bounds is None:
+	bounds = [180, -180, 90, -90]
+
     if isinstance(coords[0], list):
         for coord in coords:
             bounds = _geojson_get_bounds(coord, bounds)

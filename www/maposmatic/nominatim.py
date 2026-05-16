@@ -169,7 +169,7 @@ def _compute_prev_next_excludes(xml):
     if excludes is not None:
         excludes_list = excludes.split(',')
         hasprev = len(excludes_list) > NOMINATIM_MAX_RESULTS_PER_RESPONSE
-        prevexcludes_count = ((len(excludes_list) /
+        prevexcludes_count = ((len(excludes_list) //
                               NOMINATIM_MAX_RESULTS_PER_RESPONSE) *
                               NOMINATIM_MAX_RESULTS_PER_RESPONSE -
                               2 * NOMINATIM_MAX_RESULTS_PER_RESPONSE)

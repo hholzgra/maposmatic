@@ -161,7 +161,7 @@ def _new_GET(request):
     if not 'paper_width_mm' in init_vals and 'new_paper_width_mm' in request.session:
         init_vals['paper_width_mm'] = request.session['new_paper_width_mm']
 
-    if not 'paper_height_mm' in init_vals and 'new_paper_width_mm' in request.session:
+    if not 'paper_height_mm' in init_vals and 'new_paper_height_mm' in request.session:
         init_vals['paper_height_mm'] = request.session['new_paper_height_mm']
 
     form = forms.MapRenderingJobForm(initial=init_vals)

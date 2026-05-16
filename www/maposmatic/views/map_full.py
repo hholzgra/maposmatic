@@ -54,18 +54,16 @@ def map_full(request, id, nonce=None):
                 .values_list('id', flat=True)
                 .first())
 
-    isredirected = request.session.get('redirected', False)
-    request.session.pop('redirected', None)
+    isredirected = request.session.pop('redirected', False)
 
     queue_size = job.index_queue_at_submission
     progress = 100
     if queue_size:
-       progress = int(100 * (queue_size -
+        progress = int(100 * (queue_size -
            job.current_position_in_queue()) / float(queue_size))
 
-    refresh = job.is_rendering() and \
-        www.settings.REFRESH_JOB_RENDERING or \
-        www.settings.REFRESH_JOB_WAITING
+    refresh = (www.settings.REFRESH_JOB_RENDERING if job.is_rendering()
+          else www.settings.REFRESH_JOB_WAITING)
 
     return render(request, 'maposmatic/map-full.html',
                               { 'map':        job,

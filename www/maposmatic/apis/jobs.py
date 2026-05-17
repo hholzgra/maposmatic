@@ -373,7 +373,7 @@ def _no_geometry(job):
 
 def _geojson_get_bounds(coords, bounds = None):
     if bounds is None:
-	bounds = [180, -180, 90, -90]
+        bounds = [180, -180, 90, -90]
 
     if isinstance(coords[0], list):
         for coord in coords:

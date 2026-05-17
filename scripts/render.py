@@ -124,7 +124,7 @@ class ThreadingJobRenderer:
 
         # If the thread is no longer alive, the timeout was not reached and all
         # is well.
-        if not self.__thread.isAlive():
+        if not self.__thread.is_alive():
             if self.__thread.result != 0:
                 self.__job.remove_all_files()
             return self.__thread.result
@@ -225,7 +225,7 @@ class JobRenderer(threading.Thread):
         self.result = None
 
     def __get_my_tid(self):
-        if not self.isAlive():
+        if not self.is_alive():
             raise threading.ThreadError("the thread is not active")
 
         # Do we have it cached?

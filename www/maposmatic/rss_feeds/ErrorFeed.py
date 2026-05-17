@@ -71,7 +71,7 @@ class ErrorFeed(Feed):
     def item_description(self, item):
         try:
             errortext = open(item.get_errorlog_file(), 'r').read()
-        except:
+        except Exception:
             errortext = 'no error file found'
         return "<strong>%s</strong><hr/><pre>%s</pre>" % (item.resultmsg, errortext)
 
@@ -79,7 +79,7 @@ class ErrorFeed(Feed):
         try:
             return (float(item.lon_upper_left),   float(item.lat_upper_left),
                     float(item.lon_bottom_right), float(item.lat_bottom_right))
-        except:
+        except Exception:
             # TODO check if administrative_id is set
             # and retrieve bouding box from OSM data
             return (-180.0, 90.0, 180.0, -90.0)

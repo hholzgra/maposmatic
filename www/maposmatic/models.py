@@ -123,7 +123,7 @@ class MapRenderingJob(models.Model):
     objects = MapRenderingJobManager()
 
     def __str__(self):
-        return str(self.maptitle.encode('utf-8'))
+        return self.maptitle
 
     def maptitle_computized(self):
         t = self.maptitle.strip()

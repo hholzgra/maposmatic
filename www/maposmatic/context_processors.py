@@ -64,7 +64,7 @@ def get_osm_database_last_update(dbname='osm'):
             return None
 
         return last_update[0]
-    except:
+    except Exception:
         pass
     finally:
         # Close the DB cursor if necessary
@@ -92,7 +92,7 @@ def get_waymarked_database_last_update():
         return last_update[0].replace(tzinfo=None) # TODO we should add, not strip TZ
         # see also e.g. https://stackoverflow.com/questions/796008/cant-subtract-offset-naive-and-offset-aware-datetimes
         # and https://toptechtips.github.io/2023-04-03-python-offset-aware-offset-naive-timezones/
-    except:
+    except Exception:
         pass
     finally:
         # Close the DB cursor if necessary
@@ -115,7 +115,7 @@ def get_osmnames_table_ok():
             return False
 
         return True
-    except:
+    except Exception:
         pass
     finally:
         # Close the DB cursor if necessary

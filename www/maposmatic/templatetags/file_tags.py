@@ -10,7 +10,7 @@ from .extratags import register
 def file_basename(value):
     try:
       return os.path.basename(value.name)
-    except:
+    except Exception:
       return ""
 
 @register.filter()

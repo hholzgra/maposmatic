@@ -67,7 +67,7 @@ def reverse_geo(lat, lon):
     result = []
     for place in XMLTree(f).getroot():
         attribs = dict(place.attrib)
-        for elt in place.getchildren():
+        for elt in place:
             attribs[elt.tag] = elt.text
         result.append(attribs)
     return result
@@ -130,7 +130,7 @@ def _extract_entries(xml):
     result = []
     for place in xml.getroot():
         attribs = dict(place.attrib)
-        for elt in place.getchildren():
+        for elt in place:
             attribs[elt.tag] = elt.text
         result.append(attribs)
 

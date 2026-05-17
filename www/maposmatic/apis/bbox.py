@@ -42,7 +42,7 @@ def api_bbox(request, osm_id):
         bbox = ocitysmap.coords.BoundingBox.parse_wkt(bbox_wkt)
         return HttpResponse(content=json.dumps(bbox.as_json_bounds()),
                             content_type='text/json')
-    except:
+    except Exception:
         LOG.exception("Error calculating bounding box for OSM ID %d!" % osm_id)
 
     return HttpResponseBadRequest("ERROR: OSM ID %d not found!" % osm_id)

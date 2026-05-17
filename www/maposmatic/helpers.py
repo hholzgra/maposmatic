@@ -27,7 +27,7 @@ import datetime
 import psycopg2
 import random
 import string
-import secure
+import secrets
 
 from www.maposmatic.models import MapRenderingJob
 import www.settings

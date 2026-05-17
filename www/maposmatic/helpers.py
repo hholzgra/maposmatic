@@ -55,4 +55,4 @@ def get_pages_list(page, paginator):
     return page_list
 
 def generate_nonce(length):
-    return ''.join(secure.token_hex(string.ascii_letters//2) for i in range(length))
+    return ''.join(secure.token_hex(length//2) for i in range(length))

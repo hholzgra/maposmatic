@@ -21,7 +21,7 @@ LOG = logging.getLogger('maposmatic')
 
 import json
 
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.db import connections
 
 import ocitysmap

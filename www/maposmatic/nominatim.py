@@ -65,7 +65,7 @@ def reverse_geo(lat, lon):
     f = urlopen(request)
 
     result = []
-    for place in XMLTree(f).list(getroot()):
+    for place in XMLTree(f).getroot():
         attribs = dict(place.attrib)
         for elt in place.getchildren():
             attribs[elt.tag] = elt.text
@@ -128,7 +128,7 @@ def _extract_entries(xml):
     list of entries for the given squery (eg. "Paris"). Each entry is
     a dictionary key -> value (value is always a string)."""
     result = []
-    for place in xml.list(getroot()):
+    for place in xml.getroot():
         attribs = dict(place.attrib)
         for elt in place.getchildren():
             attribs[elt.tag] = elt.text

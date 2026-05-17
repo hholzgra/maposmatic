@@ -282,9 +282,8 @@ class RenderingsGarbageCollector:
                 os.remove(file_real_path)
                 file.deleted_on = datetime.now()
                 file.save(update_fields=["deleted_on"])
-            except:
+            except Exception:
                 LOG.exception("Remove of uploaded file '%s' failed: " % str(file.uploaded_file))
-                pass
 
 if __name__ == '__main__':
     if (not os.path.exists(RENDERING_RESULT_PATH)

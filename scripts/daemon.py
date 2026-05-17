@@ -272,15 +272,19 @@ class RenderingsGarbageCollector:
 
 
 
-    LOG.info("Cleanup remove old upload files")
-    files = UploadFile.objects.filter(keep_until__lte = datetime.now(), deleted_on__isnull = True)
+        LOG.info("Cleanup remove old upload files")
+        files = UploadFile.objects.filter(keep_until__lte = datetime.now(), deleted_on__isnull = True)
 
-    for file in files:
-        try:
-            os.remove(os.path.join(MEDIA_ROOT, file.uploaded_file.name))
-            LOG.info("Cleanup: removed %s" % file.upload_file.name)
-        except:
-            pass
+        for file in files:
+            file_real_path = os.path.join(MEDIA_ROOT, str(file.uploaded_file))
+            LOG.debug("Cleanup: removing %s" % file_real_path)
+            try:
+                os.remove(file_real_path)
+                file.deleted_on = datetime.now()
+                file.save(update_fields=["deleted_on"])
+            except:
+                LOG.exception("Remove of uploaded file '%s' failed: " % str(file.uploaded_file))
+                pass
 
 if __name__ == '__main__':
     if (not os.path.exists(RENDERING_RESULT_PATH)

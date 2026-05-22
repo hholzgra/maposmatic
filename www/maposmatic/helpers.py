@@ -27,6 +27,7 @@ import datetime
 import psycopg2
 import random
 import string
+import secrets
 
 from www.maposmatic.models import MapRenderingJob
 import www.settings
@@ -54,4 +55,4 @@ def get_pages_list(page, paginator):
     return page_list
 
 def generate_nonce(length):
-    return ''.join(random.choice(string.ascii_letters) for i in range(length))
+    return secrets.token_hex(length//2)

@@ -16,7 +16,7 @@ def _lastline(filename):
             while file.read(1) != b'\n':
                 file.seek(-2, os.SEEK_CUR)
             return str(file.readline().decode())
-    except:
+    except Exception:
         return ""
 
 @register.filter()

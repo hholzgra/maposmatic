@@ -124,7 +124,7 @@ class ThreadingJobRenderer:
 
         # If the thread is no longer alive, the timeout was not reached and all
         # is well.
-        if not self.__thread.isAlive():
+        if not self.__thread.is_alive():
             if self.__thread.result != 0:
                 self.__job.remove_all_files()
             return self.__thread.result
@@ -225,7 +225,7 @@ class JobRenderer(threading.Thread):
         self.result = None
 
     def __get_my_tid(self):
-        if not self.isAlive():
+        if not self.is_alive():
             raise threading.ThreadError("the thread is not active")
 
         # Do we have it cached?
@@ -360,7 +360,8 @@ class JobRenderer(threading.Thread):
                 img.save(prefix + THUMBNAIL_SUFFIX)
             except Exception as e:
                 LOG.warning("PNG size reduction failed: %s" % e)
-            img.close()
+            finally:
+                img.close()
 
             try:
                 pngquant_cmd = [ "pngquant", "--output", "%s.tmp.8bit.png" % prefix,
@@ -456,7 +457,7 @@ class JobRenderer(threading.Thread):
                 config.status_update("Generating preview thumbnail")
                 self._gen_thumbnail(result_file_prefix, config.paper_width_mm,
                                     config.paper_height_mm)
-            except:
+            except Exception:
                 pass
 
             if output_count > 0:

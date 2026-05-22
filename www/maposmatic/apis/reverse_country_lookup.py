@@ -23,6 +23,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import json
+
 import logging
 LOG = logging.getLogger('maposmatic')
 
@@ -51,10 +53,10 @@ def api_postgis_reverse(request, lat, lon):
         if country_code is None or len(country_code) < 1:
             raise Http404("postgis: country not found")
 
-        return HttpResponse('{"address": {"country_code": "%s"}}' % country_code[0], content_type='text/json')
+        return HttpResponse( json.dumps({"address": {"country_code": country_code[0]}})
+                           , content_type='text/json')
     except Exception as e:
         LOG.warning("reverse geo lookup failed: %s" % e)
-        pass
     finally:
         # Close the DB cursor if necessary
         if cursor is not None and not cursor.closed:

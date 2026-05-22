@@ -202,7 +202,7 @@ class MapRenderingJobForm(forms.ModelForm):
         try:
             for overlay in data.get("overlay"):
                 overlay_array.append(overlay)
-        except:
+        except Exception:
             pass
         overlay = ",".join(overlay_array)
 
@@ -229,7 +229,7 @@ class MapRenderingJobForm(forms.ModelForm):
             try:
                 self._check_osm_id(data.get("administrative_osmid"))
             except Exception as ex:
-                msg = _(u"Error with osm city: %s" % ex)
+                msg = _(u"Error with osm city: %s") % ex
                 self._errors['administrative_osmid'] \
                     = ErrorList([msg])
 

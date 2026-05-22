@@ -10,7 +10,7 @@ from .extratags import register
 def file_basename(value):
     try:
       return os.path.basename(value.name)
-    except:
+    except Exception:
       return ""
 
 @register.filter()
@@ -24,6 +24,7 @@ def file_readable_size(value):
             if size < 1024.0:
                 return "%.1f%s" % (size, unit)
             size = size / 1024
+        return "%.1f%s" % (size, unit)
 
     else:
         return _("no longer present")

@@ -21,7 +21,7 @@ LOG = logging.getLogger('maposmatic')
 
 import json
 
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.db import connections
 
 import ocitysmap
@@ -30,7 +30,10 @@ import www.settings
 from www.maposmatic import helpers, forms, models
 
 
-def heatdata(request, days=1):
+def heatdata(request, days = None):
+
+    days = int(days) if days else 1
+
     query = """
 select round(lat::numeric, 4)::float as lat
      , round(lng::numeric, 4)::float as lng
@@ -58,25 +61,23 @@ select (north + south)/2 as lat
 
     data = { "max": 8, "data": [] }
     
-    try:
-        cursor = connections['default'].cursor()
-        if cursor is None:
-            raise Http404("postgis: no cursor")
+    cursor = connections['default'].cursor()
+    if cursor is None:
+        raise Http404("postgis: no cursor")
 
+    try:
         cursor.execute(query)
 
         columns = [col[0] for col in cursor.description]
 
         for row in cursor.fetchall():
             data["data"].append(dict(zip(columns, row)))
-
+    finally:
         cursor.close()
 
-        return HttpResponse(content="var data = " + json.dumps(data, indent=2),
-                            content_type='application/javascript')
+    return HttpResponse(content="var data = " + json.dumps(data, indent=2),
+                        content_type='application/javascript')
 
-    except Exception as e:
-        raise RuntimeError(e)
 
     
 

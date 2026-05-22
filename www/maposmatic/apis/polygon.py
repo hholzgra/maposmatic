@@ -43,7 +43,7 @@ def api_polygon(request, osm_id):
         bbox = ocitysmap.coords.BoundingBox.parse_wkt(bbox_wkt).as_json_bounds()
         return HttpResponse(content=json.dumps({'bbox': bbox, 'wkt': area_wkt}),
                             content_type='text/json')
-    except:
+    except Exception:
         LOG.exception("Error retrieving polygon outline for OSM ID %d!" % osm_id)
 
     return HttpResponseBadRequest("ERROR: OSM ID %d not found!" % osm_id)

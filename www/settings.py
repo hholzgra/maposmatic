@@ -26,6 +26,10 @@
 
 import logging
 import os.path
+import threading
+
+from cachetools import TTLCache, cached
+cache = TTLCache(maxsize=100, ttl=5, lock=threading.Lock())
 
 from django.utils.translation import gettext_lazy as _
 
@@ -333,11 +337,18 @@ QUEUE_NAMES = ['default', 'api', 'multipage']
 # platform specific. The below implementation assumes that the
 # renderer process(es) are running as systemD services which
 # should be a sensible default these days.
+@cached(cache)
 def is_daemon_running(queue_name=None):
     name = ''
     if queue_name is not None:
         name = "@" + queue_name
-    return 0 == os.system('systemctl is-active maposmatic-render%s.service' % name)
+
+    return subprocess.run(
+        ['systemctl', 'is-active', f'maposmatic-render{name}.service'],
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    ).returncode == 0
 
 # Logging
 logconfig.setup_maposmatic_logging(

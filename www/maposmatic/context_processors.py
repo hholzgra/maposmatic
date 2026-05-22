@@ -64,7 +64,7 @@ def get_osm_database_last_update(dbname='osm'):
             return None
 
         return last_update[0]
-    except:
+    except Exception:
         pass
     finally:
         # Close the DB cursor if necessary
@@ -92,7 +92,7 @@ def get_waymarked_database_last_update():
         return last_update[0].replace(tzinfo=None) # TODO we should add, not strip TZ
         # see also e.g. https://stackoverflow.com/questions/796008/cant-subtract-offset-naive-and-offset-aware-datetimes
         # and https://toptechtips.github.io/2023-04-03-python-offset-aware-offset-naive-timezones/
-    except:
+    except Exception:
         pass
     finally:
         # Close the DB cursor if necessary
@@ -115,7 +115,7 @@ def get_osmnames_table_ok():
             return False
 
         return True
-    except:
+    except Exception:
         pass
     finally:
         # Close the DB cursor if necessary
@@ -187,19 +187,19 @@ def all(request):
 
     gis_lastupdate = get_osm_database_last_update('osm')
     gis_lag_ok = (gis_lastupdate
-        and datetime.datetime.utcnow() - gis_lastupdate < datetime.timedelta(minutes=30)
-        or False)
+        and datetime.datetime.now(datetime.UTC) - gis_lastupdate < datetime.timedelta(minutes=30)
+        )
 
     osmcarto_lastupdate = get_osm_database_last_update('flex')
     osmcarto_lag_ok = (osmcarto_lastupdate
-        and datetime.datetime.utcnow() - osmcarto_lastupdate < datetime.timedelta(minutes=30)
-        or False)
+        and datetime.datetime.now(datetime.UTC) - osmcarto_lastupdate < datetime.timedelta(minutes=30)
+        )
 
 
     waymarked_lastupdate = get_waymarked_database_last_update()
     waymarked_lag_ok = (waymarked_lastupdate 
-        and datetime.datetime.utcnow() -  waymarked_lastupdate < datetime.timedelta(minutes=30)
-        or False)
+        and datetime.datetime.now(datetime.UTC) -  waymarked_lastupdate < datetime.timedelta(minutes=30)
+        )
 
     osmnames_ok = get_osmnames_table_ok()
 
@@ -208,7 +208,7 @@ def all(request):
     elif daemon_running and gis_lastupdate and not (gis_lag_ok and waymarked_lag_ok):
         platform_status = 'triangle-exclamation'
     else:
-        platform_status = 'hourglas-clock'
+        platform_status = 'hourglass-clock'
 
     try:
         git_repo = git.Repo(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))) 

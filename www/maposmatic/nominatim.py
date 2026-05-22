@@ -65,9 +65,9 @@ def reverse_geo(lat, lon):
     f = urlopen(request)
 
     result = []
-    for place in XMLTree(f).getroot().getchildren():
+    for place in XMLTree(f).getroot():
         attribs = dict(place.attrib)
-        for elt in place.getchildren():
+        for elt in place:
             attribs[elt.tag] = elt.text
         result.append(attribs)
     return result
@@ -128,9 +128,9 @@ def _extract_entries(xml):
     list of entries for the given squery (eg. "Paris"). Each entry is
     a dictionary key -> value (value is always a string)."""
     result = []
-    for place in xml.getroot().getchildren():
+    for place in xml.getroot():
         attribs = dict(place.attrib)
-        for elt in place.getchildren():
+        for elt in place:
             attribs[elt.tag] = elt.text
         result.append(attribs)
 
@@ -169,7 +169,7 @@ def _compute_prev_next_excludes(xml):
     if excludes is not None:
         excludes_list = excludes.split(',')
         hasprev = len(excludes_list) > NOMINATIM_MAX_RESULTS_PER_RESPONSE
-        prevexcludes_count = ((len(excludes_list) /
+        prevexcludes_count = ((len(excludes_list) //
                               NOMINATIM_MAX_RESULTS_PER_RESPONSE) *
                               NOMINATIM_MAX_RESULTS_PER_RESPONSE -
                               2 * NOMINATIM_MAX_RESULTS_PER_RESPONSE)

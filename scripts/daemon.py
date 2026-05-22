@@ -267,7 +267,7 @@ class RenderingsGarbageCollector:
                              (f['name'], self.get_formatted_details(f['size'],
                                                                     size,
                                                                     threshold)))
-                except:
+                except Exception:
                     pass
 
 

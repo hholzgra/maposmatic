@@ -60,8 +60,8 @@ def api_papersize(request):
         lon_bottom_right = f.cleaned_data.get("lon_bottom_right")
 
         # Check we have correct floats
-        if (lat_upper_left == None or lon_upper_left == None
-            or lat_bottom_right == None or lon_bottom_right == None):
+        if (lat_upper_left is None or lon_upper_left is None
+            or lat_bottom_right is None or lon_bottom_right is None):
            return HttpResponseBadRequest("ERROR: Invalid arguments")
 
         bbox = ocitysmap.coords.BoundingBox(

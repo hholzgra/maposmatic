@@ -208,7 +208,7 @@ def all(request):
     elif daemon_running and gis_lastupdate and not (gis_lag_ok and waymarked_lag_ok):
         platform_status = 'triangle-exclamation'
     else:
-        platform_status = 'hourglas-clock'
+        platform_status = 'hourglass-clock'
 
     try:
         git_repo = git.Repo(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))) 

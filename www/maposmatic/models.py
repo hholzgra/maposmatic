@@ -118,7 +118,9 @@ class MapRenderingJob(models.Model):
     nonce = models.CharField(max_length=NONCE_SIZE, blank=True)
 
     class Meta:
-        indexes = [models.Index(fields=['submission_time',]),]
+        indexes = [models.Index(fields=['submission_time',]),
+                  ,models.Index(fields=['status','queue','submission_time']),
+                  ]
 
     objects = MapRenderingJobManager()
 

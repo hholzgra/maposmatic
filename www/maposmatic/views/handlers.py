@@ -30,7 +30,9 @@ from www.maposmatic import helpers, forms, models
 def myhandler500(request):
     type, value, tb = sys.exc_info()
 
-    tb_msg = "".join(traceback.format_exception(type, value, tb))
+    tb_msg = ""
+    if settings.DEBUG:
+        tb_msg = "".join(traceback.format_exception(type, value, tb))
 
     return render(request,
                   '500.html',

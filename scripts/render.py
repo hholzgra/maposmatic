@@ -360,7 +360,8 @@ class JobRenderer(threading.Thread):
                 img.save(prefix + THUMBNAIL_SUFFIX)
             except Exception as e:
                 LOG.warning("PNG size reduction failed: %s" % e)
-            img.close()
+            finally:
+                img.close()
 
             try:
                 pngquant_cmd = [ "pngquant", "--output", "%s.tmp.8bit.png" % prefix,

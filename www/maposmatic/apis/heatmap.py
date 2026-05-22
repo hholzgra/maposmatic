@@ -30,7 +30,10 @@ import www.settings
 from www.maposmatic import helpers, forms, models
 
 
-def heatdata(request, days=1):
+def heatdata(request, days = None):
+
+    days = int(days) if days else 1
+
     query = """
 select round(lat::numeric, 4)::float as lat
      , round(lng::numeric, 4)::float as lng

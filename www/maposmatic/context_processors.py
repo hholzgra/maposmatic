@@ -187,19 +187,19 @@ def all(request):
 
     gis_lastupdate = get_osm_database_last_update('osm')
     gis_lag_ok = (gis_lastupdate
-        and datetime.datetime.utcnow() - gis_lastupdate < datetime.timedelta(minutes=30)
-        or False)
+        and datetime.datetime.now(datetime.UTC) - gis_lastupdate < datetime.timedelta(minutes=30)
+        )
 
     osmcarto_lastupdate = get_osm_database_last_update('flex')
     osmcarto_lag_ok = (osmcarto_lastupdate
-        and datetime.datetime.utcnow() - osmcarto_lastupdate < datetime.timedelta(minutes=30)
-        or False)
+        and datetime.datetime.now(datetime.UTC) - osmcarto_lastupdate < datetime.timedelta(minutes=30)
+        )
 
 
     waymarked_lastupdate = get_waymarked_database_last_update()
     waymarked_lag_ok = (waymarked_lastupdate 
-        and datetime.datetime.utcnow() -  waymarked_lastupdate < datetime.timedelta(minutes=30)
-        or False)
+        and datetime.datetime.now(datetime.UTC) -  waymarked_lastupdate < datetime.timedelta(minutes=30)
+        )
 
     osmnames_ok = get_osmnames_table_ok()
 

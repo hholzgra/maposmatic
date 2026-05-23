@@ -38,16 +38,14 @@ def api_postgis_reverse(request, lat, lon):
     query = """select country_code
                  from country_osm_grid
                 where st_contains(geometry,
-                                  st_geomfromtext('POINT(%f %f)', 4326))
-            """ % (lon, lat)
-
-    LOG.debug("Reverse Lookup Query %s" % query)
+                                  st_geomfromtext('POINT(%s %s)', 4326))
+            """ 
 
     try:
         connections['osm'].rollback() # make sure there's no pending transaction
         cursor = connections['osm'].cursor()
 
-        cursor.execute(query)
+        cursor.execute(query, [lon, lat])
         country_code = cursor.fetchone()
         cursor.close()
         if country_code is None or len(country_code) < 1:
@@ -55,6 +53,8 @@ def api_postgis_reverse(request, lat, lon):
 
         return HttpResponse( json.dumps({"address": {"country_code": country_code[0]}})
                            , content_type='text/json')
+    except Http404:
+        raise
     except Exception as e:
         LOG.warning("reverse geo lookup failed: %s" % e)
     finally:

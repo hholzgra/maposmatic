@@ -347,6 +347,7 @@ class JobRenderer(threading.Thread):
                 LOG.warning("maybe PDF parsing is disabled in the ImageMagic Policy map? (e.g. /etc/ImageMagick-6/policy.xml)")
 
         elif 'png' in RENDERING_RESULT_FORMATS:
+            img = None
             try:
                 Image.MAX_IMAGE_PIXELS = None
                 img = Image.open(prefix + '.png')
@@ -361,7 +362,8 @@ class JobRenderer(threading.Thread):
             except Exception as e:
                 LOG.warning("PNG size reduction failed: %s" % e)
             finally:
-                img.close()
+                if img is not None:
+                    img.close()
 
             try:
                 pngquant_cmd = [ "pngquant", "--output", "%s.tmp.8bit.png" % prefix,

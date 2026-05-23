@@ -119,7 +119,7 @@ class MapRenderingJob(models.Model):
 
     class Meta:
         indexes = [models.Index(fields=['submission_time',]),
-                  ,models.Index(fields=['status','queue','submission_time']),
+                   models.Index(fields=['status','queue','submission_time']),
                   ]
 
     objects = MapRenderingJobManager()

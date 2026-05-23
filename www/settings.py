@@ -30,7 +30,8 @@ import threading
 import subprocess
 
 from cachetools import TTLCache, cached
-cache = TTLCache(maxsize=100, ttl=5, lock=threading.Lock())
+cache = TTLCache(maxsize=100, ttl=5)
+cache_lock = threading.Lock()
 
 from django.utils.translation import gettext_lazy as _
 
@@ -337,7 +338,7 @@ QUEUE_NAMES = ['default', 'api', 'multipage']
 # platform specific. The below implementation assumes that the
 # renderer process(es) are running as systemD services which
 # should be a sensible default these days.
-@cached(cache)
+@cached(cache, lock=cache_lock)
 def is_daemon_running(queue_name=None):
     name = ''
     if queue_name is not None:

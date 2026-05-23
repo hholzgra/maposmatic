@@ -63,7 +63,9 @@ def get_osm_database_last_update(dbname='osm'):
         if last_update is None or len(last_update) != 1:
             return None
 
-        return last_update[0]
+        return (last_update[0].replace(tzinfo=datetime.UTC)
+                if last_update[0].tzinfo is None
+                else last_update[0].astimezone(datetime.UTC))
     except Exception:
         pass
     finally:
@@ -89,9 +91,9 @@ def get_waymarked_database_last_update():
         if last_update is None or len(last_update) != 1:
             return None
 
-        return last_update[0].replace(tzinfo=None) # TODO we should add, not strip TZ
-        # see also e.g. https://stackoverflow.com/questions/796008/cant-subtract-offset-naive-and-offset-aware-datetimes
-        # and https://toptechtips.github.io/2023-04-03-python-offset-aware-offset-naive-timezones/
+        return (last_update[0].replace(tzinfo=datetime.UTC)
+                if last_update[0].tzinfo is None
+                else last_update[0].astimezone(datetime.UTC))
     except Exception:
         pass
     finally:
@@ -169,6 +171,9 @@ def queues_overall_symbol():
         return "exclamation"
     return "check"
 
+def _lag_ok(last_update, max_lag = 1800):
+    return last_update and datetime.datetime.now(datetime.UTC) - last_update < datetime.timedelta(seconds = max_lag)
+
 def all(request):
     # Do not add the useless overhead of parsing blog entries when generating
     # the rss feed
@@ -186,20 +191,13 @@ def all(request):
     daemon_running = all_queues_running()
 
     gis_lastupdate = get_osm_database_last_update('osm')
-    gis_lag_ok = (gis_lastupdate
-        and datetime.datetime.now(datetime.UTC) - gis_lastupdate < datetime.timedelta(minutes=30)
-        )
+    gis_lag_ok     = _lag_ok(gis_lastupdate)
 
     osmcarto_lastupdate = get_osm_database_last_update('flex')
-    osmcarto_lag_ok = (osmcarto_lastupdate
-        and datetime.datetime.now(datetime.UTC) - osmcarto_lastupdate < datetime.timedelta(minutes=30)
-        )
-
+    osmcarto_lag_ok     = _lag_ok(osmcarto_lastupdate)
 
     waymarked_lastupdate = get_waymarked_database_last_update()
-    waymarked_lag_ok = (waymarked_lastupdate 
-        and datetime.datetime.now(datetime.UTC) -  waymarked_lastupdate < datetime.timedelta(minutes=30)
-        )
+    waymarked_lag_ok     = _lag_ok(waymarked_lastupdate)
 
     osmnames_ok = get_osmnames_table_ok()
 

@@ -27,6 +27,7 @@
 import logging
 import os.path
 import threading
+import subprocess
 
 from cachetools import TTLCache, cached
 cache = TTLCache(maxsize=100, ttl=5, lock=threading.Lock())

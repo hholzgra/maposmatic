@@ -28,17 +28,17 @@ import www.settings
 from www.maposmatic import helpers, forms, models
 
 def myhandler500(request):
-    type, value, tb = sys.exc_info()
+    exc_type, value, tb = sys.exc_info()
 
     tb_msg = ""
-    if settings.DEBUG:
-        tb_msg = "".join(traceback.format_exception(type, value, tb))
+    if www.settings.DEBUG:
+        tb_msg = "".join(traceback.format_exception(exc_type, value, tb))
 
     return render(request,
                   '500.html',
                   {
                       'LANGUAGE_CODE': www.settings.LANGUAGE_CODE,
-                      'type': type,
+                      'type': exc_type,
                       'value': value,
                       'tb': tb_msg,
                    },

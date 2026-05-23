@@ -16,23 +16,21 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging
-LOG = logging.getLogger('maposmatic')
+# import logging
+# LOG = logging.getLogger('maposmatic')
 
 import json
 
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http400, Http404
 from django.db import connections
-
-import ocitysmap
-
-import www.settings
-from www.maposmatic import helpers, forms, models
 
 
 def heatdata(request, days = None):
 
     days = int(days) if days else 1
+
+    if (days < 1):
+        raise Http400("days needs to be a positive number"
 
     query = """
 select round(lat::numeric, 4)::float as lat
@@ -45,7 +43,7 @@ select (lat_upper_left + lat_bottom_right)/2 as lat
  where lat_upper_left is not null
    and submission_time BETWEEN LOCALTIMESTAMP - INTERVAL '%s days' AND LOCALTIMESTAMP
 
-union
+union all
 
 select (north + south)/2 as lat
      , (west + east)/2 as lng
@@ -55,18 +53,19 @@ select (north + south)/2 as lat
   where m.administrative_osmid is not null
    and submission_time BETWEEN LOCALTIMESTAMP - INTERVAL '%s days' AND LOCALTIMESTAMP
 
-) x group by lat, lng;
+) x group by lat, lng
 ;
-""" % (days, days)
+""" 
 
     data = { "max": 8, "data": [] }
-    
-    cursor = connections['default'].cursor()
-    if cursor is None:
+
+    try:
+        cursor = connections['default'].cursor()
+    except Exception:
         raise Http404("postgis: no cursor")
 
     try:
-        cursor.execute(query)
+        cursor.execute(query, [days, days])
 
         columns = [col[0] for col in cursor.description]
 

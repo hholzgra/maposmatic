@@ -21,7 +21,7 @@
 
 import json
 
-from django.http import HttpResponse, Http400, Http404
+from django.http import HttpResponse, HttpResponseBadRequest, Http404
 from django.db import connections
 
 
@@ -30,7 +30,7 @@ def heatdata(request, days = None):
     days = int(days) if days else 1
 
     if (days < 1):
-        raise Http400("days needs to be a positive number"
+        raise HttpResponseBadRequest("heatdata: 'days' needs to be a positive number")
 
     query = """
 select round(lat::numeric, 4)::float as lat

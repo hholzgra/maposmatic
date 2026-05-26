@@ -246,7 +246,7 @@ def all(request):
         'waymarked_lastupdate':          waymarked_lastupdate,
         'waymarked_lag_ok':              waymarked_lag_ok,
         'osmnames_ok':                   osmnames_ok,
-        'utc_now':                       datetime.datetime.utcnow(),
+        'utc_now':                       datetime.datetime.now(datetime.UTC),
         'platform_status':               platform_status,
 
         'paypal_lang_code':              paypal_lang_code,

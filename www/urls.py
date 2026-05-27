@@ -49,7 +49,7 @@ urlpatterns = [
     re_path(r'^reedit/$',                                      views.reedit,                   name = 'reedit'),
     re_path(r'^cancel/$',                                      views.cancel,                   name = 'cancel'),
 
-    re_path(r'^maps/(?P<id>\d+)/(?P<nonce>[A-Za-z]{16})$',     views.map_full,                 name = 'map-by-id-and-nonce'),
+    re_path(r'^maps/(?P<id>\d+)/(?P<nonce>[A-Za-z0-9]{16})$',     views.map_full,                 name = 'map-by-id-and-nonce'),
     re_path(r'^maps/(?P<id>\d+)[/]?$',                         views.map_full,                 name = 'map-by-id'),
     re_path(r'^maps/(?P<category>[a-z]+)$',                    views.maps,                     name = 'maps-list-cagetory'),
     re_path(r'^maps/(?P<category>[a-z]+)/(?P<extra>[a-z-]+)$', views.maps,                     name = 'maps-list-cagetory-extra'),

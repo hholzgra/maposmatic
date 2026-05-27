@@ -19,10 +19,9 @@
 import www.settings
 
 from django import forms
-from django.forms.utils import ErrorList
 from django.utils.translation import get_language, gettext_lazy as _
 from django.utils.safestring import mark_safe
-from django.utils.html import escape
+from django.utils.html import escape, format_html
 
 from www.maposmatic import models, widgets
 
@@ -136,10 +135,10 @@ class MapRenderingJobForm(forms.ModelForm):
             if s.description is not None:
                 description = mark_safe(escape(s.description))
             else:
-                description = mark_safe(_("The <i>%(stylesheet_name)s</i> stylesheet") % {'stylesheet_name':s.name})
+                description = format_html(_("The <i>{}</i> stylesheet"), s.name)
 
             if s.url:
-                description = mark_safe("%s <a target='_blank' href='%s' title='%s'><i class='fa fa-info-circle'></i></a>" % (description, s.url, _("more info")))
+                description = format_html("{} <a target='_blank' href='{}' title='{}'><i class='fa fa-info-circle'></i></a>", description, s.url, _("more info"))
 
             if s.group:
                 group = s.group
@@ -163,10 +162,10 @@ class MapRenderingJobForm(forms.ModelForm):
             if s.description is not None:
                 description = mark_safe(escape(s.description))
             else:
-                description = mark_safe(_("The <i>%(stylesheet_name)s</i> overlay") % {'stylesheet_name':s.name})
+                description = format_html(_("The <i>{}</i> overlay"), s.name)
 
             if s.url:
-                description = mark_safe("%s <a target='_blank' href='%s' title='%s'><i class='fa fa-info-circle'></i></a>" % (description, s.url, _("more info")))
+                description = format_html("{} <a target='_blank' href='{}' title='{}'><i class='fa fa-info-circle'></i></a>", description, s.url, _("more info"))
 
             if s.group not in overlay_choices:
                 overlay_choices[s.group] = []
@@ -205,26 +204,26 @@ class MapRenderingJobForm(forms.ModelForm):
         overlay = ",".join(overlay_array)
 
         if layout == '':
-            self.add_error(["layout"], _("Layout required))
+            self.add_error("layout", _("Layout required"))
 
         if indexer == '':
-            self.add_error(["indexer"], _("Indexer required"))
+            self.add_error("indexer", _("Indexer required"))
 
         if stylesheet == '':
-            self.add_error(["stylesheet"], _("Stylesheet required"))
+            self.add_error("stylesheet", _("Stylesheet required"))
 
         if mode == 'admin':
             # TODO as bounding box override now exists (Issue #24)
             #      we need to do the same bbox checks here as in
             #      the mode=bbox section below?
             if city == "":
-                self.add_error(["administrative_city"],  _("Administrative city required"))
+                self.add_error("administrative_city",  _("Administrative city required"))
 
             try:
                 self._check_osm_id(data.get("administrative_osmid"))
             except Exception as ex:
                 msg = _("Error with osm city: %s") % ex
-                self.add_errorr(s['administrative_osmid'], msg)
+                self.add_error('administrative_osmid', msg)
 
         elif mode == 'bbox':
             msgs = []
@@ -250,7 +249,7 @@ class MapRenderingJobForm(forms.ModelForm):
 
             # Don't try to instanciate a bounding box with empty coordinates
             if len(msgs):
-                self.add_error(['bbox'], msg)
+                self.add_error('bbox', msgs)
                 return data
 
             lat_upper_left = data.get("lat_upper_left")
@@ -265,7 +264,7 @@ class MapRenderingJobForm(forms.ModelForm):
             (metric_size_lat, metric_size_long) = boundingbox.spheric_sizes()
             if (metric_size_lat > www.settings.BBOX_MAXIMUM_LENGTH_IN_METERS
                 or metric_size_long > www.settings.BBOX_MAXIMUM_LENGTH_IN_METERS):
-                self.add_error(['bbox'], _("Bounding Box too large"))
+                self.add_error('bbox', _("Bounding Box too large"))
 
         return data
 

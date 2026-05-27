@@ -206,15 +206,15 @@ class MapRenderingJobForm(forms.ModelForm):
 
         if layout == '':
             msg = _(u"Layout required")
-            self._errors["layout"] = ErrorList([msg])
+            self.add_error(["layout"], msg)
 
         if indexer == '':
             msg = _(u"Indexer required")
-            self._errors["indexer"] = ErrorList([msg])
+            self.add_error(["indexer"], msg)
 
         if stylesheet == '':
             msg = _(u"Stylesheet required")
-            self._errors["stylesheet"] = ErrorList([msg])
+            self.add_error(["stylesheet"], msg)
 
         if mode == 'admin':
             # TODO as bounding box override now exists (Issue #24)
@@ -222,14 +222,13 @@ class MapRenderingJobForm(forms.ModelForm):
             #      the mode=bbox section below?
             if city == "":
                 msg = _(u"Administrative city required")
-                self._errors["administrative_city"] = ErrorList([msg])
+                self.add_error(["administrative_city"], msg)
 
             try:
                 self._check_osm_id(data.get("administrative_osmid"))
             except Exception as ex:
                 msg = _(u"Error with osm city: %s") % ex
-                self._errors['administrative_osmid'] \
-                    = ErrorList([msg])
+                self.add_errorr(s['administrative_osmid'], msg)
 
         elif mode == 'bbox':
             msgs = []
@@ -255,7 +254,7 @@ class MapRenderingJobForm(forms.ModelForm):
 
             # Don't try to instanciate a bounding box with empty coordinates
             if len(msgs):
-                self._errors['bbox'] = ErrorList(msgs)
+                self.add_error(['bbox'], msg)
                 return data
 
             lat_upper_left = data.get("lat_upper_left")
@@ -270,7 +269,7 @@ class MapRenderingJobForm(forms.ModelForm):
             (metric_size_lat, metric_size_long) = boundingbox.spheric_sizes()
             if (metric_size_lat > www.settings.BBOX_MAXIMUM_LENGTH_IN_METERS
                 or metric_size_long > www.settings.BBOX_MAXIMUM_LENGTH_IN_METERS):
-                self._errors['bbox'] = ErrorList([_(u"Bounding Box too large")])
+                self.add_error(['bbox'], _(u"Bounding Box too large"))
 
         return data
 

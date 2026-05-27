@@ -205,29 +205,25 @@ class MapRenderingJobForm(forms.ModelForm):
         overlay = ",".join(overlay_array)
 
         if layout == '':
-            msg = _(u"Layout required")
-            self.add_error(["layout"], msg)
+            self.add_error(["layout"], _("Layout required))
 
         if indexer == '':
-            msg = _(u"Indexer required")
-            self.add_error(["indexer"], msg)
+            self.add_error(["indexer"], _("Indexer required"))
 
         if stylesheet == '':
-            msg = _(u"Stylesheet required")
-            self.add_error(["stylesheet"], msg)
+            self.add_error(["stylesheet"], _("Stylesheet required"))
 
         if mode == 'admin':
             # TODO as bounding box override now exists (Issue #24)
             #      we need to do the same bbox checks here as in
             #      the mode=bbox section below?
             if city == "":
-                msg = _(u"Administrative city required")
-                self.add_error(["administrative_city"], msg)
+                self.add_error(["administrative_city"],  _("Administrative city required"))
 
             try:
                 self._check_osm_id(data.get("administrative_osmid"))
             except Exception as ex:
-                msg = _(u"Error with osm city: %s") % ex
+                msg = _("Error with osm city: %s") % ex
                 self.add_errorr(s['administrative_osmid'], msg)
 
         elif mode == 'bbox':
@@ -237,16 +233,16 @@ class MapRenderingJobForm(forms.ModelForm):
             for f in [ "lat_upper_left", "lon_upper_left",
                        "lat_bottom_right", "lon_bottom_right"]:
                 if not f in data:
-                    msgs.append(_(u"Required field '%s' missing") % f)
+                    msgs.append(_("Required field '%s' missing") % f)
 
             # Check latitude and longitude are different
             # TODO: relax this as auto-extend can deal with zero width OR height?
             #       and even both being zero could be handled by having a min. width/height?
             if (data.get("lat_upper_left") == data.get("lat_bottom_right")):
-                msgs.append(_(u"Same latitude"))
+                msgs.append(_("Same latitude"))
 
             if (data.get("lon_upper_left") == data.get("lon_bottom_right")):
-                msgs.append(_(u"Same longitude"))
+                msgs.append(_("Same longitude"))
 
             # Make sure that bbox and admin modes are exclusive
             data["administrative_city"] = ''
@@ -269,7 +265,7 @@ class MapRenderingJobForm(forms.ModelForm):
             (metric_size_lat, metric_size_long) = boundingbox.spheric_sizes()
             if (metric_size_lat > www.settings.BBOX_MAXIMUM_LENGTH_IN_METERS
                 or metric_size_long > www.settings.BBOX_MAXIMUM_LENGTH_IN_METERS):
-                self.add_error(['bbox'], _(u"Bounding Box too large"))
+                self.add_error(['bbox'], _("Bounding Box too large"))
 
         return data
 

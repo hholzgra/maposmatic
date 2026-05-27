@@ -74,5 +74,5 @@ def api_papersize(request):
                          key = lambda p: p['width'])
 
     return HttpResponse(content=json.dumps(paper_sizes),
-                        content_type='text/json')
+                        content_type='application/json')
 

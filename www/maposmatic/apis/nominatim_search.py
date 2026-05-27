@@ -56,7 +56,7 @@ def api_nominatim(request):
         contents = []
 
     return HttpResponse(content=json.dumps(contents),
-                        content_type='text/json')
+                        content_type='application/json')
 
 
 

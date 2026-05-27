@@ -41,7 +41,7 @@ def api_bbox(request, osm_id):
         bbox_wkt, area_wkt = renderer.get_geographic_info(osm_id)
         bbox = ocitysmap.coords.BoundingBox.parse_wkt(bbox_wkt)
         return HttpResponse(content=json.dumps(bbox.as_json_bounds()),
-                            content_type='text/json')
+                            content_type='application/json')
     except Exception:
         LOG.exception("Error calculating bounding box for OSM ID %d!" % osm_id)
 

@@ -52,7 +52,7 @@ def api_postgis_reverse(request, lat, lon):
             raise Http404("postgis: country not found")
 
         return HttpResponse( json.dumps({"address": {"country_code": country_code[0]}})
-                           , content_type='text/json')
+                           , content_type='application/json')
     except Http404:
         raise
     except Exception as e:

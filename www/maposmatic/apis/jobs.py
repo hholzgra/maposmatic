@@ -95,7 +95,7 @@ def _jobs_get(request, job_id):
         status = 200
 
     return HttpResponse( content=json.dumps(result, indent=4, sort_keys=True, default=str)
-                       , content_type='text/json', status=status)
+                       , content_type='application/json', status=status)
 
 
 
@@ -366,7 +366,7 @@ def _jobs_post(request):
         status = 202
 
     return HttpResponse( content=json.dumps(result, indent=4, sort_keys=True, default=str)
-                         , content_type='text/json', status=status)
+                         , content_type='application/json', status=status)
 
 def _no_geometry(job):
     return not job.administrative_osmid and not job.lat_upper_left

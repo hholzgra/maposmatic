@@ -221,15 +221,26 @@ def _get_admin_boundary_info_from_GIS(cursor, osm_id):
     # the "relation" items by osm2pgsql, which assigns to that ID the
     # opposite of osm_id... But we still consider that it could be the
     # real osm_id (not its opposite). Let's have fun...
+    # osm_id comes from the (external) Nominatim response, so coerce it to
+    # an integer before it ever reaches the database. This both defends
+    # against SQL injection and makes the negation below well defined; a
+    # non-numeric value is treated as "not found".
+    try:
+        osm_id = int(osm_id)
+    except (TypeError, ValueError):
+        return None
+
     for table_name in ("polygon", "line"):
         # Lookup the polygon/line table for both osm_id and
-        # the opposite of osm_id
+        # the opposite of osm_id. The table name is interpolated from a
+        # hard-coded literal (safe); osm_id is passed as a bind parameter.
         cursor.execute("""select osm_id, admin_level,
                           st_astext(st_envelope(st_transform(way,
                           4002))) AS bbox
                           from planet_osm_%s
-                          where osm_id = -%s"""
-                       % (table_name,osm_id))
+                          where osm_id = %%s"""
+                       % table_name,
+                       (-osm_id,))
         result = tuple(set(cursor.fetchall()))
 
         if len(result) == 0:

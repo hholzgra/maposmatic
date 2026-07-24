@@ -210,20 +210,12 @@ class MapRenderingJob(models.Model):
             formats.append('jpg')
         for format in formats:
             map_path = self.get_map_filepath("." + format)
-            if format != 'csv' and os.path.exists(map_path):
-                # Map files (all formats but CSV)
-                allfiles['maps'][format] = (
+            if os.path.exists(map_path):
+                topic = 'indeces' if format == 'csv' else 'maps'
+                allfiles[topic][format] = (
                     self.get_map_fileurl("." + format),
                     _("%(title)s %(format)s Map") % {'title': self.maptitle,
                                                      'format': format.upper()},
-                    os.stat(map_path).st_size,
-                    map_path)
-            elif format == 'csv' and os.path.exists(map_path):
-                # Index CSV file
-                allfiles['indeces'][format] = (
-                    self.get_map_fileurl("." + format),
-                     _("%(title)s %(format)s Index") % {'title': self.maptitle,
-                                                       'format': format.upper()},
                     os.stat(map_path).st_size,
                     map_path)
 

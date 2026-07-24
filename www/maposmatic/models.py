@@ -26,7 +26,7 @@ from django.urls import reverse
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import www.settings
 import re
 import os
@@ -104,6 +104,7 @@ class MapRenderingJob(models.Model):
     submission_time = models.DateTimeField(auto_now_add=True)
     startofrendering_time = models.DateTimeField(null=True,blank=True)
     endofrendering_time = models.DateTimeField(null=True,blank=True)
+    file_prefix = models.CharField(max_length=512, null=True, blank=True)
     resultmsg = models.CharField(max_length=256, null=True,blank=True)
     submitterip = models.GenericIPAddressField(null=True,blank=True)
     submittermail = models.EmailField(null=True,blank=True)
@@ -139,26 +140,32 @@ class MapRenderingJob(models.Model):
     _files_prefix = None
     def files_prefix(self):
         if self._files_prefix is None:
-            try:
-                self._files_prefix = "%s/%06d_%s_%s" % \
-                    (self.startofrendering_time.strftime("%Y/%m/%d"),
-                     self.id,
-                     self.startofrendering_time.strftime("%Y-%m-%d_%H-%M"),
-                     self.maptitle_computized())
-            except Exception:
-                self._files_prefix = "%06d_%s" % \
-                    (self.id,
-                     self.maptitle_computized())
+            if self.file_prefix:
+                self._files_prefix = self.file_prefix
+            else:
+                try:
+                    ts = self.startofrendering_time.astimezone(timezone.utc);
+                    self._files_prefix = "%s/%06d_%s_%s" % \
+                        (ts.strftime("%Y/%m/%d"),
+                         self.id,
+                         ts.strftime("%Y-%m-%d_%H-%M"),
+                         self.maptitle_computized())
+                except Exception:
+                    self._files_prefix = "%06d_%s" % \
+                        (self.id,
+                         self.maptitle_computized())
         return self._files_prefix
 
     def start_rendering(self):
         self.status = 1
-        self.startofrendering_time = datetime.now()
+        self.startofrendering_time = datetime.now(timezone.utc)
+        self._files_prefix = None
+        self.file_prefix = self.files_prefix()
         self.save()
 
     def end_rendering(self, resultmsg):
         self.status = 2
-        self.endofrendering_time = datetime.now()
+        self.endofrendering_time = datetime.now(timezone.utc)
         self.resultmsg = resultmsg
         self.save()
 

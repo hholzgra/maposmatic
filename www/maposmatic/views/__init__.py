@@ -63,8 +63,8 @@ from .privacy       import privacy
 from .documentation import documentation_user_guide, documentation_api
 from .donate        import donate, donate_thanks
 
-from .maps          import maps
-from .map_full      import map_full
+from .map_list      import map_list
+from .map_detail    import map_detail
 from .new           import new
 from .recreate      import recreate
 from .reedit        import reedit

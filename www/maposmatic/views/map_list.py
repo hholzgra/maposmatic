@@ -35,11 +35,11 @@ from django.db.models import Q
 import www.settings
 from www.maposmatic import helpers, forms, models
 
-def maps(request, category=None, extra=None):
+def map_list(request, category=None, extra=None):
     """Displays all maps and jobs, sorted by submission time, or maps matching
     the search terms when provided."""
 
-    map_list = None
+    jobs = None
 
     form = forms.MapSearchForm(request.GET)
 
@@ -48,24 +48,24 @@ def maps(request, category=None, extra=None):
         query = Q(maptitle__icontains = term)
         if term.isnumeric():
             query.add(Q(id = term), Q.OR)
-        map_list = (models.MapRenderingJob.objects
+        jobs = (models.MapRenderingJob.objects
                     .order_by('-submission_time')
                     .filter(query))
-        if len(map_list) == 1:
+        if len(jobs) == 1:
             return HttpResponseRedirect(reverse('map-by-id',
-                                                args=[map_list[0].id]))
+                                                args=[jobs[0].id]))
     else:
         form = forms.MapSearchForm()
 
-    if map_list is None:
-        map_list = (models.MapRenderingJob.objects
+    if jobs is None:
+        jobs = (models.MapRenderingJob.objects
                     .order_by('-submission_time'))
         if category == 'errors':
-            map_list = map_list.filter(status=2).exclude(resultmsg='ok')
+            jobs = jobs.filter(status=2).exclude(resultmsg='ok')
         elif category == 'queue' and extra is not None:
-            map_list = map_list.filter(queue=extra)
+            jobs = jobs.filter(queue=extra)
 
-    paginator = Paginator(map_list, www.settings.ITEMS_PER_PAGE)
+    paginator = Paginator(jobs, www.settings.ITEMS_PER_PAGE)
 
     try:
         try:
@@ -77,7 +77,7 @@ def maps(request, category=None, extra=None):
     except (EmptyPage, InvalidPage):
         maps = paginator.page(paginator.num_pages)
 
-    return render(request, 'maposmatic/maps.html',
+    return render(request, 'maposmatic/map_list.html',
                               { 'maps':      maps,
                                 'form':      form,
                                 'category':  category,

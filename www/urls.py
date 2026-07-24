@@ -49,11 +49,11 @@ urlpatterns = [
     re_path(r'^reedit/$',                                      views.reedit,                   name = 'reedit'),
     re_path(r'^cancel/$',                                      views.cancel,                   name = 'cancel'),
 
-    re_path(r'^maps/(?P<id>\d+)/(?P<nonce>[A-Za-z0-9]{16})$',     views.map_full,                 name = 'map-by-id-and-nonce'),
-    re_path(r'^maps/(?P<id>\d+)[/]?$',                         views.map_full,                 name = 'map-by-id'),
-    re_path(r'^maps/(?P<category>[a-z]+)$',                    views.maps,                     name = 'maps-list-cagetory'),
-    re_path(r'^maps/(?P<category>[a-z]+)/(?P<extra>[a-z-]+)$', views.maps,                     name = 'maps-list-cagetory-extra'),
-    re_path(r'^maps/$',                                        views.maps,                     name = 'maps'),
+    re_path(r'^maps/(?P<id>\d+)/(?P<nonce>[A-Za-z0-9]{16})$',     views.map_detail,               name = 'map-by-id-and-nonce'),
+    re_path(r'^maps/(?P<id>\d+)[/]?$',                         views.map_detail,               name = 'map-by-id'),
+    re_path(r'^maps/(?P<category>[a-z]+)$',                    views.map_list,                 name = 'maps-list-cagetory'),
+    re_path(r'^maps/(?P<category>[a-z]+)/(?P<extra>[a-z-]+)$', views.map_list,                 name = 'maps-list-cagetory-extra'),
+    re_path(r'^maps/$',                                        views.map_list,                 name = 'maps'),
 
     re_path(r'^about/api/$',                                   views.documentation_api,        name = 'documentation_api'),
     re_path(r'^about/user-guide/$',                            views.documentation_user_guide, name = 'documentation_user_guide'),

@@ -31,7 +31,7 @@ from django.shortcuts import get_object_or_404, render
 import www.settings
 from www.maposmatic import helpers, forms, models
 
-def map_full(request, id, nonce=None):
+def map_detail(request, id, nonce=None):
     """The full-page map details page.
 
     Args:
@@ -65,7 +65,7 @@ def map_full(request, id, nonce=None):
     refresh = (www.settings.REFRESH_JOB_RENDERING if job.is_rendering()
           else www.settings.REFRESH_JOB_WAITING)
 
-    return render(request, 'maposmatic/map-full.html',
+    return render(request, 'maposmatic/map_detail.html',
                               { 'map':        job,
                                 'redirected': isredirected,
                                 'nonce':      nonce,

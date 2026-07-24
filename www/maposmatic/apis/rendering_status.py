@@ -52,7 +52,7 @@ def api_rendering_status(request, id, nonce=None):
         www.settings.REFRESH_JOB_RENDERING or \
         www.settings.REFRESH_JOB_WAITING
 
-    return render(request, 'maposmatic/map-full-parts/rendering-status.html',
+    return render(request, 'maposmatic/map_detail_parts/rendering-status.html',
                               { 'map':        job,
                                 'redirected': isredirected,
                                 'nonce':      nonce,

@@ -23,6 +23,17 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Django settings for www project.
+#
+# This file provides defaults for (almost) every setting. settings_local.py
+# (and settings_bounds.py) hold the actual per-deployment/local values and
+# are imported *last*, on purpose, so that anything a local install sets
+# there overrides the default defined here rather than the other way
+# around. A handful of settings have no sensible generic default at all
+# (e.g. OCITYSMAP_PATH, ADMINS, DATABASES, SECRET_KEY-less-fallback...) and
+# only ever come from settings_local.py; the few defaults below that need
+# one of those values early (before the local import has happened) reach
+# it explicitly via the `_local` module reference instead of relying on
+# import-order luck.
 
 import logging
 import os.path
@@ -35,17 +46,11 @@ cache_lock = threading.Lock()
 
 from django.utils.translation import gettext_lazy as _
 
-from .settings_local import *
-try:
-  from .settings_bounds import *
-except ModuleNotFoundError:
-  pass
-
-from . import logconfig
+from . import settings_local as _local
 
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
-MANAGERS = ADMINS
+MANAGERS = _local.ADMINS
 
 # needed starting with Django 3.2 to silence warnings
 # see also e.g. https://koenwoortman.com/python-django-auto-created-primary-key-used-when-not-defining-primary-key-type/
@@ -88,7 +93,7 @@ TEMPLATES = [
         'DIRS': [
             os.path.join(PROJECT_PATH, 'templates'),
             os.path.join(PROJECT_PATH, 'maposmatic/templates'),
-            OCITYSMAP_PATH,
+            _local.OCITYSMAP_PATH,
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -200,7 +205,7 @@ LANGUAGE_FLAGS = {
 
 LOCALE_PATHS = [
     os.path.join(PROJECT_PATH, 'locale'),
-    os.path.join(OCITYSMAP_PATH, 'locale'),
+    os.path.join(_local.OCITYSMAP_PATH, 'locale'),
 ]
 
 # Associate a Django language code with:
@@ -351,14 +356,6 @@ def is_daemon_running(queue_name=None):
         check=False,
     ).returncode == 0
 
-# Logging
-logconfig.setup_maposmatic_logging(
-        int(os.environ.get("MAPOSMATIC_LOG_LEVEL",
-                           DEFAULT_MAPOSMATIC_LOG_LEVEL)),
-        os.environ.get('MAPOSMATIC_LOG_FILE', DEFAULT_MAPOSMATIC_LOG_FILE),
-        os.environ.get("MAPOSMATIC_LOG_FORMAT", DEFAULT_MAPOSMATIC_LOG_FORMAT))
-LOG = logging.getLogger('maposmatic')
-
 # File upload settings
 # make sure files and dirs are group-writable
 # render user should be in www-data group to be able to clean up
@@ -372,3 +369,23 @@ MAINTENANCE_MODE = False  # True or False, *NOT* None
 MAINTENANCE_MODE_IGNORE_IP_ADDRESSES = ('127.0.0.1')
 MAINTENANCE_MODE_TEMPLATE = '503.html'
 
+# Everything above this point is a default. From here on, local settings
+# are imported and take precedence over any of the above, and then
+# anything that needs the final, merged settings (e.g. logging setup,
+# which needs the local DEFAULT_MAPOSMATIC_LOG_* values) can run.
+
+from .settings_local import *
+try:
+  from .settings_bounds import *
+except ModuleNotFoundError:
+  pass
+
+from . import logconfig
+
+# Logging
+logconfig.setup_maposmatic_logging(
+        int(os.environ.get("MAPOSMATIC_LOG_LEVEL",
+                           DEFAULT_MAPOSMATIC_LOG_LEVEL)),
+        os.environ.get('MAPOSMATIC_LOG_FILE', DEFAULT_MAPOSMATIC_LOG_FILE),
+        os.environ.get("MAPOSMATIC_LOG_FORMAT", DEFAULT_MAPOSMATIC_LOG_FORMAT))
+LOG = logging.getLogger('maposmatic')

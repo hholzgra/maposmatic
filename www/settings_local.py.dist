@@ -165,12 +165,6 @@ MEDIA_ROOT = '/home/media/media.lawrence.com/'
 # e.g.   PAYPAL_ID = 'YQPBAUM3JW8T2'  # original MapOSMatic doation ID
 PAYPAL_ID = ''
 
-# Piwik base URL - enable tracking if set
-# exclude http:/https:, this will be added dynamically
-# example: PIWIK_BASE_URL = '//stats.maposmatic.org/piwik/'
-
-PIWIK_BASE_URL = ''
-
 # how long to store the submitter IP address in the database
 # value in hours, 0 for no storage at all, -1 for unlimited
 # storage without purging

@@ -251,7 +251,6 @@ def all(request):
         'MAX_BOUNDING_BOX':              www.settings.MAX_BOUNDING_BOX,
         'OUTER_BOUNDS_JSON':             www.settings.MAX_BOUNDING_OUTER,
         'PAYPAL_ID':                     www.settings.PAYPAL_ID,
-        'PIWIK_BASE_URL':                www.settings.PIWIK_BASE_URL,
         'SUBMITTER_IP_LIFETIME':         www.settings.SUBMITTER_IP_LIFETIME,
         'SUBMITTER_MAIL_LIFETIME':       www.settings.SUBMITTER_MAIL_LIFETIME,
         'WEBLATE_BASE_URL':              www.settings.WEBLATE_BASE_URL,

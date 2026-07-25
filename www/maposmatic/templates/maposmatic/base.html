@@ -249,24 +249,5 @@
       });
       {% block extrajs %}{% endblock %}
     </script>
-
-    {% if PIWIK__BASE_URL %}
-    <!-- Piwik statistics -->
-    <script type="text/javascript">
-      var pkBaseURL = document.location.protocol + '{{ PIWIK_BASE_URL }}';
-      document.write(unescape("%3Cscript src='" + pkBaseURL
-            + "piwik.js' type='text/javascript'%3E%3C/script%3E"));
-    </script><script type="text/javascript">
-      try {
-        var piwikTracker = Piwik.getTracker(pkBaseURL + "piwik.php", {% if DEBUG %}3{% else %}2{% endif %});
-        piwikTracker.trackPageView();
-        piwikTracker.enableLinkTracking();
-      } catch (err) {}
-    </script>
-    <noscript>
-      <img src="{{ PIWIK_BASE_URL }}?idsite={% if DEBUG %}3{% else %}2{% endif %}" />
-    </noscript>
-    <!-- End Piwik Tag -->
-    {% endif %}
   </body>
 </html>

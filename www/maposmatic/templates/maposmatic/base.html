@@ -27,7 +27,6 @@
 {% load i18n %}
 {% load l10n %}
 {% load extratags %}
-{% load cookielaw_tags%}
 
 <!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE }}"{% if LANGUAGE_BIDI %} dir="rtl"{% endif %}>
@@ -81,9 +80,6 @@
 
     <link rel="stylesheet" href="/media/css/maposmatic.css" />
 
-    <link rel="stylesheet" href="/media/cookielaw/css/cookielaw.css" />
-    <script src="/media/cookielaw/js/eu_cookie_compliance.min.js"></script>
-
     <style>
       {% block extracss %}{% endblock %}
     </style>
@@ -94,7 +90,6 @@
     {% include "./base-parts/navbar.html" %}
 
     <div class="container" style="margin-top: 5em;">
-      {% cookielaw_banner %}
 
       {% if MAINTENANCE_NOTICE %}
       <div class="alert alert-danger">

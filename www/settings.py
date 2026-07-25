@@ -131,7 +131,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'cookielaw',
     'maintenance_mode',
     'www.maposmatic',
 )

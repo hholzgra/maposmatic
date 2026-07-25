@@ -37,6 +37,7 @@ from django.forms.models import model_to_dict
 from django.core.exceptions import ValidationError
 from django.core.files import File
 from django.core.files.base import ContentFile
+from django.views.decorators.csrf import csrf_exempt
 
 import ocitysmap
 
@@ -533,6 +534,7 @@ def _process_poi_file(file):
     return result
 
 
+@csrf_exempt  # programmatic API for external clients that cannot carry a CSRF token
 def jobs(request, job_id=False):
     """API handler for external rendering requests"""
 

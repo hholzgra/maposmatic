@@ -88,6 +88,7 @@
 
       {% if not map.needs_waiting %}
       <form method="post" action="{% url "recreate" %}" style="display: inline;">
+        {% csrf_token %}
         <input type="hidden" name="id" value="{{ map.id }}" />
 	<button class="btn btn-primary tooltipped" align="right"
                 title="{% trans "Recreate map" %}"
@@ -96,6 +97,7 @@
 	</button>
       </form>
       <form method="post" action="{% url "reedit" %}" style="display: inline">
+        {% csrf_token %}
         <input type="hidden" name="id" value="{{ map.id }}" />
 	<button class="btn btn-primary tooltipped" align="right"
                 title="{% trans "Reedit map" %}"
@@ -160,6 +162,7 @@
         {% if nonce == map.nonce %}
           <div style="height: 2em"></div>
           <form method="post" action="{% url "cancel" %}">
+            {% csrf_token %}
             <input type="hidden" name="id" value="{{ map.id }}" />
             <input type="hidden" name="nonce" value="{{ map.nonce }}" />
             <button type="submit" class="btn btn-lg btn-danger tooltipped"

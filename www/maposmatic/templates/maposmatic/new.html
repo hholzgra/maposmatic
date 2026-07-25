@@ -92,6 +92,7 @@ new bootstrap.Modal(document.getElementById('error-modal')).show()
 {% include "./new-parts/step-bar.html" %}
 
 <form id="mainfrm" method="post" enctype="multipart/form-data" onkeydown="return event.key != 'Enter';" action="{% url "new" %}#submitmapform">
+  {% csrf_token %}
   {{ form.mode }}
 
   <div class="row" style="margin-top: 30px;" >

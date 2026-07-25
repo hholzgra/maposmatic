@@ -207,6 +207,7 @@
 	</div>
 	<div class="col-6">
 	  <form method="post" action="{% url "recreate" %}" style="display: inline;">
+	    {% csrf_token %}
 	    <input type="hidden" name="id" value="{{ map.id }}" />
 	    <button class="btn btn-primary tooltipped"
 		    title="{% trans "Recreate map" %}"
@@ -215,6 +216,7 @@
 	    </button>
 	  </form>
 	  <form class="float-end" method="post" action="{% url "reedit" %}" style="display: inline;">
+	    {% csrf_token %}
 	    <input type="hidden" name="id" value="{{ map.id }}" />
 	    <button class="btn btn-primary tooltipped"
 		    title="{% trans "Reedit map" %}"

@@ -130,6 +130,31 @@
     <script type="text/javascript">
       var locationFilter = null;
 
+      // Send Django's CSRF token along with same-origin, state-changing
+      // AJAX requests (jQuery). The token is read from the csrftoken cookie
+      // that Django sets on any page rendering {% templatetag openblock %} csrf_token {% templatetag closeblock %}.
+      function getCookie(name) {
+        var value = null;
+        if (document.cookie && document.cookie !== '') {
+          var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              value = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+          }
+        }
+        return value;
+      }
+      $.ajaxSetup({
+        beforeSend: function(xhr, settings) {
+          if (!/^(GET|HEAD|OPTIONS|TRACE)$/.test(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+          }
+        }
+      });
+
       // Set focus to the search field
       $('#id_query').focus();
 

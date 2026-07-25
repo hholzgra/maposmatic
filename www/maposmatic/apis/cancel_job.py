@@ -24,6 +24,7 @@ import json
 from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import get_object_or_404
 from django.forms.models import model_to_dict
+from django.views.decorators.csrf import csrf_exempt
 
 import ocitysmap
 
@@ -31,6 +32,7 @@ import www.settings
 from www.maposmatic import helpers, forms, models
 
 
+@csrf_exempt  # programmatic API for external clients that cannot carry a CSRF token
 def cancel_job(request):
     """API handler for canceling rendering requests"""
 

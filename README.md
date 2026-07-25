@@ -31,6 +31,27 @@ Installation
 
 Please refer to the [``INSTALL``](INSTALL.md) file in this repository.
 
+Running tests
+-------------
+
+The automated test suite runs against a dedicated, self-contained test
+settings module (``www/settings_test.py``) that uses throwaway in-memory
+SQLite databases, so it needs neither PostgreSQL nor any external service:
+
+```bash
+   ./manage.py test www.maposmatic --settings=www.settings_test
+```
+
+Like the normal settings, the test settings still expect a
+``www/settings_local.py`` to exist, but none of its values matter for the
+tests. In a fresh checkout (or CI) create one from the template first:
+
+```bash
+   cp www/settings_local.py.dist www/settings_local.py
+```
+
+Tests live in ``www/maposmatic/tests/``.
+
 End user and API documentation
 ------------------------------
 

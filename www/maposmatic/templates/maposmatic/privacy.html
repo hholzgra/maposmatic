@@ -120,32 +120,17 @@
 </p>
 
 <dl>
-  <dt><tt class="badge text-bg-secondary">cookielaw_accepted</tt></dt>
+  <dt><tt class="badge text-bg-secondary">csrftoken</tt></dt>
   <dd>
     <p>
       {% blocktrans %}
-      This cooke gets created as soon as you click
-      <span class="badge text-bg-success">Accept</span>
-      on the cookie warning. After this you will not
-      see that warning again on this browser until
-      the cookie gets deleted by you, or expires after
-      ten years.
+      This cookie holds a security token that protects the
+      site's forms against cross-site request forgery (CSRF).
+      It is required for the map creation, recreate, reedit
+      and cancel forms to work correctly. It does not contain
+      any personal information and does not track you in any way.
       {% endblocktrans %}
     </p>
-    <p>
-      {% blocktrans %}
-      The cookie only stores a fixed valie of "1" to
-      remember your acceptance.
-      {% endblocktrans %}
-    </p>
-    <p>
-      {% blocktrans %}
-      If you do not accept this cookie the cookie
-      warning block will appear every time you load
-      a new page from the site, but it will not otherwise
-      affect functionality of the site apart from the
-      screen space taken.
-      {% endblocktrans %}
   </dd>
   <dt><tt class="badge text-bg-secondary">sessionid</tt></dt>
   <dd>

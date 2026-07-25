@@ -369,6 +369,26 @@ MAINTENANCE_MODE = False  # True or False, *NOT* None
 MAINTENANCE_MODE_IGNORE_IP_ADDRESSES = ('127.0.0.1')
 MAINTENANCE_MODE_TEMPLATE = '503.html'
 
+# Content-Security-Policy: external origins the browser is allowed to load
+# images from, on top of the site's own ('self') and inline "data:" images.
+# Everything else (scripts, styles, fonts, ...) stays local-only. These two
+# lists are merged into the img-src directive; add further entries in
+# settings_local.py as needed. A "*" wildcard is allowed for the sub-domain
+# part, which is needed for OpenStreetMap's a./b./c. tile servers.
+
+# Map tile servers.
+MAP_TILE_SOURCES = [
+    'https://*.tile.openstreetmap.org/', # OSM default tiles
+    'https://mymapnik.rudzick.it/',      # "Baumkarte" tiles
+]
+
+# Other, non-tile external images (e.g. the PayPal donation button pixel
+# rendered when PAYPAL_ID is set). Kept separate from the map tile servers
+# so both can evolve independently.
+EXTERNAL_IMAGE_SOURCES = [
+    'https://www.paypalobjects.com/',
+]
+
 # Everything above this point is a default. From here on, local settings
 # are imported and take precedence over any of the above, and then
 # anything that needs the final, merged settings (e.g. logging setup,

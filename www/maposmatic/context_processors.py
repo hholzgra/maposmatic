@@ -174,6 +174,26 @@ def queues_overall_symbol():
 def _lag_ok(last_update, max_lag = 1800):
     return last_update and datetime.datetime.now(datetime.UTC) - last_update < datetime.timedelta(seconds = max_lag)
 
+def content_security_policy():
+    """Build the Content-Security-Policy value rendered as a <meta> tag in
+    the page <head>. Everything is restricted to the site's own origin, with
+    the sole exception of external images, whose (configurable) origins come
+    from the MAP_TILE_SOURCES and EXTERNAL_IMAGE_SOURCES settings. Inline
+    scripts, event handlers and styles are used throughout the templates, so
+    'unsafe-inline' is required for script-src/style-src; this policy
+    therefore restricts resource *origins* but does not (yet) guard against
+    inline injection."""
+    img_src = (["'self'", "data:"]
+               + list(www.settings.MAP_TILE_SOURCES)
+               + list(www.settings.EXTERNAL_IMAGE_SOURCES))
+    directives = [
+        "default-src 'self'",
+        "img-src %s" % " ".join(img_src),
+        "script-src 'self' 'unsafe-inline'",
+        "style-src 'self' 'unsafe-inline'",
+    ]
+    return "; ".join(directives)
+
 def all(request):
     # Do not add the useless overhead of parsing blog entries when generating
     # the rss feed
@@ -219,6 +239,7 @@ def all(request):
         'BRAND_NAME':                    www.settings.BRAND_NAME,
         'CONTACT_CHAT':                  www.settings.CONTACT_CHAT,
         'CONTACT_EMAIL':                 www.settings.CONTACT_EMAIL,
+        'CONTENT_SECURITY_POLICY':       content_security_policy(),
         'DEBUG':                         www.settings.DEBUG,
         'EXTRA_FOOTER':                  www.settings.EXTRA_FOOTER,
         'GIT_BRANCH':                    git_branch,

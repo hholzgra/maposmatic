@@ -34,6 +34,7 @@
   <head>
     <title>{{BRAND_NAME}}{% if DEBUG %} [DEV: {{GIT_BRANCH}}]{% endif %}: {% block title %}Welcome!{% endblock %}</title>
     <meta charset="utf-8" />
+    {% if CONTENT_SECURITY_POLICY %}<meta http-equiv="Content-Security-Policy" content="{{ CONTENT_SECURITY_POLICY }}" />{% endif %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <link rel="shortcut icon" href="/media/img/favicon.png" />

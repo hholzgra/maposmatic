@@ -4,43 +4,45 @@ INSTALLATION NOTES
 Dependencies
 ------------
 
-MapOSMatic depends on :
-
- * Python, the programming language.
+MapOSMatic requires **Python 3.13** and depends on:
 
  * OCitySMap, the rendering pipeline for MapOSMatic. See OCitySMap's
-   install file for installation instructions and OCitySMap's
-   dependencies.
+   install file for installation instructions and its own (much larger,
+   GIS-heavy) set of dependencies. MapOSMatic and OCitySMap are installed
+   into the *same* Python virtualenv.
 
- * Django, the Web framework used to develop the Web front-end, but
-   also used for the maposmaticd daemon to conveniently access the
-   database through Django's ORM.
+ * A set of Python packages, pinned in the ``requirements.txt`` file in
+   this repository. Notable entries: Django (web framework, also used by
+   the rendering daemon for ORM access to the database), psycopg2
+   (PostgreSQL access), Django Cookie Law (EU cookie-consent compliance),
+   Pillow (PNG map rendering), feedparser (blog feed on the front page),
+   plus GitPython, gpxpy, requests, python-slugify, cachetools,
+   django-ipware and django-multiupload.
 
- * The Django Cookie Law application for compliance with EU cookie
-   regulations
+ * A few non-Python system tools: ``gettext`` (internationalization),
+   ``ImageMagick`` (its ``montage`` tool renders multi-page map
+   thumbnails), and a working PostgreSQL/PostGIS installation.
 
- * python-psycopg2, to let Django access the PostgreSQL database.
+Install the system tools and the build prerequisites for psycopg2
+(which is built from source, so it needs libpq and a C compiler):
 
- * python-feedparser, to parse the MapOSMatic blog feed and display
-   the latest entries on the main MapOSMatic website.
+```bash
+   sudo apt-get install gettext imagemagick \
+                        postgresql postgis \
+                        libpq-dev gcc python3-dev
+```
 
- * python-imaging, to render PNG maps.
+Then create the virtualenv and install the pinned Python packages:
 
- * gettext, for internationalization.
+```bash
+   python3 -m venv --system-site-packages /home/maposmatic
+   /home/maposmatic/bin/pip install -r requirements.txt
+```
 
- * JSON (any python-*json package should work).
-
- * ImageMagick, for rendering the thumbnails of multi-page maps.
-
-On an Debian/Ubuntu installation, the following should be sufficient
-to fullfil all basic MapOSMatic dependencies:
-
-  sudo aptitude install python-django python-psycopg2 \
-          python-feedparser python-imaging gettext imagemagick
-
-You will also most likely need a working PostGIS installation for the
-entire pipeline to run. See the INSTALL documentation of OcitySMap for
-more details.
+The ``--system-site-packages`` flag lets the venv reuse system-provided
+GIS Python bindings (e.g. python3-mapnik) that OCitySMap needs. See the
+INSTALL documentation of OCitySMap for the full PostGIS / data import
+setup, which the entire pipeline relies on.
 
 Setup
 -----

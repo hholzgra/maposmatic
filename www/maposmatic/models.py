@@ -142,18 +142,18 @@ class MapRenderingJob(models.Model):
         if self._files_prefix is None:
             if self.file_prefix:
                 self._files_prefix = self.file_prefix
+            elif self.startofrendering_time is None:
+                # not started rendering yet: no dated path available
+                self._files_prefix = "%06d_%s" % \
+                    (self.id,
+                     self.maptitle_computized())
             else:
-                try:
-                    ts = self.startofrendering_time.astimezone(timezone.utc);
-                    self._files_prefix = "%s/%06d_%s_%s" % \
-                        (ts.strftime("%Y/%m/%d"),
-                         self.id,
-                         ts.strftime("%Y-%m-%d_%H-%M"),
-                         self.maptitle_computized())
-                except Exception:
-                    self._files_prefix = "%06d_%s" % \
-                        (self.id,
-                         self.maptitle_computized())
+                ts = self.startofrendering_time.astimezone(timezone.utc)
+                self._files_prefix = "%s/%06d_%s_%s" % \
+                    (ts.strftime("%Y/%m/%d"),
+                     self.id,
+                     ts.strftime("%Y-%m-%d_%H-%M"),
+                     self.maptitle_computized())
         return self._files_prefix
 
     def start_rendering(self):

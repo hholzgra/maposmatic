@@ -30,7 +30,7 @@ import threading
 import time
 from functools import reduce
 import glob
-from datetime import datetime
+from datetime import datetime, timezone
 
 import django
 django.setup()
@@ -273,14 +273,14 @@ class RenderingsGarbageCollector:
 
 
         LOG.info("Cleanup remove old upload files")
-        files = UploadFile.objects.filter(keep_until__lte = datetime.now(), deleted_on__isnull = True)
+        files = UploadFile.objects.filter(keep_until__lte = datetime.now(timezone.utc), deleted_on__isnull = True)
 
         for file in files:
             file_real_path = os.path.join(MEDIA_ROOT, str(file.uploaded_file))
             LOG.debug("Cleanup: removing %s" % file_real_path)
             try:
                 os.remove(file_real_path)
-                file.deleted_on = datetime.now()
+                file.deleted_on = datetime.now(timezone.utc)
                 file.save(update_fields=["deleted_on"])
             except Exception:
                 LOG.exception("Remove of uploaded file '%s' failed: " % str(file.uploaded_file))

@@ -15,17 +15,7 @@ from django.test import TestCase
 import www.settings
 from www.maposmatic.models import MapRenderingJob
 
-
-def make_job(**kwargs):
-    """Create and persist a MapRenderingJob with sensible required-field
-    defaults; override any field via kwargs."""
-    defaults = dict(
-        maptitle="Test Map", stylesheet="MapnikOSM", layout="plain",
-        paper_width_mm=210, paper_height_mm=297,
-        status=0, index_queue_at_submission=0, queue="default",
-    )
-    defaults.update(kwargs)
-    return MapRenderingJob.objects.create(**defaults)
+from .base import make_job
 
 
 class StateMachineTest(TestCase):

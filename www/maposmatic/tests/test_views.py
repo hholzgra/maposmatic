@@ -9,7 +9,7 @@
 
 from www.maposmatic.models import MapRenderingJob
 
-from .base import RenderedViewTestCase, make_job
+from .base import RenderedViewTestCase, OcitysmapMockMixin, make_job
 
 NONCE = "0123456789abcdef"   # 16 hex chars, matches the URL nonce pattern
 
@@ -90,3 +90,17 @@ class RecreateViewTest(RenderedViewTestCase):
 
     def test_recreate_get_is_bad_request(self):
         self.assertEqual(self.client.get("/recreate/").status_code, 400)
+
+
+# --- Views that build an OCitySMap instance (wizard form population) ---
+
+class NewViewTest(OcitysmapMockMixin, RenderedViewTestCase):
+    def test_new_page_renders(self):
+        self.assertEqual(self.client.get("/new/").status_code, 200)
+
+
+class ReeditViewTest(OcitysmapMockMixin, RenderedViewTestCase):
+    def test_reedit_renders_prefilled_form(self):
+        job = make_job(status=2)
+        response = self.client.post("/reedit/", {"id": job.id})
+        self.assertEqual(response.status_code, 200)

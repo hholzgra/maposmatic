@@ -11,6 +11,8 @@ from django.test import SimpleTestCase
 
 from www.maposmatic import forms
 
+from .base import OcitysmapMockMixin
+
 
 class MapSearchFormTest(SimpleTestCase):
     def test_valid_query(self):
@@ -47,3 +49,15 @@ class MapRecreateFormTest(SimpleTestCase):
 
     def test_id_is_required(self):
         self.assertFalse(forms.MapRecreateForm({}).is_valid())
+
+
+class MapRenderingJobFormTest(OcitysmapMockMixin, SimpleTestCase):
+    """The submission form builds an OCitySMap instance in __init__ to populate
+    its choice fields, so it needs the ocitysmap mock."""
+
+    def test_choices_are_populated_from_ocitysmap(self):
+        form = forms.MapRenderingJobForm()
+        layout_names = [choice[0] for choice in form.fields["layout"].choices]
+        self.assertIn("plain", layout_names)
+        self.assertEqual(form.fields["layout"].initial, "plain")
+        self.assertEqual(form.fields["stylesheet"].initial, "MapnikOSM")

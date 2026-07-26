@@ -13,7 +13,7 @@ import json
 
 from django.test import TestCase
 
-from .base import make_job
+from .base import make_job, OcitysmapMockMixin
 
 NONCE = "0123456789abcdef"
 
@@ -81,3 +81,34 @@ class CancelJobApiTest(TestCase):
 
     def test_unknown_id_is_404(self):
         self.assertEqual(self._post({"id": 999999, "nonce": "x"}).status_code, 404)
+
+
+# --- Config endpoints (these build an OCitySMap instance, hence the mock) ---
+
+class PaperFormatsApiTest(OcitysmapMockMixin, TestCase):
+    def test_returns_paper_sizes_with_dimensions(self):
+        data = json.loads(self.client.get("/apis/paper_formats").content)
+        self.assertEqual(data["Din A4"], {"width": 210, "height": 297})
+        self.assertNotIn("Best fit", data)   # entries without dimensions dropped
+
+
+class LayoutsApiTest(OcitysmapMockMixin, TestCase):
+    def test_lists_renderers_with_description_and_preview(self):
+        data = json.loads(self.client.get("/apis/layouts").content)
+        self.assertIn("plain", data)
+        self.assertEqual(data["plain"]["description"],
+                         "Full-page map without index")
+        self.assertIn("preview_url", data["plain"])
+
+
+class StylesApiTest(OcitysmapMockMixin, TestCase):
+    def test_lists_styles_with_preview(self):
+        data = json.loads(self.client.get("/apis/styles").content)
+        self.assertIn("MapnikOSM", data)
+        self.assertIn("preview_url", data["MapnikOSM"])
+
+
+class OverlaysApiTest(OcitysmapMockMixin, TestCase):
+    def test_lists_overlays(self):
+        data = json.loads(self.client.get("/apis/overlays").content)
+        self.assertIn("Contour", data)

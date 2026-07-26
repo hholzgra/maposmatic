@@ -39,6 +39,15 @@ DATABASES = {
     "waymarked": dict(_SQLITE),
 }
 
+# Build the schema for the maposmatic app directly from the current models
+# (run_syncdb) instead of replaying its migration history. Several historical
+# migrations contain PostgreSQL-only raw SQL (e.g. `UPDATE ... FROM` with a
+# table alias in 0026) that SQLite cannot parse, and replaying Postgres SQL on
+# SQLite would not be a meaningful test anyway. Django's own apps keep their
+# migrations. Migration-specific logic (e.g. the 0038 file_prefix backfill) is
+# covered by testing its functions directly instead.
+MIGRATION_MODULES = {"maposmatic": None}
+
 # Never fetch the blog feed over the network while rendering templates.
 FRONT_PAGE_FEED = ""
 

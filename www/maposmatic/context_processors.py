@@ -66,8 +66,8 @@ def get_osm_database_last_update(dbname='osm'):
         return (last_update[0].replace(tzinfo=datetime.UTC)
                 if last_update[0].tzinfo is None
                 else last_update[0].astimezone(datetime.UTC))
-    except Exception:
-        pass
+    except Exception as e:
+        LOG.warning("could not read last update from '%s' database: %s", dbname, e)
     finally:
         # Close the DB cursor if necessary
         if cursor is not None and not cursor.closed:
@@ -94,8 +94,8 @@ def get_waymarked_database_last_update():
         return (last_update[0].replace(tzinfo=datetime.UTC)
                 if last_update[0].tzinfo is None
                 else last_update[0].astimezone(datetime.UTC))
-    except Exception:
-        pass
+    except Exception as e:
+        LOG.warning("could not read last update from waymarked database: %s", e)
     finally:
         # Close the DB cursor if necessary
         if cursor is not None and not cursor.closed:
@@ -117,8 +117,8 @@ def get_osmnames_table_ok():
             return False
 
         return True
-    except Exception:
-        pass
+    except Exception as e:
+        LOG.warning("could not query osmnames 'place' table: %s", e)
     finally:
         # Close the DB cursor if necessary
         if cursor is not None and not cursor.closed:

@@ -195,12 +195,9 @@ class MapRenderingJobForm(forms.ModelForm):
         layout        = data.get("layout")
         indexer       = data.get("indexer")
         stylesheet    = data.get("stylesheet")
-        overlay_array = []
-        try:
-            for overlay in data.get("overlay"):
-                overlay_array.append(overlay)
-        except Exception:
-            pass
+        # overlay is a MultipleChoiceField; its cleaned value is a list, or
+        # None when the field is absent from the submission
+        overlay_array = data.get("overlay") or []
         overlay = ",".join(overlay_array)
 
         if layout == '':

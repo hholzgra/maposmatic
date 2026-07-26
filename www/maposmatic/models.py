@@ -271,7 +271,7 @@ class MapRenderingJob(models.Model):
 
     def cancel(self):
         self.status = 4
-        self.endofrendering_time = datetime.now()
+        self.endofrendering_time = datetime.now(timezone.utc)
         self.resultmsg = 'rendering cancelled'
         self.save()
 

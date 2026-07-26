@@ -1,0 +1,8 @@
+# MapOSMatic development / CI tooling. Not required at runtime.
+#
+# Install into the same virtualenv as requirements.txt:
+#     pip install -r requirements-dev.txt
+# Then enable the git hooks (runs the test suite before each commit):
+#     pre-commit install
+
+pre-commit==4.6.1

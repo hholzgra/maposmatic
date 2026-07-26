@@ -52,6 +52,22 @@ tests. In a fresh checkout (or CI) create one from the template first:
 
 Tests live in ``www/maposmatic/tests/``.
 
+Pre-commit hook
+---------------
+
+The test suite can be run automatically before every commit via the
+[pre-commit](https://pre-commit.com/) framework (configured in
+``.pre-commit-config.yaml``). Enable it once per clone, from within the
+activated virtualenv:
+
+```bash
+   pip install -r requirements-dev.txt
+   pre-commit install
+```
+
+Afterwards ``git commit`` runs the test suite first and aborts the commit if
+any test fails. Bypass a single commit with ``git commit --no-verify``.
+
 End user and API documentation
 ------------------------------
 

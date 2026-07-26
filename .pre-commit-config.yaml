@@ -1,0 +1,17 @@
+# Pre-commit hooks for MapOSMatic.
+#
+# One-time setup per clone, from within the activated virtualenv:
+#     pip install -r requirements-dev.txt
+#     pre-commit install
+#
+# Thereafter every `git commit` runs the test suite and aborts on failure.
+# Bypass a single commit with `git commit --no-verify`.
+repos:
+  - repo: local
+    hooks:
+      - id: maposmatic-tests
+        name: maposmatic test suite
+        entry: python3 manage.py test www.maposmatic --settings=www.settings_test
+        language: system
+        pass_filenames: false
+        always_run: true

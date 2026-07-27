@@ -85,4 +85,4 @@ class ErrorFeed(Feed):
             return (-180.0, 90.0, 180.0, -90.0)
 
     def item_pubdate(self, item):
-        return item.startofrendering_time;
+        return item.startofrendering_time

@@ -152,7 +152,7 @@ class MapRenderingJobForm(forms.ModelForm):
         grouped_choices = []
         for name, members in style_choices.items():
             grouped_choices.append([name, members])
-        self.fields['stylesheet'].choices = grouped_choices;
+        self.fields['stylesheet'].choices = grouped_choices
 
         if not self.fields['stylesheet'].initial:
             self.fields['stylesheet'].initial = stylesheets[0].name
@@ -174,7 +174,7 @@ class MapRenderingJobForm(forms.ModelForm):
         grouped_choices = []
         for name, members in overlay_choices.items():
             grouped_choices.append([name, members])
-        self.fields['overlay'].choices = grouped_choices;
+        self.fields['overlay'].choices = grouped_choices
 
         if not self.fields['overlay'].initial:
             self.fields['overlay'].initial = ''

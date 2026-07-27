@@ -85,7 +85,7 @@ class MapsFeed(Feed):
                 item.lon_bottom_right, item.lat_bottom_right)
 
     def item_pubdate(self, item):
-        return item.endofrendering_time;
+        return item.endofrendering_time
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

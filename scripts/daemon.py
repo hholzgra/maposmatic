@@ -26,21 +26,24 @@
 import logging
 import os
 import sys
-import threading
 import time
 from functools import reduce
 import glob
 from datetime import datetime, timezone
 
-import django
-django.setup()
+from django import db, setup
 
-from www.maposmatic.models import MapRenderingJob, UploadFile
 from www.settings import RENDERING_RESULT_PATH, RENDERING_RESULT_MAX_SIZE_GB, RENDERING_RESULT_MAX_PURGE_ITERATIONS, MEDIA_ROOT
 
-import render
+# The Django app registry must be populated before any models are imported,
+# so setup() has to run here, between imports. The model/settings/render
+# imports below are therefore intentionally "not at top of file" (flake8
+# E402); do not move them above setup() -- that triggers AppRegistryNotReady.
+setup()
 
-from django import db
+from www.maposmatic.models import MapRenderingJob, UploadFile  # noqa: E402
+
+import render # noqa: 402
 
 LOG = logging.getLogger('maposmatic')
 
@@ -95,14 +98,14 @@ class MapOSMaticDaemon:
                 job = MapRenderingJob.objects.to_render(self.queue_name)[0]
                 self.dispatch(job)
 
-                # check disk space after rendering 
+                # check disk space after rendering
                 try:
                     cleanup.cleanup()
                 except Exception as e:
                     LOG.warning("Cleanup failed: %s" % e)
-            except IndexError: # no pending job found
+            except IndexError:  # no pending job found
                 try:
-                    time.sleep(self.frequency) # wait a bit before checking again
+                    time.sleep(self.frequency)  # wait a bit before checking again
                 except KeyboardInterrupt:
                     break
 
@@ -188,11 +191,11 @@ class RenderingsGarbageCollector:
         for display by get_formatted_value()."""
 
         return 'saved %s, now %s/%s (%d%%)' % \
-                (self.get_formatted_value(saved),
-                 self.get_formatted_value(size),
-                 self.get_formatted_value(threshold),
-                 size*100/threshold
-                 )
+            (self.get_formatted_value(saved),
+             self.get_formatted_value(size),
+             self.get_formatted_value(threshold),
+             size*100/threshold
+             )
 
     def cleanup(self):
         """Run one iteration of the cleanup loop. A sorted list of files from
@@ -202,12 +205,12 @@ class RenderingsGarbageCollector:
         SIZE_GB = 1024 * 1024 * 1024
 
         files = list(map(lambda f: self.get_file_info(f),
-                    [os.path.join(f)
-                        for f in glob.iglob(os.path.join(RENDERING_RESULT_PATH, '**'), recursive=True)
-                        if not (os.path.isdir(f) or
-                                f.startswith('.') or
-                                f.endswith(render.ERROR_SUFFIX) or
-                                f.endswith(render.THUMBNAIL_SUFFIX))]))
+                         [os.path.join(f)
+                          for f in glob.iglob(os.path.join(RENDERING_RESULT_PATH, '**'), recursive=True)
+                          if not (os.path.isdir(f) or
+                                  f.startswith('.') or
+                                  f.endswith(render.ERROR_SUFFIX) or
+                                  f.endswith(render.THUMBNAIL_SUFFIX))]))
 
         # Compute the total size occupied by the renderings, and the actual
         # threshold, in bytes.
@@ -299,6 +302,5 @@ if __name__ == '__main__':
         else:
             daemon = ForkingMapOSMaticDaemon()
         daemon.serve()
-    except Exception as e:
+    except Exception:
         LOG.exception('Fatal error during daemon execution!')
-

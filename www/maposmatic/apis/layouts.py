@@ -16,9 +16,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging
-LOG = logging.getLogger('maposmatic')
-
 import json
 
 from django.http import HttpResponse
@@ -27,9 +24,12 @@ import ocitysmap
 
 import www.settings
 
+import logging
+LOG = logging.getLogger('maposmatic')
+
 def layouts(request):
     result = {}
-    
+
     for renderer in ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH).get_all_renderers():
         result[renderer.name] = { "description": renderer.description,
                                   "preview_url": request.build_absolute_uri('/media/img/layout/'+renderer.name+'.png')
@@ -40,4 +40,3 @@ def layouts(request):
                                             sort_keys = True,
                                             default   = str),
                          content_type='application/json')
-

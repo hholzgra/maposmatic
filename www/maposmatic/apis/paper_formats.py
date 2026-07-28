@@ -16,9 +16,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging
-LOG = logging.getLogger('maposmatic')
-
 import json
 
 from django.http import HttpResponse
@@ -27,9 +24,12 @@ import ocitysmap
 
 import www.settings
 
+import logging
+LOG = logging.getLogger('maposmatic')
+
 def paper_formats(request):
     _ocitysmap = ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH)
-    
+
     result = {}
     for p in _ocitysmap.get_all_paper_sizes():
         if p[1] and p[2]:

@@ -9,9 +9,9 @@ from .extratags import register
 @register.filter()
 def file_basename(value):
     try:
-      return os.path.basename(value.name)
+        return os.path.basename(value.name)
     except Exception:
-      return ""
+        return ""
 
 @register.filter()
 def file_readable_size(value):

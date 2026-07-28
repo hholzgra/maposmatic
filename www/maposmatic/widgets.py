@@ -68,14 +68,13 @@ class AreaWidget(forms.TextInput):
         </div>
         <div id="area-size-alert" class="alert alert-danger">%(alert)s</div>
         """ % {'tl_lat': upper_left_lat, 'tl_lon': upper_left_lon,
-                   'br_lat': lower_right_lat, 'br_lon': lower_right_lon,
-                   'tl_lat_help': _('Latitude of the top left corner'),
-                   'tl_lon_help': _('Longitude of the top left corner'),
-                   'br_lat_help': _('Latitude of the bottom right corner'),
-                   'br_lon_help': _('Longitude of the bottom right corner'),
-                   'alert': alert,
-                   'clear': _('Remove any selected region from the map')
-                  }
+               'br_lat': lower_right_lat, 'br_lon': lower_right_lon,
+               'tl_lat_help': _('Latitude of the top left corner'),
+               'tl_lon_help': _('Longitude of the top left corner'),
+               'br_lat_help': _('Latitude of the bottom right corner'),
+               'br_lon_help': _('Longitude of the bottom right corner'),
+               'alert': alert,
+               }
 
         return mark_safe(tpl)
 
@@ -84,7 +83,7 @@ class AreaWidget(forms.TextInput):
         Return the appropriate values
         """
         return (data['lat_upper_left'], data['lon_upper_left'],
-                 data['lat_bottom_right'], data['lon_bottom_right'])
+                data['lat_bottom_right'], data['lon_bottom_right'])
 
 class AreaField(forms.MultiValueField):
     '''
@@ -99,4 +98,3 @@ class AreaField(forms.MultiValueField):
         if not data_list:
             return None
         return data_list
-

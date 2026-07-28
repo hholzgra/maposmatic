@@ -7,7 +7,7 @@
 # throwaway SQLite test database configured in www.settings_test).
 
 import os
-import re
+
 from datetime import datetime, timezone
 
 from django.test import TestCase

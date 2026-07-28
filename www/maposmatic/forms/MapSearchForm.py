@@ -25,7 +25,7 @@ class MapSearchForm(forms.Form):
     """
 
     query = forms.CharField(min_length=1, required=True,
-                widget=forms.TextInput(attrs=
-                    {'placeholder': _('Search for a map'),
-                     'class':       'form-control',
-                     }))
+                            widget=forms.TextInput(attrs=
+                                                   {'placeholder': _('Search for a map'),
+                                                    'class':       'form-control',
+                                                    }))

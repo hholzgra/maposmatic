@@ -25,7 +25,7 @@
 import os
 import sys
 
-from config import *
+from config import OCITYSMAP_PATH, MAPOSMATIC_LOG, MAPOSMATIC_LVL
 
 if __name__ == '__main__':
     here = os.path.dirname(os.path.abspath(__file__))

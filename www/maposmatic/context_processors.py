@@ -31,7 +31,6 @@ import datetime
 import git
 import os
 
-from .models import MapRenderingJob
 import www.settings
 
 from www.maposmatic import forms, models
@@ -200,10 +199,10 @@ def all(request):
     if request.path == reverse('rss-feed'):
         return {}
 
-    l = django.utils.translation.get_language()
-    if l in www.settings.PAYPAL_LANGUAGES:
-        paypal_lang_code = www.settings.PAYPAL_LANGUAGES[l][0]
-        paypal_country_code = www.settings.PAYPAL_LANGUAGES[l][1]
+    lang = django.utils.translation.get_language()
+    if lang in www.settings.PAYPAL_LANGUAGES:
+        paypal_lang_code = www.settings.PAYPAL_LANGUAGES[lang][0]
+        paypal_country_code = www.settings.PAYPAL_LANGUAGES[lang][1]
     else:
         paypal_lang_code = "en_US"
         paypal_country_code = "US"
@@ -229,7 +228,7 @@ def all(request):
         platform_status = 'hourglass-clock'
 
     try:
-        git_repo = git.Repo(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))) 
+        git_repo = git.Repo(os.path.dirname(os.path.dirname(os.path.dirname(__file__))))
         git_branch = git_repo.active_branch
     except Exception as e:
         git_branch = e

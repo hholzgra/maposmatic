@@ -26,7 +26,7 @@ from django.urls import reverse
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timezone
 import www.settings
 import re
 import os
@@ -115,7 +115,7 @@ class MapRenderingJob(models.Model):
     renderstep = models.CharField(max_length=80,null=True,blank=True)
 
     queue = models.CharField(max_length=40,null=False,blank=False, default='default')
-    
+
     nonce = models.CharField(max_length=NONCE_SIZE, blank=True)
 
     class Meta:
@@ -138,6 +138,7 @@ class MapRenderingJob(models.Model):
         return t
 
     _files_prefix = None
+
     def files_prefix(self):
         if self._files_prefix is None:
             if self.file_prefix:
@@ -190,12 +191,14 @@ class MapRenderingJob(models.Model):
                 self.paper_width_mm != -1 and self.paper_height_mm != -1)
 
     _map_fileurl_base = None
+
     def get_map_fileurl(self, format):
         if self._map_fileurl_base is None:
             self._map_fileurl_base = os.path.join(www.settings.RENDERING_RESULT_URL, self.files_prefix())
         return self._map_fileurl_base + format
 
     _map_filepath_base = None
+
     def get_map_filepath(self, format):
         if self._map_filepath_base is None:
             self._map_filepath_base = os.path.join(www.settings.RENDERING_RESULT_PATH, self.files_prefix() )
@@ -204,10 +207,8 @@ class MapRenderingJob(models.Model):
     def output_files(self):
         """Returns a structured dictionary of the output files for this job.
         The result contains two lists, 'maps' and 'indeces', listing the output
-        files, and two single files for thumbnail and error output. 
+        files, and two single files for thumbnail and error output.
         Each file is reported by a tuple (format, path, title, size)."""
-
-        files_prefix = self.files_prefix()
 
         allfiles = {'maps': {}, 'indeces': {}, 'thumbnail': [], 'errorlog': []}
 
@@ -318,7 +319,7 @@ class MapRenderingJob(models.Model):
         errors = {}
 
         _ocitysmap = ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH)
-       
+
         renderer_names = _ocitysmap.get_all_renderer_names()
         if self.layout not in renderer_names:
             errors['layout'] = ValidationError(_("Invalid layout '%s'" % self.layout), code='invalid')
@@ -330,14 +331,14 @@ class MapRenderingJob(models.Model):
         # TODO Django form passes value in weird ways, check how to correctly do this ....
         if self.overlay is not None:
             LOG.warning("Overlays: %s" % self.overlay)
-            overlay_names = _ocitysmap.get_all_overlay_names()
-            if isinstance (self.overlay, str):
+            if isinstance(self.overlay, str):
                 overlays = self.overlay.split(',')
             else:
-                overlays = self.overlay
+                overlays = self.overlay  # noqa 
 
+# TODO add proper overlays name check
+#            overlay_names = _ocitysmap.get_all_overlay_names()
 #            for test_name in overlays:
-#                LOG.warning("checking overlay '%s'" % test_name)
 #                if test_name not in overlay_names:
 #                    errors['overlay'] = ValidationError(_("Invalid overlay '%s'" % test_name), code='invalid')
 #                    break

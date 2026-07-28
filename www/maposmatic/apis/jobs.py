@@ -16,9 +16,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging
-LOG = logging.getLogger('maposmatic')
-
 from os import path
 
 import json
@@ -29,7 +26,6 @@ import gpxpy.gpx
 
 import requests
 from tempfile import NamedTemporaryFile
-
 
 from django.http import HttpResponse, HttpResponseNotFound, HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404
@@ -42,8 +38,11 @@ from django.views.decorators.csrf import csrf_exempt
 import ocitysmap
 
 import www.settings
-from www.maposmatic import helpers, forms, nominatim, models
+from www.maposmatic import helpers, models
 from .job_stati import _job_stati_dict
+
+import logging
+LOG = logging.getLogger('maposmatic')
 
 def _jobs_get(request, job_id):
     if not job_id:
@@ -96,11 +95,12 @@ def _jobs_get(request, job_id):
         status = 200
 
     return HttpResponse( content=json.dumps(result, indent=4, sort_keys=True, default=str)
-                       , content_type='application/json', status=status)
+                         , content_type='application/json', status=status)
 
 
 
-def _jobs_post(request):
+def _jobs_post(request):  # noqa: C901
+    # TODO function is too complex
     result = { "error": {} }
 
     job = models.MapRenderingJob()
@@ -142,13 +142,13 @@ def _jobs_post(request):
             result['error'][key] = "Unknown parameter '%s'" % key
 
     if 'osmid' in input:
-        job.administrative_osmid= input['osmid']
+        job.administrative_osmid = input['osmid']
     elif 'bbox' in input:
         job.lat_upper_left   = input['bbox'][0]
         job.lon_upper_left   = input['bbox'][3]
         job.lat_bottom_right = input['bbox'][2]
         job.lon_bottom_right = input['bbox'][1]
-    elif 'lat_min' in input and 'lat_max' in input and 'lon_min' in input and 'lon_max' in input: 
+    elif 'lat_min' in input and 'lat_max' in input and 'lon_min' in input and 'lon_max' in input:
         job.lat_upper_left   = input['max_lat']
         job.lon_upper_left   = input['min_lon']
         job.lat_bottom_right = input['min_lat']
@@ -227,11 +227,11 @@ def _jobs_post(request):
         import_urls.append(input['umap_url'])
 
     for import_url in import_urls:
-            try:
-                import_file = _get_remote_file(import_url)
-                import_files.append(import_file)
-            except Exception as e:
-                result['error']['import_url'] = "Can't fetch import_url: %s" % e
+        try:
+            import_file = _get_remote_file(import_url)
+            import_files.append(import_file)
+        except Exception as e:
+            result['error']['import_url'] = "Can't fetch import_url: %s" % e
 
     for import_file in request.FILES:
         import_files.append(request.FILES[import_file])
@@ -416,7 +416,7 @@ def _process_umap_file(file):
 
         # make sure we have a 'layers' list, there is none if Umap /geojson
         # URL scheme was used ...
-        if not 'layers' in umap:
+        if 'layers' not in umap:
             umap['layers'] = []
 
         # Umap /geojson URL exports do not contain the actual data layers,
@@ -544,5 +544,3 @@ def jobs(request, job_id=False):
         return _jobs_post(request)
     else:
         return HttpResponseNotAllowed(['GET','POST'])
-
-    

@@ -25,11 +25,11 @@
 
 import json
 
-import logging
-LOG = logging.getLogger('maposmatic')
-
 from django.http import HttpResponse, Http404
 from django.db import connections
+
+import logging
+LOG = logging.getLogger('maposmatic')
 
 def api_postgis_reverse(request, lat, lon):
     lat = float(lat)
@@ -39,10 +39,10 @@ def api_postgis_reverse(request, lat, lon):
                  from country_osm_grid
                 where st_contains(geometry,
                                   st_geomfromtext('POINT(%s %s)', 4326))
-            """ 
+            """
 
     try:
-        connections['osm'].rollback() # make sure there's no pending transaction
+        connections['osm'].rollback()  # make sure there's no pending transaction
         cursor = connections['osm'].cursor()
 
         cursor.execute(query, [lon, lat])
@@ -52,7 +52,7 @@ def api_postgis_reverse(request, lat, lon):
             raise Http404("postgis: country not found")
 
         return HttpResponse( json.dumps({"address": {"country_code": country_code[0]}})
-                           , content_type='application/json')
+                             , content_type='application/json')
     except Http404:
         raise
     except Exception as e:

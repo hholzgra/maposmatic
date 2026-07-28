@@ -37,7 +37,6 @@ Most of the credits should go to gthe Nominatim team.
 from django.utils.translation import gettext
 from django.db import connections
 import logging
-import psycopg2
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from xml.etree.ElementTree import parse as XMLTree
@@ -60,7 +59,7 @@ def reverse_geo(lat, lon):
     returns the reverse geocoded informations."""
 
     request = Request('%s/reverse?%s' %
-        (NOMINATIM_BASE_URL, urlencode({'lat': lat, 'lon': lon})))
+                      (NOMINATIM_BASE_URL, urlencode({'lat': lat, 'lon': lon})))
     request.add_header('User-Agent', NOMINATIM_USER_AGENT)
     f = urlopen(request)
 
@@ -110,13 +109,13 @@ def _fetch_xml(query_text, exclude, with_polygons, accept_language):
                       format='xml', addressdetails=1)
 
     if with_polygons:
-        query_tags['polygon']=1
+        query_tags['polygon'] = 1
 
     if exclude != '':
         query_tags['exclude_place_ids'] = exclude
 
     request = Request('%s/search/?%s' %
-            (NOMINATIM_BASE_URL, urlencode(query_tags)))
+                      (NOMINATIM_BASE_URL, urlencode(query_tags)))
     request.add_header('User-Agent', NOMINATIM_USER_AGENT)
     if accept_language:
         request.add_header('Accept-Language', accept_language)
@@ -354,11 +353,3 @@ def _prepare_and_filter_entries(entries):
     cursor.close()
 
     return filtered_results
-
-if __name__ == "__main__":
-    import pprint, sys
-    pp = pprint.PrettyPrinter(indent=4)
-
-    for city in sys.argv[1:]:
-        print("###### %s:" % city)
-        pp.pprint(query(city))

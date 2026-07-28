@@ -23,10 +23,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from django.shortcuts import render
+
 import logging
 LOG = logging.getLogger('maposmatic')
-
-from django.shortcuts import render
 
 def documentation_user_guide(request):
     """The user guide page."""

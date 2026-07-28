@@ -23,15 +23,14 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging
-LOG = logging.getLogger('maposmatic')
-
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 
-import www.settings
-from www.maposmatic import helpers, forms, models
+from www.maposmatic import forms, models
+
+import logging
+LOG = logging.getLogger('maposmatic')
 
 def cancel(request):
     if request.method == 'POST':

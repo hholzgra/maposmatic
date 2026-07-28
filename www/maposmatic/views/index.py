@@ -13,11 +13,11 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+from django.shortcuts import render
+from www.maposmatic import forms, models
+
 import logging
 LOG = logging.getLogger('maposmatic')
-
-from django.shortcuts import render
-from www.maposmatic import helpers, forms, models
 
 def index(request):
     """The main page."""

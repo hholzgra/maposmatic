@@ -23,24 +23,23 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging
-LOG = logging.getLogger('maposmatic')
-
 import json
 
 from django.http import HttpResponse, Http404
 from django.db import connections
 from django.db.transaction import TransactionManagementError
-from django.utils.translation import gettext, gettext_lazy as _
+from django.utils.translation import gettext
 
 import ocitysmap
 
 import www.settings
 
+import logging
+LOG = logging.getLogger('maposmatic')
+
 def api_geosearch(request):
     """Simple place name search."""
 
-    exclude = request.GET.get('exclude', '')
     squery = request.GET.get('q', '')
     squery = squery.lower()
 
@@ -140,4 +139,3 @@ def api_geosearch(request):
 
     except Exception as e:
         raise TransactionManagementError(e)
-

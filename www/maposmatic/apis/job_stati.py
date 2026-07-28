@@ -16,17 +16,12 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging
-LOG = logging.getLogger('maposmatic')
-
 import json
 
 from django.http import HttpResponse
 
-import ocitysmap
-
-import www.settings
-
+import logging
+LOG = logging.getLogger('maposmatic')
 
 def _job_stati_dict(id = None):
     # TODO do not hard-code these, get them from OCitysMap cleanly

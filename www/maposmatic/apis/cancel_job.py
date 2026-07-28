@@ -16,9 +16,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging
-LOG = logging.getLogger('maposmatic')
-
 import json
 
 from django.http import HttpResponse, HttpResponseNotAllowed, HttpResponseBadRequest, HttpResponseForbidden
@@ -26,10 +23,10 @@ from django.shortcuts import get_object_or_404
 from django.forms.models import model_to_dict
 from django.views.decorators.csrf import csrf_exempt
 
-import ocitysmap
+from www.maposmatic import models
 
-import www.settings
-from www.maposmatic import helpers, forms, models
+import logging
+LOG = logging.getLogger('maposmatic')
 
 
 @csrf_exempt  # programmatic API for external clients that cannot carry a CSRF token
@@ -44,7 +41,7 @@ def cancel_job(request):
     else:
         input = json.loads(request.POST['job'])
 
-    if not "id" in input or not "nonce" in input:
+    if "id" not in input or "nonce" not in input:
         return HttpResponseBadRequest()
 
     job = get_object_or_404(models.MapRenderingJob, id = input['id'])
@@ -58,4 +55,3 @@ def cancel_job(request):
         job.cancel()
 
     return HttpResponse(status=204)
-

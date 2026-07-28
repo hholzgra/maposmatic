@@ -96,7 +96,7 @@ class MapRenderingJobForm(forms.ModelForm):
         else:
             country_code = lang_key[3:5].lower()
             lang_html = mark_safe("<span class='fi fi-%s'> </span> %s"
-                                       % (country_code, lang_name))
+                                  % (country_code, lang_name))
             map_lang_flag_list.append((lang_key, lang_html))
 
         map_language = forms.ChoiceField(choices=map_lang_flag_list,
@@ -114,7 +114,7 @@ class MapRenderingJobForm(forms.ModelForm):
         self._ocitysmap = ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH, get_language())
 
         layout_renderers = self._ocitysmap.get_all_renderers()
-        indexers         = self._ocitysmap.get_all_indexers()
+        indexers         = self._ocitysmap.get_all_indexers()  # noqa
         stylesheets      = self._ocitysmap.get_all_style_configurations()
         overlays         = self._ocitysmap.get_all_overlay_configurations()
 
@@ -128,7 +128,7 @@ class MapRenderingJobForm(forms.ModelForm):
         self.fields['indexer'].choices = self._ocitysmap.get_all_indexers_name_desc()
 
         if not self.fields['indexer'].initial:
-            self.fields['indexer'].initial = 'Street' # TODO: make configurable
+            self.fields['indexer'].initial = 'Street'  # TODO: make configurable
 
         style_choices = {"": []}
         for s in stylesheets:
@@ -191,14 +191,9 @@ class MapRenderingJobForm(forms.ModelForm):
 
         mode          = data.get("mode")
         city          = data.get("administrative_city")
-        title         = data.get("maptitle")
         layout        = data.get("layout")
         indexer       = data.get("indexer")
         stylesheet    = data.get("stylesheet")
-        # overlay is a MultipleChoiceField; its cleaned value is a list, or
-        # None when the field is absent from the submission
-        overlay_array = data.get("overlay") or []
-        overlay = ",".join(overlay_array)
 
         if layout == '':
             self.add_error("layout", _("Layout required"))
@@ -228,7 +223,7 @@ class MapRenderingJobForm(forms.ModelForm):
             # Check bounding box corners are provided
             for f in [ "lat_upper_left", "lon_upper_left",
                        "lat_bottom_right", "lon_bottom_right"]:
-                if not f in data:
+                if f not in data:
                     msgs.append(_("Required field '%s' missing") % f)
 
             # Check latitude and longitude are different

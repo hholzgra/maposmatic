@@ -23,15 +23,14 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging
-LOG = logging.getLogger('maposmatic')
-
 import json
 
 from django.http import HttpResponse
 
-import www.settings
 from www.maposmatic import nominatim
+
+import logging
+LOG = logging.getLogger('maposmatic')
 
 def api_nominatim(request):
     """Nominatim query gateway."""
@@ -50,15 +49,10 @@ def api_nominatim(request):
 
     try:
         contents = nominatim.query(squery, exclude, with_polygons=False,
-                accept_language=lang)
-    except Exception as e:
+                                   accept_language=lang)
+    except Exception:
         LOG.exception("Error querying Nominatim")
         contents = []
 
     return HttpResponse(content=json.dumps(contents),
                         content_type='application/json')
-
-
-
-
-

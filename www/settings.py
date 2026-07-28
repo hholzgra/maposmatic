@@ -40,13 +40,13 @@ import os.path
 import threading
 import subprocess
 
+# from django.utils.translation import gettext_lazy as _
+
+from . import settings_local as _local
+
 from cachetools import TTLCache, cached
 cache = TTLCache(maxsize=100, ttl=5)
 cache_lock = threading.Lock()
-
-from django.utils.translation import gettext_lazy as _
-
-from . import settings_local as _local
 
 PROJECT_PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -165,12 +165,12 @@ LANGUAGES = {
     "nl":    "Nederlands",
     "pl":    "Polski",
     # "pt-br": "Português do Brasil", # TODO: no longer works with Django 3.2
-    "pt": "Português", # WAS: pt-pt
+    "pt":    "Português",  # WAS: pt-pt
     "ru":    "Русский",
     "sk":    "Slovenčina",
     "tr":    "Türkçe",
     "uk":    "українська",
-    "zh": "繁體中文", # WAS: zh-tw
+    "zh":    "繁體中文",  # WAS: zh-tw
 }
 LANGUAGES_LIST = sorted(LANGUAGES.items(), key=lambda p: p[1])
 
@@ -325,12 +325,12 @@ MAP_LANGUAGES = {
     "ar_YE.UTF-8": "اليَمَن",
     "en_ZA.UTF-8": "South Africa",
     "en_ZW.UTF-8": "Zimbabwe",
-#    "C": _(u"No localization"),
+    # "C": _(u"No localization"),
 }
 
-MAP_LANGUAGES_LIST= list(MAP_LANGUAGES.items())
-#MAP_LANGUAGES_LIST= sorted(MAP_LANGUAGES.items(), key=lambda p: p[1]) # See issue #106
-#MAP_LANGUAGES_LIST.append(("C", _(u"No localization")))
+MAP_LANGUAGES_LIST = list(MAP_LANGUAGES.items())
+# MAP_LANGUAGES_LIST = sorted(MAP_LANGUAGES.items(), key=lambda p: p[1]) # See issue #106
+# MAP_LANGUAGES_LIST.append(("C", _(u"No localization")))
 
 # Job page refresh frequency, in seconds, for when the job is waiting in queue
 # and when the job is currently being rendered.
@@ -378,8 +378,8 @@ MAINTENANCE_MODE_TEMPLATE = '503.html'
 
 # Map tile servers.
 MAP_TILE_SOURCES = [
-    'https://*.tile.openstreetmap.org/', # OSM default tiles
-    'https://mymapnik.rudzick.it/',      # "Baumkarte" tiles
+    'https://*.tile.openstreetmap.org/',  # OSM default tiles
+    'https://mymapnik.rudzick.it/',       # "Baumkarte" tiles
 ]
 
 # Other, non-tile external images (e.g. the PayPal donation button pixel
@@ -394,18 +394,17 @@ EXTERNAL_IMAGE_SOURCES = [
 # anything that needs the final, merged settings (e.g. logging setup,
 # which needs the local DEFAULT_MAPOSMATIC_LOG_* values) can run.
 
-from .settings_local import *
+from .settings_local import *  # noqa: F403, E402
+from . import logconfig  # noqa: E402
 try:
-  from .settings_bounds import *
+    from .settings_bounds import *  # noqa: F403
 except ModuleNotFoundError:
-  pass
-
-from . import logconfig
+    pass
 
 # Logging
 logconfig.setup_maposmatic_logging(
         int(os.environ.get("MAPOSMATIC_LOG_LEVEL",
-                           DEFAULT_MAPOSMATIC_LOG_LEVEL)),
-        os.environ.get('MAPOSMATIC_LOG_FILE', DEFAULT_MAPOSMATIC_LOG_FILE),
-        os.environ.get("MAPOSMATIC_LOG_FORMAT", DEFAULT_MAPOSMATIC_LOG_FORMAT))
+                           DEFAULT_MAPOSMATIC_LOG_LEVEL)),  # noqa: F405
+        os.environ.get('MAPOSMATIC_LOG_FILE', DEFAULT_MAPOSMATIC_LOG_FILE),  # noqa: F405
+        os.environ.get("MAPOSMATIC_LOG_FORMAT", DEFAULT_MAPOSMATIC_LOG_FORMAT))  # noqa: F405
 LOG = logging.getLogger('maposmatic')

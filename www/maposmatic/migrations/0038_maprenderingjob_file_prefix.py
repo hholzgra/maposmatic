@@ -14,7 +14,7 @@ BATCH_SIZE = 2000
 
 
 def compute_files_prefix(job):
-    """Generate file_prefix for already existing render requests 
+    """Generate file_prefix for already existing render requests
     from rendering start time using the legacy format used so far
     """
     title = (job.maptitle or '').strip()

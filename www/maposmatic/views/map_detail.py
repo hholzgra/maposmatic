@@ -23,13 +23,13 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging
-LOG = logging.getLogger('maposmatic')
-
 from django.shortcuts import get_object_or_404, render
 
 import www.settings
-from www.maposmatic import helpers, forms, models
+from www.maposmatic import models
+
+import logging
+LOG = logging.getLogger('maposmatic')
 
 def map_detail(request, id, nonce=None):
     """The full-page map details page.
@@ -60,19 +60,18 @@ def map_detail(request, id, nonce=None):
     progress = 100
     if queue_size:
         progress = int(100 * (queue_size -
-           job.current_position_in_queue()) / float(queue_size))
+                              job.current_position_in_queue()) / float(queue_size))
 
     refresh = (www.settings.REFRESH_JOB_RENDERING if job.is_rendering()
-          else www.settings.REFRESH_JOB_WAITING)
+               else www.settings.REFRESH_JOB_WAITING)
 
     return render(request, 'maposmatic/map_detail.html',
-                              { 'map':        job,
-                                'redirected': isredirected,
-                                'nonce':      nonce,
-                                'refresh':    refresh,
-                                'progress':   progress,
-                                'queue_size': queue_size,
-                                'prev_job':  prev_job,
-                                'next_job':  next_job,
-                               })
-
+                  { 'map':        job,
+                    'redirected': isredirected,
+                    'nonce':      nonce,
+                    'refresh':    refresh,
+                    'progress':   progress,
+                    'queue_size': queue_size,
+                    'prev_job':  prev_job,
+                    'next_job':  next_job,
+                   })

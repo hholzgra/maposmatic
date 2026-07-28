@@ -19,16 +19,15 @@
 # Feeds for MapOSMatic
 
 import datetime
-import logging
-
-LOG = logging.getLogger('maposmatic')
 
 from django.contrib.gis.feeds import Feed
 from django.utils.translation import gettext_lazy as _
-from django.template.loader import render_to_string, get_template
 
 from www.maposmatic import models
 import www.settings
+
+import logging
+LOG = logging.getLogger('maposmatic')
 
 class ErrorFeed(Feed):
     """
@@ -37,8 +36,9 @@ class ErrorFeed(Feed):
 
     title = "%s %s %s" % (www.settings.BRAND_NAME, _("errors"),
                           www.settings.DEBUG and '' or _('[DEV]'))
-    link = '/maps/' # We can't use reverse here as the urlpatterns aren't
-                    # defined yet at this point.
+    # We can't use reverse here as the urlpatterns aren't defined yet at this point.
+    link = '/maps/'
+
     description = _('The latest render failures on MapOSMatic.')
 
     # description_template = "maposmatic/map-feed.html"

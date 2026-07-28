@@ -4,9 +4,7 @@ from .extratags import register
 
 import os
 
-from django import template
 from django.utils.safestring import mark_safe
-from django.utils.translation import gettext_lazy as _
 from django.utils.html import escape
 
 def _lastline(filename):
@@ -30,6 +28,3 @@ def email_url(value):
         "email": www.settings.CONTACT_EMAIL,
         "id":    value.id
     })
-
-
-

@@ -23,14 +23,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import datetime
-import psycopg2
-import random
-import string
 import secrets
-
-from www.maposmatic.models import MapRenderingJob
-import www.settings
 
 def get_pages_list(page, paginator):
     """Returns a list of number.

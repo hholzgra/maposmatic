@@ -22,23 +22,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import os
-import re
-
 from django import template
-from django.utils.safestring import mark_safe
-from django.utils.translation import gettext_lazy as _
-from django.utils.html import escape
-
-import www.settings
-
-import ocitysmap
 
 register = template.Library()
-
-from . import file_tags, geo_tags, l18n_tags, bbox_tags
-from . import paper_tags, rss_feed_tags, job_tags
-
 
 @register.filter()
 def add_blank_after_comma(value):

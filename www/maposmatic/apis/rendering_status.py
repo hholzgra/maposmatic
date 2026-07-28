@@ -16,19 +16,15 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging
-LOG = logging.getLogger('maposmatic')
 
-import json
-
-from django.http import HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponseBadRequest
 from django.shortcuts import get_object_or_404, render
 
-import ocitysmap
-
 import www.settings
-from www.maposmatic import helpers, forms, nominatim, models
+from www.maposmatic import models
 
+import logging
+LOG = logging.getLogger('maposmatic')
 
 def api_rendering_status(request, id, nonce=None):
     """API handler for updating map request rendering status"""
@@ -45,19 +41,19 @@ def api_rendering_status(request, id, nonce=None):
     queue_size = job.index_queue_at_submission
     progress = 100
     if queue_size:
-       progress = int(100 * (queue_size -
-           job.current_position_in_queue()) / float(queue_size))
+        progress = int(100 * (queue_size -
+                              job.current_position_in_queue()) / float(queue_size))
 
     refresh = job.is_rendering() and \
         www.settings.REFRESH_JOB_RENDERING or \
         www.settings.REFRESH_JOB_WAITING
 
     return render(request, 'maposmatic/map_detail_parts/rendering-status.html',
-                              { 'map':        job,
-                                'redirected': isredirected,
-                                'nonce':      nonce,
-                                'refresh':    refresh,
-                                'progress':   progress,
-                                'queue_size': queue_size,
-                                'status':     job.renderstep or "working",
-                              })
+                  { 'map':        job,
+                    'redirected': isredirected,
+                    'nonce':      nonce,
+                    'refresh':    refresh,
+                    'progress':   progress,
+                    'queue_size': queue_size,
+                    'status':     job.renderstep or "working",
+                   })

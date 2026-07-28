@@ -23,32 +23,32 @@ class Migration(migrations.Migration):
         ),
 
         migrations.RunSQL("""
-        INSERT INTO maposmatic_uploadfile (uploaded_file, file_type) 
-             SELECT DISTINCT track AS uploaded_file, 'gpx' AS file_type 
-               FROM maposmatic_maprenderingjob 
+        INSERT INTO maposmatic_uploadfile (uploaded_file, file_type)
+             SELECT DISTINCT track AS uploaded_file, 'gpx' AS file_type
+               FROM maposmatic_maprenderingjob
               WHERE track <> ''
-        """, 
+        """,
         ),
         migrations.RunSQL("""
-        INSERT INTO maposmatic_uploadfile (uploaded_file, file_type) 
-             SELECT DISTINCT umap AS uploaded_file, 'umap' AS file_type 
-               FROM maposmatic_maprenderingjob 
+        INSERT INTO maposmatic_uploadfile (uploaded_file, file_type)
+             SELECT DISTINCT umap AS uploaded_file, 'umap' AS file_type
+               FROM maposmatic_maprenderingjob
               WHERE umap <> ''
-        """, 
+        """,
         ),
         migrations.RunSQL("""
-        INSERT INTO maposmatic_uploadfile (uploaded_file, file_type) 
-             SELECT DISTINCT poi_file AS uploaded_file, 'poi' AS file_type 
-               FROM maposmatic_maprenderingjob 
+        INSERT INTO maposmatic_uploadfile (uploaded_file, file_type)
+             SELECT DISTINCT poi_file AS uploaded_file, 'poi' AS file_type
+               FROM maposmatic_maprenderingjob
               WHERE poi_file <> ''
-        """, 
+        """,
         ),
 
         migrations.RunSQL("""
-        INSERT INTO maposmatic_uploadfile_job (uploadfile_id, maprenderingjob_id) 
-             SELECT file.id AS uploadfile_id, job.id AS maprenderingjob_id 
-               FROM maposmatic_uploadfile file 
-               JOIN maposmatic_maprenderingjob job 
+        INSERT INTO maposmatic_uploadfile_job (uploadfile_id, maprenderingjob_id)
+             SELECT file.id AS uploadfile_id, job.id AS maprenderingjob_id
+               FROM maposmatic_uploadfile file
+               JOIN maposmatic_maprenderingjob job
                  ON job.track = file.uploaded_file
         """,
         ),

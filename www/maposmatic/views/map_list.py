@@ -23,9 +23,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging
-LOG = logging.getLogger('maposmatic')
-
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
@@ -34,6 +31,9 @@ from django.db.models import Q
 
 import www.settings
 from www.maposmatic import helpers, forms, models
+
+import logging
+LOG = logging.getLogger('maposmatic')
 
 def map_list(request, category=None, extra=None):
     """Displays all maps and jobs, sorted by submission time, or maps matching
@@ -49,8 +49,8 @@ def map_list(request, category=None, extra=None):
         if term.isnumeric():
             query.add(Q(id = term), Q.OR)
         jobs = (models.MapRenderingJob.objects
-                    .order_by('-submission_time')
-                    .filter(query))
+                .order_by('-submission_time')
+                .filter(query))
         if len(jobs) == 1:
             return HttpResponseRedirect(reverse('map-by-id',
                                                 args=[jobs[0].id]))
@@ -59,7 +59,7 @@ def map_list(request, category=None, extra=None):
 
     if jobs is None:
         jobs = (models.MapRenderingJob.objects
-                    .order_by('-submission_time'))
+                .order_by('-submission_time'))
         if category == 'errors':
             jobs = jobs.filter(status=2).exclude(resultmsg='ok')
         elif category == 'queue' and extra is not None:
@@ -78,11 +78,10 @@ def map_list(request, category=None, extra=None):
         maps = paginator.page(paginator.num_pages)
 
     return render(request, 'maposmatic/map_list.html',
-                              { 'maps':      maps,
-                                'form':      form,
-                                'category':  category,
-                                'extra':     extra,
-                                'is_search': form.is_valid(),
-                                'pages':     helpers.get_pages_list(maps, paginator),
-                               })
-
+                  { 'maps':      maps,
+                    'form':      form,
+                    'category':  category,
+                    'extra':     extra,
+                    'is_search': form.is_valid(),
+                    'pages':     helpers.get_pages_list(maps, paginator),
+                    })

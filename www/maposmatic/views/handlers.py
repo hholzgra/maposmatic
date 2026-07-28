@@ -13,19 +13,15 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import sys, traceback
-import smtplib
-import datetime
-import html
+import sys
+import traceback
+
+from django.shortcuts import render
+
+import www.settings
 
 import logging
 LOG = logging.getLogger('maposmatic')
-
-from django.shortcuts import render
-from django.template.loader import render_to_string, get_template
-
-import www.settings
-from www.maposmatic import helpers, forms, models
 
 def myhandler500(request):
     exc_type, value, tb = sys.exc_info()

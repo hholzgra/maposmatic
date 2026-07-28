@@ -25,16 +25,15 @@
 # Feeds for MapOSMatic
 
 import datetime
-import logging
-
-LOG = logging.getLogger('maposmatic')
 
 from django.contrib.gis.feeds import Feed
 from django.utils.translation import gettext_lazy as _
-from django.template.loader import render_to_string, get_template
 
 from www.maposmatic import models
 import www.settings
+
+import logging
+LOG = logging.getLogger('maposmatic')
 
 class MapsFeed(Feed):
     """
@@ -42,10 +41,12 @@ class MapsFeed(Feed):
     with their thumbnail, and links to the rendered files.
     """
 
-    title = "%s %s %s" % (www.settings.BRAND_NAME, _("maps"), 
+    title = "%s %s %s" % (www.settings.BRAND_NAME, _("maps"),
                           www.settings.DEBUG and '' or _('[DEV]'))
-    link = '/maps/' # We can't use reverse here as the urlpatterns aren't
-                    # defined yet at this point.
+
+    # We can't use reverse here as the urlpatterns aren't defined yet at this point.
+    link = '/maps/'
+
     description = _('The latest rendered maps on MapOSMatic.')
 
     description_template = "maposmatic/map-feed.html"
@@ -62,11 +63,11 @@ class MapsFeed(Feed):
                  .order_by('-endofrendering_time'))
 
         if items.count() == 0:
-          # Fall back to the last 10 entries, regardless of time
-          items = (models.MapRenderingJob.objects
-                  .filter(status=2)
-                  .filter(resultmsg='ok')
-                  .order_by('-endofrendering_time')[:10])
+            # Fall back to the last 10 entries, regardless of time
+            items = (models.MapRenderingJob.objects
+                     .filter(status=2)
+                     .filter(resultmsg='ok')
+                     .order_by('-endofrendering_time')[:10])
 
         return items
 
@@ -80,7 +81,7 @@ class MapsFeed(Feed):
         if item.lon_upper_left is None:
             # old / resubmitted jobs with boundary ID only
             # TODO: extract actual bbox from OSM ID?
-            return(0,0,0,0)
+            return (0,0,0,0)
         return (item.lon_upper_left, item.lat_upper_left,
                 item.lon_bottom_right, item.lat_bottom_right)
 
@@ -91,4 +92,3 @@ class MapsFeed(Feed):
         context = super().get_context_data(**kwargs)
         context['MAP_LANGUAGES'] = www.settings.MAP_LANGUAGES
         return context
-

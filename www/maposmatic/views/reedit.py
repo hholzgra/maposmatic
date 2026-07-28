@@ -16,17 +16,14 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging
-LOG = logging.getLogger('maposmatic')
-
 from django.shortcuts import get_object_or_404, render
-from django.http import HttpResponseRedirect, HttpResponseBadRequest
-from django.urls import reverse
-from django.utils.translation import gettext, gettext_lazy as _
+from django.http import HttpResponseBadRequest
 from django.utils.safestring import mark_safe
 
+from www.maposmatic import forms, models, views
 
-from www.maposmatic import helpers, forms, models, views
+import logging
+LOG = logging.getLogger('maposmatic')
 
 def reedit(request):
     if request.method == 'POST':
@@ -50,7 +47,7 @@ def reedit(request):
         form = forms.MapRenderingJobForm(initial=init_vals)
 
         papersize_buttons, multisize_buttons = views._papersize_buttons()
-        
+
         bounds = "L.latLngBounds(L.latLng(%f,%f),L.latLng(%f,%f))" % (job.lat_upper_left,
                                                                       job.lon_upper_left,
                                                                       job.lat_bottom_right,
@@ -66,4 +63,3 @@ def reedit(request):
                       })
 
     return HttpResponseBadRequest("ERROR: Invalid request")
-

@@ -23,18 +23,15 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging
-LOG = logging.getLogger('maposmatic')
-
 import datetime
 from ipware import get_client_ip
 
 from fnmatch import fnmatch
 
-from django.core.paginator import Paginator, InvalidPage, EmptyPage
+# from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.http import HttpResponseRedirect, HttpResponseNotAllowed
 from django.shortcuts import render
-from django.utils.translation import gettext, gettext_lazy as _
+# from django.utils.translation import gettext, gettext_lazy as _
 from django.utils.safestring import mark_safe
 from django.urls import reverse
 
@@ -42,6 +39,9 @@ import www.settings
 from www.maposmatic import helpers, forms, models, views
 
 import ocitysmap
+
+import logging
+LOG = logging.getLogger('maposmatic')
 
 def _is_spam(job):
     if job.layout.startswith('multi') and job.lat_upper_left == 51.7 and job.stylesheet == 'Pencil':
@@ -88,7 +88,7 @@ def _new_POST(request):
     job.indexer = form.cleaned_data.get('indexer')
     job.paper_width_mm = form.cleaned_data.get('paper_width_mm')
     job.paper_height_mm = form.cleaned_data.get('paper_height_mm')
-    job.status = 0 # Submitted
+    job.status = 0  # Submitted
     if www.settings.SUBMITTER_IP_LIFETIME != 0:
         job.submitterip = request.META['REMOTE_ADDR']
     else:
@@ -128,7 +128,7 @@ def _new_POST(request):
         if www.settings.UPLOAD_FILE_LIFETIME > 0:
             keep_until = datetime.datetime.now() + datetime.timedelta(days=www.settings.UPLOAD_FILE_LIFETIME)
         else:
-            keep_until = '2999-12-30' # arbitrary 'max' value
+            keep_until = '2999-12-30'  # arbitrary 'max' value
     for file in files:
         _create_upload_file(job, file, keep_until)
 
@@ -140,28 +140,28 @@ def _new_GET(request):
     init_vals = request.GET.dict()
     oc = ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH)
 
-    if not 'layout' in init_vals and 'new_layout' in request.session :
+    if 'layout' not in init_vals and 'new_layout' in request.session :
         init_vals['layout'] = request.session['new_layout']
     else:
         request.session['new_layout'] = oc.get_all_renderer_names()[0]
 
-    if not 'indexer' in init_vals and 'new_indexer' in request.session :
+    if 'indexer' not in init_vals and 'new_indexer' in request.session :
         init_vals['indexer'] = request.session['new_indexer']
     else:
-        request.session['new_indexer'] = 'Street' # TODO make configurable
+        request.session['new_indexer'] = 'Street'  # TODO make configurable
 
-    if not 'stylesheet' in init_vals and 'new_stylesheet' in request.session:
+    if 'stylesheet' not in init_vals and 'new_stylesheet' in request.session:
         init_vals['stylesheet'] = request.session['new_stylesheet']
     else:
         request.session['new_stylesheet'] = oc.get_all_style_names()[0]
 
-    if not 'overlay' in init_vals and 'new_overlay' in request.session:
+    if 'overlay' not in init_vals and 'new_overlay' in request.session:
         init_vals['overlay'] = request.session['new_overlay']
 
-    if not 'paper_width_mm' in init_vals and 'new_paper_width_mm' in request.session:
+    if 'paper_width_mm' not in init_vals and 'new_paper_width_mm' in request.session:
         init_vals['paper_width_mm'] = request.session['new_paper_width_mm']
 
-    if not 'paper_height_mm' in init_vals and 'new_paper_height_mm' in request.session:
+    if 'paper_height_mm' not in init_vals and 'new_paper_height_mm' in request.session:
         init_vals['paper_height_mm'] = request.session['new_paper_height_mm']
 
     form = forms.MapRenderingJobForm(initial=init_vals)

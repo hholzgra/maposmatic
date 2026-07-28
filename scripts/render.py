@@ -27,14 +27,10 @@ import datetime
 from PIL import Image
 import multiprocessing
 import os
-import smtplib
 import sys
 import threading
 import traceback
 import subprocess
-
-import logging
-LOG = logging.getLogger('maposmatic')
 
 import ocitysmap
 from ocitysmap import renderers
@@ -46,12 +42,13 @@ from www.settings import DAEMON_ERRORS_EMAIL_REPLY_TO
 from www.settings import DAEMON_ERRORS_JOB_URL
 from www.settings import EMAIL_HOST
 
-from django.template import Context, Template
-from www.settings import TEMPLATES
-from django.template.loader import render_to_string, get_template
+from django.template.loader import get_template
 from django.utils.translation import gettext_lazy as _
 
 from django.core import mail
+
+import logging
+LOG = logging.getLogger('maposmatic')
 
 RESULT_SUCCESS               = 0
 RESULT_KEYBOARD_INTERRUPT    = 1
@@ -105,9 +102,10 @@ class ThreadingJobRenderer:
                             body,
                             DAEMON_ERRORS_EMAIL_FROM,
                             [ self.__job.submittermail ],
+                            reply_to = DAEMON_ERRORS_EMAIL_REPLY_TO,
                            )
 
-        except Exception as e:
+        except Exception:
             LOG.exception("Could not send notification email to the submitter!")
 
     def run(self):
@@ -173,8 +171,9 @@ class ForkingJobRenderer:
                             body,
                             DAEMON_ERRORS_EMAIL_FROM,
                             [ self.__job.submittermail ],
+                            reply_to = DAEMON_ERRORS_EMAIL_REPLY_TO,
                            )
-        except Exception as e:
+        except Exception:
             LOG.exception("Could not send notification email to the submitter!")
 
     def run(self):
@@ -243,7 +242,7 @@ class JobRenderer(threading.Thread):
     def kill(self):
         LOG.debug("Killing job #%d's worker thread..." % self.job.id)
         res = ctypes.pythonapi.PyThreadState_SetAsyncExc(self.__get_my_tid(),
-                ctypes.py_object(SystemExit))
+                                                         ctypes.py_object(SystemExit))
         if res == 0:
             raise ValueError("Invalid thread ID")
         elif res != 1:
@@ -275,10 +274,11 @@ class JobRenderer(threading.Thread):
                             body,
                             DAEMON_ERRORS_EMAIL_FROM,
                             [ self.job.submittermail ],
-                            html_message = html
+                            html_message = html,
+                            reply_to = DAEMON_ERRORS_EMAIL_REPLY_TO,
                            )
             LOG.info("Email notification sent.")
-        except Exception as e:
+        except Exception:
             LOG.exception("Could not send notification email to the submitter!")
 
 
@@ -311,7 +311,7 @@ class JobRenderer(threading.Thread):
             subject = 'Rendering of job %d failed' % self.job.id
 
             mail.mail_admins(subject, body)
-        except Exception as e:
+        except Exception:
             LOG.exception("Could not send error email to the admins!")
 
         self._email_submitter("render_email_failure.txt")
@@ -452,7 +452,7 @@ class JobRenderer(threading.Thread):
                     output_formats.append(format)
 
             output_count = renderer.render(config, self.job.layout,
-                            output_formats, result_file_prefix)
+                                           output_formats, result_file_prefix)
 
             # Create thumbnail
             try:
@@ -476,7 +476,7 @@ class JobRenderer(threading.Thread):
             self.result = RESULT_MEMORY_EXCEEDED
             LOG.exception("Not enough memory to render job #%d" % self.job.id)
             self._email_exception(sys.exc_info())
-        except Exception as e:
+        except Exception:
             self.result = RESULT_RENDERING_EXCEPTION
             LOG.exception("Rendering of job #%d failed (exception occurred during"
                           " rendering)!" % self.job.id)
@@ -527,4 +527,3 @@ if __name__ == '__main__':
     except ValueError:
         usage()
         sys.exit(3)
-

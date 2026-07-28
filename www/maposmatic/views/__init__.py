@@ -22,14 +22,32 @@ import ocitysmap
 
 from django.utils.translation import gettext, gettext_lazy as _
 
+from .index         import index
+
+from .about         import about
+from .privacy       import privacy
+from .documentation import documentation_user_guide, documentation_api
+from .donate        import donate, donate_thanks
+
+from .map_list      import map_list
+from .map_detail    import map_detail
+from .new           import new
+from .recreate      import recreate
+from .reedit        import reedit
+from .cancel        import cancel
+
+from .heatmap       import heatmap
+
+from .congo         import congo
+
 # helper for the "new" and "reedit" views
 def _papersize_button(basename, width=None, height=None):
     format = "<button id='{0}_{1}_{2}' type='button' class='btn btn-primary papersize papersize_{1}_{2}' onclick='set_papersize({1}, {2});'><i class='fas fa-{3} fa-2x'></i></button> "
 
-    if width is None or height is None: # no values -> "best fit"
+    if width is None or height is None:  # no values -> "best fit"
         return format.format(basename, "best", "fit", 'square')
 
-    if width == height: # square format, just one button
+    if width == height:  # square format, just one button
         return format.format(basename, width, height, 'square')
 
     # individual buttons for landscape and portrait
@@ -55,23 +73,3 @@ def _papersize_buttons():
             multisize_buttons += "<b>%s</b> (%s&times;%smm²)</p>" % (p[0], repr(p[1]), repr(p[2]))
 
     return papersize_buttons, multisize_buttons
-
-from .index         import index
-
-from .about         import about
-from .privacy       import privacy
-from .documentation import documentation_user_guide, documentation_api
-from .donate        import donate, donate_thanks
-
-from .map_list      import map_list
-from .map_detail    import map_detail
-from .new           import new
-from .recreate      import recreate
-from .reedit        import reedit
-from .cancel        import cancel
-
-from .heatmap       import heatmap
-
-from .congo         import congo
-
-

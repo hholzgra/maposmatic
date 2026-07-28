@@ -23,7 +23,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import django
 from django.urls import include, re_path
 from django.views.static import serve
 from django.views.generic import TemplateView
@@ -58,7 +57,7 @@ urlpatterns = [
     re_path(r'^about/api/$',                                   views.documentation_api,        name = 'documentation_api'),
     re_path(r'^about/user-guide/$',                            views.documentation_user_guide, name = 'documentation_user_guide'),
     re_path(r'^about/$',                                       views.about,                    name = 'about'),
-    
+
     re_path(r'^privacy/$',                                     views.privacy,                  name = 'privacy'),
 
     re_path(r'^donate/$',                                      views.donate,                   name = 'donate'),
@@ -110,7 +109,7 @@ urlpatterns = [
     # robots.txt
     re_path(r'^robots\.txt$',                                  TemplateView.as_view(template_name = "robots.txt", content_type = 'text/plain')),
 
-    # favicons 
+    # favicons
     re_path(r'^favicon\.png$',                                 RedirectView.as_view(url = staticfiles_storage.url('img/favicon.png'))),
     re_path(r'^favicon\.ico$',                                 RedirectView.as_view(url = staticfiles_storage.url('img/favicon.ico'))),
     re_path(r'^apple-touch-icon.*\.png$',                      RedirectView.as_view(url = staticfiles_storage.url('img/apple-touch-icon.png'))),
@@ -121,4 +120,4 @@ if settings.DEBUG:
 
     urlpatterns.append( re_path(r'^media/(?P<path>.*)$',   serve, {'document_root': settings.LOCAL_MEDIA_PATH}))
 else:
-    handler500 = views.handlers.myhandler500
+    handler500 = handlers.myhandler500

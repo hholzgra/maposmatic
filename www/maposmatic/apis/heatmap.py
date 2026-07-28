@@ -36,7 +36,7 @@ def heatdata(request, days = None):
 select round(lat::numeric, 4)::float as lat
      , round(lng::numeric, 4)::float as lng
      , count(*) as count
-  from (   
+  from (
 select (lat_upper_left + lat_bottom_right)/2 as lat
      , (lon_upper_left + lon_bottom_right)/2 as lng
   from maposmatic_maprenderingjob
@@ -55,7 +55,7 @@ select (north + south)/2 as lat
 
 ) x group by lat, lng
 ;
-""" 
+"""
 
     data = { "max": 8, "data": [] }
 
@@ -76,7 +76,3 @@ select (north + south)/2 as lat
 
     return HttpResponse(content="var data = " + json.dumps(data, indent=2),
                         content_type='application/javascript')
-
-
-    
-

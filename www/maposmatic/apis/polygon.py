@@ -16,9 +16,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging
-LOG = logging.getLogger('maposmatic')
-
 import json
 
 from django.http import HttpResponse, HttpResponseBadRequest
@@ -26,8 +23,9 @@ from django.http import HttpResponse, HttpResponseBadRequest
 import ocitysmap
 
 import www.settings
-from www.maposmatic import helpers, forms, nominatim, models
 
+import logging
+LOG = logging.getLogger('maposmatic')
 
 def api_polygon(request, osm_id):
     """API handler that returns the polygon outline from an OSM ID polygon."""

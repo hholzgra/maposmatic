@@ -16,9 +16,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging
-LOG = logging.getLogger('maposmatic')
-
 import json
 
 from django.http import HttpResponse, HttpResponseBadRequest
@@ -26,7 +23,10 @@ from django.http import HttpResponse, HttpResponseBadRequest
 import ocitysmap
 
 import www.settings
-from www.maposmatic import helpers, forms, nominatim, models
+from www.maposmatic import forms
+
+import logging
+LOG = logging.getLogger('maposmatic')
 
 def api_papersize(request):
     """API handler to get the compatible paper sizes for the provided layout
@@ -42,8 +42,6 @@ def api_papersize(request):
     renderer = ocitysmap.OCitySMap(www.settings.OCITYSMAP_CFG_PATH)
     osmid = f.cleaned_data.get('osmid')
     layout = f.cleaned_data.get('layout')
-    stylesheet = renderer.get_stylesheet_by_name(
-        f.cleaned_data.get('stylesheet'))
 
     # Determine geographic area
     if osmid is not None:
@@ -60,9 +58,11 @@ def api_papersize(request):
         lon_bottom_right = f.cleaned_data.get("lon_bottom_right")
 
         # Check we have correct floats
-        if (lat_upper_left is None or lon_upper_left is None
-            or lat_bottom_right is None or lon_bottom_right is None):
-           return HttpResponseBadRequest("ERROR: Invalid arguments")
+        if ( lat_upper_left is None
+             or lon_upper_left is None
+             or lat_bottom_right is None
+             or lon_bottom_right is None ):
+            return HttpResponseBadRequest("ERROR: Invalid arguments")
 
         bbox = ocitysmap.coords.BoundingBox(
             lat_upper_left, lon_upper_left,
@@ -75,4 +75,3 @@ def api_papersize(request):
 
     return HttpResponse(content=json.dumps(paper_sizes),
                         content_type='application/json')
-

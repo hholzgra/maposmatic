@@ -23,16 +23,15 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import logging
-LOG = logging.getLogger('maposmatic')
-
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.urls import reverse
 
 import www.settings
 from www.maposmatic import helpers, forms, models
 
+import logging
+LOG = logging.getLogger('maposmatic')
 
 def recreate(request):
     if request.method == 'POST':
@@ -68,12 +67,12 @@ def recreate(request):
             newjob.paper_width_mm = job.paper_width_mm
             newjob.paper_height_mm = job.paper_height_mm
 
-            newjob.status = 0 # Submitted
+            newjob.status = 0  # Submitted
             if www.settings.SUBMITTER_IP_LIFETIME != 0:
                 newjob.submitterip = request.META['REMOTE_ADDR']
             else:
                 newjob.submitterip = None
-            newjob.submittermail = None # TODO
+            newjob.submittermail = None  # TODO
             newjob.map_language = job.map_language
             newjob.index_queue_at_submission = (models.MapRenderingJob.objects
                                                 .queue_size(job.queue) + 1)
@@ -88,4 +87,3 @@ def recreate(request):
                                                 args=[newjob.id, newjob.nonce]))
 
     return HttpResponseBadRequest("ERROR: Invalid request")
-

@@ -13,8 +13,8 @@ MapOSMatic requires **Python 3.13** and depends on:
 
  * A set of Python packages, pinned in the ``requirements.txt`` file in
    this repository. Notable entries: Django (web framework, also used by
-   the rendering daemon for ORM access to the database), psycopg2
-   (PostgreSQL access), Django Cookie Law (EU cookie-consent compliance),
+   the rendering daemon for ORM access to the database),
+   psycopg2 (PostgreSQL access),
    Pillow (PNG map rendering), feedparser (blog feed on the front page),
    plus GitPython, gpxpy, requests, python-slugify, cachetools,
    django-ipware and django-multiupload.
